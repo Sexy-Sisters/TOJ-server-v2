@@ -1,11 +1,16 @@
 spring:
   jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: true
     show-sql: true
     hibernate:
       ddl-auto: update
-    datasource:
-      hikari:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://localhost:3306/toj?serverTimezone=UTC&characterEncoding=UTF-8
-        username: toj-svc
-        password: toj-pass
+
+  datasource:
+      url: jdbc:mysql://localhost:3306/toj
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: toj-user
+      password: toj-pass
+#?serverTimezone=UTC&characterEncoding=UTF-8

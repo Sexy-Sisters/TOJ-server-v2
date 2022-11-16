@@ -14,5 +14,5 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
       - --lower_case_table_names=1
-    volumes:
-      - ./mysql:/var/lib/mysql
+#    volumes:
+#      - ./mysql:/var/lib/mysql
