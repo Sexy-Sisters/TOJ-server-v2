@@ -2,8 +2,8 @@
 name: Feature request
 about: 기능 명세
 title: ''
-labels: ''
-assignees: ''
+labels: "⚡️FEAT"
+assignees: leekyukin
 
 ---
 

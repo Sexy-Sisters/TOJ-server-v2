@@ -2,12 +2,12 @@
 name: Bug report
 about: 버그 제보
 title: ''
-labels: ''
-assignees: ''
+labels: "\U0001F41EBUG"
+assignees: leekyukin
 
 ---
 
-## 🐞 describe the bug
+## 📑 describe the bug
 > description
 
 ## 📸Screenshots
