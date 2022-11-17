@@ -11,12 +11,13 @@ class UserFacade (
     private val notificationService: NotificationService,
 ) {
 
-    fun createUser(command: UserCommand.CreateRequest) {
-        userService.createUser(command)
+    fun createUser(command: UserCommand.CreateRequest): Long {
+        var userId = userService.createUser(command)
         notificationService.sendEmail(
             command.email,
             "TOJ 회원가입 완료",
             "TOJ 회원가입 완료"
         )
+        return userId
     }
 }

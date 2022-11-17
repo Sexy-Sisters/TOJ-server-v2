@@ -1,11 +1,11 @@
 package com.sexysisters.tojserverv2.interfaces.user
 
 import com.sexysisters.tojserverv2.application.user.UserFacade
-import com.sexysisters.tojserverv2.domain.user.service.UserService
+import com.sexysisters.tojserverv2.common.response.CommonResponse
 import com.sexysisters.tojserverv2.interfaces.user.dto.UserDtoMapper
 import com.sexysisters.tojserverv2.interfaces.user.dto.UserRequest
+import com.sexysisters.tojserverv2.interfaces.user.dto.UserResponse
 import org.mapstruct.factory.Mappers
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,8 +20,10 @@ class UserApiController (
     private val mapper = Mappers.getMapper(UserDtoMapper::class.java)
 
     @PostMapping
-    fun registerUser(@RequestBody @Valid request: UserRequest.Create) {
+    fun registerUser(@RequestBody @Valid request: UserRequest.Create): CommonResponse<UserResponse.CreateUser> {
         val userCommand = mapper.of(request)
-        userFacade.createUser(userCommand)
+        val userId = userFacade.createUser(userCommand)
+        val response = mapper.of(userId)
+        return CommonResponse.success(response)
     }
 }

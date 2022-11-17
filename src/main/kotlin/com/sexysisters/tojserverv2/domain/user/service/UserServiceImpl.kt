@@ -12,8 +12,9 @@ class UserServiceImpl(
 ): UserService {
 
     @Transactional
-    override fun createUser(command: UserCommand.CreateRequest) {
-        val initUser = command.toEntity()
-        userStore.store(initUser)
+    override fun createUser(command: UserCommand.CreateRequest): Long {
+        var initUser = command.toEntity()
+        var savedUser = userStore.store(initUser)
+        return savedUser.id!!
     }
 }
