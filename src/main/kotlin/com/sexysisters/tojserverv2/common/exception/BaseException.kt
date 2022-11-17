@@ -2,7 +2,7 @@ package com.sexysisters.tojserverv2.common.exception
 
 import com.sexysisters.tojserverv2.common.response.ErrorCode
 
-class BaseException : RuntimeException {
+open class BaseException : RuntimeException {
 
     var errorCode: ErrorCode
 
