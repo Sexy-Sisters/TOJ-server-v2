@@ -25,6 +25,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.hibernate.validator:hibernate-validator")
+    implementation("org.glassfish:jakarta.el")
 
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     runtimeOnly("com.mysql:mysql-connector-j")
@@ -40,8 +42,8 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
     // AWS
-    implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
-    implementation("org.springframework.cloud:spring-cloud-aws-autoconfigure:2.2.6.RELEASE")
+//    implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+//    implementation("org.springframework.cloud:spring-cloud-aws-autoconfigure:2.2.6.RELEASE")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
