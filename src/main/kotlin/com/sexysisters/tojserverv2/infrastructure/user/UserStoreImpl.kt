@@ -7,9 +7,9 @@ import com.sexysisters.tojserverv2.domain.user.exception.NicknameAlreadyExistsEx
 import org.springframework.stereotype.Component
 
 @Component
-class UserStoreImpl (
+class UserStoreImpl(
     private val userRepository: UserRepository,
-): UserStore {
+) : UserStore {
 
     override fun store(user: User): User {
         validation(user.email, user.nickname)

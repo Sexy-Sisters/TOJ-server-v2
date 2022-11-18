@@ -6,11 +6,10 @@ import com.sexysisters.tojserverv2.domain.user.service.UserService
 import org.springframework.stereotype.Component
 
 @Component
-class UserFacade (
+class UserFacade(
     private val userService: UserService,
     private val notificationService: NotificationService,
 ) {
-
     fun createUser(command: UserCommand.CreateRequest): Long {
         var userId = userService.createUser(command)
         notificationService.sendEmail(

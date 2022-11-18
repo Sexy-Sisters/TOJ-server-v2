@@ -4,7 +4,7 @@ import com.sexysisters.tojserverv2.domain.notification.NotificationService
 import org.springframework.stereotype.Component
 
 @Component
-class NotificationExecutor: NotificationService {
+class NotificationExecutor : NotificationService {
 
     override fun sendEmail(email: String, title: String, description: String) {
 //        TODO("이메일 발송 구현")

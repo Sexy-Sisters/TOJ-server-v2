@@ -3,8 +3,7 @@ package com.sexysisters.tojserverv2.common.response
 import javax.validation.constraints.Null
 import com.sexysisters.tojserverv2.common.response.CommonResponse as CommonResponse
 
-
-class CommonResponse<T: Any?> (
+class CommonResponse<T : Any?> (
     val result: Result,
     val data: T? = null,
     val message: String? = null,
@@ -46,6 +45,3 @@ class CommonResponse<T: Any?> (
         SUCCESS, FAIL
     }
 }
-
-
-

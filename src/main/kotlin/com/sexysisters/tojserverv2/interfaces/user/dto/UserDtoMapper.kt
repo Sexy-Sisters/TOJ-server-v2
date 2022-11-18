@@ -5,7 +5,7 @@ import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.ReportingPolicy
 
-@Mapper (
+@Mapper(
     componentModel = "spring",
     injectionStrategy = InjectionStrategy.CONSTRUCTOR,
     unmappedTargetPolicy = ReportingPolicy.ERROR,
@@ -13,7 +13,6 @@ import org.mapstruct.ReportingPolicy
 interface UserDtoMapper {
 
     fun of(request: UserRequest.Create): UserCommand.CreateRequest
-
 
     fun of(userId: Long?): UserResponse.CreateUser
 }
