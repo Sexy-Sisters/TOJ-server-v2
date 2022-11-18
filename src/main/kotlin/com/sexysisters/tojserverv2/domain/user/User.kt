@@ -1,12 +1,17 @@
 package com.sexysisters.tojserverv2.domain.user
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import org.springframework.security.authorization.AuthorityAuthorizationDecision
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
 @Table(name = "tbl_user")
-class User (
+class User(
     var name: String,
     var nickname: String,
     val email: String,
@@ -18,7 +23,7 @@ class User (
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-): BaseTimeEntity()
+) : BaseTimeEntity()
 
 enum class Authority {
     ADMIN, USER

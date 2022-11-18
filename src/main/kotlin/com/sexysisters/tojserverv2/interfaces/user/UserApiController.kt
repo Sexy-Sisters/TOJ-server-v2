@@ -14,9 +14,9 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api/v2/user")
-class UserApiController (
+class UserApiController(
     private val userFacade: UserFacade,
-){
+) {
     private val mapper = Mappers.getMapper(UserDtoMapper::class.java)
 
     @PostMapping

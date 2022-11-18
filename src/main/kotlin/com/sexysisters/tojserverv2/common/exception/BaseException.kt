@@ -13,7 +13,7 @@ open class BaseException : RuntimeException {
     constructor(
         message: String,
         errorCode: ErrorCode,
-    ): super(message){
+    ) : super(message) {
         this.errorCode = errorCode
     }
 
@@ -21,7 +21,7 @@ open class BaseException : RuntimeException {
         message: String,
         errorCode: ErrorCode,
         cause: Throwable,
-    ): super(message, cause) {
+    ) : super(message, cause) {
         this.errorCode = errorCode
     }
 }

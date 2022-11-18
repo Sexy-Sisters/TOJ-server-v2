@@ -12,9 +12,9 @@ import org.springframework.security.web.SecurityFilterChain
 
 @EnableWebSecurity
 @Configuration
-class SecurityConfiguration (
+class SecurityConfiguration(
     private val authDetailsService: AuthDetailsService,
-){
+) {
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 class UserServiceImpl(
     private val userStore: UserStore,
     private val passwordEncoder: PasswordEncoder,
-): UserService {
+) : UserService {
 
     @Transactional
     override fun createUser(command: UserCommand.CreateRequest): Long {

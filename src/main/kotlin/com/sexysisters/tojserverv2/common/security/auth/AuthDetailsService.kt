@@ -6,9 +6,9 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
 
 @Service
-class AuthDetailsService (
+class AuthDetailsService(
     private val userReader: UserReader,
-): UserDetailsService {
+) : UserDetailsService {
 
     override fun loadUserByUsername(username: String): UserDetails {
         return userReader.findUserByEmail(username)

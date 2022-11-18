@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 @Component
 class UserReaderImpl(
     private val userRepository: UserRepository,
-): UserReader {
+) : UserReader {
 
     override fun findUserByEmail(email: String): User {
         return userRepository.findByEmail(email)
