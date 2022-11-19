@@ -3,6 +3,7 @@ package com.sexysisters.tojserverv2.domain.user.service
 import com.sexysisters.tojserverv2.domain.user.Authority
 import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.UserCommand
+import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.design.UserStore
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
@@ -14,6 +15,16 @@ import org.springframework.security.crypto.password.PasswordEncoder
 
 class UserServiceTest : BehaviorSpec({
 
+    val encoder: PasswordEncoder = mockk()
+    val userStore: UserStore = mockk()
+    val userReader: UserReader = mockk()
+
+    val target = UserServiceImpl(
+        userStore,
+        encoder,
+        userReader,
+    )
+
     val user = User(
         id = 1L,
         name = "이규진",
@@ -24,16 +35,8 @@ class UserServiceTest : BehaviorSpec({
         authority = Authority.USER,
     )
 
-    Given("모의 객체 생성") {
-        val encoder: PasswordEncoder = mockk()
-        val userStore: UserStore = mockk()
-
+    Given("회원가입 answer 정의 & parameter capture") {
         val userCapture = slot<User>()
-
-        val target = UserServiceImpl(
-            userStore,
-            encoder,
-        )
 
         every { encoder.encode(any()) } returns "encodedPassword"
         every { userStore.store(capture(userCapture)) } returns user
@@ -51,6 +54,7 @@ class UserServiceTest : BehaviorSpec({
             Then("Command가 정상적으로 Entity로 변환되어야 한다.") {
                 val userEntity = userCapture.captured
 
+                userId shouldBe 1L
                 userEntity.email shouldBe createRequest.email
                 userEntity.name shouldBe createRequest.name
                 userEntity.nickname shouldBe createRequest.nickname
@@ -62,6 +66,29 @@ class UserServiceTest : BehaviorSpec({
             Then("PasswordEncoder와 UserStore 로직이 동작해야 한다.") {
                 verify(exactly = 1) { encoder.encode(any()) }
                 verify(exactly = 1) { userStore.store(any()) }
+            }
+        }
+    }
+
+    Given("프로필 조회 answer 정의 & parameter capture") {
+        val userId = 1L
+
+        val userIdCapture = slot<Long>()
+        every { userReader.findUserById(capture(userIdCapture)) } returns user
+
+        When("특정 유저 프로필 조회시") {
+            val userInfo = target.findUserProfile(userId)
+
+            Then("정확한 유저 프로필이 조회되어야 한다.") {
+
+                userIdCapture.captured shouldBe userId
+                userInfo.nickname shouldBe user.nickname
+                userInfo.profileImg shouldBe user.profileImg
+                // TODO :: add properties -> description, age, school, ...
+            }
+
+            Then("UserReader 로직이 동작해야 한다.") {
+                verify(exactly = 1) { userReader.findUserById(userId) }
             }
         }
     }
