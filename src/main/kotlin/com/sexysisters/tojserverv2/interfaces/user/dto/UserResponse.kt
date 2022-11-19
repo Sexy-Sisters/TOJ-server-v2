@@ -5,4 +5,9 @@ class UserResponse {
     class CreateUser(
         val userId: Long,
     )
+
+    class Profile(
+        val nickname: String,
+        val profileImg: String,
+    )
 }
