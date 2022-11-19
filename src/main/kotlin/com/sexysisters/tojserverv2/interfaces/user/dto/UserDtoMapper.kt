@@ -13,9 +13,9 @@ import org.mapstruct.ReportingPolicy
 )
 interface UserDtoMapper {
 
-    fun of(request: UserRequest.Create): UserCommand.CreateRequest
+    fun of(request: UserRequest.SignUp): UserCommand.CreateRequest
 
-    fun of(userId: Long?): UserResponse.CreateUser
+    fun of(userId: Long?): UserResponse.SignUp
 
     fun of(userInfo: UserInfo.Profile): UserResponse.Profile
 }

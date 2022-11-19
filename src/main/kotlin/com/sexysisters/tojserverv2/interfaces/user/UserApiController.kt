@@ -24,7 +24,7 @@ class UserApiController(
     private val mapper = Mappers.getMapper(UserDtoMapper::class.java)
 
     @PostMapping
-    fun registerUser(@RequestBody @Valid request: UserRequest.Create): CommonResponse<UserResponse.CreateUser> {
+    fun signUpUser(@RequestBody @Valid request: UserRequest.SignUp): CommonResponse<UserResponse.SignUp> {
         val userCommand = mapper.of(request)
         val userId = userFacade.createUser(userCommand)
         val response = mapper.of(userId)
