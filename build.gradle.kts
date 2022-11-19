@@ -54,6 +54,9 @@ dependencies {
     // Mockk
     testImplementation("io.mockk:mockk:1.13.2")
 
+    // Swagger
+    implementation("io.springfox:springfox-boot-starter:3.0.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 }
