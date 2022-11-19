@@ -20,9 +20,9 @@ class UserServiceTest : BehaviorSpec({
     val userReader: UserReader = mockk()
 
     val target = UserServiceImpl(
-        userStore,
-        encoder,
-        userReader,
+        userStore = userStore,
+        userReader = userReader,
+        passwordEncoder = encoder,
     )
 
     val user = User(
