@@ -3,7 +3,8 @@ package com.sexysisters.tojserverv2.domain.user
 import org.springframework.security.crypto.password.PasswordEncoder
 
 class UserCommand {
-    data class CreateRequest(
+
+    class CreateRequest(
         val name: String,
         val nickname: String,
         val email: String,
