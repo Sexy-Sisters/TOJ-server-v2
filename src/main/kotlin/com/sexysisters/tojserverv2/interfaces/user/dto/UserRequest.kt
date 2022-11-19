@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank
 
 class UserRequest {
 
-    data class Create(
+    data class SignUp(
         @field:NotBlank(message = "name이 비어있습니다.")
         val name: String,
 
