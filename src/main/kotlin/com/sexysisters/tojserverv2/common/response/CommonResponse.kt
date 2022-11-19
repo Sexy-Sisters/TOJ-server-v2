@@ -1,11 +1,8 @@
 package com.sexysisters.tojserverv2.common.response
 
-import javax.validation.constraints.Null
-import com.sexysisters.tojserverv2.common.response.CommonResponse as CommonResponse
-
 class CommonResponse<T : Any?> (
     val result: Result,
-    val data: T? = null,
+    val data: T,
     val message: String? = null,
     val errorCode: String? = null,
 ) {
@@ -24,16 +21,18 @@ class CommonResponse<T : Any?> (
             return success(data, null)
         }
 
-        fun fail(message: String, errorCode: String): CommonResponse<Null> {
+        fun fail(message: String, errorCode: String): CommonResponse<Unit> {
             return CommonResponse(
+                data = Unit,
                 result = Result.FAIL,
                 message = message,
                 errorCode = errorCode,
             )
         }
 
-        fun fail(errorCode: ErrorCode): CommonResponse<Null> {
+        fun fail(errorCode: ErrorCode): CommonResponse<Unit> {
             return CommonResponse(
+                data = Unit,
                 result = Result.FAIL,
                 message = errorCode.errorMsg,
                 errorCode = errorCode.name,

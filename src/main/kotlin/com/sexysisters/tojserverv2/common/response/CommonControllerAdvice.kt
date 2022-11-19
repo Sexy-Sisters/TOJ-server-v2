@@ -18,28 +18,28 @@ class CommonControllerAdvice {
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception::class)
-    fun onException(e: Exception): CommonResponse<Null> {
+    fun onException(e: Exception): CommonResponse<Unit> {
         return CommonResponse.fail(ErrorCode.COMMON_SYSTEM_ERROR)
     }
 
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(BaseException::class)
-    fun onBaseException(e: BaseException): CommonResponse<Null> {
+    fun onBaseException(e: BaseException): CommonResponse<Unit> {
         return CommonResponse.fail(e.message!!, e.errorCode.errorMsg)
     }
 
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ClientAbortException::class)
-    fun skipException(e: Exception): CommonResponse<Null> {
+    fun skipException(e: Exception): CommonResponse<Unit> {
         return CommonResponse.fail(ErrorCode.COMMON_SYSTEM_ERROR)
     }
 
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun methodArgumentNotValidException(e: MethodArgumentNotValidException): CommonResponse<Null> {
+    fun methodArgumentNotValidException(e: MethodArgumentNotValidException): CommonResponse<Unit> {
         val bindingResult: BindingResult = e.bindingResult
         val fe: FieldError? = bindingResult.fieldError
 
