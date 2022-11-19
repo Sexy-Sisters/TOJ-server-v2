@@ -1,6 +1,7 @@
 package com.sexysisters.tojserverv2.interfaces.user.dto
 
 import com.sexysisters.tojserverv2.domain.user.UserCommand
+import com.sexysisters.tojserverv2.domain.user.UserInfo
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.ReportingPolicy
@@ -12,7 +13,9 @@ import org.mapstruct.ReportingPolicy
 )
 interface UserDtoMapper {
 
-    fun of(request: UserRequest.Create): UserCommand.CreateRequest
+    fun of(request: UserRequest.SignUp): UserCommand.CreateRequest
 
-    fun of(userId: Long?): UserResponse.CreateUser
+    fun of(userId: Long?): UserResponse.SignUp
+
+    fun of(userInfo: UserInfo.Profile): UserResponse.Profile
 }
