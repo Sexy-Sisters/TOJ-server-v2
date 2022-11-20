@@ -2,10 +2,12 @@ package com.sexysisters.tojserverv2.domain.user.service
 
 import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.UserInfo
+import com.sexysisters.tojserverv2.domain.user.UserMapper
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.design.UserStore
 import com.sexysisters.tojserverv2.domain.user.setEncodedPassword
 import com.sexysisters.tojserverv2.domain.user.toEntity
+import org.mapstruct.factory.Mappers
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,6 +18,7 @@ class UserServiceImpl(
     private val userReader: UserReader,
     private val passwordEncoder: PasswordEncoder,
 ) : UserService {
+    private val userMapper = Mappers.getMapper(UserMapper::class.java)
 
     @Transactional
     override fun createUser(command: UserCommand.CreateRequest): Long {
@@ -28,6 +31,6 @@ class UserServiceImpl(
     @Transactional
     override fun findUserProfile(userId: Long): UserInfo.Profile {
         val user = userReader.findUserById(userId)
-        return UserInfo.Profile.of(user)
+        return userMapper.of(user)
     }
 }
