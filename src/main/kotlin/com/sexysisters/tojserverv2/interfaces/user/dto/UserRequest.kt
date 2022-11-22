@@ -5,16 +5,13 @@ import javax.validation.constraints.NotBlank
 class UserRequest {
 
     data class SignUp(
-        @field:NotBlank(message = "name이 비어있습니다.")
-        val name: String,
-
-        @field:NotBlank(message = "nickname이 비어있습니다.")
-        val nickname: String,
-
         @field:NotBlank(message = "email이 비어있습니다.")
         val email: String,
 
         @field:NotBlank(message = "password가 비어있습니다.")
         val password: String,
+
+        @field:NotBlank(message = "nickname이 비어있습니다.")
+        val nickname: String,
     )
 }
