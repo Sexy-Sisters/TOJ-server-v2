@@ -18,4 +18,8 @@ interface UserDtoMapper {
     fun of(userId: Long?): UserResponse.SignUp
 
     fun of(userInfo: UserInfo.Profile): UserResponse.Profile
+
+    fun of(request: UserRequest.Login): UserCommand.LoginRequest
+
+    fun of(request: UserRequest.GoogleAuth): UserCommand.GoogleLoginRequest
 }
