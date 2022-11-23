@@ -1,6 +1,5 @@
-package com.sexysisters.tojserverv2.common.security
+package com.sexysisters.tojserverv2.config
 
-import com.sexysisters.tojserverv2.common.security.auth.AuthDetailsService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -12,14 +11,10 @@ import org.springframework.security.web.SecurityFilterChain
 
 @EnableWebSecurity
 @Configuration
-class SecurityConfiguration(
-    private val authDetailsService: AuthDetailsService,
-) {
+class SecurityConfiguration {
 
     @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
+    fun passwordEncoder() = BCryptPasswordEncoder()
 
     @Bean
     @Throws(Exception::class)
