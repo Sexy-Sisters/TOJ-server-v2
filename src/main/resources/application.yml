@@ -1,7 +1,7 @@
 spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+    mvc:
+        pathmatch:
+            matching-strategy: ant_path_matcher
 
     jpa:
         properties:
@@ -18,7 +18,14 @@ spring:
         username: toj-user
         password: toj-pass
 
+    redis:
+        host: localhost
+        port: 6379
 
+    jwt:
+        access-token-valid-time: 100000000
+        refresh-token-valid-time: 1000000000000
+        secret: alsdjfljasldkjfk;lajdlkfjslakjdlfkjlk;sdfghjklkjhgfaj;fdlkjal;kdjflkajdflkasjkdlf
 
 oauth:
     google:
