@@ -6,4 +6,9 @@ class UserInfo {
         val nickname: String,
         val profileImg: String,
     )
+
+    class TokenResponse(
+        val accessToken: String,
+        val refreshToken: String,
+    )
 }

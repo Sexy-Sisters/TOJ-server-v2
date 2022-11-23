@@ -9,6 +9,15 @@ class UserCommand {
         var password: String,
         val nickname: String,
     )
+
+    class LoginRequest(
+        val email: String,
+        val password: String,
+    )
+
+    class GoogleLoginRequest(
+        val code: String,
+    )
 }
 
 fun UserCommand.CreateRequest.toEntity() = User(

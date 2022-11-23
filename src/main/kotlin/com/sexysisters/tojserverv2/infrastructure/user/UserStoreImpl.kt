@@ -20,4 +20,14 @@ class UserStoreImpl(
         if (userRepository.existsByEmail(email)) throw EmailAlreadyExistsException()
         if (userRepository.existsByNickname(nickname)) throw NicknameAlreadyExistsException()
     }
+
+    override fun storeOAuthUser(user: User) {
+        if (!isAlreadyExists(user)) {
+            store(user)
+        }
+    }
+
+    private fun isAlreadyExists(user: User): Boolean {
+        return userRepository.existsByEmail(user.email)
+    }
 }
