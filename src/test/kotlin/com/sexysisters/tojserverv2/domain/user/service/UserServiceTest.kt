@@ -26,13 +26,11 @@ class UserServiceTest : BehaviorSpec({
     )
 
     val user = User(
-        id = 1L,
         name = "이규진",
         nickname = "청출어람",
         email = "leekujin14@gmail.com",
         password = "enCodedPassword",
         profileImg = "추후 수정",
-        authority = Authority.USER,
     )
 
     Given("회원가입 answer 정의 & parameter capture") {
@@ -43,7 +41,6 @@ class UserServiceTest : BehaviorSpec({
 
         When("회원가입 시") {
             val createRequest = UserCommand.CreateRequest(
-                name = "이규진",
                 nickname = "청출어람",
                 email = "leekujin14@gmail.com",
                 password = "password",
@@ -54,9 +51,7 @@ class UserServiceTest : BehaviorSpec({
             Then("Command가 정상적으로 Entity로 변환되어야 한다.") {
                 val userEntity = userCapture.captured
 
-                userId shouldBe 1L
                 userEntity.email shouldBe createRequest.email
-                userEntity.name shouldBe createRequest.name
                 userEntity.nickname shouldBe createRequest.nickname
                 userEntity.password shouldBe "encodedPassword"
                 userEntity.authority shouldBe Authority.USER

@@ -1,20 +1,41 @@
 spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+    mvc:
+        pathmatch:
+            matching-strategy: ant_path_matcher
 
-  jpa:
-    properties:
-      hibernate:
-        format_sql: true
-    generate-ddl: true
-    show-sql: true
-    hibernate:
-      ddl-auto: update
+    jpa:
+        properties:
+            hibernate:
+                format_sql: true
+        generate-ddl: true
+        show-sql: true
+        hibernate:
+            ddl-auto: update
 
-  datasource:
-      url: jdbc:mysql://localhost:3306/toj?serverTimezone=UTC&characterEncoding=UTF-8
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: toj-user
-      password: toj-pass
+    datasource:
+        url: jdbc:mysql://localhost:3306/toj?serverTimezone=UTC&characterEncoding=UTF-8
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: toj-user
+        password: toj-pass
 
+    redis:
+        host: localhost
+        port: 6379
+
+    jwt:
+        access-token-valid-time: 100000000
+        refresh-token-valid-time: 1000000000000
+        secret: alsdjfljasldkjfk;lajdlkfjslakjdlfkjlk;sdfghjklkjhgfaj;fdlkjal;kdjflkajdflkasjkdlf
+
+oauth:
+    google:
+        base-url: https://accounts.google.com/o/oauth2/v2/auth
+        client-id: 692382753948-tvhuh938v39a73fq9q7qfnl32h3d1b3o.apps.googleusercontent.com
+        client-secret: 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
+        redirect-url: http://localhost:8080/api/v2/auth/google/callback
+
+feign:
+    client:
+        config:
+            default:
+                loggerLevel: full

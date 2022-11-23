@@ -5,16 +5,26 @@ import javax.validation.constraints.NotBlank
 class UserRequest {
 
     data class SignUp(
-        @field:NotBlank(message = "name이 비어있습니다.")
-        val name: String,
-
-        @field:NotBlank(message = "nickname이 비어있습니다.")
-        val nickname: String,
-
-        @field:NotBlank(message = "email이 비어있습니다.")
+        @field:NotBlank(message = "email is empty")
         val email: String,
 
-        @field:NotBlank(message = "password가 비어있습니다.")
+        @field:NotBlank(message = "password is empty")
         val password: String,
+
+        @field:NotBlank(message = "nickname is empty")
+        val nickname: String,
+    )
+
+    data class Login(
+        @field:NotBlank(message = "email is empty")
+        val email: String,
+
+        @field:NotBlank(message = "password is empty")
+        val password: String,
+    )
+
+    data class GoogleAuth(
+        @field:NotBlank(message = "auth code is empty")
+        val code: String,
     )
 }

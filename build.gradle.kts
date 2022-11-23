@@ -23,12 +23,13 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.glassfish:jakarta.el")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-configuration-processor:2.7.5")
     implementation("org.hibernate.validator:hibernate-validator")
-    implementation("org.glassfish:jakarta.el")
 
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     runtimeOnly("com.mysql:mysql-connector-j")
@@ -56,6 +57,9 @@ dependencies {
 
     // Swagger
     implementation("io.springfox:springfox-boot-starter:3.0.0")
+
+    // fegin client
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.3")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
