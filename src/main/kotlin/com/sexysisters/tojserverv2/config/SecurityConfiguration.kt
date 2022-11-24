@@ -3,7 +3,7 @@ package com.sexysisters.tojserverv2.config
 import com.sexysisters.tojserverv2.common.security.auth.AuthDetailsService
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
-import com.sexysisters.tojserverv2.infrastructure.jwt.filter.JwtAuthenticationFilter
+import com.sexysisters.tojserverv2.common.filter.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
