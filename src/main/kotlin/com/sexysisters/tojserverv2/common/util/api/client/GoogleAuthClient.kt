@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.common.util.api.client
 
 import com.sexysisters.tojserverv2.common.util.api.dto.GoogleCodeRequest
-import com.sexysisters.tojserverv2.interfaces.user.dto.TokenResponse
+import com.sexysisters.tojserverv2.common.util.api.dto.TokenResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.PostMapping
 
