@@ -4,6 +4,7 @@ import com.sexysisters.tojserverv2.common.security.auth.AuthDetailsService
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
 import com.sexysisters.tojserverv2.common.filter.JwtAuthenticationFilter
+import com.sexysisters.tojserverv2.common.filter.JwtExceptionFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -47,6 +48,10 @@ class SecurityConfiguration(
                     jwtValidator,
                 ),
                 UsernamePasswordAuthenticationFilter::class.java
+            )
+            .addFilterBefore(
+                JwtExceptionFilter(),
+                JwtAuthenticationFilter::class.java
             )
 
         return http.build()

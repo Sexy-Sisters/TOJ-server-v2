@@ -1,8 +1,8 @@
 package com.sexysisters.tojserverv2.common.filter
 
 import com.sexysisters.tojserverv2.common.security.auth.AuthDetailsService
-import com.sexysisters.tojserverv2.config.infrastructure.jwt.JwtTokenProvider
-import com.sexysisters.tojserverv2.config.infrastructure.jwt.JwtValidator
+import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
+import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
