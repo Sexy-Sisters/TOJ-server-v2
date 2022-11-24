@@ -12,7 +12,7 @@ class AuthFacade(
     private val notificationService: NotificationService,
 ) {
 
-    fun googleLogin(userCommand: UserCommand.GoogleLoginRequest): UserInfo.TokenResponse {
+    fun googleLogin(userCommand: UserCommand.GoogleLoginRequest): UserInfo.Token {
         val response = authService.googleLogin(userCommand)
         notificationService.sendEmail("", "", "")
         return response

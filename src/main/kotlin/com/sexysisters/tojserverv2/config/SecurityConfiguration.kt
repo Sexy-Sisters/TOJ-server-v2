@@ -3,9 +3,11 @@ package com.sexysisters.tojserverv2.config
 import com.sexysisters.tojserverv2.common.security.auth.AuthDetailsService
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
-import com.sexysisters.tojserverv2.infrastructure.jwt.filter.JwtAuthenticationFilter
+import com.sexysisters.tojserverv2.common.filter.JwtAuthenticationFilter
+import com.sexysisters.tojserverv2.common.filter.JwtExceptionFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -35,6 +37,7 @@ class SecurityConfiguration(
 
             .and()
             .authorizeRequests()
+            .antMatchers(HttpMethod.GET, "/api/v2/user").authenticated()
             .anyRequest().permitAll()
 
         http
@@ -45,6 +48,10 @@ class SecurityConfiguration(
                     jwtValidator,
                 ),
                 UsernamePasswordAuthenticationFilter::class.java
+            )
+            .addFilterBefore(
+                JwtExceptionFilter(),
+                JwtAuthenticationFilter::class.java
             )
 
         return http.build()

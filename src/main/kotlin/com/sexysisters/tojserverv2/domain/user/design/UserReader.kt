@@ -5,4 +5,5 @@ import com.sexysisters.tojserverv2.domain.user.User
 interface UserReader {
     fun findUserByEmail(email: String): User
     fun findUserById(id: Long): User
+    fun getCurrentUser(): User
 }

@@ -1,4 +1,4 @@
-package com.sexysisters.tojserverv2.infrastructure.jwt.filter
+package com.sexysisters.tojserverv2.common.filter
 
 import com.sexysisters.tojserverv2.common.security.auth.AuthDetailsService
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider

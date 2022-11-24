@@ -43,13 +43,11 @@ class CommonControllerAdvice {
         val fe: FieldError? = bindingResult.fieldError
 
         if (fe != null) {
-            val message: String =
-                "Request Error ${fe.field} = ${fe.rejectedValue} + (${fe.defaultMessage})"
+            val message: String = "Request Error ${fe.field} = ${fe.rejectedValue} + (${fe.defaultMessage})"
             return CommonResponse.fail(message, ErrorCode.COMMON_INVALID_PARAMETER.name)
         } else {
             return CommonResponse.fail(
-                ErrorCode.COMMON_INVALID_PARAMETER.errorMsg,
-                ErrorCode.COMMON_INVALID_PARAMETER.name
+                ErrorCode.COMMON_INVALID_PARAMETER.errorMsg, ErrorCode.COMMON_INVALID_PARAMETER.name
             )
         }
     }

@@ -1,6 +1,9 @@
 package com.sexysisters.tojserverv2.common.response
 
-class CommonResponse<T : Any?> (
+import com.fasterxml.jackson.core.JsonProcessingException
+import com.fasterxml.jackson.databind.ObjectMapper
+
+class CommonResponse<T : Any?>(
     val result: Result,
     val data: T,
     val message: String? = null,
@@ -39,6 +42,10 @@ class CommonResponse<T : Any?> (
             )
         }
     }
+
+    @Throws(JsonProcessingException::class)
+    fun convertToJson(): String =
+        ObjectMapper().writeValueAsString(this)
 
     enum class Result {
         SUCCESS, FAIL
