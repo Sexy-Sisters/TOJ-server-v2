@@ -77,6 +77,7 @@ class UserServiceTest : BehaviorSpec({
             Then("정확한 유저 프로필이 조회되어야 한다.") {
 
                 userIdCapture.captured shouldBe userId
+                userInfo.email shouldBe user.email
                 userInfo.nickname shouldBe user.nickname
                 userInfo.profileImg shouldBe user.profileImg
                 // TODO :: add properties -> description, age, school, ...
@@ -97,7 +98,7 @@ class UserServiceTest : BehaviorSpec({
             Then("정확한 값이 반환되어야 한다.") {
                 userInfo.email shouldBe user.email
                 userInfo.nickname shouldBe user.nickname
-                userInfo.profile shouldBe user.profileImg
+                userInfo.profileImg shouldBe user.profileImg
             }
         }
     }
