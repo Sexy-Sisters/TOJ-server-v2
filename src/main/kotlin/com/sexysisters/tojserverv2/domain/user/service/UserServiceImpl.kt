@@ -28,9 +28,15 @@ class UserServiceImpl(
         return savedUser.id!!
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     override fun findUserProfile(userId: Long): UserInfo.Profile {
         val user = userReader.findUserById(userId)
+        return userMapper.of(user)
+    }
+
+    @Transactional(readOnly = true)
+    override fun findCurrentUserProfile(): UserInfo.Profile {
+        val user = userReader.getCurrentUser()
         return userMapper.of(user)
     }
 }

@@ -6,6 +6,7 @@ import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
 import com.sexysisters.tojserverv2.infrastructure.jwt.filter.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -35,6 +36,7 @@ class SecurityConfiguration(
 
             .and()
             .authorizeRequests()
+            .antMatchers(HttpMethod.GET, "/api/v2/user").authenticated()
             .anyRequest().permitAll()
 
         http

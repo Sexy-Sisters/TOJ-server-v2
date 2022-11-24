@@ -50,4 +50,12 @@ class UserApiController(
         val response = mapper.of(userInfo)
         return CommonResponse.success(response)
     }
+
+    @ApiOperation(value = "현재 로그인한 유저 프로필 정보 조회")
+    @GetMapping
+    fun findCurrentUserProfile(): CommonResponse<UserResponse.Profile> {
+        val userInfo = userService.findCurrentUserProfile()
+        val response = mapper.of(userInfo)
+        return CommonResponse.success(response)
+    }
 }
