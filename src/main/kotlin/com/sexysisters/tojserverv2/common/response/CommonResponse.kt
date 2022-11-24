@@ -33,12 +33,12 @@ class CommonResponse<T : Any?>(
             )
         }
 
-        fun fail(errorCode: ErrorCode): CommonResponse<Unit> {
+        fun fail(errorCode: ErrorProperty): CommonResponse<Unit> {
             return CommonResponse(
                 data = Unit,
                 result = Result.FAIL,
                 message = errorCode.errorMsg,
-                errorCode = errorCode.name,
+                errorCode = errorCode.errorMsg,
             )
         }
     }

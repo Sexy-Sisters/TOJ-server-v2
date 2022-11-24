@@ -1,12 +1,12 @@
 package com.sexysisters.tojserverv2.domain.user.service
 
-import com.sexysisters.tojserverv2.common.response.ErrorCode
 import com.sexysisters.tojserverv2.config.properties.JwtProperties
 import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.design.UserStore
 import com.sexysisters.tojserverv2.domain.user.exception.PasswordMismatchException
+import com.sexysisters.tojserverv2.domain.user.exception.UserErrorCode
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.oauth.GoogleAuthExecutor
 import com.sexysisters.tojserverv2.infrastructure.redis.RedisRepository
@@ -91,7 +91,7 @@ class AuthServiceTest : BehaviorSpec({
             }
 
             Then("실패시 PASSWORD_MISMATCH 예외를 던져야 한다.") {
-                exception.errorCode shouldBe ErrorCode.PASSWORD_MISMATCH
+                exception.errorCode shouldBe UserErrorCode.PASSWORD_MISMATCH
             }
         }
     }

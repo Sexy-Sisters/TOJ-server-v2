@@ -7,6 +7,7 @@ import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.design.UserStore
 import com.sexysisters.tojserverv2.domain.user.setEncodedPassword
 import com.sexysisters.tojserverv2.domain.user.toEntity
+import com.sexysisters.tojserverv2.domain.user.updateInfo
 import org.mapstruct.factory.Mappers
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -38,5 +39,11 @@ class UserServiceImpl(
     override fun findCurrentUserProfile(): UserInfo.Profile {
         val user = userReader.getCurrentUser()
         return userMapper.of(user)
+    }
+
+    @Transactional
+    override fun updateUser(command: UserCommand.UpdateRequest) {
+        val user = userReader.findUserById(command.id)
+        val updatedUser = user.updateInfo(command.nickname, command.name)
     }
 }

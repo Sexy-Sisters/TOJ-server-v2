@@ -18,6 +18,12 @@ class UserCommand {
     class GoogleLoginRequest(
         val code: String,
     )
+
+    class UpdateRequest(
+        val id: Long,
+        val nickname: String,
+        val name: String
+    )
 }
 
 fun UserCommand.CreateRequest.toEntity() = User(
