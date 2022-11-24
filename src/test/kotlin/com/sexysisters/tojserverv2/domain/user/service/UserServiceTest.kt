@@ -87,4 +87,18 @@ class UserServiceTest : BehaviorSpec({
             }
         }
     }
+
+    Given("현재 로그인한 유저 조회") {
+        every { userReader.getCurrentUser() } returns user
+
+        When("성공") {
+            val userInfo = target.findCurrentUserProfile()
+
+            Then("정확한 값이 반환되어야 한다.") {
+                userInfo.email shouldBe user.email
+                userInfo.nickname shouldBe user.nickname
+                userInfo.profile shouldBe user.profileImg
+            }
+        }
+    }
 })
