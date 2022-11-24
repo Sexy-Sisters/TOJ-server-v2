@@ -5,5 +5,5 @@ import com.sexysisters.tojserverv2.domain.user.UserInfo
 
 interface AuthService {
     fun getGoogleLink(): String
-    fun googleLogin(code: UserCommand.GoogleLoginRequest): UserInfo.TokenResponse
+    fun googleLogin(code: UserCommand.GoogleLoginRequest): UserInfo.Token
 }

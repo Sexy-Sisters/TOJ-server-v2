@@ -19,7 +19,7 @@ class AuthServiceImpl(
     override fun getGoogleLink() = googleAuthExecutor.getLink()
 
     @Transactional
-    override fun googleLogin(command: UserCommand.GoogleLoginRequest): UserInfo.TokenResponse {
+    override fun googleLogin(command: UserCommand.GoogleLoginRequest): UserInfo.Token {
         val code = command.code
         val oAuthResponse = googleAuthExecutor.execute(code)
 
@@ -32,7 +32,7 @@ class AuthServiceImpl(
 
         userStore.storeOAuthUser(user)
 
-        return UserInfo.TokenResponse(
+        return UserInfo.Token(
             accessToken = jwtTokenProvider.createAccessToken(user.email),
             refreshToken = jwtTokenProvider.createRefreshToken(user.email),
         )
