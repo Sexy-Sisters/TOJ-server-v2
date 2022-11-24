@@ -1,6 +1,7 @@
 package com.sexysisters.tojserverv2.domain.user
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.user.service.UserService
 import javax.persistence.Entity
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
@@ -24,6 +25,15 @@ class User(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+}
+
+fun User.updateInfo(
+    nickname: String,
+    name: String,
+): User {
+    this.nickname = nickname
+    this.name = name
+    return this
 }
 
 enum class Authority {
