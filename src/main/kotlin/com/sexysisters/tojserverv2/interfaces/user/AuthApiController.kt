@@ -10,9 +10,11 @@ import com.sexysisters.tojserverv2.interfaces.user.dto.UserResponse
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.mapstruct.factory.Mappers
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
@@ -35,6 +37,11 @@ class AuthApiController(
         val response = mapper.of(userInfo)
         return CommonResponse.success(response)
     }
+
+    @ApiOperation(value = "로그아웃")
+    @DeleteMapping
+    fun logout(@RequestHeader("Authorization") accessToken: String) =
+        authService.logout(accessToken)
 
     @ApiOperation(value = "구글 OAuth 로그인 링크")
     @GetMapping("/google")

@@ -1,8 +1,10 @@
 package com.sexysisters.tojserverv2.infrastructure.jwt
 
 import com.sexysisters.tojserverv2.config.properties.JwtProperties
+import com.sexysisters.tojserverv2.infrastructure.jwt.exception.AlreadyLogoutException
 import com.sexysisters.tojserverv2.infrastructure.jwt.exception.ExpiredTokenException
 import com.sexysisters.tojserverv2.infrastructure.jwt.exception.InvalidTokenException
+import com.sexysisters.tojserverv2.infrastructure.redis.RedisRepository
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest
 @Component
 class JwtTokenProvider(
     private val jwtProperties: JwtProperties,
+    private val redisRepository: RedisRepository,
 ) {
 
     fun createAccessToken(email: String) = createToken(email, jwtProperties.accessTokenValidTime)
@@ -42,6 +45,9 @@ class JwtTokenProvider(
     }
 
     fun extractAllClaims(token: String): Claims {
+        if (redisRepository.hasBlackList(token)) {
+            throw AlreadyLogoutException()
+        }
         try {
             return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey(jwtProperties.secret))

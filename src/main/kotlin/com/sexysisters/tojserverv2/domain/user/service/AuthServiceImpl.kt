@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.Duration
+import java.util.Date
 
 @Service
 class AuthServiceImpl(
@@ -26,6 +27,7 @@ class AuthServiceImpl(
     private val googleAuthExecutor: GoogleAuthExecutor,
 ) : AuthService {
 
+    @Transactional(readOnly = true)
     override fun login(request: UserCommand.LoginRequest): UserInfo.Token {
         val email = request.email
         val user = userReader.findUserByEmail(email)
@@ -51,8 +53,13 @@ class AuthServiceImpl(
         }
     }
 
-    override fun logout() {
-        TODO("Not yet implemented")
+    @Transactional(readOnly = true)
+    override fun logout(accessToken: String) {
+        val user = userReader.getCurrentUser()
+        val parsedAccessToken = jwtTokenProvider.parseToken(accessToken)!!
+        val remainTime = jwtTokenProvider.getExpiredTime(parsedAccessToken).time - Date().time
+        redisRepository.setBlackList(parsedAccessToken, Duration.ofMillis(remainTime))
+        redisRepository.deleteData(user.email)
     }
 
     override fun getGoogleLink() = googleAuthExecutor.getLink()
