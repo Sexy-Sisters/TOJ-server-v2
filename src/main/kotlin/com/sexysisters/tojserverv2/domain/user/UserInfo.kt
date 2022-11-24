@@ -7,7 +7,7 @@ class UserInfo {
         val profileImg: String,
     )
 
-    class TokenResponse(
+    class Token(
         val accessToken: String,
         val refreshToken: String,
     )
