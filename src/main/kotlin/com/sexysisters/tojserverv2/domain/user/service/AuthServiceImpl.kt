@@ -48,7 +48,9 @@ class AuthServiceImpl(
     }
 
     private fun checkPassword(expected: String, actual: String) {
-        if (!passwordEncoder.matches(expected, actual)) {
+        val isOAuthAccount = expected == "OAUTH"
+        val isWrongPassword = !passwordEncoder.matches(expected, actual)
+        if (isOAuthAccount && isWrongPassword) {
             throw PasswordMismatchException()
         }
     }
