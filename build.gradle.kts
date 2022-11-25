@@ -44,9 +44,9 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
-    // AWS
-//    implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
-//    implementation("org.springframework.cloud:spring-cloud-aws-autoconfigure:2.2.6.RELEASE")
+    // S3
+    implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+    implementation("org.springframework.cloud:spring-cloud-aws-autoconfigure:2.2.6.RELEASE")
 
     // kotest
     testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
