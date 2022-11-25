@@ -7,5 +7,5 @@ interface AuthService {
     fun login(request: UserCommand.LoginRequest): UserInfo.Token
     fun logout(accessToken: String)
     fun getGoogleLink(): String
-    fun googleLogin(code: UserCommand.GoogleLoginRequest): UserInfo.Token
+    fun googleLogin(code: String): UserInfo.Token
 }

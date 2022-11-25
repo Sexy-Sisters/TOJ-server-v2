@@ -61,6 +61,8 @@ dependencies {
     // fegin client
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.3")
 
+    implementation("org.apache.commons:commons-lang3:3.12.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 }
