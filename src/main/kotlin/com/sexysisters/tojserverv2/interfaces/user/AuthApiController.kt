@@ -1,7 +1,6 @@
 package com.sexysisters.tojserverv2.interfaces.user
 
 import com.sexysisters.tojserverv2.common.response.CommonResponse
-import com.sexysisters.tojserverv2.domain.user.UserInfo
 import com.sexysisters.tojserverv2.domain.user.service.AuthService
 import com.sexysisters.tojserverv2.interfaces.user.dto.UserDtoMapper
 import com.sexysisters.tojserverv2.interfaces.user.dto.UserRequest
