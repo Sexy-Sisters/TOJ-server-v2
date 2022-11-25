@@ -1,7 +1,6 @@
 package com.sexysisters.tojserverv2.domain.user
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import com.sexysisters.tojserverv2.domain.user.service.UserService
 import javax.persistence.Entity
 import javax.persistence.EnumType
 import javax.persistence.Enumerated

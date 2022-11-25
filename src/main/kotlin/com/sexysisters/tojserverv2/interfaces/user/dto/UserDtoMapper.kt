@@ -21,7 +21,5 @@ interface UserDtoMapper {
 
     fun of(request: UserRequest.Login): UserCommand.LoginRequest
 
-    fun of(request: UserRequest.GoogleAuth): UserCommand.GoogleLoginRequest
-
     fun of(userInfo: UserInfo.Token): UserResponse.Token
 }
