@@ -30,7 +30,7 @@ fun UserCommand.CreateRequest.toEntity() = User(
     email = email,
     password = password,
     nickname = nickname,
-    profileImg = "추후 수정",
+    profileImg = S3Properties.defaultProfileImg,
 )
 
 fun UserCommand.CreateRequest.setEncodedPassword(encoder: PasswordEncoder) {
