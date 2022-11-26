@@ -44,7 +44,6 @@ cloud:
     aws:
         s3:
             bucket: toj-img-bucket
-            user: user-profile/
         region:
             static: ap-northeast-2
         stack:
