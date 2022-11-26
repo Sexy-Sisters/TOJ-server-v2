@@ -43,9 +43,10 @@ class UserServiceImpl(
     }
 
     @Transactional
-    override fun updateUser(command: UserCommand.UpdateRequest) {
-        val user = userReader.findUserById(command.id)
+    override fun updateUser(command: UserCommand.UpdateRequest): UserInfo.Profile {
+        val user = userReader.getCurrentUser()
         val updatedUser = user.updateInfo(command.nickname, command.name)
+        return userMapper.of(updatedUser)
     }
 
     @Transactional

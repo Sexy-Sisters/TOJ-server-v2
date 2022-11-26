@@ -17,7 +17,6 @@ class UserCommand {
     )
 
     class UpdateRequest(
-        val id: Long,
         val nickname: String,
         val name: String
     )
