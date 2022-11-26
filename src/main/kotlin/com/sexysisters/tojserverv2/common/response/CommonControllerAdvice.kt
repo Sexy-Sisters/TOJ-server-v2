@@ -18,7 +18,8 @@ class CommonControllerAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception::class)
     fun onException(e: Exception): CommonResponse<Unit> {
-        return CommonResponse.fail(ErrorCode.COMMON_SYSTEM_ERROR)
+        // return CommonResponse.fail(ErrorCode.COMMON_SYSTEM_ERROR)
+        return CommonResponse.fail(e.message!!, e.message!!)
     }
 
     @ResponseBody
