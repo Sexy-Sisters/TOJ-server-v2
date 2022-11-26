@@ -2,6 +2,7 @@ package com.sexysisters.tojserverv2.interfaces.user
 
 import com.sexysisters.tojserverv2.application.user.UserFacade
 import com.sexysisters.tojserverv2.common.response.CommonResponse
+import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.service.UserService
 import com.sexysisters.tojserverv2.interfaces.user.dto.UserDtoMapper
 import com.sexysisters.tojserverv2.interfaces.user.dto.UserRequest
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -57,5 +59,12 @@ class UserApiController(
         val userInfo = userService.findCurrentUserProfile()
         val response = mapper.of(userInfo)
         return CommonResponse.success(response)
+    }
+
+    @ApiOperation(value = "현재 로그인한 유저 프로필 이미지 수정")
+    @PutMapping("/profile-img")
+    fun updateProfileImg(request: UserRequest.UpdateProfileImg) {
+        val userCommand: UserCommand.UpdateProfileImgRequest = mapper.of(request)
+        userService.updateProfileImg(userCommand)
     }
 }

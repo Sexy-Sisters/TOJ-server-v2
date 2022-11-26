@@ -13,13 +13,18 @@ import org.mapstruct.ReportingPolicy
 )
 interface UserDtoMapper {
 
+    // request
     fun of(request: UserRequest.SignUp): UserCommand.CreateRequest
 
+    fun of(request: UserRequest.Login): UserCommand.LoginRequest
+
+    fun of(request: UserRequest.UpdateProfileImg): UserCommand.UpdateProfileImgRequest
+
+    // response
     fun of(userId: Long?): UserResponse.SignUp
 
     fun of(userInfo: UserInfo.Profile): UserResponse.Profile
 
-    fun of(request: UserRequest.Login): UserCommand.LoginRequest
-
     fun of(userInfo: UserInfo.Token): UserResponse.Token
+
 }

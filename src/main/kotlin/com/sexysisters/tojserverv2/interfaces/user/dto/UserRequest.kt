@@ -27,4 +27,9 @@ class UserRequest {
         @field:NotBlank(message = "auth code is empty")
         val code: String,
     )
+
+    data class UpdateProfileImg(
+        @field:NotBlank(message = "img url is empty")
+        val imgUrl: String,
+    )
 }
