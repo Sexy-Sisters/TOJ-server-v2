@@ -1,5 +1,6 @@
 package com.sexysisters.tojserverv2.domain.user
 
+import com.sexysisters.tojserverv2.config.properties.S3Properties
 import org.springframework.security.crypto.password.PasswordEncoder
 
 class UserCommand {
@@ -15,14 +16,14 @@ class UserCommand {
         val password: String,
     )
 
-    class GoogleLoginRequest(
-        val code: String,
-    )
-
     class UpdateRequest(
         val id: Long,
         val nickname: String,
         val name: String
+    )
+
+    class UpdateProfileImgRequest(
+        val profileImg: String,
     )
 }
 

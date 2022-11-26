@@ -7,5 +7,6 @@ interface UserService {
     fun createUser(command: UserCommand.CreateRequest): Long
     fun findUserProfile(userId: Long): UserInfo.Profile
     fun findCurrentUserProfile(): UserInfo.Profile
-    fun updateUser(userId: UserCommand.UpdateRequest)
+    fun updateUser(command: UserCommand.UpdateRequest)
+    fun updateProfileImg(command: UserCommand.UpdateProfileImgRequest)
 }

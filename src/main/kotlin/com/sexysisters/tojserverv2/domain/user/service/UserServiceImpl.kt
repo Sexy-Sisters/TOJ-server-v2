@@ -8,6 +8,7 @@ import com.sexysisters.tojserverv2.domain.user.design.UserStore
 import com.sexysisters.tojserverv2.domain.user.setEncodedPassword
 import com.sexysisters.tojserverv2.domain.user.toEntity
 import com.sexysisters.tojserverv2.domain.user.updateInfo
+import com.sexysisters.tojserverv2.domain.user.updateProfileImg
 import org.mapstruct.factory.Mappers
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -45,5 +46,12 @@ class UserServiceImpl(
     override fun updateUser(command: UserCommand.UpdateRequest) {
         val user = userReader.findUserById(command.id)
         val updatedUser = user.updateInfo(command.nickname, command.name)
+    }
+
+    @Transactional
+    override fun updateProfileImg(command: UserCommand.UpdateProfileImgRequest) {
+        val user = userReader.getCurrentUser()
+        val profileImg = command.profileImg
+        user.updateProfileImg(profileImg)
     }
 }
