@@ -1,5 +1,6 @@
 package com.sexysisters.tojserverv2.domain.user.service
 
+import com.sexysisters.tojserverv2.config.properties.S3Properties
 import com.sexysisters.tojserverv2.domain.user.Authority
 import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.UserCommand
@@ -99,6 +100,24 @@ class UserServiceTest : BehaviorSpec({
                 userInfo.email shouldBe user.email
                 userInfo.nickname shouldBe user.nickname
                 userInfo.profileImg shouldBe user.profileImg
+            }
+        }
+    }
+
+    Given("유저 정보 수정") {
+        every { userReader.getCurrentUser() } returns user
+
+        val request = UserCommand.UpdateRequest(
+            nickname = "이미청출어람해버림",
+            name = "이름",
+        )
+
+        When("성공") {
+            val userInfo = target.updateUser(request)
+
+            Then("유정 정보가 정확하게 변경되야함") {
+                userInfo.nickname shouldBe request.nickname
+                userInfo.name shouldBe request.name
             }
         }
     }
