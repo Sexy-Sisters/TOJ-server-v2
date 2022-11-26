@@ -7,15 +7,10 @@ import javax.validation.constraints.NotEmpty
 
 @ConstructorBinding
 @Validated
-@ConfigurationProperties(prefix = "spring.jwt")
-data class JwtProperties(
+@ConfigurationProperties("cloud.aws.s3")
+class S3Properties(
     @NotEmpty
-    val accessTokenValidTime: Long,
+    val bucket: String,
     @NotEmpty
-    val refreshTokenValidTime: Long,
-    @NotEmpty
-    val secret: String,
-) {
-    val jwtPrefix = "Bearer"
-    val jwtHeader = "Authorization"
-}
+    val user: String,
+)

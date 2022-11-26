@@ -39,3 +39,16 @@ feign:
         config:
             default:
                 loggerLevel: full
+
+cloud:
+    aws:
+        s3:
+            bucket: toj-img-bucket
+        region:
+            static: ap-northeast-2
+        stack:
+            auto: false
+        credentials:
+            instanceProfile: true
+            access-key: AKIASV7YG3ONGOLLGF5V
+            secret-key: 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
