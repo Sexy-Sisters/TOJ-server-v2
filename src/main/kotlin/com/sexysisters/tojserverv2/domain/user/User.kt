@@ -35,6 +35,10 @@ fun User.updateInfo(
     return this
 }
 
+fun User.updateProfileImg(profileImg: String) {
+    this.profileImg = profileImg
+}
+
 enum class Authority {
     ADMIN, USER
 }

@@ -1,5 +1,6 @@
 package com.sexysisters.tojserverv2.domain.user.service
 
+import com.sexysisters.tojserverv2.config.properties.S3Properties
 import com.sexysisters.tojserverv2.domain.user.Authority
 import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.UserCommand
@@ -30,16 +31,16 @@ class UserServiceTest : BehaviorSpec({
         nickname = "청출어람",
         email = "leekujin14@gmail.com",
         password = "enCodedPassword",
-        profileImg = "추후 수정",
+        profileImg = S3Properties.defaultProfileImg,
     )
 
-    Given("회원가입 answer 정의 & parameter capture") {
+    Given("회원가입") {
         val userCapture = slot<User>()
 
         every { encoder.encode(any()) } returns "encodedPassword"
         every { userStore.store(capture(userCapture)) } returns user
 
-        When("회원가입 시") {
+        When("성공") {
             val createRequest = UserCommand.CreateRequest(
                 nickname = "청출어람",
                 email = "leekujin14@gmail.com",
@@ -55,7 +56,7 @@ class UserServiceTest : BehaviorSpec({
                 userEntity.nickname shouldBe createRequest.nickname
                 userEntity.password shouldBe "encodedPassword"
                 userEntity.authority shouldBe Authority.USER
-                userEntity.profileImg shouldBe "추후 수정"
+                userEntity.profileImg shouldBe S3Properties.defaultProfileImg
             }
 
             Then("PasswordEncoder와 UserStore 로직이 동작해야 한다.") {
@@ -65,7 +66,7 @@ class UserServiceTest : BehaviorSpec({
         }
     }
 
-    Given("프로필 조회 answer 정의 & parameter capture") {
+    Given("아이디로 프로필 조회") {
         val userId = 1L
 
         val userIdCapture = slot<Long>()
@@ -80,6 +81,7 @@ class UserServiceTest : BehaviorSpec({
                 userInfo.email shouldBe user.email
                 userInfo.nickname shouldBe user.nickname
                 userInfo.profileImg shouldBe user.profileImg
+                userInfo.name shouldBe user.name
                 // TODO :: add properties -> description, age, school, ...
             }
 
@@ -99,6 +101,25 @@ class UserServiceTest : BehaviorSpec({
                 userInfo.email shouldBe user.email
                 userInfo.nickname shouldBe user.nickname
                 userInfo.profileImg shouldBe user.profileImg
+                userInfo.name shouldBe user.name
+            }
+        }
+    }
+
+    Given("유저 정보 수정") {
+        every { userReader.getCurrentUser() } returns user
+
+        val request = UserCommand.UpdateRequest(
+            nickname = "이미청출어람해버림",
+            name = "이름",
+        )
+
+        When("성공") {
+            val userInfo = target.updateUser(request)
+
+            Then("유정 정보가 정확하게 변경되야함") {
+                userInfo.nickname shouldBe request.nickname
+                userInfo.name shouldBe request.name
             }
         }
     }

@@ -27,4 +27,17 @@ class UserRequest {
         @field:NotBlank(message = "auth code is empty")
         val code: String,
     )
+
+    data class UpdateProfileImg(
+        @field:NotBlank(message = "img url is empty")
+        val profileImg: String,
+    )
+
+    data class Update(
+        @field:NotBlank(message = "nickname is emtpy")
+        val nickname: String,
+
+        @field:NotBlank(message = "name is empty")
+        val name: String,
+    )
 }

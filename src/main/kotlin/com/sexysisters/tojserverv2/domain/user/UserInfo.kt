@@ -6,6 +6,7 @@ class UserInfo {
         val email: String,
         val nickname: String,
         val profileImg: String,
+        val name: String,
     )
 
     class Token(
