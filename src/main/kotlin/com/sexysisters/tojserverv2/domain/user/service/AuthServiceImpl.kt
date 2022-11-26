@@ -66,7 +66,7 @@ class AuthServiceImpl(
 
     override fun getGoogleLink() = googleAuthExecutor.getLink()
 
-    @Transactional(readOnly = true)
+    @Transactional
     override fun googleLogin(code: String): UserInfo.Token {
         val oAuthResponse = googleAuthExecutor.execute(code)
         val user = User(
