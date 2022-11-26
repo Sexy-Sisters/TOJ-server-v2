@@ -18,6 +18,8 @@ interface UserDtoMapper {
 
     fun of(request: UserRequest.Login): UserCommand.LoginRequest
 
+    fun of(request: UserRequest.Update): UserCommand.UpdateRequest
+
     fun of(request: UserRequest.UpdateProfileImg): UserCommand.UpdateProfileImgRequest
 
     // response
@@ -26,5 +28,4 @@ interface UserDtoMapper {
     fun of(userInfo: UserInfo.Profile): UserResponse.Profile
 
     fun of(userInfo: UserInfo.Token): UserResponse.Token
-
 }

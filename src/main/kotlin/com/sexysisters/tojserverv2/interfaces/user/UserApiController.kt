@@ -61,6 +61,17 @@ class UserApiController(
         return CommonResponse.success(response)
     }
 
+    @ApiOperation(value = "현재 로그인한 유저 프로필 정보 수정")
+    @PutMapping("/profile-info")
+    fun updateProfileInfo(
+        @RequestBody @Valid request: UserRequest.Update
+    ): CommonResponse<UserResponse.Profile> {
+        val userCommand: UserCommand.UpdateRequest = mapper.of(request)
+        val userInfo = userService.updateUser(userCommand)
+        val response = mapper.of(userInfo)
+        return CommonResponse.success(response)
+    }
+
     @ApiOperation(value = "현재 로그인한 유저 프로필 이미지 수정")
     @PutMapping("/profile-img")
     fun updateProfileImg(request: UserRequest.UpdateProfileImg) {

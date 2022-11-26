@@ -30,6 +30,14 @@ class UserRequest {
 
     data class UpdateProfileImg(
         @field:NotBlank(message = "img url is empty")
-        val imgUrl: String,
+        val profileImg: String,
+    )
+
+    data class Update(
+        @field:NotBlank(message = "nickname is emtpy")
+        val nickname: String,
+
+        @field:NotBlank(message = "name is empty")
+        val name: String,
     )
 }
