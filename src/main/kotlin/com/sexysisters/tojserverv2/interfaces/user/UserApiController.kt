@@ -74,7 +74,7 @@ class UserApiController(
 
     @ApiOperation(value = "현재 로그인한 유저 프로필 이미지 수정")
     @PutMapping("/profile-img")
-    fun updateProfileImg(request: UserRequest.UpdateProfileImg) {
+    fun updateProfileImg(@RequestBody @Valid request: UserRequest.UpdateProfileImg) {
         val userCommand: UserCommand.UpdateProfileImgRequest = mapper.of(request)
         userService.updateProfileImg(userCommand)
     }
