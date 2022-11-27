@@ -4,6 +4,7 @@ import com.sexysisters.tojserverv2.config.properties.S3Properties
 import com.sexysisters.tojserverv2.domain.user.Authority
 import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.UserCommand
+import com.sexysisters.tojserverv2.domain.user.UserMapper
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.design.UserStore
 import io.kotest.core.spec.style.BehaviorSpec
@@ -12,6 +13,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verify
+import org.mapstruct.factory.Mappers
 import org.springframework.security.crypto.password.PasswordEncoder
 
 class UserServiceTest : BehaviorSpec({
@@ -19,11 +21,13 @@ class UserServiceTest : BehaviorSpec({
     val encoder: PasswordEncoder = mockk()
     val userStore: UserStore = mockk()
     val userReader: UserReader = mockk()
+    val userMapper = Mappers.getMapper(UserMapper::class.java)
 
     val target = UserServiceImpl(
         userStore = userStore,
         userReader = userReader,
         passwordEncoder = encoder,
+        userMapper = userMapper,
     )
 
     val user = User(
