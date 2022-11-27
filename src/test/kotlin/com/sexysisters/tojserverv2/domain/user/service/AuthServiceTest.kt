@@ -28,13 +28,11 @@ class AuthServiceTest : BehaviorSpec({
     val googleAuthExecutor: GoogleAuthExecutor = mockk()
 
     val target = AuthServiceImpl(
-        userStore = userStore,
         userReader = userReader,
         passwordEncoder = encoder,
         jwtTokenProvider = jwtTokenProvider,
         jwtProperties = jwtProperties,
         redisRepository = redisRepository,
-        googleAuthExecutor = googleAuthExecutor,
     )
 
     val user = User(

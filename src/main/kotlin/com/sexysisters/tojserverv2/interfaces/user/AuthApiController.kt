@@ -7,7 +7,6 @@ import com.sexysisters.tojserverv2.interfaces.user.dto.UserRequest
 import com.sexysisters.tojserverv2.interfaces.user.dto.UserResponse
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
-import org.mapstruct.factory.Mappers
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -21,15 +20,15 @@ import javax.validation.Valid
 @RequestMapping("api/v2/auth")
 class AuthApiController(
     private val authService: AuthService,
+    private val userDtoMapper: UserDtoMapper,
 ) {
-    private val mapper = Mappers.getMapper(UserDtoMapper::class.java)
 
     @ApiOperation(value = "기본 로그인")
     @PostMapping
     fun login(@RequestBody @Valid request: UserRequest.Login): CommonResponse<UserResponse.Token> {
-        val userCommand = mapper.of(request)
+        val userCommand = userDtoMapper.of(request)
         val userInfo = authService.login(userCommand)
-        val response = mapper.of(userInfo)
+        val response = userDtoMapper.of(userInfo)
         return CommonResponse.success(response)
     }
 
