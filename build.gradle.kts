@@ -61,7 +61,12 @@ dependencies {
     // fegin client
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.3")
 
+    // random util
     implementation("org.apache.commons:commons-lang3:3.12.0")
+
+    // mail, thymeleaf
+    implementation("org.springframework.boot:spring-boot-starter-mail:2.6.7")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")

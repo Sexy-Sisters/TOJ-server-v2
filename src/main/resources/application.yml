@@ -29,6 +29,19 @@ spring:
         refresh-token-valid-time: 1000000000000
         secret: alsdjfljasldkjfk;lajdlkfjslakjdlfkjlk;sdfghjklkjhgfaj;fdlkjal;kdjflkajdflkasjkdlf
 
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: leekujin14@gmail.com
+        password: fmfinwraqzndlcrl
+        properties:
+            mail:
+                smtp:
+                    socketFactory.class: javax.net.ssl.SSLSocketFactory
+                    auth: true
+                    starttls:
+                        enable: true
+
 oauth:
     google:
         base-url: https://accounts.google.com/o/oauth2/v2/auth
