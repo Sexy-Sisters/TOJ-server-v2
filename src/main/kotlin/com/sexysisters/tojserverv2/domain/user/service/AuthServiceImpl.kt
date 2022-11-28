@@ -9,7 +9,6 @@ import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.exception.PasswordMismatchException
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.mail.MailSender
-import com.sexysisters.tojserverv2.infrastructure.mail.MailSenderImpl
 import com.sexysisters.tojserverv2.infrastructure.redis.RedisRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -75,5 +74,15 @@ class AuthServiceImpl(
             title = MailProperties.AUTHENTICATION_TITLE,
             content = code,
         )
+    }
+
+    override fun authenticateCode(command: UserCommand.AuthenticateCode): Boolean {
+        val email = command.email
+        val expectedCode = command.code
+        val actualCode = redisRepository.getData(email)
+
+        val response = actualCode == expectedCode
+        if (response) redisRepository.deleteData(email)
+        return response
     }
 }

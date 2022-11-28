@@ -28,6 +28,11 @@ class UserCommand {
     class SendCodeRequest(
         val email: String,
     )
+
+    class AuthenticateCode(
+        val email: String,
+        val code: String,
+    )
 }
 
 fun UserCommand.CreateRequest.toEntity() = User(

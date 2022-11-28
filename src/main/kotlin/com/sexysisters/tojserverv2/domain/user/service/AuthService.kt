@@ -7,4 +7,5 @@ interface AuthService {
     fun login(request: UserCommand.LoginRequest): UserInfo.Token
     fun logout(accessToken: String)
     fun sendCode(command: UserCommand.SendCodeRequest)
+    fun authenticateCode(command: UserCommand.AuthenticateCode): Boolean
 }
