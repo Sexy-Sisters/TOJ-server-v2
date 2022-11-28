@@ -2,7 +2,6 @@ package com.sexysisters.tojserverv2.infrastructure
 
 import com.sexysisters.tojserverv2.domain.notification.NotificationService
 import com.sexysisters.tojserverv2.infrastructure.mail.MailSender
-import org.springframework.mail.SimpleMailMessage
 import org.springframework.stereotype.Component
 
 @Component

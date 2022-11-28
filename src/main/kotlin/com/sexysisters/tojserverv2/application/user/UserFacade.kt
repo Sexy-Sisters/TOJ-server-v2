@@ -12,7 +12,7 @@ class UserFacade(
     private val notificationService: NotificationService,
 ) {
     fun createUser(command: UserCommand.CreateRequest): Long {
-        var userId = userService.createUser(command)
+        val userId = userService.createUser(command)
         notificationService.sendEmail(
             command.email,
             MailProperties.SIGNUP_TITLE,
