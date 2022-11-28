@@ -10,7 +10,6 @@ import com.sexysisters.tojserverv2.interfaces.user.dto.UserResponse
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
-import org.mapstruct.factory.Mappers
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -28,8 +27,8 @@ import javax.validation.Valid
 class UserApiController(
     private val userFacade: UserFacade,
     private val userService: UserService,
+    private val userDtoMapper: UserDtoMapper,
 ) {
-    private val mapper = Mappers.getMapper(UserDtoMapper::class.java)
 
     @ApiOperation(value = "회원가입")
     @ResponseStatus(HttpStatus.CREATED)
@@ -37,9 +36,9 @@ class UserApiController(
     fun signUpUser(
         @RequestBody @Valid request: UserRequest.SignUp
     ): CommonResponse<UserResponse.SignUp> {
-        val userCommand = mapper.of(request)
+        val userCommand = userDtoMapper.of(request)
         val userId = userFacade.createUser(userCommand)
-        val response = mapper.of(userId)
+        val response = userDtoMapper.of(userId)
         return CommonResponse.success(response)
     }
 
@@ -49,7 +48,7 @@ class UserApiController(
         @ApiParam(value = "유저 아이디") @PathVariable userId: Long
     ): CommonResponse<UserResponse.Profile> {
         val userInfo = userService.findUserProfile(userId)
-        val response = mapper.of(userInfo)
+        val response = userDtoMapper.of(userInfo)
         return CommonResponse.success(response)
     }
 
@@ -57,7 +56,7 @@ class UserApiController(
     @GetMapping
     fun findCurrentUserProfile(): CommonResponse<UserResponse.Profile> {
         val userInfo = userService.findCurrentUserProfile()
-        val response = mapper.of(userInfo)
+        val response = userDtoMapper.of(userInfo)
         return CommonResponse.success(response)
     }
 
@@ -66,16 +65,16 @@ class UserApiController(
     fun updateProfileInfo(
         @RequestBody @Valid request: UserRequest.Update
     ): CommonResponse<UserResponse.Profile> {
-        val userCommand: UserCommand.UpdateRequest = mapper.of(request)
+        val userCommand: UserCommand.UpdateRequest = userDtoMapper.of(request)
         val userInfo = userService.updateUser(userCommand)
-        val response = mapper.of(userInfo)
+        val response = userDtoMapper.of(userInfo)
         return CommonResponse.success(response)
     }
 
     @ApiOperation(value = "현재 로그인한 유저 프로필 이미지 수정")
     @PutMapping("/profile-img")
     fun updateProfileImg(@RequestBody @Valid request: UserRequest.UpdateProfileImg) {
-        val userCommand: UserCommand.UpdateProfileImgRequest = mapper.of(request)
+        val userCommand: UserCommand.UpdateProfileImgRequest = userDtoMapper.of(request)
         userService.updateProfileImg(userCommand)
     }
 }

@@ -9,7 +9,6 @@ import com.sexysisters.tojserverv2.domain.user.setEncodedPassword
 import com.sexysisters.tojserverv2.domain.user.toEntity
 import com.sexysisters.tojserverv2.domain.user.updateInfo
 import com.sexysisters.tojserverv2.domain.user.updateProfileImg
-import org.mapstruct.factory.Mappers
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -19,15 +18,15 @@ class UserServiceImpl(
     private val userStore: UserStore,
     private val userReader: UserReader,
     private val passwordEncoder: PasswordEncoder,
+    private val userMapper: UserMapper,
 ) : UserService {
-    private val userMapper = Mappers.getMapper(UserMapper::class.java)
 
     @Transactional
     override fun createUser(command: UserCommand.CreateRequest): Long {
         command.setEncodedPassword(passwordEncoder)
         val initUser = command.toEntity()
         val savedUser = userStore.store(initUser)
-        return savedUser.id!!
+        return savedUser.id
     }
 
     @Transactional(readOnly = true)

@@ -1,14 +1,14 @@
 package com.sexysisters.tojserverv2.domain.user.service
 
+import com.sexysisters.tojserverv2.common.util.random.RandomCodeUtil
 import com.sexysisters.tojserverv2.config.properties.JwtProperties
-import com.sexysisters.tojserverv2.domain.user.User
+import com.sexysisters.tojserverv2.config.properties.MailProperties
 import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.UserInfo
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
-import com.sexysisters.tojserverv2.domain.user.design.UserStore
 import com.sexysisters.tojserverv2.domain.user.exception.PasswordMismatchException
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
-import com.sexysisters.tojserverv2.infrastructure.oauth.GoogleAuthExecutor
+import com.sexysisters.tojserverv2.infrastructure.mail.MailSender
 import com.sexysisters.tojserverv2.infrastructure.redis.RedisRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -18,13 +18,12 @@ import java.util.Date
 
 @Service
 class AuthServiceImpl(
-    private val userStore: UserStore,
+    private val mailSender: MailSender,
     private val userReader: UserReader,
     private val passwordEncoder: PasswordEncoder,
     private val jwtTokenProvider: JwtTokenProvider,
     private val jwtProperties: JwtProperties,
     private val redisRepository: RedisRepository,
-    private val googleAuthExecutor: GoogleAuthExecutor,
 ) : AuthService {
 
     @Transactional(readOnly = true)
@@ -64,22 +63,26 @@ class AuthServiceImpl(
         redisRepository.deleteData(user.email)
     }
 
-    override fun getGoogleLink() = googleAuthExecutor.getLink()
-
     @Transactional
-    override fun googleLogin(code: String): UserInfo.Token {
-        val oAuthResponse = googleAuthExecutor.execute(code)
-        val user = User(
-            nickname = oAuthResponse.name,
-            email = oAuthResponse.email,
-            profileImg = oAuthResponse.picture,
-            password = "OAUTH"
+    override fun sendCode(command: UserCommand.SendCodeRequest) {
+        val email = command.email
+        val code = RandomCodeUtil.generate(6)
+        val time = MailProperties.AUTHENTCIATION_TIME
+        redisRepository.setDataExpired(email, code, time)
+        mailSender.sendMail(
+            to = email,
+            title = MailProperties.AUTHENTICATION_TITLE,
+            content = code,
         )
-        userStore.storeOAuthUser(user)
+    }
 
-        return UserInfo.Token(
-            accessToken = jwtTokenProvider.createAccessToken(user.email),
-            refreshToken = jwtTokenProvider.createRefreshToken(user.email),
-        )
+    override fun authenticateCode(command: UserCommand.AuthenticateCode): Boolean {
+        val email = command.email
+        val expectedCode = command.code
+        val actualCode = redisRepository.getData(email)
+
+        val response = actualCode == expectedCode
+        if (response) redisRepository.deleteData(email)
+        return response
     }
 }

@@ -24,6 +24,15 @@ class UserCommand {
     class UpdateProfileImgRequest(
         val profileImg: String,
     )
+
+    class SendCodeRequest(
+        val email: String,
+    )
+
+    class AuthenticateCode(
+        val email: String,
+        val code: String,
+    )
 }
 
 fun UserCommand.CreateRequest.toEntity() = User(

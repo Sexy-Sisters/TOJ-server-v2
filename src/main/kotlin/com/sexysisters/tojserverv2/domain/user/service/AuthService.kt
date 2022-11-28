@@ -6,6 +6,6 @@ import com.sexysisters.tojserverv2.domain.user.UserInfo
 interface AuthService {
     fun login(request: UserCommand.LoginRequest): UserInfo.Token
     fun logout(accessToken: String)
-    fun getGoogleLink(): String
-    fun googleLogin(code: String): UserInfo.Token
+    fun sendCode(command: UserCommand.SendCodeRequest)
+    fun authenticateCode(command: UserCommand.AuthenticateCode): Boolean
 }

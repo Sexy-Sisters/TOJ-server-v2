@@ -1,4 +1,6 @@
 spring:
+    main:
+        allow-bean-definition-overriding: true
     mvc:
         pathmatch:
             matching-strategy: ant_path_matcher
@@ -52,3 +54,12 @@ cloud:
             instanceProfile: true
             access-key: AKIASV7YG3ONGOLLGF5V
             secret-key: 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
+
+mail-sender:
+    host: smtp.gmail.com
+    port: 587
+    username: leekujin14@gmail.com
+    password: fmfinwraqzndlcrl
+    protocol: smtp
+    auth: true
+    starttls-enable: true
