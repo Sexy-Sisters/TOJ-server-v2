@@ -26,7 +26,7 @@ class UserServiceImpl(
         command.setEncodedPassword(passwordEncoder)
         val initUser = command.toEntity()
         val savedUser = userStore.store(initUser)
-        return savedUser.id!!
+        return savedUser.id
     }
 
     @Transactional(readOnly = true)

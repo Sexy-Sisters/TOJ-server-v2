@@ -4,11 +4,10 @@ import com.sexysisters.tojserverv2.config.properties.JwtProperties
 import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
-import com.sexysisters.tojserverv2.domain.user.design.UserStore
 import com.sexysisters.tojserverv2.domain.user.exception.PasswordMismatchException
 import com.sexysisters.tojserverv2.domain.user.exception.UserErrorCode
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
-import com.sexysisters.tojserverv2.infrastructure.oauth.GoogleAuthExecutor
+import com.sexysisters.tojserverv2.infrastructure.mail.MailSenderImpl
 import com.sexysisters.tojserverv2.infrastructure.redis.RedisRepository
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
@@ -19,13 +18,12 @@ import org.springframework.security.crypto.password.PasswordEncoder
 
 class AuthServiceTest : BehaviorSpec({
 
-    val userStore: UserStore = mockk()
     val userReader: UserReader = mockk()
     val encoder: PasswordEncoder = mockk()
     val jwtTokenProvider: JwtTokenProvider = mockk()
     val jwtProperties: JwtProperties = mockk(relaxed = true)
     val redisRepository: RedisRepository = mockk(relaxed = true)
-    val googleAuthExecutor: GoogleAuthExecutor = mockk()
+    val mailSenderImpl: MailSenderImpl = mockk()
 
     val target = AuthServiceImpl(
         userReader = userReader,
@@ -33,6 +31,7 @@ class AuthServiceTest : BehaviorSpec({
         jwtTokenProvider = jwtTokenProvider,
         jwtProperties = jwtProperties,
         redisRepository = redisRepository,
+        mailSender = mailSenderImpl,
     )
 
     val user = User(
