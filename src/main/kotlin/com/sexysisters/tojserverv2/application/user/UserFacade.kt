@@ -1,5 +1,6 @@
 package com.sexysisters.tojserverv2.application.user
 
+import com.sexysisters.tojserverv2.config.properties.MailProperties
 import com.sexysisters.tojserverv2.domain.notification.NotificationService
 import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.service.UserService
@@ -14,8 +15,8 @@ class UserFacade(
         var userId = userService.createUser(command)
         notificationService.sendEmail(
             command.email,
-            "TOJ 회원가입 완료",
-            "TOJ 회원가입 완료"
+            MailProperties.SIGNUP_TITLE,
+            MailProperties.SIGNUP_DESCRIBTION,
         )
         return userId
     }

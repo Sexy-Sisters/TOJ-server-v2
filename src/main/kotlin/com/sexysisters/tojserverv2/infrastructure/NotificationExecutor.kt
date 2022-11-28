@@ -1,14 +1,21 @@
 package com.sexysisters.tojserverv2.infrastructure
 
 import com.sexysisters.tojserverv2.domain.notification.NotificationService
+import com.sexysisters.tojserverv2.infrastructure.mail.MailSender
+import org.springframework.mail.SimpleMailMessage
 import org.springframework.stereotype.Component
 
 @Component
-class NotificationExecutor : NotificationService {
+class NotificationExecutor(
+    private val mailSender: MailSender,
+) : NotificationService {
 
     override fun sendEmail(email: String, title: String, description: String) {
-//        TODO("이메일 발송 구현")
-        println("sendEmail")
+        mailSender.sendMail(
+            to = email,
+            title = title,
+            content = description,
+        )
     }
 
     override fun sendKakao(phoneNo: String, description: String) {
