@@ -38,10 +38,18 @@ class AuthApiController(
     fun logout(@RequestHeader("Authorization") accessToken: String) =
         authService.logout(accessToken)
 
-    @ApiOperation(value = "랜던 코드 이메일 발송")
+    @ApiOperation(value = "인증 코드 이메일 발송")
     @PostMapping("/code")
     fun sendCode(@RequestBody @Valid request: UserRequest.SendCode) {
         val userCommand: UserCommand.SendCodeRequest = userDtoMapper.of(request)
         authService.sendCode(userCommand)
+    }
+
+    @ApiOperation(value = "발송된 인증 코드 검증")
+    @DeleteMapping("/code")
+    fun authenticateCode(@RequestBody @Valid request: UserRequest.AuthenticateCode): CommonResponse<Boolean> {
+        val userCommand = userDtoMapper.of(request)
+        val response = authService.authenticateCode(userCommand)
+        return CommonResponse.success(response)
     }
 }

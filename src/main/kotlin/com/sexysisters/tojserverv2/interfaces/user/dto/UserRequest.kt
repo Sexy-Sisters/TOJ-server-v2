@@ -45,4 +45,12 @@ class UserRequest {
         @field:NotBlank(message = "email is empty")
         val email: String,
     )
+
+    data class AuthenticateCode(
+        @field:NotBlank(message = "email is empty")
+        val email: String,
+
+        @field:NotBlank(message = "code is empty")
+        val code: String,
+    )
 }
