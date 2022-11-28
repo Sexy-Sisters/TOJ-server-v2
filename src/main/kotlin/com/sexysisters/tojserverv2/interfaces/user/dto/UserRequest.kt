@@ -40,4 +40,9 @@ class UserRequest {
         @field:NotBlank(message = "name is empty")
         val name: String,
     )
+
+    data class SendCode(
+        @field:NotBlank(message = "email is empty")
+        val email: String,
+    )
 }
