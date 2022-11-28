@@ -65,7 +65,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.12.0")
 
     // mail, thymeleaf
-    implementation("org.springframework.boot:spring-boot-starter-mail:2.6.7")
+    implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
