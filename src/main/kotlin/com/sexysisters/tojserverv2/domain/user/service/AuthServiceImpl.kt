@@ -63,7 +63,7 @@ class AuthServiceImpl(
         redisRepository.deleteData(user.email)
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     override fun sendCode(command: UserCommand.SendCodeRequest) {
         val email = command.email
         val code = RandomCodeUtil.generate(6)
@@ -76,6 +76,7 @@ class AuthServiceImpl(
         )
     }
 
+    @Transactional(readOnly = true)
     override fun authenticateCode(command: UserCommand.AuthenticateCode): Boolean {
         val email = command.email
         val expectedCode = command.code
