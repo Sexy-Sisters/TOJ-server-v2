@@ -13,7 +13,7 @@ import javax.persistence.Table
 @Entity
 @Table(name = "tbl_school")
 class School(
-    val schoolCode: String,
+    val code: String,
     val belong: String,
     val name: String,
     val address: String,

@@ -17,7 +17,7 @@ interface SchoolInfoMapper {
     // Mapping(source = "ENG_SCHUL_NM", target = "englishName"),
     @Mappings(
         value = [
-            Mapping(source = "SD_SCHUL_CODE", target = "schoolCode"),
+            Mapping(source = "SD_SCHUL_CODE", target = "code"),
             Mapping(source = "ATPT_OFCDC_SC_NM", target = "belong"),
             Mapping(source = "SCHUL_NM", target = "name"),
             Mapping(source = "SCHUL_KND_SC_NM", target = "division"),
