@@ -1,4 +1,4 @@
-package com.sexysisters.tojserverv2.common.util.api.dto
+package com.sexysisters.tojserverv2.common.util.api.oauth.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
