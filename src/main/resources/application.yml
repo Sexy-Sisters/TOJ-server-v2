@@ -34,7 +34,7 @@ oauth:
         base-url: https://accounts.google.com/o/oauth2/v2/auth
         client-id: 692382753948-tvhuh938v39a73fq9q7qfnl32h3d1b3o.apps.googleusercontent.com
         client-secret: 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
-        redirect-url: http://localhost:8080/api/v2/auth/google/callback
+        redirect-url: http://ec2-15-164-246-49.ap-northeast-2.compute.amazonaws.com:8080/api/v2/oauth/google/callback
 
 feign:
     client:
