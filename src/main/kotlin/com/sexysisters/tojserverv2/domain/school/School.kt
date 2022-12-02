@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.domain.school
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import java.time.LocalDateTime
+import java.time.LocalDate
 import javax.persistence.Entity
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
@@ -13,13 +13,18 @@ import javax.persistence.Table
 @Entity
 @Table(name = "tbl_school")
 class School(
+    val schoolCode: String,
+    val belong: String,
     val name: String,
     val address: String,
     val headcount: Int,
-    val phoneNumber: String,
-    val birthDay: LocalDateTime,
+    val birthDay: LocalDate,
     val homePageAddress: String,
+    val phoneNumber: String,
     // TODO :: 평점
+
+    @Enumerated(EnumType.STRING)
+    val grade: Grade,
 
     @Enumerated(EnumType.STRING)
     val kind: Kind,
@@ -27,6 +32,10 @@ class School(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+}
+
+enum class Grade {
+    ELEMENTRY, MIDDLE, HIGH,
 }
 
 enum class Kind {
