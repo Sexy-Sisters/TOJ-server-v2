@@ -13,13 +13,13 @@ class SchoolInfoReaderImpl(
     private val schoolInfoMapper: SchoolInfoMapper,
 ) : SchoolInfoReader {
 
-    override fun execute(schoolName: String, schoolDivision: String): List<SchoolInfoResponse> {
+    override fun execute(schoolName: String, schoolBelong: String): List<SchoolInfoResponse> {
         val neisSchoolInfoHtml = neisSchoolInfoClient.schoolInfo(
             type = NeisRequestProperty.TYPE,
             pageIndex = NeisRequestProperty.PAGE_INDEX,
             pageSize = NeisRequestProperty.PAGE_SIZE,
             schoolName = schoolName,
-            schoolDivision = schoolDivision,
+            schoolBelong = schoolBelong,
         )
         val neisSchoolInfoResponse = Gson().fromJson(
             neisSchoolInfoHtml,

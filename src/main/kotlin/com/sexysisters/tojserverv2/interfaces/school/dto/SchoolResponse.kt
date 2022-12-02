@@ -1,6 +1,6 @@
-package com.sexysisters.tojserverv2.domain.school
+package com.sexysisters.tojserverv2.interfaces.school.dto
 
-class SchoolInfo {
+class SchoolResponse {
 
     data class Search(
         val schoolCode: String,

@@ -19,10 +19,11 @@ class Result(
     val MESSAGE: String,
 )
 
+// val ENG_SCHUL_NM: String, // 영문명,
 data class Row(
+    val SD_SCHUL_CODE: String,
     val ATPT_OFCDC_SC_NM: String, // 교육청,
     val SCHUL_NM: String, // 이름,
-    val ENG_SCHUL_NM: String, // 영문명,
     val SCHUL_KND_SC_NM: String, // 고등학교,
     val ORG_RDNMA: String, // 주소,
     val FOAS_MEMRD: String, // 설립일,

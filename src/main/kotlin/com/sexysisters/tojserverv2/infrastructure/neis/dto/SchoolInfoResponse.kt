@@ -1,9 +1,9 @@
 package com.sexysisters.tojserverv2.infrastructure.neis.dto
 
-class SchoolInfoResponse(
+data class SchoolInfoResponse(
+    val schoolCode: String,
     val belong: String,
     val name: String,
-    val englishName: String,
     val division: String,
     val address: String,
     val birthday: String,

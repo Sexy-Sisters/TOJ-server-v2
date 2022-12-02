@@ -17,6 +17,6 @@ interface NeisSchoolInfoClient {
         @RequestParam(NeisParamProperty.PAGE_INDEX) pageIndex: Int,
         @RequestParam(NeisParamProperty.PAGE_SIZE) pageSize: Int,
         @RequestParam(NeisParamProperty.SCHOOL_NAME) schoolName: String,
-        @RequestParam(NeisParamProperty.SCHOOL_DIVISION) schoolDivision: String,
+        @RequestParam(NeisParamProperty.SCHOOL_BELONG) schoolBelong: String,
     ): String
 }
