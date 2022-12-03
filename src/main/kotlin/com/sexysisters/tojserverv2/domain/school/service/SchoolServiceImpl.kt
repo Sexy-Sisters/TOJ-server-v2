@@ -23,13 +23,11 @@ class SchoolServiceImpl(
     private val schoolStore: SchoolStore,
 ) : SchoolService {
 
-    @Transactional
+    @Transactional(readOnly = true)
     override fun searchSchool(command: SchoolCommand.SearchRequest): List<SchoolInfo.Search> {
-        val name = command.name
-        val belong = command.belong
-        val searchResults = schoolInfoReader.searchSchools(
-            schoolName = name,
-            schoolBelong = belong,
+        val searchResults = neisSchoolReader.search(
+            schoolName = command.name,
+            schoolBelong = command.belong,
         )
         return searchResults.map { schoolMapper.of(it) }
     }
