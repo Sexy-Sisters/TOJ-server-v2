@@ -19,4 +19,12 @@ interface NeisSchoolInfoClient {
         @RequestParam(NeisParamProperty.SCHOOL_NAME) schoolName: String,
         @RequestParam(NeisParamProperty.SCHOOL_BELONG) schoolBelong: String,
     ): String
+
+    @GetMapping("/schoolInfo")
+    fun schoolInfo(
+        @RequestParam(NeisParamProperty.TYPE) type: String,
+        @RequestParam(NeisParamProperty.PAGE_INDEX) pageIndex: Int,
+        @RequestParam(NeisParamProperty.PAGE_SIZE) pageSize: Int,
+        @RequestParam(NeisParamProperty.SCHOOL_CODE) schoolCode: String,
+    ): String
 }

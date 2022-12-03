@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.infrastructure.neis.dto
 
-import com.sexysisters.tojserverv2.infrastructure.neis.Row
+import com.sexysisters.tojserverv2.common.util.api.neis.dto.Row
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
@@ -25,6 +25,7 @@ interface SchoolInfoMapper {
             Mapping(source = "FOAS_MEMRD", target = "birthday"),
             Mapping(source = "HMPG_ADRES", target = "homePageAddress"),
             Mapping(source = "ORG_TELNO", target = "phone"),
+            Mapping(source = "HS_SC_NM", target = "kind")
         ]
     )
     fun of(row: Row): SchoolInfoResponse

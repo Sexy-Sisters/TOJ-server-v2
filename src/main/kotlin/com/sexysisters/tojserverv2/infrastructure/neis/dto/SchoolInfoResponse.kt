@@ -1,5 +1,7 @@
 package com.sexysisters.tojserverv2.infrastructure.neis.dto
 
+import com.sexysisters.tojserverv2.domain.school.School
+
 data class SchoolInfoResponse(
     val code: String,
     val belong: String,
@@ -9,4 +11,17 @@ data class SchoolInfoResponse(
     val birthday: String,
     val homePageAddress: String,
     val phone: String,
-)
+    val kind: String,
+) {
+    fun toEntity(): School {
+        return School(
+            code = this.code,
+            belong = this.belong,
+            name = this.name,
+            address = this.address,
+            birthDay = this.birthday,
+            homePageAddress = this.homePageAddress,
+            phone = phone,
+        )
+    }
+}

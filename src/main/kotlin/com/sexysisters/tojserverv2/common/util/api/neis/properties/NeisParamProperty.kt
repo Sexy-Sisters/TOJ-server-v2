@@ -7,4 +7,5 @@ object NeisParamProperty {
     const val PAGE_SIZE = "pSize"
     const val SCHOOL_NAME = "SCHUL_NM"
     const val SCHOOL_BELONG = "ATPT_OFCDC_SC_NM"
+    const val SCHOOL_CODE = "SD_SCHUL_CODE"
 }
