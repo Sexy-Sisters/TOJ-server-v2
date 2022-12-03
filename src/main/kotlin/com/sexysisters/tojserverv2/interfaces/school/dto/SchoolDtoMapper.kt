@@ -1,9 +1,7 @@
 package com.sexysisters.tojserverv2.interfaces.school.dto
 
-import com.sexysisters.tojserverv2.domain.school.School
 import com.sexysisters.tojserverv2.domain.school.SchoolCommand
 import com.sexysisters.tojserverv2.domain.school.SchoolInfo
-import com.sexysisters.tojserverv2.infrastructure.neis.dto.SchoolInfoResponse
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.ReportingPolicy
