@@ -38,6 +38,7 @@ class SecurityConfiguration(
             .and()
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/api/v2/user").authenticated()
+            .antMatchers(HttpMethod.POST, "/api/v2/school").authenticated()
             .anyRequest().permitAll()
 
         http
