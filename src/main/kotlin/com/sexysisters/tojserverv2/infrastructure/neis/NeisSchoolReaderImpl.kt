@@ -4,18 +4,21 @@ import com.google.gson.Gson
 import com.sexysisters.tojserverv2.common.util.api.neis.client.NeisSchoolInfoClient
 import com.sexysisters.tojserverv2.common.util.api.neis.dto.NeisSchoolInfoResponse
 import com.sexysisters.tojserverv2.common.util.api.neis.properties.NeisRequestProperty
-import com.sexysisters.tojserverv2.domain.school.exception.SchoolNotFoundException
-import com.sexysisters.tojserverv2.infrastructure.neis.dto.SchoolInfoMapper
-import com.sexysisters.tojserverv2.infrastructure.neis.dto.SchoolInfoResponse
+import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.school.exception.SchoolExcpetion
+import com.sexysisters.tojserverv2.domain.school.type.getDivision
+import com.sexysisters.tojserverv2.domain.school.type.getKind
+import com.sexysisters.tojserverv2.infrastructure.neis.dto.NeisSchoolMapper
+import com.sexysisters.tojserverv2.infrastructure.neis.dto.NeisSchoolResponse
 import org.springframework.stereotype.Component
 
 @Component
-class SchoolInfoReaderImpl(
+class NeisSchoolReaderImpl(
     private val neisSchoolInfoClient: NeisSchoolInfoClient,
-    private val schoolInfoMapper: SchoolInfoMapper,
-) : SchoolInfoReader {
+    private val neisSchoolMapper: NeisSchoolMapper,
+) : NeisSchoolReader {
 
-    override fun searchSchools(schoolName: String, schoolBelong: String): List<SchoolInfoResponse> {
+    override fun search(schoolName: String, schoolBelong: String): List<NeisSchoolResponse> {
         val neisSchoolInfoHtml = neisSchoolInfoClient.schoolInfo(
             type = NeisRequestProperty.TYPE,
             pageIndex = NeisRequestProperty.PAGE_INDEX,
@@ -29,13 +32,13 @@ class SchoolInfoReaderImpl(
         )
 
         val schoolInfo = neisSchoolInfoResponse.schoolInfo
-            ?: throw SchoolNotFoundException()
+            ?: throw SchoolExcpetion.SchoolNotFound()
         val row = schoolInfo[1].row
 
-        return row.map { schoolInfoMapper.of(it) }
+        return row.map { neisSchoolMapper.of(it) }
     }
 
-    override fun findSchoolByCode(code: String): SchoolInfoResponse {
+    override fun searchByCode(code: String): NeisSchoolResponse {
         val neisSchoolInfoHtml = neisSchoolInfoClient.schoolInfo(
             type = NeisRequestProperty.TYPE,
             pageIndex = NeisRequestProperty.PAGE_INDEX,
@@ -49,9 +52,23 @@ class SchoolInfoReaderImpl(
         )
 
         val schoolInfo = neisSchoolResponse.schoolInfo
-            ?: throw SchoolNotFoundException()
+            ?: throw SchoolExcpetion.SchoolNotFound()
         val row = schoolInfo[1].row[0]
 
-        return schoolInfoMapper.of(row)
+        return neisSchoolMapper.of(row)
+    }
+
+    override fun findSchoolByCode(code: String): School {
+        val schoolInfoResponse = searchByCode(code)
+        val school = schoolInfoResponse.toEntity()
+
+        val kind = schoolInfoResponse.kind
+        if (kind != null) {
+            school.kind = getKind(kind)
+        }
+        val division = schoolInfoResponse.division
+        school.division = getDivision(division)
+
+        return school
     }
 }
