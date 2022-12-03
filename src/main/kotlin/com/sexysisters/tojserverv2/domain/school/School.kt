@@ -1,13 +1,17 @@
 package com.sexysisters.tojserverv2.domain.school
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import java.time.LocalDate
+import com.sexysisters.tojserverv2.domain.school.type.Division
+import com.sexysisters.tojserverv2.domain.school.type.Kind
+import com.sexysisters.tojserverv2.domain.user.User
+import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.OneToMany
 import javax.persistence.Table
 
 @Entity
@@ -17,27 +21,24 @@ class School(
     val belong: String,
     val name: String,
     val address: String,
-    val headcount: Int,
-    val birthDay: LocalDate,
+    val birthDay: String,
     val homePageAddress: String,
-    val phoneNumber: String,
+    val phone: String,
     // TODO :: 평점
-
-    @Enumerated(EnumType.STRING)
-    val grade: Grade,
-
-    @Enumerated(EnumType.STRING)
-    val kind: Kind,
 ) : BaseTimeEntity() {
+
+    @Enumerated(EnumType.STRING)
+    var division: Division? = null
+
+    @Enumerated(EnumType.STRING)
+    var kind: Kind? = null
+
+    @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
+    val studentList = mutableListOf<User>()
+
+    @OneToMany(cascade = [CascadeType.ALL])
+    val joinQueue = mutableListOf<User>()
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
-}
-
-enum class Grade {
-    ELEMENTRY, MIDDLE, HIGH,
-}
-
-enum class Kind {
-    SPECIAL_PURPOSE, VOCATIONAL, ORDINARY,
 }
