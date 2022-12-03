@@ -41,7 +41,7 @@ class SchoolServiceImpl(
     @Transactional
     override fun joinSchool(code: String): SchoolInfo.Join {
         val user = userReader.getCurrentUser()
-        validateAlreayApply(user.applyStatus)
+        validateAlreadyApply(user.applyStatus)
 
         val school = schoolReader.findSchoolByCode(code)
         user.setRelation(school)
@@ -49,7 +49,7 @@ class SchoolServiceImpl(
         return schoolMapper.joinOf(applyStatus)
     }
 
-    private fun validateAlreayApply(applyStatus: ApplyStatus) {
+    private fun validateAlreadyApply(applyStatus: ApplyStatus) {
         if (applyStatus != ApplyStatus.NONE)
             throw SchoolExcpetion.AlreadyApply()
     }
