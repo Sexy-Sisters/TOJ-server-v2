@@ -15,26 +15,27 @@ spring:
             ddl-auto: update
 
     datasource:
-        url: jdbc:mysql://localhost:3306/toj?serverTimezone=UTC&characterEncoding=UTF-8
+        url: jdbc:mysql://${MYSQL_HOST}:3306/${MYSQL_DB}?serverTimezone=UTC&characterEncoding=UTF-8
         driver-class-name: com.mysql.cj.jdbc.Driver
-        username: toj-user
-        password: toj-pass
+        username: ${MYSQL_USER}
+        password: ${MYSQL_PASSWORD}
 
     redis:
-        host: localhost
-        port: 6379
+        host: ${REDIS_HOST}
+        port: ${REDIS_PORT}
 
     jwt:
-        access-token-valid-time: 100000000
-        refresh-token-valid-time: 1000000000000
-        secret: alsdjfljasldkjfk;lajdlkfjslakjdlfkjlk;sdfghjklkjhgfaj;fdlkjal;kdjflkajdflkasjkdlf
+        access-token-valid-time: ${ACCESS_TOKEN_VALID_TIME}
+        refresh-token-valid-time: ${REFRESH_TOKEN_VALID_TIME}
+        secret: ${JWT_SECRET}
 
 oauth:
     google:
-        base-url: https://accounts.google.com/o/oauth2/v2/auth
-        client-id: 692382753948-tvhuh938v39a73fq9q7qfnl32h3d1b3o.apps.googleusercontent.com
-        client-secret: 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
-        redirect-url: http://ec2-15-164-246-49.ap-northeast-2.compute.amazonaws.com:8080/api/v2/oauth/google/callback
+        base-url: ${GOOGLE_BASE_URL}
+        client-id: ${GOOGLE_CLIENT_ID}
+        client-secret: ${GOOGLE_CLIENT_SCERET}
+        redirect-url: ${GOOGLE_REDIRECT_URL}
+
 
 feign:
     client:
@@ -45,21 +46,21 @@ feign:
 cloud:
     aws:
         s3:
-            bucket: toj-img-bucket
+            bucket: ${BUCKET_NAME}
         region:
-            static: ap-northeast-2
+            static: ${AWS_REGION}
         stack:
             auto: false
         credentials:
             instanceProfile: true
-            access-key: AKIASV7YG3ONGOLLGF5V
-            secret-key: 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
+            access-key: ${AWS_ACCESS_KEY}
+            secret-key: ${AWS_SECRET_KEY}
 
 mail-sender:
     host: smtp.gmail.com
     port: 587
-    username: leekujin14@gmail.com
-    password: fmfinwraqzndlcrl
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     protocol: smtp
     auth: true
     starttls-enable: true
