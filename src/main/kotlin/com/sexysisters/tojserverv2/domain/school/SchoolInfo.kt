@@ -13,9 +13,17 @@ class SchoolInfo {
         val phone: String,
     )
 
-    data class Search(
+    class Search(
         val code: String,
         val name: String,
         val address: String,
+    )
+
+    class Apply(
+        val applyStatus: String,
+    )
+
+    class Join(
+        val applyStatus: String,
     )
 }

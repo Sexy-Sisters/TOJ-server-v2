@@ -38,6 +38,18 @@ class SchoolServiceImpl(
         val school = neisSchoolReader.findSchoolByCode(code)
         schoolStore.store(school)
     }
+
+    @Transactional
+    override fun applySchool(code: String): SchoolInfo.Apply {
+        val user = userReader.getCurrentUser()
+        validateAlreadyApply(user.applyStatus)
+
+        val school = schoolReader.findSchoolByCode(code)
+        school.joinQueue.add(user)
+        val applyStatus = user.setWaiting()
+        return schoolMapper.applyOf(applyStatus)
+    }
+
     @Transactional
     override fun joinSchool(code: String): SchoolInfo.Join {
         val user = userReader.getCurrentUser()
