@@ -65,7 +65,7 @@ class UserApiController(
     fun updateProfileInfo(
         @RequestBody @Valid request: UserRequest.Update
     ): CommonResponse<UserResponse.Profile> {
-        val userCommand: UserCommand.UpdateRequest = userDtoMapper.of(request)
+        val userCommand = userDtoMapper.of(request)
         val userInfo = userService.updateUser(userCommand)
         val response = userDtoMapper.of(userInfo)
         return CommonResponse.success(response)

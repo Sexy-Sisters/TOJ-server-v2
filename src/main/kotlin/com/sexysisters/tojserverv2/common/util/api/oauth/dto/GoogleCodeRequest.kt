@@ -1,4 +1,4 @@
-package com.sexysisters.tojserverv2.common.util.api.dto
+package com.sexysisters.tojserverv2.common.util.api.oauth.dto
 
 data class GoogleCodeRequest(
     val code: String,

@@ -36,6 +36,7 @@ oauth:
         client-secret: ${GOOGLE_CLIENT_SCERET}
         redirect-url: ${GOOGLE_REDIRECT_URL}
 
+
 feign:
     client:
         config:

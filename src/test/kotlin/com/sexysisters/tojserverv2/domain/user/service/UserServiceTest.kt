@@ -1,12 +1,12 @@
 package com.sexysisters.tojserverv2.domain.user.service
 
 import com.sexysisters.tojserverv2.config.properties.S3Properties
-import com.sexysisters.tojserverv2.domain.user.Authority
 import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.UserMapper
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.design.UserStore
+import com.sexysisters.tojserverv2.domain.user.type.Authority
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every

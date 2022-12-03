@@ -1,9 +1,9 @@
 package com.sexysisters.tojserverv2.infrastructure.oauth
 
-import com.sexysisters.tojserverv2.common.util.api.client.GoogleAuthClient
-import com.sexysisters.tojserverv2.common.util.api.client.GoogleInfoClient
-import com.sexysisters.tojserverv2.common.util.api.dto.GoogleCodeRequest
-import com.sexysisters.tojserverv2.common.util.api.dto.GoogleInfoResponse
+import com.sexysisters.tojserverv2.common.util.api.oauth.client.GoogleAuthClient
+import com.sexysisters.tojserverv2.common.util.api.oauth.client.GoogleInfoClient
+import com.sexysisters.tojserverv2.common.util.api.oauth.dto.GoogleCodeRequest
+import com.sexysisters.tojserverv2.common.util.api.oauth.dto.GoogleInfoResponse
 import com.sexysisters.tojserverv2.config.properties.OAuthProperties
 import com.sexysisters.tojserverv2.config.properties.googleBaseUrl
 import com.sexysisters.tojserverv2.config.properties.googleClientId

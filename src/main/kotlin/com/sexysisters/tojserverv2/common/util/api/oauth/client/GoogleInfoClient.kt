@@ -1,6 +1,6 @@
-package com.sexysisters.tojserverv2.common.util.api.client
+package com.sexysisters.tojserverv2.common.util.api.oauth.client
 
-import com.sexysisters.tojserverv2.common.util.api.dto.GoogleInfoResponse
+import com.sexysisters.tojserverv2.common.util.api.oauth.dto.GoogleInfoResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

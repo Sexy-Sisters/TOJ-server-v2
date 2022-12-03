@@ -1,9 +1,9 @@
 package com.sexysisters.tojserverv2.common.util.api
 
-import com.sexysisters.tojserverv2.common.util.api.exception.OtherServerBadRequestException
-import com.sexysisters.tojserverv2.common.util.api.exception.OtherServerExpiredTokenException
-import com.sexysisters.tojserverv2.common.util.api.exception.OtherServerForbiddenException
-import com.sexysisters.tojserverv2.common.util.api.exception.OtherServerUnauthorizedException
+import com.sexysisters.tojserverv2.common.util.api.oauth.exception.OtherServerBadRequestException
+import com.sexysisters.tojserverv2.common.util.api.oauth.exception.OtherServerExpiredTokenException
+import com.sexysisters.tojserverv2.common.util.api.oauth.exception.OtherServerForbiddenException
+import com.sexysisters.tojserverv2.common.util.api.oauth.exception.OtherServerUnauthorizedException
 import feign.FeignException
 import feign.Response
 import feign.codec.ErrorDecoder
