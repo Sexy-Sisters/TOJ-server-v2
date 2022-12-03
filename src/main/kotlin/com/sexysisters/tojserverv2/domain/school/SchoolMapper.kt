@@ -12,4 +12,7 @@ import org.mapstruct.ReportingPolicy
 )
 interface SchoolMapper {
     fun of(neisSchoolResponse: NeisSchoolResponse): SchoolInfo.Search
+
+    @Mapping(target = "applyStatus", source = "applyStatus")
+    fun joinOf(applyStatus: String): SchoolInfo.Join
 }

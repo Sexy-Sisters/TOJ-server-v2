@@ -6,4 +6,5 @@ enum class SchoolErrorCode(
     override val errorMsg: String,
 ) : ErrorProperty {
     SCHOOL_NOT_FOUND("School does not exist"),
+    ALREADY_APPLIED("You've already applied"),
 }

@@ -21,6 +21,7 @@ class SchoolServiceImpl(
     private val schoolMapper: SchoolMapper,
     private val schoolReader: SchoolReader,
     private val schoolStore: SchoolStore,
+    private val userReader: UserReader,
 ) : SchoolService {
 
     @Transactional(readOnly = true)
@@ -37,7 +38,19 @@ class SchoolServiceImpl(
         val school = neisSchoolReader.findSchoolByCode(code)
         schoolStore.store(school)
     }
+    @Transactional
+    override fun joinSchool(code: String): SchoolInfo.Join {
+        val user = userReader.getCurrentUser()
+        validateAlreayApply(user.applyStatus)
+
         val school = schoolReader.findSchoolByCode(code)
-        schoolStore.store(school)
+        user.setRelation(school)
+        val applyStatus = user.setEngaged()
+        return schoolMapper.joinOf(applyStatus)
+    }
+
+    private fun validateAlreayApply(applyStatus: ApplyStatus) {
+        if (applyStatus != ApplyStatus.NONE)
+            throw SchoolExcpetion.AlreadyApply()
     }
 }
