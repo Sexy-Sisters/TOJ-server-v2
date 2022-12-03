@@ -27,4 +27,6 @@ class UserReaderImpl(
         val auth = SecurityContextHolder.getContext().authentication.principal as AuthDetails
         return findUserByEmail(auth.username)
     }
+
+    override fun existsUserByEmail(email: String) = userRepository.existsByEmail(email)
 }
