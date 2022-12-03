@@ -4,8 +4,8 @@ enum class Kind(
     val description: String,
 ) {
     SPECIAL_PURPOSE("특목고"),
-    VOCATIONAL("특성화"),
-    ORDINARY("일반계"),
+    VOCATIONAL("특성화고"),
+    ORDINARY("일반고"),
 }
 
 fun getKind(description: String): Kind? {

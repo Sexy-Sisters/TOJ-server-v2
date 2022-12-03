@@ -12,7 +12,7 @@ import org.mapstruct.ReportingPolicy
     injectionStrategy = InjectionStrategy.CONSTRUCTOR,
     unmappedTargetPolicy = ReportingPolicy.ERROR,
 )
-interface SchoolInfoMapper {
+interface NeisSchoolMapper {
 
     // Mapping(source = "ENG_SCHUL_NM", target = "englishName"),
     @Mappings(
@@ -25,8 +25,8 @@ interface SchoolInfoMapper {
             Mapping(source = "FOAS_MEMRD", target = "birthday"),
             Mapping(source = "HMPG_ADRES", target = "homePageAddress"),
             Mapping(source = "ORG_TELNO", target = "phone"),
-            Mapping(source = "HS_SC_NM", target = "kind")
+            Mapping(source = "HS_SC_NM", target = "kind"),
         ]
     )
-    fun of(row: Row): SchoolInfoResponse
+    fun of(row: Row): NeisSchoolResponse
 }

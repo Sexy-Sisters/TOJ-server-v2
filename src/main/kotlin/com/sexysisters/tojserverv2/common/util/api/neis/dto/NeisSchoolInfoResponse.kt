@@ -28,5 +28,5 @@ data class Row(
     val FOAS_MEMRD: String, // 설립일
     val HMPG_ADRES: String, // 홈페이지 주소
     val ORG_TELNO: String, // 전화번호
-    val HS_SC_NM: String, // 고등학교 종류
+    val HS_SC_NM: String?, // 고등학교 종류
 )
