@@ -2,8 +2,7 @@ package com.sexysisters.tojserverv2.infrastructure.user
 
 import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.design.UserStore
-import com.sexysisters.tojserverv2.domain.user.exception.EmailAlreadyExistsException
-import com.sexysisters.tojserverv2.domain.user.exception.NicknameAlreadyExistsException
+import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import org.springframework.stereotype.Component
 
 @Component
@@ -17,8 +16,8 @@ class UserStoreImpl(
     }
 
     private fun validation(email: String, nickname: String) {
-        if (userRepository.existsByEmail(email)) throw EmailAlreadyExistsException()
-        if (userRepository.existsByNickname(nickname)) throw NicknameAlreadyExistsException()
+        if (userRepository.existsByEmail(email)) throw UserException.EmailAlreadyExists()
+        if (userRepository.existsByNickname(nickname)) throw UserException.NicknameAlreadyExists()
     }
 
     override fun storeOAuthUser(user: User) {

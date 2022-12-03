@@ -6,4 +6,5 @@ interface UserReader {
     fun findUserByEmail(email: String): User
     fun findUserById(id: Long): User
     fun getCurrentUser(): User
+    fun existsUserByEmail(email: String): Boolean
 }

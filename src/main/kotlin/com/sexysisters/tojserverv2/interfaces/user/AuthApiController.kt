@@ -1,7 +1,6 @@
 package com.sexysisters.tojserverv2.interfaces.user
 
 import com.sexysisters.tojserverv2.common.response.CommonResponse
-import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.service.AuthService
 import com.sexysisters.tojserverv2.interfaces.user.dto.UserDtoMapper
 import com.sexysisters.tojserverv2.interfaces.user.dto.UserRequest
@@ -41,7 +40,7 @@ class AuthApiController(
     @ApiOperation(value = "인증 코드 이메일 발송")
     @PostMapping("/code")
     fun sendCode(@RequestBody @Valid request: UserRequest.SendCode) {
-        val userCommand: UserCommand.SendCodeRequest = userDtoMapper.of(request)
+        val userCommand = userDtoMapper.of(request)
         authService.sendCode(userCommand)
     }
 
