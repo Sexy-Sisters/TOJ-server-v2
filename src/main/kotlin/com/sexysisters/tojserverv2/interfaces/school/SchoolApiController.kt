@@ -8,6 +8,7 @@ import com.sexysisters.tojserverv2.interfaces.school.dto.SchoolRequest
 import com.sexysisters.tojserverv2.interfaces.school.dto.SchoolResponse
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -60,4 +61,11 @@ class SchoolApiController(
         val response = schoolInfo.map { schoolDtoMapper.of(it) }
         return CommonResponse.success(response)
     }
+
+    @ApiOperation(value = "학교 탈퇴 & 학교 참여 신청 취소")
+    @DeleteMapping
+    fun becomeIndependent() {
+        schoolService.becomeIndependent()
+    }
 }
+

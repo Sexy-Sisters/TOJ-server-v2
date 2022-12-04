@@ -8,6 +8,7 @@ import com.sexysisters.tojserverv2.domain.school.design.SchoolStore
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolExcpetion
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.setEngaged
+import com.sexysisters.tojserverv2.domain.user.setNone
 import com.sexysisters.tojserverv2.domain.user.setRelation
 import com.sexysisters.tojserverv2.domain.user.setWaiting
 import com.sexysisters.tojserverv2.domain.user.type.ApplyStatus
@@ -82,6 +83,13 @@ class SchoolServiceImpl(
             .map { schoolMapper.of(it) }
     }
 
+    @Transactional
+    override fun becomeIndependent() {
+        val user = userReader.getCurrentUser()
+        user.setNone()
+        user.school = null
+    }
+
     private fun validateIsEngaged(applyStatus: ApplyStatus) {
         if(applyStatus != ApplyStatus.ENGAGED) {
             throw SchoolExcpetion.NotBelong()
@@ -92,5 +100,4 @@ class SchoolServiceImpl(
         if (applyStatus != ApplyStatus.NONE)
             throw SchoolExcpetion.AlreadyApply()
     }
-
 }

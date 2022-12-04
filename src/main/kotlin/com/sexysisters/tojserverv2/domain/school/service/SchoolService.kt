@@ -10,4 +10,5 @@ interface SchoolService {
     fun applySchool(code: String): SchoolInfo.Apply
     fun getWaitingList(): List<SchoolInfo.Student>
     fun getStudentList(): List<SchoolInfo.Student>
+    fun becomeIndependent()
 }
