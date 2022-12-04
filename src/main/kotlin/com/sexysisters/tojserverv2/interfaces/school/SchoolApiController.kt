@@ -44,4 +44,13 @@ class SchoolApiController(
         val applyStaus = schoolFacade.applySchool(schoolCode)
         return CommonResponse.success(applyStaus)
     }
+
+    @ApiOperation(value = "가입 신청자 리스트 조회")
+    @GetMapping("/waiting-list")
+    fun getWaitingList(): CommonResponse<List<SchoolResponse.Student>> {
+        val schoolInfo = schoolService.getWaitingList()
+        val response: List<SchoolResponse.Student> = schoolInfo
+            .map { schoolDtoMapper.of(it) }
+        return CommonResponse.success(response)
+    }
 }

@@ -7,4 +7,11 @@ class SchoolResponse {
         val name: String,
         val address: String,
     )
+
+    data class Student(
+        val profileImg: String,
+        val nickname: String,
+        val name: String,
+        val email: String,
+    )
 }
