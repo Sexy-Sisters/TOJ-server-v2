@@ -42,10 +42,11 @@ class SchoolServiceImpl(
     @Transactional
     override fun applySchool(code: String): SchoolInfo.Apply {
         val user = userReader.getCurrentUser()
-        validateAlreadyApply(user.applyStatus)
+        validateIsNone(user.applyStatus)
 
         val school = schoolReader.findSchoolByCode(code)
-        school.joinQueue.add(user)
+        school.studentList.add(user)
+        user.school = school
         val applyStatus = user.setWaiting()
         return schoolMapper.applyOf(applyStatus)
     }
@@ -53,7 +54,7 @@ class SchoolServiceImpl(
     @Transactional
     override fun joinSchool(code: String): SchoolInfo.Join {
         val user = userReader.getCurrentUser()
-        validateAlreadyApply(user.applyStatus)
+        validateIsNone(user.applyStatus)
 
         val school = schoolReader.findSchoolByCode(code)
         user.setRelation(school)
@@ -61,7 +62,7 @@ class SchoolServiceImpl(
         return schoolMapper.joinOf(applyStatus)
     }
 
-    private fun validateAlreadyApply(applyStatus: ApplyStatus) {
+    private fun validateIsNone(applyStatus: ApplyStatus) {
         if (applyStatus != ApplyStatus.NONE)
             throw SchoolExcpetion.AlreadyApply()
     }
