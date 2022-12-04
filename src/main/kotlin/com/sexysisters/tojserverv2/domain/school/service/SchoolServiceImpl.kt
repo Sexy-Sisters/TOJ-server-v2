@@ -52,22 +52,6 @@ class SchoolServiceImpl(
     }
 
     @Transactional
-    override fun getWaitingList(): List<SchoolInfo.Student> {
-        val user = userReader.getCurrentUser()
-        validateIsEngaged(user.applyStatus)
-
-        return user.school!!.studentList
-            .filter { it.applyStatus != ApplyStatus.WAITING }
-            .map { schoolMapper.of(it) }
-    }
-
-    private fun validateIsEngaged(applyStatus: ApplyStatus) {
-        if(applyStatus != ApplyStatus.ENGAGED) {
-            throw SchoolExcpetion.NotBelong()
-        }
-    }
-
-    @Transactional
     override fun joinSchool(code: String): SchoolInfo.Join {
         val user = userReader.getCurrentUser()
         validateIsNone(user.applyStatus)
@@ -78,8 +62,35 @@ class SchoolServiceImpl(
         return schoolMapper.joinOf(applyStatus)
     }
 
+    @Transactional(readOnly = true)
+    override fun getWaitingList(): List<SchoolInfo.Student> {
+        val user = userReader.getCurrentUser()
+        validateIsEngaged(user.applyStatus)
+
+        return user.school!!.studentList
+            .filter { it.applyStatus != ApplyStatus.WAITING }
+            .map { schoolMapper.of(it) }
+    }
+
+    @Transactional(readOnly = true)
+    override fun getStudentList(): List<SchoolInfo.Student> {
+        val user = userReader.getCurrentUser()
+        validateIsEngaged(user.applyStatus)
+
+        return user.school!!.studentList
+            .filter { it.applyStatus != ApplyStatus.ENGAGED }
+            .map { schoolMapper.of(it) }
+    }
+
+    private fun validateIsEngaged(applyStatus: ApplyStatus) {
+        if(applyStatus != ApplyStatus.ENGAGED) {
+            throw SchoolExcpetion.NotBelong()
+        }
+    }
+
     private fun validateIsNone(applyStatus: ApplyStatus) {
         if (applyStatus != ApplyStatus.NONE)
             throw SchoolExcpetion.AlreadyApply()
     }
+
 }

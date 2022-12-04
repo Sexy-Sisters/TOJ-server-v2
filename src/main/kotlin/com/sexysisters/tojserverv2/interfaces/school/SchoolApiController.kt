@@ -49,8 +49,15 @@ class SchoolApiController(
     @GetMapping("/waiting-list")
     fun getWaitingList(): CommonResponse<List<SchoolResponse.Student>> {
         val schoolInfo = schoolService.getWaitingList()
-        val response: List<SchoolResponse.Student> = schoolInfo
-            .map { schoolDtoMapper.of(it) }
+        val response = schoolInfo.map { schoolDtoMapper.of(it) }
+        return CommonResponse.success(response)
+    }
+
+    @ApiOperation(value = "소속된 학생 리스트 조회")
+    @GetMapping("/student-list")
+    fun getStudentList(): CommonResponse<List<SchoolResponse.Student>> {
+        val schoolInfo = schoolService.getStudentList()
+        val response = schoolInfo.map { schoolDtoMapper.of(it) }
         return CommonResponse.success(response)
     }
 }

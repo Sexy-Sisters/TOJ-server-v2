@@ -9,4 +9,5 @@ interface SchoolService {
     fun joinSchool(code: String): SchoolInfo.Join
     fun applySchool(code: String): SchoolInfo.Apply
     fun getWaitingList(): List<SchoolInfo.Student>
+    fun getStudentList(): List<SchoolInfo.Student>
 }
