@@ -25,7 +25,7 @@ class SchoolServiceImpl(
 ) : SchoolService {
 
     @Transactional(readOnly = true)
-    override fun searchSchool(command: SchoolCommand.SearchRequest): List<SchoolInfo.Search> {
+    override fun searchSchool(command: SchoolCommand.Search): List<SchoolInfo.Search> {
         val searchResults = neisSchoolReader.search(
             schoolName = command.name,
             schoolBelong = command.belong,
@@ -49,6 +49,22 @@ class SchoolServiceImpl(
         user.school = school
         val applyStatus = user.setWaiting()
         return schoolMapper.applyOf(applyStatus)
+    }
+
+    @Transactional
+    override fun getWaitingList(): List<SchoolInfo.Student> {
+        val user = userReader.getCurrentUser()
+        validateIsEngaged(user.applyStatus)
+
+        return user.school!!.studentList
+            .filter { it.applyStatus != ApplyStatus.WAITING }
+            .map { schoolMapper.of(it) }
+    }
+
+    private fun validateIsEngaged(applyStatus: ApplyStatus) {
+        if(applyStatus != ApplyStatus.ENGAGED) {
+            throw SchoolExcpetion.NotBelong()
+        }
     }
 
     @Transactional

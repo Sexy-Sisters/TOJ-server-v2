@@ -7,4 +7,5 @@ enum class SchoolErrorCode(
 ) : ErrorProperty {
     SCHOOL_NOT_FOUND("School does not exist"),
     ALREADY_APPLIED("You've already applied"),
+    NOT_BELONG("You don't belong to the school"),
 }
