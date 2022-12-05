@@ -8,6 +8,7 @@ import com.sexysisters.tojserverv2.domain.school.design.SchoolStore
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolExcpetion
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.setEngaged
+import com.sexysisters.tojserverv2.domain.user.setNone
 import com.sexysisters.tojserverv2.domain.user.setRelation
 import com.sexysisters.tojserverv2.domain.user.setWaiting
 import com.sexysisters.tojserverv2.domain.user.type.ApplyStatus
@@ -25,7 +26,7 @@ class SchoolServiceImpl(
 ) : SchoolService {
 
     @Transactional(readOnly = true)
-    override fun searchSchool(command: SchoolCommand.SearchRequest): List<SchoolInfo.Search> {
+    override fun searchSchool(command: SchoolCommand.Search): List<SchoolInfo.Search> {
         val searchResults = neisSchoolReader.search(
             schoolName = command.name,
             schoolBelong = command.belong,
@@ -42,10 +43,11 @@ class SchoolServiceImpl(
     @Transactional
     override fun applySchool(code: String): SchoolInfo.Apply {
         val user = userReader.getCurrentUser()
-        validateAlreadyApply(user.applyStatus)
+        validateIsNone(user.applyStatus)
 
         val school = schoolReader.findSchoolByCode(code)
-        school.joinQueue.add(user)
+        school.studentList.add(user)
+        user.school = school
         val applyStatus = user.setWaiting()
         return schoolMapper.applyOf(applyStatus)
     }
@@ -53,7 +55,7 @@ class SchoolServiceImpl(
     @Transactional
     override fun joinSchool(code: String): SchoolInfo.Join {
         val user = userReader.getCurrentUser()
-        validateAlreadyApply(user.applyStatus)
+        validateIsNone(user.applyStatus)
 
         val school = schoolReader.findSchoolByCode(code)
         user.setRelation(school)
@@ -61,7 +63,40 @@ class SchoolServiceImpl(
         return schoolMapper.joinOf(applyStatus)
     }
 
-    private fun validateAlreadyApply(applyStatus: ApplyStatus) {
+    @Transactional(readOnly = true)
+    override fun getWaitingList(): List<SchoolInfo.Student> {
+        val user = userReader.getCurrentUser()
+        validateIsEngaged(user.applyStatus)
+
+        return user.school!!.studentList
+            .filter { it.applyStatus != ApplyStatus.WAITING }
+            .map { schoolMapper.of(it) }
+    }
+
+    @Transactional(readOnly = true)
+    override fun getStudentList(): List<SchoolInfo.Student> {
+        val user = userReader.getCurrentUser()
+        validateIsEngaged(user.applyStatus)
+
+        return user.school!!.studentList
+            .filter { it.applyStatus != ApplyStatus.ENGAGED }
+            .map { schoolMapper.of(it) }
+    }
+
+    @Transactional
+    override fun becomeIndependent() {
+        val user = userReader.getCurrentUser()
+        user.setNone()
+        user.school = null
+    }
+
+    private fun validateIsEngaged(applyStatus: ApplyStatus) {
+        if(applyStatus != ApplyStatus.ENGAGED) {
+            throw SchoolExcpetion.NotBelong()
+        }
+    }
+
+    private fun validateIsNone(applyStatus: ApplyStatus) {
         if (applyStatus != ApplyStatus.NONE)
             throw SchoolExcpetion.AlreadyApply()
     }
