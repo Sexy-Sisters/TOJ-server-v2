@@ -58,7 +58,7 @@ class NeisSchoolReaderImpl(
         return neisSchoolMapper.of(row)
     }
 
-    override fun findSchoolByCode(code: String): School {
+    override fun getSchoolByCode(code: String): School {
         val schoolInfoResponse = searchByCode(code)
         val school = schoolInfoResponse.toEntity()
 
