@@ -19,14 +19,6 @@ class SchoolInfo {
         val address: String,
     )
 
-    class Apply(
-        val applyStatus: String,
-    )
-
-    class Join(
-        val applyStatus: String,
-    )
-
     class Student(
         val profileImg: String,
         val nickname: String,

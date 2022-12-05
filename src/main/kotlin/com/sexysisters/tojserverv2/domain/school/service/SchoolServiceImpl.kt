@@ -41,26 +41,24 @@ class SchoolServiceImpl(
     }
 
     @Transactional
-    override fun applySchool(code: String): SchoolInfo.Apply {
+    override fun applySchool(code: String): String {
         val user = userReader.getCurrentUser()
         validateIsNone(user.applyStatus)
 
         val school = schoolReader.findSchoolByCode(code)
         school.studentList.add(user)
         user.school = school
-        val applyStatus = user.setWaiting()
-        return schoolMapper.applyOf(applyStatus)
+        return user.setWaiting()
     }
 
     @Transactional
-    override fun joinSchool(code: String): SchoolInfo.Join {
+    override fun joinSchool(code: String): String {
         val user = userReader.getCurrentUser()
         validateIsNone(user.applyStatus)
 
         val school = schoolReader.findSchoolByCode(code)
         user.setRelation(school)
-        val applyStatus = user.setEngaged()
-        return schoolMapper.joinOf(applyStatus)
+        return user.setEngaged()
     }
 
     @Transactional(readOnly = true)

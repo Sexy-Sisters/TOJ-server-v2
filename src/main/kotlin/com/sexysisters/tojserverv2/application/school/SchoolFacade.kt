@@ -13,14 +13,14 @@ class SchoolFacade(
 
     @Transactional
     fun applySchool(code: String): String {
+        val isExists = schoolRepository.existsByCode(code)
+
         val applyStatus =
-            if (!schoolRepository.existsByCode(code)) {
-                schoolService.createSchool(code)
-                val schoolInfo = schoolService.joinSchool(code)
-                schoolInfo.applyStatus
+            if (isExists) {
+                schoolService.applySchool(code)
             } else {
-                val schoolInfo = schoolService.applySchool(code)
-                schoolInfo.applyStatus
+                schoolService.createSchool(code)
+                schoolService.joinSchool(code)
             }
         return applyStatus
     }
