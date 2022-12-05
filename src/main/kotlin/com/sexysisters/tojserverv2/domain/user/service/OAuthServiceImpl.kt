@@ -24,7 +24,8 @@ class OAuthServiceImpl(
             nickname = oAuthResponse.name,
             email = oAuthResponse.email,
             profileImg = oAuthResponse.picture,
-            password = "OAUTH"
+            password = "OAUTH",
+            name = "이름"
         )
         userStore.storeOAuthUser(initUser)
 

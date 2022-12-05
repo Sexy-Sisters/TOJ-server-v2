@@ -11,7 +11,8 @@ class SchoolResponse {
     data class Student(
         val profileImg: String,
         val nickname: String,
-        val name: String,
-        val email: String,
+        val grade: Int,
+        val classroom: Int,
+        val number: Int,
     )
 }

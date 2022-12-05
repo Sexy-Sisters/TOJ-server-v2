@@ -4,8 +4,8 @@ import com.sexysisters.tojserverv2.config.properties.JwtProperties
 import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
-import com.sexysisters.tojserverv2.domain.user.exception.PasswordMismatchException
 import com.sexysisters.tojserverv2.domain.user.exception.UserErrorCode
+import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.mail.MailSenderImpl
 import com.sexysisters.tojserverv2.infrastructure.redis.RedisRepository
@@ -83,7 +83,7 @@ class AuthServiceTest : BehaviorSpec({
         )
 
         When("로그인 시") {
-            val exception = shouldThrow<PasswordMismatchException> {
+            val exception = shouldThrow<UserException.PasswordMismatch> {
                 target.login(loginRequest)
             }
 

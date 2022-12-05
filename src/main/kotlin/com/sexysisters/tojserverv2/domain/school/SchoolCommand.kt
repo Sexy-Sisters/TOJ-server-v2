@@ -7,8 +7,7 @@ class SchoolCommand {
         val belong: String,
     )
 
-    data class CreateStudent (
-        val name: String,
+    data class CreateStudent(
         val age: Int,
         val grade: Int,
         val classroom: Int,
