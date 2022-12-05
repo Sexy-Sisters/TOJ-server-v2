@@ -4,7 +4,6 @@ import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.school.student.Student
 import com.sexysisters.tojserverv2.domain.school.type.Division
 import com.sexysisters.tojserverv2.domain.school.type.Kind
-import com.sexysisters.tojserverv2.domain.user.User
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.EnumType

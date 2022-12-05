@@ -1,9 +1,7 @@
 package com.sexysisters.tojserverv2.domain.user
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import com.sexysisters.tojserverv2.domain.school.School
 import com.sexysisters.tojserverv2.domain.school.student.Student
-import com.sexysisters.tojserverv2.domain.user.type.ApplyStatus
 import com.sexysisters.tojserverv2.domain.user.type.Authority
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -27,19 +25,11 @@ class User(
     @Enumerated(EnumType.STRING)
     var authority: Authority = Authority.USER
 
-    @Enumerated(EnumType.STRING)
-    var applyStatus: ApplyStatus = ApplyStatus.NONE
-
     @OneToOne(mappedBy = "user")
     var student: Student? = null
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
-}
-
-fun User.setRelation(school: School) {
-    this.school = school
-    school.studentList.add(this)
 }
 
 fun User.updateInfo(
@@ -53,19 +43,4 @@ fun User.updateInfo(
 
 fun User.updateProfileImg(profileImg: String) {
     this.profileImg = profileImg
-}
-
-fun User.setNone(): String {
-    this.applyStatus = ApplyStatus.NONE
-    return ApplyStatus.NONE.description
-}
-
-fun User.setWaiting(): String {
-    this.applyStatus = ApplyStatus.WAITING
-    return ApplyStatus.WAITING.description
-}
-
-fun User.setEngaged(): String {
-    this.applyStatus = ApplyStatus.ENGAGED
-    return ApplyStatus.ENGAGED.description
 }
