@@ -20,17 +20,18 @@ class OAuthServiceImpl(
     @Transactional
     override fun googleLogin(code: String): UserInfo.Token {
         val oAuthResponse = googleAuthExecutor.execute(code)
-        val user = User(
+        val initUser = User(
             nickname = oAuthResponse.name,
             email = oAuthResponse.email,
             profileImg = oAuthResponse.picture,
-            password = "OAUTH"
+            password = "OAUTH",
+            name = "이름"
         )
-        userStore.storeOAuthUser(user)
+        userStore.storeOAuthUser(initUser)
 
         return UserInfo.Token(
-            accessToken = jwtTokenProvider.createAccessToken(user.email),
-            refreshToken = jwtTokenProvider.createRefreshToken(user.email),
+            accessToken = jwtTokenProvider.createAccessToken(initUser.email),
+            refreshToken = jwtTokenProvider.createRefreshToken(initUser.email),
         )
     }
 }

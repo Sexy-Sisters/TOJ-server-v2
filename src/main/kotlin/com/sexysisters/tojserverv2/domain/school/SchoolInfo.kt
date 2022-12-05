@@ -19,18 +19,11 @@ class SchoolInfo {
         val address: String,
     )
 
-    class Apply(
-        val applyStatus: String,
-    )
-
-    class Join(
-        val applyStatus: String,
-    )
-
     class Student(
         val profileImg: String,
         val nickname: String,
-        val name: String,
-        val email: String,
+        val grade: Int,
+        val classroom: Int,
+        val number: Int,
     )
 }

@@ -14,6 +14,7 @@ import org.mapstruct.ReportingPolicy
 interface SchoolDtoMapper {
     // request
     fun of(request: SchoolRequest.Search): SchoolCommand.Search
+    fun of(request: SchoolRequest.CreateStudent): SchoolCommand.CreateStudent
 
     // response
     fun of(info: SchoolInfo.Search): SchoolResponse.Search

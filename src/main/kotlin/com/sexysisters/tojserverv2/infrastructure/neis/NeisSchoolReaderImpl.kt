@@ -5,7 +5,7 @@ import com.sexysisters.tojserverv2.common.util.api.neis.client.NeisSchoolInfoCli
 import com.sexysisters.tojserverv2.common.util.api.neis.dto.NeisSchoolInfoResponse
 import com.sexysisters.tojserverv2.common.util.api.neis.properties.NeisRequestProperty
 import com.sexysisters.tojserverv2.domain.school.School
-import com.sexysisters.tojserverv2.domain.school.exception.SchoolExcpetion
+import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import com.sexysisters.tojserverv2.domain.school.type.getDivision
 import com.sexysisters.tojserverv2.domain.school.type.getKind
 import com.sexysisters.tojserverv2.infrastructure.neis.dto.NeisSchoolMapper
@@ -32,7 +32,7 @@ class NeisSchoolReaderImpl(
         )
 
         val schoolInfo = neisSchoolInfoResponse.schoolInfo
-            ?: throw SchoolExcpetion.SchoolNotFound()
+            ?: throw SchoolException.SchoolNotFound()
         val row = schoolInfo[1].row
 
         return row.map { neisSchoolMapper.of(it) }
@@ -52,13 +52,13 @@ class NeisSchoolReaderImpl(
         )
 
         val schoolInfo = neisSchoolResponse.schoolInfo
-            ?: throw SchoolExcpetion.SchoolNotFound()
+            ?: throw SchoolException.SchoolNotFound()
         val row = schoolInfo[1].row[0]
 
         return neisSchoolMapper.of(row)
     }
 
-    override fun findSchoolByCode(code: String): School {
+    override fun getSchoolByCode(code: String): School {
         val schoolInfoResponse = searchByCode(code)
         val school = schoolInfoResponse.toEntity()
 
