@@ -1,6 +1,7 @@
 package com.sexysisters.tojserverv2.domain.school
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.school.student.Student
 import com.sexysisters.tojserverv2.domain.school.type.Division
 import com.sexysisters.tojserverv2.domain.school.type.Kind
 import com.sexysisters.tojserverv2.domain.user.User
@@ -34,7 +35,7 @@ class School(
     var kind: Kind? = null
 
     @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
-    val studentList = mutableListOf<User>()
+    val studentList = mutableListOf<Student>()
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L

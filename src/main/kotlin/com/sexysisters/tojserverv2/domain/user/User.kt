@@ -2,17 +2,16 @@ package com.sexysisters.tojserverv2.domain.user
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.school.student.Student
 import com.sexysisters.tojserverv2.domain.user.type.ApplyStatus
 import com.sexysisters.tojserverv2.domain.user.type.Authority
 import javax.persistence.Entity
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
-import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
+import javax.persistence.OneToOne
 import javax.persistence.Table
 
 @Entity
@@ -22,8 +21,7 @@ class User(
     var password: String,
     var nickname: String,
     var profileImg: String,
-    var name: String = "수정해주세요",
-
+    var name: String,
 ) : BaseTimeEntity() {
 
     @Enumerated(EnumType.STRING)
@@ -32,9 +30,8 @@ class User(
     @Enumerated(EnumType.STRING)
     var applyStatus: ApplyStatus = ApplyStatus.NONE
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "school_id")
-    var school: School? = null
+    @OneToOne(mappedBy = "user")
+    var student: Student? = null
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
