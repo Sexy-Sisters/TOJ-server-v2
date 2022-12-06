@@ -1,10 +1,13 @@
 package com.sexysisters.tojserverv2.domain.student.service
 
 import com.sexysisters.tojserverv2.domain.school.SchoolCommand
+import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import com.sexysisters.tojserverv2.domain.student.Status
 import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.student.StudentStore
+import com.sexysisters.tojserverv2.domain.student.updateStatus
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -13,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional
 class StudentServiceImpl(
     private val userReader: UserReader,
     private val studentStore: StudentStore,
+    private val schoolReader: SchoolReader,
+    private val studentReader: StudentReader,
 ) : StudentService {
 
     @Transactional
@@ -42,5 +47,23 @@ class StudentServiceImpl(
         if (student.status == Status.ENGAGED) {
             throw SchoolException.AlreadyJoined()
         }
+    }
+
+    @Transactional
+    override fun applySchool(code: String, studentId: Long): String {
+        val student = studentReader.getStudent(studentId)
+        val school = schoolReader.getSchool(code)
+        school.studentList.add(student)
+        student.school = school
+        return student.updateStatus(Status.WAITING)
+    }
+
+    @Transactional
+    override fun joinSchool(code: String, studentId: Long): String {
+        val student = studentReader.getStudent(studentId)
+        val school = schoolReader.getSchool(code)
+        school.studentList.add(student)
+        student.school = school
+        return student.updateStatus(Status.ENGAGED)
     }
 }

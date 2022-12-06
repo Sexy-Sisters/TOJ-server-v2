@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional
 class SchoolServiceImpl(
     private val neisSchoolReader: NeisSchoolReader,
     private val schoolMapper: SchoolMapper,
-    private val schoolReader: SchoolReader,
     private val schoolStore: SchoolStore,
     private val studentReader: StudentReader,
 ) : SchoolService {
@@ -35,24 +34,6 @@ class SchoolServiceImpl(
     override fun createSchool(code: String) {
         val initSchool = neisSchoolReader.getSchoolByCode(code)
         schoolStore.store(initSchool)
-    }
-
-    @Transactional
-    override fun applySchool(code: String, studentId: Long): String {
-        val student = studentReader.getStudent(studentId)
-        val school = schoolReader.getSchool(code)
-        school.studentList.add(student)
-        student.school = school
-        return student.updateStatus(Status.WAITING)
-    }
-
-    @Transactional
-    override fun joinSchool(code: String, studentId: Long): String {
-        val student = studentReader.getStudent(studentId)
-        val school = schoolReader.getSchool(code)
-        school.studentList.add(student)
-        student.school = school
-        return student.updateStatus(Status.ENGAGED)
     }
 
     @Transactional(readOnly = true)
