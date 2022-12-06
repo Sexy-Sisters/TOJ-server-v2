@@ -1,8 +1,8 @@
 package com.sexysisters.tojserverv2.infrastructure.school.student
 
-import com.sexysisters.tojserverv2.domain.school.design.StudentReader
-import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
-import com.sexysisters.tojserverv2.domain.school.student.Student
+import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.StudentReader
+import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
@@ -15,11 +15,11 @@ class StudentReaderImpl(
 
     override fun getStudent(id: Long): Student {
         return studentRepository.findByIdOrNull(id)
-            ?: throw SchoolException.StudentNotFound()
+            ?: throw StudentException.StudentNotFound()
     }
 
     override fun getCurrentStudent(): Student {
         return userReader.getCurrentUser().student
-            ?: throw SchoolException.StudentNotFound()
+            ?: throw StudentException.StudentNotFound()
     }
 }

@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.domain.school
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import com.sexysisters.tojserverv2.domain.school.student.Student
+import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.school.type.Division
 import com.sexysisters.tojserverv2.domain.school.type.Kind
 import javax.persistence.CascadeType

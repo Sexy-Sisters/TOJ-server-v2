@@ -1,4 +1,4 @@
-package com.sexysisters.tojserverv2.domain.school.student
+package com.sexysisters.tojserverv2.domain.student
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.school.School
