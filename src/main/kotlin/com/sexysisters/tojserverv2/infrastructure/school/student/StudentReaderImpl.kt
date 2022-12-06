@@ -1,8 +1,8 @@
 package com.sexysisters.tojserverv2.infrastructure.school.student
 
-import com.sexysisters.tojserverv2.domain.school.design.StudentReader
+import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
-import com.sexysisters.tojserverv2.domain.school.student.Student
+import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component

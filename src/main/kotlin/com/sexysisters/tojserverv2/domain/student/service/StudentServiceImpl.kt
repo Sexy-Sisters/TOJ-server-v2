@@ -1,10 +1,10 @@
-package com.sexysisters.tojserverv2.domain.school.service
+package com.sexysisters.tojserverv2.domain.student.service
 
 import com.sexysisters.tojserverv2.domain.school.SchoolCommand
-import com.sexysisters.tojserverv2.domain.school.design.StudentStore
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
-import com.sexysisters.tojserverv2.domain.school.student.Status
-import com.sexysisters.tojserverv2.domain.school.student.Student
+import com.sexysisters.tojserverv2.domain.student.Status
+import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.StudentStore
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

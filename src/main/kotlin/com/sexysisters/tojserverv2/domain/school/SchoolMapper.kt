@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.domain.school
 
-import com.sexysisters.tojserverv2.domain.school.student.Student
+import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.infrastructure.neis.dto.NeisSchoolResponse
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper

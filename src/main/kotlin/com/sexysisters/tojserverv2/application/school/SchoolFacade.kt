@@ -2,7 +2,7 @@ package com.sexysisters.tojserverv2.application.school
 
 import com.sexysisters.tojserverv2.domain.school.SchoolCommand
 import com.sexysisters.tojserverv2.domain.school.service.SchoolService
-import com.sexysisters.tojserverv2.domain.school.service.StudentService
+import com.sexysisters.tojserverv2.domain.student.service.StudentService
 import com.sexysisters.tojserverv2.infrastructure.school.SchoolRepository
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
