@@ -5,9 +5,8 @@ import com.sexysisters.tojserverv2.domain.school.SchoolInfo
 import com.sexysisters.tojserverv2.domain.school.SchoolMapper
 import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.school.SchoolStore
-import com.sexysisters.tojserverv2.domain.student.StudentReader
-import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import com.sexysisters.tojserverv2.domain.student.Status
+import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.student.updateStatus
 import com.sexysisters.tojserverv2.infrastructure.neis.NeisSchoolReader
 import org.springframework.stereotype.Service
@@ -19,6 +18,7 @@ class SchoolServiceImpl(
     private val schoolMapper: SchoolMapper,
     private val schoolStore: SchoolStore,
     private val studentReader: StudentReader,
+    private val schoolReader: SchoolReader,
 ) : SchoolService {
 
     @Transactional(readOnly = true)
@@ -36,23 +36,21 @@ class SchoolServiceImpl(
         schoolStore.store(initSchool)
     }
 
-    @Transactional(readOnly = true)
-    override fun getWaitingList(): List<SchoolInfo.Student> {
+    @Transactional
+    override fun applySchool(code: String): String {
         val student = studentReader.getCurrentStudent()
-        student.school ?: throw SchoolException.NotBelong()
-
-        return student.school!!.studentList
-            .filter { it.status == Status.WAITING }
-            .map { schoolMapper.of(it) }
+        val school = schoolReader.getSchool(code)
+        school.studentList.add(student)
+        student.school = school
+        return student.updateStatus(Status.WAITING)
     }
 
-    @Transactional(readOnly = true)
-    override fun getStudentList(): List<SchoolInfo.Student> {
+    @Transactional
+    override fun joinSchool(code: String): String {
         val student = studentReader.getCurrentStudent()
-        student.school ?: throw SchoolException.NotBelong()
-
-        return student.school!!.studentList
-            .filter { it.status == Status.ENGAGED }
-            .map { schoolMapper.of(it) }
+        val school = schoolReader.getSchool(code)
+        school.studentList.add(student)
+        student.school = school
+        return student.updateStatus(Status.ENGAGED)
     }
 }

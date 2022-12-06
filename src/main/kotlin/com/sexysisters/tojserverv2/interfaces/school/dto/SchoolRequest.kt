@@ -11,11 +11,4 @@ class SchoolRequest {
         @field: NotBlank(message = "school belong is empty")
         val belong: String,
     )
-
-    class CreateStudent(
-        val age: Int,
-        val grade: Int,
-        val classroom: Int,
-        val number: Int,
-    )
 }

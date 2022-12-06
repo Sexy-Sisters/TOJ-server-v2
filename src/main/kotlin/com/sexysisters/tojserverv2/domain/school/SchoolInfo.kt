@@ -18,12 +18,4 @@ class SchoolInfo {
         val name: String,
         val address: String,
     )
-
-    class Student(
-        val profileImg: String,
-        val nickname: String,
-        val grade: Int,
-        val classroom: Int,
-        val number: Int,
-    )
 }

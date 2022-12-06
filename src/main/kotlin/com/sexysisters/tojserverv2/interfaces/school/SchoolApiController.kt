@@ -2,7 +2,6 @@ package com.sexysisters.tojserverv2.interfaces.school
 
 import com.sexysisters.tojserverv2.application.school.SchoolFacade
 import com.sexysisters.tojserverv2.common.response.CommonResponse
-import com.sexysisters.tojserverv2.domain.school.SchoolCommand
 import com.sexysisters.tojserverv2.domain.school.service.SchoolService
 import com.sexysisters.tojserverv2.interfaces.school.dto.SchoolDtoMapper
 import com.sexysisters.tojserverv2.interfaces.school.dto.SchoolRequest
@@ -40,33 +39,9 @@ class SchoolApiController(
     @ApiOperation(value = "학교 가입 신청(새로 생성하는 학교면 바로 가입)")
     @PostMapping
     fun applySchool(
-        @RequestBody @Valid request: SchoolRequest.CreateStudent,
         @RequestParam(name = "schoolCode") schoolCode: String
     ): CommonResponse<String> {
-        val schoolCommand: SchoolCommand.CreateStudent = schoolDtoMapper.of(request)
-        val status = schoolFacade.applySchool(schoolCommand, schoolCode)
+        val status = schoolFacade.applySchool(schoolCode)
         return CommonResponse.success(status)
     }
-
-    @ApiOperation(value = "가입 신청자 리스트 조회")
-    @GetMapping("/waiting-list")
-    fun getWaitingList(): CommonResponse<List<SchoolResponse.Student>> {
-        val schoolInfo = schoolService.getWaitingList()
-        val response = schoolInfo.map { schoolDtoMapper.of(it) }
-        return CommonResponse.success(response)
-    }
-
-    @ApiOperation(value = "소속된 학생 리스트 조회")
-    @GetMapping("/student-list")
-    fun getStudentList(): CommonResponse<List<SchoolResponse.Student>> {
-        val schoolInfo = schoolService.getStudentList()
-        val response = schoolInfo.map { schoolDtoMapper.of(it) }
-        return CommonResponse.success(response)
-    }
-
-    // @ApiOperation(value = "학교 탈퇴 & 학교 참여 신청 취소")
-    // @DeleteMapping
-    // fun becomeIndependent() {
-    //     schoolService.becomeIndependent()
-    // }
 }

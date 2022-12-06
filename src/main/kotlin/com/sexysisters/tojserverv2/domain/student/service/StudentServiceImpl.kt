@@ -1,13 +1,14 @@
 package com.sexysisters.tojserverv2.domain.student.service
 
-import com.sexysisters.tojserverv2.domain.school.SchoolCommand
-import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import com.sexysisters.tojserverv2.domain.student.Status
 import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.StudentCommand
+import com.sexysisters.tojserverv2.domain.student.StudentInfo
+import com.sexysisters.tojserverv2.domain.student.StudentMapper
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.student.StudentStore
-import com.sexysisters.tojserverv2.domain.student.updateStatus
+import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,14 +17,12 @@ import org.springframework.transaction.annotation.Transactional
 class StudentServiceImpl(
     private val userReader: UserReader,
     private val studentStore: StudentStore,
-    private val schoolReader: SchoolReader,
     private val studentReader: StudentReader,
+    private val studentMapper: StudentMapper,
 ) : StudentService {
 
     @Transactional
-    override fun createStudent(
-        command: SchoolCommand.CreateStudent,
-    ): Long {
+    override fun createStudent(command: StudentCommand.Create): Long {
         val user = userReader.getCurrentUser()
         if (user.student != null) {
             validateIsNonEngaged(user.student!!)
@@ -49,21 +48,23 @@ class StudentServiceImpl(
         }
     }
 
-    @Transactional
-    override fun applySchool(code: String, studentId: Long): String {
-        val student = studentReader.getStudent(studentId)
-        val school = schoolReader.getSchool(code)
-        school.studentList.add(student)
-        student.school = school
-        return student.updateStatus(Status.WAITING)
+    @Transactional(readOnly = true)
+    override fun getWaitingList(): List<StudentInfo.Main> {
+        val student = studentReader.getCurrentStudent()
+        student.school ?: throw StudentException.NotBelong()
+
+        return student.school!!.studentList
+            .filter { it.status == Status.WAITING }
+            .map { studentMapper.of(it) }
     }
 
-    @Transactional
-    override fun joinSchool(code: String, studentId: Long): String {
-        val student = studentReader.getStudent(studentId)
-        val school = schoolReader.getSchool(code)
-        school.studentList.add(student)
-        student.school = school
-        return student.updateStatus(Status.ENGAGED)
+    @Transactional(readOnly = true)
+    override fun getStudentList(): List<StudentInfo.Main> {
+        val student = studentReader.getCurrentStudent()
+        student.school ?: throw StudentException.NotBelong()
+
+        return student.school!!.studentList
+            .filter { it.status == Status.ENGAGED }
+            .map { studentMapper.of(it) }
     }
 }

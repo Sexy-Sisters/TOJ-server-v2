@@ -6,11 +6,4 @@ class SchoolCommand {
         val name: String,
         val belong: String,
     )
-
-    data class CreateStudent(
-        val age: Int,
-        val grade: Int,
-        val classroom: Int,
-        val number: Int,
-    )
 }

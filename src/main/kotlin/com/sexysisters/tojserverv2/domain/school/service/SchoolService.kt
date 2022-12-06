@@ -6,7 +6,6 @@ import com.sexysisters.tojserverv2.domain.school.SchoolInfo
 interface SchoolService {
     fun searchSchool(command: SchoolCommand.Search): List<SchoolInfo.Search>
     fun createSchool(code: String)
-    fun getWaitingList(): List<SchoolInfo.Student>
-    fun getStudentList(): List<SchoolInfo.Student>
-    // fun becomeIndependent()
+    fun joinSchool(code: String): String
+    fun applySchool(code: String): String
 }
