@@ -31,7 +31,7 @@ class UserServiceImpl(
 
     @Transactional(readOnly = true)
     override fun findUserProfile(userId: Long): UserInfo.Profile {
-        val user = userReader.findUserById(userId)
+        val user = userReader.getUser(userId)
         return userMapper.of(user)
     }
 
