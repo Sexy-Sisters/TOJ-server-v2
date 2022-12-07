@@ -1,9 +1,11 @@
 package com.sexysisters.tojserverv2.domain.school
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.school.type.Division
 import com.sexysisters.tojserverv2.domain.school.type.Kind
+import org.apache.commons.lang3.StringUtils
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -38,4 +40,14 @@ class School(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+
+    init {
+        if (StringUtils.isEmpty(code)) throw SchoolException.SchoolEmptyProperties()
+        if (StringUtils.isEmpty(belong)) throw SchoolException.SchoolEmptyProperties()
+        if (StringUtils.isEmpty(name)) throw SchoolException.SchoolEmptyProperties()
+        if (StringUtils.isEmpty(address)) throw SchoolException.SchoolEmptyProperties()
+        if (StringUtils.isEmpty(birthDay)) throw SchoolException.SchoolEmptyProperties()
+        if (StringUtils.isEmpty(homePageAddress)) throw SchoolException.SchoolEmptyProperties()
+        if (StringUtils.isEmpty(phone)) throw SchoolException.SchoolEmptyProperties()
+    }
 }
