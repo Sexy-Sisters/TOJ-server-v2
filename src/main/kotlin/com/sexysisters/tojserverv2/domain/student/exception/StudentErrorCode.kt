@@ -9,4 +9,5 @@ enum class StudentErrorCode(
     STUDENT_NOT_FOUND("Student does not exist"),
     ALREADY_APPLIED("You've already applied"),
     ALREADY_JOINED("You've already joined"),
+    ALREADY_CREATED("You've already created student information"),
 }

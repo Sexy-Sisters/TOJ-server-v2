@@ -24,9 +24,12 @@ class StudentServiceImpl(
     @Transactional
     override fun createStudent(command: StudentCommand.Create): Long {
         val user = userReader.getCurrentUser()
-        if (user.student != null) {
-            validateIsNonEngaged(user.student!!)
-        }
+        // if (user.student != null) {
+        //     validateIsNonEngaged(user.student!!)
+        // }
+
+        if (user.student != null) throw StudentException.AlreadyCreated()
+
         val initStudent = Student(
             user = user,
             grade = command.grade,
@@ -41,10 +44,10 @@ class StudentServiceImpl(
 
     private fun validateIsNonEngaged(student: Student) {
         if (student.status == Status.WAITING) {
-            throw SchoolException.AlreadyApplied()
+            throw StudentException.AlreadyApplied()
         }
         if (student.status == Status.ENGAGED) {
-            throw SchoolException.AlreadyJoined()
+            throw StudentException.AlreadyJoined()
         }
     }
 
