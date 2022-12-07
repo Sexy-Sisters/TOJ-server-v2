@@ -7,7 +7,5 @@ enum class StudentErrorCode(
 ) : ErrorProperty {
     NOT_BELONG("You don't belong to the school"),
     STUDENT_NOT_FOUND("Student does not exist"),
-    ALREADY_APPLIED("You've already applied"),
-    ALREADY_JOINED("You've already joined"),
-    ALREADY_CREATED("You've already created student information"),
+    ALREADY_CREATED("You've already completed the student information form"),
 }
