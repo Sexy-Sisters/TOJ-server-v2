@@ -29,7 +29,7 @@ class AuthServiceImpl(
     @Transactional(readOnly = true)
     override fun login(request: UserCommand.LoginRequest): UserInfo.Token {
         val email = request.email
-        val user = userReader.findUserByEmail(email)
+        val user = userReader.getUser(email)
         checkPassword(request.password, user.password)
 
         val accessToken = jwtTokenProvider.createAccessToken(email)

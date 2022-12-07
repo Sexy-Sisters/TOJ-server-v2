@@ -74,7 +74,7 @@ class UserServiceTest : BehaviorSpec({
         val userId = 1L
 
         val userIdCapture = slot<Long>()
-        every { userReader.findUserById(capture(userIdCapture)) } returns user
+        every { userReader.getUser(capture(userIdCapture)) } returns user
 
         When("특정 유저 프로필 조회시") {
             val userInfo = target.findUserProfile(userId)
@@ -90,7 +90,7 @@ class UserServiceTest : BehaviorSpec({
             }
 
             Then("UserReader 로직이 동작해야 한다.") {
-                verify(exactly = 1) { userReader.findUserById(userId) }
+                verify(exactly = 1) { userReader.getUser(userId) }
             }
         }
     }

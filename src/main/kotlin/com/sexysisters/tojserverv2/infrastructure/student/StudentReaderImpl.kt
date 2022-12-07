@@ -1,4 +1,4 @@
-package com.sexysisters.tojserverv2.infrastructure.school.student
+package com.sexysisters.tojserverv2.infrastructure.student
 
 import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.student.StudentReader

@@ -47,7 +47,7 @@ class AuthServiceTest : BehaviorSpec({
         val accessToken = "accessToken"
         val refreshToken = "refreshToken"
 
-        every { userReader.findUserByEmail(any()) } returns user
+        every { userReader.getUser(any()) } returns user
         every { encoder.matches(any(), any()) } returns true
         every { jwtTokenProvider.createAccessToken(any()) } returns accessToken
         every { jwtTokenProvider.createRefreshToken(any()) } returns refreshToken
@@ -72,7 +72,7 @@ class AuthServiceTest : BehaviorSpec({
         val accessToken = "accessToken"
         val refreshToken = "refreshToken"
 
-        every { userReader.findUserByEmail(any()) } returns user
+        every { userReader.getUser(any()) } returns user
         every { encoder.matches(any(), any()) } returns false
         every { jwtTokenProvider.createAccessToken(any()) } returns accessToken
         every { jwtTokenProvider.createRefreshToken(any()) } returns refreshToken

@@ -10,5 +10,5 @@ class AuthDetailsService(
 ) : UserDetailsService {
 
     override fun loadUserByUsername(username: String) =
-        AuthDetails(userReader.findUserByEmail(username))
+        AuthDetails(userReader.getUser(username))
 }

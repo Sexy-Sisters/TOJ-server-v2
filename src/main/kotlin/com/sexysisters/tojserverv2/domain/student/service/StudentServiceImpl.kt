@@ -1,6 +1,5 @@
 package com.sexysisters.tojserverv2.domain.student.service
 
-import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import com.sexysisters.tojserverv2.domain.student.Status
 import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.student.StudentCommand
@@ -24,9 +23,7 @@ class StudentServiceImpl(
     @Transactional
     override fun createStudent(command: StudentCommand.Create): Long {
         val user = userReader.getCurrentUser()
-        if (user.student != null) {
-            validateIsNonEngaged(user.student!!)
-        }
+        if (user.student != null) throw StudentException.AlreadyCreated()
         val initStudent = Student(
             user = user,
             grade = command.grade,
@@ -37,15 +34,6 @@ class StudentServiceImpl(
         user.student = initStudent
 
         return studentStore.store(initStudent)
-    }
-
-    private fun validateIsNonEngaged(student: Student) {
-        if (student.status == Status.WAITING) {
-            throw SchoolException.AlreadyApplied()
-        }
-        if (student.status == Status.ENGAGED) {
-            throw SchoolException.AlreadyJoined()
-        }
     }
 
     @Transactional(readOnly = true)
