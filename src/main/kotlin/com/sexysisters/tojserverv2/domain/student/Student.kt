@@ -3,7 +3,6 @@ package com.sexysisters.tojserverv2.domain.student
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.school.School
 import com.sexysisters.tojserverv2.domain.user.User
-import org.apache.commons.lang3.StringUtils
 import javax.persistence.Entity
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
@@ -25,7 +24,7 @@ class Student(
     val age: Int,
 
     @Enumerated(EnumType.STRING)
-    var status: Status = Status.NONE,
+    var status: Status = Status.INDEPENDENT,
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -43,12 +42,19 @@ class Student(
 enum class Status(
     val description: String,
 ) {
-    NONE("무소속"),
+    INDEPENDENT("무소속"),
     WAITING("대기 중"),
     ENGAGED("소속"),
 }
 
-fun Student.updateStatus(status: Status): String {
-    this.status = status
-    return status.description
+fun Student.independent() {
+    status = Status.INDEPENDENT
+}
+
+fun Student.waiting() {
+    status = Status.WAITING
+}
+
+fun Student.engaed() {
+    status = Status.ENGAGED
 }

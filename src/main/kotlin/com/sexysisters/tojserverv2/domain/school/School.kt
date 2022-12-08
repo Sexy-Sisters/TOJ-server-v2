@@ -51,3 +51,8 @@ class School(
         if (StringUtils.isEmpty(phone)) throw SchoolException.SchoolEmptyProperties()
     }
 }
+
+fun School.makeRelation(student: Student) {
+    this.studentList.add(student)
+    student.school = this
+}
