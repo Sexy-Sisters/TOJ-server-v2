@@ -2,7 +2,7 @@ package com.sexysisters.tojserverv2.domain.user
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.student.Student
-import com.sexysisters.tojserverv2.domain.student.exception.StudentException
+import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import com.sexysisters.tojserverv2.domain.user.type.Authority
 import org.apache.commons.lang3.StringUtils
 import javax.persistence.Entity
@@ -34,11 +34,11 @@ class User(
     val id: Long = 0L
 
     init {
-        if (StringUtils.isEmpty(email)) throw StudentException.StudentEmptyProperties()
-        if (StringUtils.isEmpty(password)) throw StudentException.StudentEmptyProperties()
-        if (StringUtils.isEmpty(nickname)) throw StudentException.StudentEmptyProperties()
-        if (StringUtils.isEmpty(profileImg)) throw StudentException.StudentEmptyProperties()
-        if (StringUtils.isEmpty(name)) throw StudentException.StudentEmptyProperties()
+        if (StringUtils.isEmpty(email)) throw UserException.UserNotValid()
+        if (StringUtils.isEmpty(password)) throw UserException.UserNotValid()
+        if (StringUtils.isEmpty(nickname)) throw UserException.UserNotValid()
+        if (StringUtils.isEmpty(profileImg)) throw UserException.UserNotValid()
+        if (StringUtils.isEmpty(name)) throw UserException.UserNotValid()
     }
 }
 
