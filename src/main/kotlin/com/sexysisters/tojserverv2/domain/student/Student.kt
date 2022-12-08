@@ -2,6 +2,7 @@ package com.sexysisters.tojserverv2.domain.student
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.user.User
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -37,6 +38,11 @@ class Student(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+
+    init {
+        if (status == Status.INDEPENDENT)
+            throw StudentException.StudentNotValid()
+    }
 }
 
 enum class Status(
@@ -55,6 +61,6 @@ fun Student.waiting() {
     status = Status.WAITING
 }
 
-fun Student.engaed() {
+fun Student.engaged() {
     status = Status.ENGAGED
 }

@@ -7,7 +7,7 @@ import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.school.SchoolStore
 import com.sexysisters.tojserverv2.domain.school.makeRelation
 import com.sexysisters.tojserverv2.domain.student.StudentReader
-import com.sexysisters.tojserverv2.domain.student.engaed
+import com.sexysisters.tojserverv2.domain.student.engaged
 import com.sexysisters.tojserverv2.domain.student.waiting
 import com.sexysisters.tojserverv2.infrastructure.neis.NeisSchoolReader
 import org.springframework.stereotype.Service
@@ -51,7 +51,7 @@ class SchoolServiceImpl(
         val student = studentReader.getCurrentStudent()
         val school = schoolReader.getSchool(code)
         school.makeRelation(student)
-        student.engaed()
+        student.engaged()
         return student.status.description
     }
 }
