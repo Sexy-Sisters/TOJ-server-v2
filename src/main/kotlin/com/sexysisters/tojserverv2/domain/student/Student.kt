@@ -38,11 +38,6 @@ class Student(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
-
-    init {
-        if (status == Status.INDEPENDENT)
-            throw StudentException.StudentNotValid()
-    }
 }
 
 enum class Status(
