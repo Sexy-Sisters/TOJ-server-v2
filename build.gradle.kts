@@ -32,7 +32,7 @@ dependencies {
     implementation("org.hibernate.validator:hibernate-validator")
 
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
-    runtimeOnly("com.mysql:mysql-connector-j")
+    implementation("mysql:mysql-connector-java")
 
     // MapStruct
     implementation("org.mapstruct:mapstruct:1.5.3.Final")

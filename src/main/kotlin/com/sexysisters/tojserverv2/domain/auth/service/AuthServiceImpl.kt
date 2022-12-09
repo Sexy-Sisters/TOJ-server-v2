@@ -1,13 +1,15 @@
-package com.sexysisters.tojserverv2.domain.user.service
+package com.sexysisters.tojserverv2.domain.auth.service
 
 import com.sexysisters.tojserverv2.common.util.random.RandomCodeUtil
 import com.sexysisters.tojserverv2.config.properties.JwtProperties
 import com.sexysisters.tojserverv2.config.properties.MailProperties
-import com.sexysisters.tojserverv2.domain.user.UserCommand
-import com.sexysisters.tojserverv2.domain.user.UserInfo
+import com.sexysisters.tojserverv2.domain.auth.AuthCommand
+import com.sexysisters.tojserverv2.domain.auth.AuthInfo
+import com.sexysisters.tojserverv2.domain.auth.exception.AuthException
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
+import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
 import com.sexysisters.tojserverv2.infrastructure.mail.MailSender
 import com.sexysisters.tojserverv2.infrastructure.redis.RedisRepository
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -23,14 +25,15 @@ class AuthServiceImpl(
     private val passwordEncoder: PasswordEncoder,
     private val jwtTokenProvider: JwtTokenProvider,
     private val jwtProperties: JwtProperties,
+    private val jwtValidator: JwtValidator,
     private val redisRepository: RedisRepository,
 ) : AuthService {
 
     @Transactional(readOnly = true)
-    override fun login(request: UserCommand.LoginRequest): UserInfo.Token {
-        val email = request.email
+    override fun login(command: AuthCommand.LoginRequest): AuthInfo.Token {
+        val email = command.email
         val user = userReader.getUser(email)
-        checkPassword(request.password, user.password)
+        checkPassword(command.password, user.password)
 
         val accessToken = jwtTokenProvider.createAccessToken(email)
         val refreshToken = jwtTokenProvider.createRefreshToken(email)
@@ -40,7 +43,7 @@ class AuthServiceImpl(
             Duration.ofMillis(jwtProperties.refreshTokenValidTime),
         )
 
-        return UserInfo.Token(
+        return AuthInfo.Token(
             accessToken = accessToken,
             refreshToken = refreshToken,
         )
@@ -50,7 +53,7 @@ class AuthServiceImpl(
         val isOAuthAccount = expected == "OAUTH"
         val isWrongPassword = !passwordEncoder.matches(expected, actual)
         if (isOAuthAccount || isWrongPassword) {
-            throw UserException.PasswordMismatch()
+            throw AuthException.PasswordMismatch()
         }
     }
 
@@ -64,10 +67,16 @@ class AuthServiceImpl(
     }
 
     @Transactional(readOnly = true)
-    override fun sendCode(command: UserCommand.SendCodeRequest) {
+    override fun getNewAccessToken(refreshToken: String): String {
+        jwtValidator.validateRefreshToken(refreshToken)
+        val email = jwtValidator.getEmail(refreshToken)
+        return jwtTokenProvider.createAccessToken(email)
+    }
+
+    @Transactional(readOnly = true)
+    override fun sendCode(command: AuthCommand.SendCodeRequest) {
         val email = command.email
         validateEmailDuplication(email)
-
         val code = RandomCodeUtil.generate(6)
         val time = MailProperties.AUTHENTCIATION_TIME
         redisRepository.setDataExpired(email, code, time)
@@ -85,11 +94,10 @@ class AuthServiceImpl(
     }
 
     @Transactional(readOnly = true)
-    override fun authenticateCode(command: UserCommand.AuthenticateCode): Boolean {
+    override fun authenticateCode(command: AuthCommand.AuthenticateCode): Boolean {
         val email = command.email
         val expectedCode = command.code
         val actualCode = redisRepository.getData(email)
-
         val response = actualCode == expectedCode
         if (response) redisRepository.deleteData(email)
         return response

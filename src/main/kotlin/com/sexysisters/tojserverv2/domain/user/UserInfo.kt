@@ -8,9 +8,4 @@ class UserInfo {
         val profileImg: String,
         val name: String,
     )
-
-    class Token(
-        val accessToken: String,
-        val refreshToken: String,
-    )
 }

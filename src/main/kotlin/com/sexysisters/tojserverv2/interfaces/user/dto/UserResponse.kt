@@ -10,9 +10,4 @@ class UserResponse {
         val nickname: String,
         val profileImg: String,
     )
-
-    class Token(
-        val accessToken: String,
-        val refreshToken: String,
-    )
 }

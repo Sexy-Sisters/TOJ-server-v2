@@ -1,12 +1,13 @@
-package com.sexysisters.tojserverv2.domain.user.service
+package com.sexysisters.tojserverv2.domain.auth.service
 
 import com.sexysisters.tojserverv2.config.properties.JwtProperties
+import com.sexysisters.tojserverv2.domain.auth.AuthCommand
+import com.sexysisters.tojserverv2.domain.auth.exception.AuthErrorCode
+import com.sexysisters.tojserverv2.domain.auth.exception.AuthException
 import com.sexysisters.tojserverv2.domain.user.User
-import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
-import com.sexysisters.tojserverv2.domain.user.exception.UserErrorCode
-import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
+import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
 import com.sexysisters.tojserverv2.infrastructure.mail.MailSenderImpl
 import com.sexysisters.tojserverv2.infrastructure.redis.RedisRepository
 import io.kotest.assertions.throwables.shouldThrow
@@ -22,6 +23,7 @@ class AuthServiceTest : BehaviorSpec({
     val encoder: PasswordEncoder = mockk()
     val jwtTokenProvider: JwtTokenProvider = mockk()
     val jwtProperties: JwtProperties = mockk(relaxed = true)
+    val jwtValidator: JwtValidator = mockk()
     val redisRepository: RedisRepository = mockk(relaxed = true)
     val mailSenderImpl: MailSenderImpl = mockk()
 
@@ -29,6 +31,7 @@ class AuthServiceTest : BehaviorSpec({
         userReader = userReader,
         passwordEncoder = encoder,
         jwtTokenProvider = jwtTokenProvider,
+        jwtValidator = jwtValidator,
         jwtProperties = jwtProperties,
         redisRepository = redisRepository,
         mailSender = mailSenderImpl,
@@ -44,16 +47,17 @@ class AuthServiceTest : BehaviorSpec({
 
     Given("로그인 성공 answer 정의") {
 
+        val email = "email"
         val accessToken = "accessToken"
         val refreshToken = "refreshToken"
 
-        every { userReader.getUser(any()) } returns user
+        every { userReader.getUser(email) } returns user
         every { encoder.matches(any(), any()) } returns true
         every { jwtTokenProvider.createAccessToken(any()) } returns accessToken
         every { jwtTokenProvider.createRefreshToken(any()) } returns refreshToken
 
-        val loginRequest = UserCommand.LoginRequest(
-            email = "email",
+        val loginRequest = AuthCommand.LoginRequest(
+            email = email,
             password = "password",
         )
 
@@ -72,23 +76,23 @@ class AuthServiceTest : BehaviorSpec({
         val accessToken = "accessToken"
         val refreshToken = "refreshToken"
 
-        every { userReader.getUser(any()) } returns user
+        every { userReader.getUser("email") } returns user
         every { encoder.matches(any(), any()) } returns false
         every { jwtTokenProvider.createAccessToken(any()) } returns accessToken
         every { jwtTokenProvider.createRefreshToken(any()) } returns refreshToken
 
-        val loginRequest = UserCommand.LoginRequest(
-            email = "wrongEmail",
+        val loginRequest = AuthCommand.LoginRequest(
+            email = "email",
             password = "wrongPassword",
         )
 
         When("로그인 시") {
-            val exception = shouldThrow<UserException.PasswordMismatch> {
+            val exception = shouldThrow<AuthException.PasswordMismatch> {
                 target.login(loginRequest)
             }
 
             Then("실패시 PASSWORD_MISMATCH 예외를 던져야 한다.") {
-                exception.errorCode shouldBe UserErrorCode.PASSWORD_MISMATCH
+                exception.errorCode shouldBe AuthErrorCode.PASSWORD_MISMATCH
             }
         }
     }

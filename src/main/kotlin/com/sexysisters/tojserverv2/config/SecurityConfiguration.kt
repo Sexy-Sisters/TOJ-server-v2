@@ -37,9 +37,20 @@ class SecurityConfiguration(
 
             .and()
             .authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/api/v2/user").authenticated()
-            .antMatchers(HttpMethod.POST, "/api/v2/school").authenticated()
-            .anyRequest().permitAll()
+
+            // auth
+            .antMatchers(HttpMethod.POST, "/api/v2/auth").anonymous()
+            .antMatchers("/api/v2/auth/code").anonymous()
+
+            // oauth
+            .antMatchers("/api/v2/oauth/**").anonymous()
+
+            // user
+            .antMatchers(HttpMethod.POST, "/api/v2/user").anonymous()
+
+            // school
+            .antMatchers(HttpMethod.GET, "/api/v2/school").permitAll()
+            .anyRequest().authenticated()
 
         http
             .addFilterBefore(

@@ -16,20 +16,12 @@ interface UserDtoMapper {
     // request
     fun of(request: UserRequest.SignUp): UserCommand.CreateRequest
 
-    fun of(request: UserRequest.Login): UserCommand.LoginRequest
-
     fun of(request: UserRequest.Update): UserCommand.UpdateRequest
 
     fun of(request: UserRequest.UpdateProfileImg): UserCommand.UpdateProfileImgRequest
-
-    fun of(request: UserRequest.SendCode): UserCommand.SendCodeRequest
-
-    fun of(request: UserRequest.AuthenticateCode): UserCommand.AuthenticateCode
 
     // response
     fun of(userId: Long?): UserResponse.SignUp
 
     fun of(userInfo: UserInfo.Profile): UserResponse.Profile
-
-    fun of(userInfo: UserInfo.Token): UserResponse.Token
 }

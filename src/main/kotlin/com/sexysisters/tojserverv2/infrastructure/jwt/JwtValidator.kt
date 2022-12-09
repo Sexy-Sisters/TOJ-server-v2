@@ -12,6 +12,7 @@ class JwtValidator(
 
     fun getEmail(token: String) = jwtTokenProvider.extractAllClaims(token)["email"].toString()
 
-    fun validateRefreshToken(token: String) = redisRepository.getData(getEmail(token))
-        ?: throw InvalidTokenException()
+    fun validateRefreshToken(token: String) =
+        redisRepository.getData(getEmail(token))
+            ?: throw InvalidTokenException()
 }
