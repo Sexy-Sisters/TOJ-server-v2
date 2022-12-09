@@ -42,12 +42,17 @@ class School(
     val id: Long = 0L
 
     init {
-        if (StringUtils.isEmpty(code)) throw SchoolException.SchoolEmptyProperties()
-        if (StringUtils.isEmpty(belong)) throw SchoolException.SchoolEmptyProperties()
-        if (StringUtils.isEmpty(name)) throw SchoolException.SchoolEmptyProperties()
-        if (StringUtils.isEmpty(address)) throw SchoolException.SchoolEmptyProperties()
-        if (StringUtils.isEmpty(birthDay)) throw SchoolException.SchoolEmptyProperties()
-        if (StringUtils.isEmpty(homePageAddress)) throw SchoolException.SchoolEmptyProperties()
-        if (StringUtils.isEmpty(phone)) throw SchoolException.SchoolEmptyProperties()
+        if (StringUtils.isEmpty(code)) throw SchoolException.SchoolNotValid()
+        if (StringUtils.isEmpty(belong)) throw SchoolException.SchoolNotValid()
+        if (StringUtils.isEmpty(name)) throw SchoolException.SchoolNotValid()
+        if (StringUtils.isEmpty(address)) throw SchoolException.SchoolNotValid()
+        if (StringUtils.isEmpty(birthDay)) throw SchoolException.SchoolNotValid()
+        if (StringUtils.isEmpty(homePageAddress)) throw SchoolException.SchoolNotValid()
+        if (StringUtils.isEmpty(phone)) throw SchoolException.SchoolNotValid()
     }
+}
+
+fun School.makeRelation(student: Student) {
+    this.studentList.add(student)
+    student.school = this
 }

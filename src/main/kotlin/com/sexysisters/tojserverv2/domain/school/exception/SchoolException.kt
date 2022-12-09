@@ -4,5 +4,5 @@ import com.sexysisters.tojserverv2.common.exception.BaseException
 
 class SchoolException {
     class SchoolNotFound : BaseException(SchoolErrorCode.SCHOOL_NOT_FOUND)
-    class SchoolEmptyProperties : BaseException(SchoolErrorCode.SCHOOL_EMPTY_PROPERTIES)
+    class SchoolNotValid : BaseException(SchoolErrorCode.SCHOOL_NOT_VALID)
 }
