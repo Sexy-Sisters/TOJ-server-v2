@@ -9,6 +9,7 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
@@ -36,6 +37,15 @@ class AuthApiController(
     @DeleteMapping
     fun logout(@RequestHeader("Authorization") accessToken: String) =
         authService.logout(accessToken)
+
+
+    @ApiOperation(value = "액세스 토큰 재발급")
+    @PutMapping
+    fun getNewAccessToken(@RequestHeader(value = "Refresh-Token") refreshToken: String): CommonResponse<UserResponse.Token> {
+        val accessToken = authService.getNewAccessToken(refreshToken)
+        val response = UserResponse.Token(accessToken)
+        return CommonResponse.success(response)
+    }
 
     @ApiOperation(value = "인증 코드 이메일 발송")
     @PostMapping("/code")

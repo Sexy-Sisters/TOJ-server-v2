@@ -8,6 +8,7 @@ import com.sexysisters.tojserverv2.domain.user.UserInfo
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
+import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
 import com.sexysisters.tojserverv2.infrastructure.mail.MailSender
 import com.sexysisters.tojserverv2.infrastructure.redis.RedisRepository
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -23,6 +24,7 @@ class AuthServiceImpl(
     private val passwordEncoder: PasswordEncoder,
     private val jwtTokenProvider: JwtTokenProvider,
     private val jwtProperties: JwtProperties,
+    private val jwtValidator: JwtValidator,
     private val redisRepository: RedisRepository,
 ) : AuthService {
 
@@ -61,6 +63,13 @@ class AuthServiceImpl(
         val remainTime = jwtTokenProvider.getExpiredTime(parsedAccessToken).time - Date().time
         redisRepository.setBlackList(parsedAccessToken, Duration.ofMillis(remainTime))
         redisRepository.deleteData(user.email)
+    }
+
+    @Transactional(readOnly = true)
+    override fun getNewAccessToken(refreshToken: String): String {
+        jwtValidator.validateRefreshToken(refreshToken)
+        val email = jwtValidator.getEmail(refreshToken)
+        return jwtTokenProvider.createAccessToken(email)
     }
 
     @Transactional(readOnly = true)

@@ -11,6 +11,6 @@ class UserInfo {
 
     class Token(
         val accessToken: String,
-        val refreshToken: String,
+        val refreshToken: String? = null,
     )
 }
