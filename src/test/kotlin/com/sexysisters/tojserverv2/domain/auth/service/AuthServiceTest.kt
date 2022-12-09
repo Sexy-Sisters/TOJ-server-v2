@@ -1,10 +1,9 @@
-package com.sexysisters.tojserverv2.domain.user.service
+package com.sexysisters.tojserverv2.domain.auth.service
 
 import com.sexysisters.tojserverv2.config.properties.JwtProperties
 import com.sexysisters.tojserverv2.domain.auth.AuthCommand
 import com.sexysisters.tojserverv2.domain.auth.exception.AuthErrorCode
 import com.sexysisters.tojserverv2.domain.auth.exception.AuthException
-import com.sexysisters.tojserverv2.domain.auth.service.AuthServiceImpl
 import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
