@@ -11,11 +11,6 @@ class UserCommand {
         val nickname: String,
     )
 
-    class LoginRequest(
-        val email: String,
-        val password: String,
-    )
-
     class UpdateRequest(
         val nickname: String,
         val name: String
@@ -23,15 +18,6 @@ class UserCommand {
 
     class UpdateProfileImgRequest(
         val profileImg: String,
-    )
-
-    class SendCodeRequest(
-        val email: String,
-    )
-
-    class AuthenticateCode(
-        val email: String,
-        val code: String,
     )
 }
 

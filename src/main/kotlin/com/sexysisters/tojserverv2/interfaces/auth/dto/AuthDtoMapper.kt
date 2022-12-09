@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.interfaces.auth.dto
 
-import com.sexysisters.tojserverv2.domain.user.UserCommand
-import com.sexysisters.tojserverv2.domain.user.UserInfo
+import com.sexysisters.tojserverv2.domain.auth.AuthCommand
+import com.sexysisters.tojserverv2.domain.auth.AuthInfo
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.ReportingPolicy
@@ -14,13 +14,13 @@ import org.mapstruct.ReportingPolicy
 interface AuthDtoMapper {
 
     // request
-    fun of(request: AuthRequest.Login): UserCommand.LoginRequest
+    fun of(request: AuthRequest.Login): AuthCommand.LoginRequest
 
-    fun of(request: AuthRequest.SendCode): UserCommand.SendCodeRequest
+    fun of(request: AuthRequest.SendCode): AuthCommand.SendCodeRequest
 
-    fun of(request: AuthRequest.AuthenticateCode): UserCommand.AuthenticateCode
+    fun of(request: AuthRequest.AuthenticateCode): AuthCommand.AuthenticateCode
 
     // response
 
-    fun of(userInfo: UserInfo.Token): AuthResponse.Token
+    fun of(userInfo: AuthInfo.Token): AuthResponse.Token
 }

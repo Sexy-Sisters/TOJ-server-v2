@@ -2,8 +2,8 @@ package com.sexysisters.tojserverv2.interfaces.user
 
 import com.sexysisters.tojserverv2.common.response.CommonResponse
 import com.sexysisters.tojserverv2.domain.user.service.OAuthService
-import com.sexysisters.tojserverv2.interfaces.user.dto.UserDtoMapper
-import com.sexysisters.tojserverv2.interfaces.user.dto.UserResponse
+import com.sexysisters.tojserverv2.interfaces.auth.dto.AuthDtoMapper
+import com.sexysisters.tojserverv2.interfaces.auth.dto.AuthResponse
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.web.bind.annotation.GetMapping
@@ -16,7 +16,7 @@ import javax.websocket.server.PathParam
 @RequestMapping("/api/v2/oauth")
 class OAuthApiController(
     private val oAuthService: OAuthService,
-    private val userDtoMapper: UserDtoMapper,
+    private val authDtoMapper: AuthDtoMapper,
 ) {
 
     @ApiOperation(value = "구글 OAuth 로그인 링크")
@@ -28,9 +28,9 @@ class OAuthApiController(
 
     @ApiOperation(value = "Google OAuth callback (client 사용 안함)")
     @GetMapping("/google/callback")
-    fun googleAuth(@PathParam("code") code: String): CommonResponse<UserResponse.Token> {
+    fun googleAuth(@PathParam("code") code: String): CommonResponse<AuthResponse.Token> {
         val userInfo = oAuthService.googleLogin(code)
-        val response: UserResponse.Token = userDtoMapper.of(userInfo)
+        val response = authDtoMapper.of(userInfo)
         return CommonResponse.success(response)
     }
 }

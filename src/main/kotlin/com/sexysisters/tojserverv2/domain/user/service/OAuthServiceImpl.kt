@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.domain.user.service
 
+import com.sexysisters.tojserverv2.domain.auth.AuthInfo
 import com.sexysisters.tojserverv2.domain.user.User
-import com.sexysisters.tojserverv2.domain.user.UserInfo
 import com.sexysisters.tojserverv2.domain.user.design.UserStore
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.oauth.GoogleAuthExecutor
@@ -18,7 +18,7 @@ class OAuthServiceImpl(
     override fun getGoogleLink() = googleAuthExecutor.getLink()
 
     @Transactional
-    override fun googleLogin(code: String): UserInfo.Token {
+    override fun googleLogin(code: String): AuthInfo.Token {
         val oAuthResponse = googleAuthExecutor.execute(code)
         val initUser = User(
             nickname = oAuthResponse.name,
@@ -29,7 +29,7 @@ class OAuthServiceImpl(
         )
         userStore.storeOAuthUser(initUser)
 
-        return UserInfo.Token(
+        return AuthInfo.Token(
             accessToken = jwtTokenProvider.createAccessToken(initUser.email),
             refreshToken = jwtTokenProvider.createRefreshToken(initUser.email),
         )
