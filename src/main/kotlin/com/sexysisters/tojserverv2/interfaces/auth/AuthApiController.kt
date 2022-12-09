@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.interfaces.auth
 
 import com.sexysisters.tojserverv2.common.response.CommonResponse
-import com.sexysisters.tojserverv2.domain.user.service.AuthService
+import com.sexysisters.tojserverv2.domain.auth.service.AuthService
 import com.sexysisters.tojserverv2.interfaces.auth.dto.AuthDtoMapper
 import com.sexysisters.tojserverv2.interfaces.auth.dto.AuthRequest
 import com.sexysisters.tojserverv2.interfaces.auth.dto.AuthResponse
@@ -37,7 +37,6 @@ class AuthApiController(
     @DeleteMapping
     fun logout(@RequestHeader("Authorization") accessToken: String) =
         authService.logout(accessToken)
-
 
     @ApiOperation(value = "액세스 토큰 재발급")
     @PutMapping

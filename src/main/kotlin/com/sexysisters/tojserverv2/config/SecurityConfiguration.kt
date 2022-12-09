@@ -39,8 +39,8 @@ class SecurityConfiguration(
             .authorizeRequests()
 
             // auth
+            .antMatchers(HttpMethod.POST, "/api/v2/auth").anonymous()
             .antMatchers("/api/v2/auth/code").anonymous()
-            .antMatchers(HttpMethod.POST,"/api/v2/auth").anonymous()
 
             // oauth
             .antMatchers("/api/v2/oauth/**").anonymous()
