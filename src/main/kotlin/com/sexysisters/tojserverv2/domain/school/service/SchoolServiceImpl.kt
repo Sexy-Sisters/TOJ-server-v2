@@ -5,6 +5,7 @@ import com.sexysisters.tojserverv2.domain.school.SchoolMapper
 import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.school.SchoolStore
 import com.sexysisters.tojserverv2.domain.school.makeRelation
+import com.sexysisters.tojserverv2.domain.school.policy.SchoolPolicy
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.student.engaged
 import com.sexysisters.tojserverv2.domain.student.waiting
@@ -19,6 +20,7 @@ class SchoolServiceImpl(
     private val schoolStore: SchoolStore,
     private val studentReader: StudentReader,
     private val schoolReader: SchoolReader,
+    private val schoolPolicy: List<SchoolPolicy>,
 ) : SchoolService {
 
     @Transactional(readOnly = true)
@@ -40,6 +42,7 @@ class SchoolServiceImpl(
     override fun applySchool(code: String): String {
         val student = studentReader.getCurrentStudent()
         val school = schoolReader.getSchool(code)
+        schoolPolicy.forEach { it.check(school, student) }
         school.makeRelation(student)
         student.waiting()
         return student.status.description
