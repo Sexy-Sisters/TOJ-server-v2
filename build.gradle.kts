@@ -9,6 +9,7 @@ plugins {
     kotlin("kapt") version "1.6.21"
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
     id("org.jlleitschuh.gradle.ktlint-idea") version "10.0.0"
+    // id("com.ewerk.gradle.plugins.querydsl") version "1.0.10"
 }
 
 group = "com.sexysisters"
@@ -67,6 +68,10 @@ dependencies {
     // mail, thymeleaf
     implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+
+    // Querydsl
+    implementation("com.querydsl:querydsl-jpa:5.0.0")
+    kapt("com.querydsl:querydsl-apt:5.0.0:jpa")
 
     implementation("com.google.code.gson:gson")
 
