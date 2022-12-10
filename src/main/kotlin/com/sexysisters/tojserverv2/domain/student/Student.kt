@@ -1,8 +1,10 @@
 package com.sexysisters.tojserverv2.domain.student
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.approve.Approve
 import com.sexysisters.tojserverv2.domain.school.School
 import com.sexysisters.tojserverv2.domain.user.User
+import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
 import javax.persistence.OneToOne
 import javax.persistence.Table
 
@@ -33,9 +36,11 @@ class Student(
     @JoinColumn(name = "school_id")
     var school: School? = null
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    var user: User? = null
+    @OneToMany(mappedBy = "applicant", cascade = arrayOf(CascadeType.ALL))
+    val approves = mutableListOf<Approve>()
+
+    @OneToMany(mappedBy = "acceptor", cascade = arrayOf(CascadeType.ALL))
+    val acceptorList = mutableListOf<Approve>()
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L

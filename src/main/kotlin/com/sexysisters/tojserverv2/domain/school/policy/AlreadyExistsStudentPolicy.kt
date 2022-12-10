@@ -3,29 +3,28 @@ package com.sexysisters.tojserverv2.domain.school.policy
 import com.sexysisters.tojserverv2.domain.school.School
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import com.sexysisters.tojserverv2.domain.student.Student
-import com.sexysisters.tojserverv2.domain.student.StudentReader
+import com.sexysisters.tojserverv2.infrastructure.student.StudentRepository
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
 /*
-    한 학교에 같은 학년, 반, 번호는 존재할 수 없다.
+    이미 존재하는 인적 사항인지 확인
  */
-@Order(20)
+@Order(value = 20)
 @Component
 class AlreadyExistsStudentPolicy(
-    private val studentReader: StudentReader,
+    private val studentRepository: StudentRepository,
 ) : SchoolPolicy {
 
-    override fun check(school: School, student: Student) {
-        val grade = student.grade
-        val classroom = student.classroom
-        val number = student.number
-        val hasStudent = studentReader.checkAlreadyExists(
-            school,
-            grade,
-            classroom,
-            number,
+    override fun check(student: Student, school: School) {
+        val hasStudent = studentRepository.checkAlreadyExists(
+            school = school,
+            grade = student.grade,
+            classroom = student.classroom,
+            number = student.number,
         )
-        if (hasStudent) throw SchoolException.StudentAlreadyExists()
+        if (hasStudent) {
+            throw SchoolException.StudentAlreadyExists()
+        }
     }
 }

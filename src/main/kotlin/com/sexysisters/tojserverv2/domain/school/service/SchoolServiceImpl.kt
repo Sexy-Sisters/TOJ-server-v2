@@ -7,8 +7,6 @@ import com.sexysisters.tojserverv2.domain.school.SchoolStore
 import com.sexysisters.tojserverv2.domain.school.makeRelation
 import com.sexysisters.tojserverv2.domain.school.policy.SchoolPolicy
 import com.sexysisters.tojserverv2.domain.student.StudentReader
-import com.sexysisters.tojserverv2.domain.student.engaged
-import com.sexysisters.tojserverv2.domain.student.waiting
 import com.sexysisters.tojserverv2.infrastructure.neis.NeisSchoolReader
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -42,18 +40,8 @@ class SchoolServiceImpl(
     override fun applySchool(code: String): String {
         val student = studentReader.getCurrentStudent()
         val school = schoolReader.getSchool(code)
-        schoolPolicy.forEach { it.check(school, student) }
+        schoolPolicy.forEach { it.check(student, school) }
         school.makeRelation(student)
-        student.waiting()
-        return student.status.description
-    }
-
-    @Transactional
-    override fun joinSchool(code: String): String {
-        val student = studentReader.getCurrentStudent()
-        val school = schoolReader.getSchool(code)
-        school.makeRelation(student)
-        student.engaged()
         return student.status.description
     }
 }
