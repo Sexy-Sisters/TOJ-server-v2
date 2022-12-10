@@ -7,4 +7,6 @@ enum class SchoolErrorCode(
 ) : ErrorProperty {
     SCHOOL_NOT_FOUND("School does not exist"),
     SCHOOL_NOT_VALID("School domain is not valid"),
+    STUDENT_ALREADY_EXISTS("Student already exists"),
+    STUDENT_INFO_OUT_OF_RANGE("Student information is out of range"),
 }

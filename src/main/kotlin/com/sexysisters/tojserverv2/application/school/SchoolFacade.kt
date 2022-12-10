@@ -3,7 +3,6 @@ package com.sexysisters.tojserverv2.application.school
 import com.sexysisters.tojserverv2.domain.school.service.SchoolService
 import com.sexysisters.tojserverv2.infrastructure.school.SchoolRepository
 import org.springframework.stereotype.Component
-import org.springframework.transaction.annotation.Transactional
 
 @Component
 class SchoolFacade(
@@ -11,16 +10,11 @@ class SchoolFacade(
     private val schoolService: SchoolService,
 ) {
 
-    @Transactional
     fun applySchool(code: String): String {
         val isExists = schoolRepository.existsByCode(code)
-        val status =
-            if (isExists) {
-                schoolService.applySchool(code)
-            } else {
-                schoolService.createSchool(code)
-                schoolService.joinSchool(code)
-            }
-        return status
+        if (!isExists) {
+            schoolService.createSchool(code)
+        }
+        return schoolService.applySchool(code)
     }
 }
