@@ -1,6 +1,5 @@
 package com.sexysisters.tojserverv2.domain.school.service
 
-import com.sexysisters.tojserverv2.domain.school.SchoolCommand
 import com.sexysisters.tojserverv2.domain.school.SchoolInfo
 import com.sexysisters.tojserverv2.domain.school.SchoolMapper
 import com.sexysisters.tojserverv2.domain.school.SchoolReader
@@ -23,10 +22,10 @@ class SchoolServiceImpl(
 ) : SchoolService {
 
     @Transactional(readOnly = true)
-    override fun searchSchool(command: SchoolCommand.Search): List<SchoolInfo.Search> {
+    override fun searchSchool(name: String, belong: String): List<SchoolInfo.Search> {
         val searchResults = neisSchoolReader.search(
-            schoolName = command.name,
-            schoolBelong = command.belong,
+            schoolName = name,
+            schoolBelong = belong,
         )
         return searchResults.map { schoolMapper.of(it) }
     }
