@@ -29,9 +29,7 @@ class Student(
     @Enumerated(EnumType.STRING)
     var status: Status = Status.INDEPENDENT,
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    val user: User,
+
 ) : BaseTimeEntity() {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,6 +52,11 @@ enum class Status(
     INDEPENDENT("무소속"),
     WAITING("대기 중"),
     ENGAGED("소속"),
+}
+
+fun Student.makeRelation(user: User) {
+    this.user = user
+    user.student = this
 }
 
 fun Student.independent() {

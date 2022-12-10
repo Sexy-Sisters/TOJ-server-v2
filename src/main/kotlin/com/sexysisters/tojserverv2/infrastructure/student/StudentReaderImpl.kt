@@ -1,5 +1,6 @@
 package com.sexysisters.tojserverv2.infrastructure.student
 
+import com.sexysisters.tojserverv2.domain.school.School
 import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.student.exception.StudentException
@@ -21,5 +22,19 @@ class StudentReaderImpl(
     override fun getCurrentStudent(): Student {
         return userReader.getCurrentUser().student
             ?: throw StudentException.StudentNotFound()
+    }
+
+    override fun checkAlreadyExists(
+        school: School,
+        grade: Int,
+        classroom: Int,
+        number: Int,
+    ): Boolean {
+        return studentRepository.existsBySchoolAndGradeAndClassroomAndNumber(
+            school = school,
+            grade = grade,
+            classroom = classroom,
+            number = number,
+        )
     }
 }
