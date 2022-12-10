@@ -8,5 +8,5 @@ enum class SchoolErrorCode(
     SCHOOL_NOT_FOUND("School does not exist"),
     SCHOOL_NOT_VALID("School domain is not valid"),
     STUDENT_ALREADY_EXISTS("Student already exists"),
-    ALREADY_JOINED("You've already joined school"),
+    ALREADY_JOINED("You've already joined the school"),
 }
