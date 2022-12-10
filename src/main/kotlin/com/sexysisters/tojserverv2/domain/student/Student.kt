@@ -28,13 +28,15 @@ class Student(
 
     @Enumerated(EnumType.STRING)
     var status: Status = Status.INDEPENDENT,
-
-
 ) : BaseTimeEntity() {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")
     var school: School? = null
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    var user: User? = null
 
     @OneToMany(mappedBy = "applicant", cascade = arrayOf(CascadeType.ALL))
     val approves = mutableListOf<Approve>()

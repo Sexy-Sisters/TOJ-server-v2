@@ -30,7 +30,7 @@ class StudentReaderImpl(
         classroom: Int,
         number: Int,
     ): Boolean {
-        return studentRepository.existsBySchoolAndGradeAndClassroomAndNumber(
+        return studentRepository.checkAlreadyExists(
             school = school,
             grade = grade,
             classroom = classroom,

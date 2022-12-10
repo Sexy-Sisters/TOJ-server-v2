@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 /*
     이미 존재하는 인적 사항인지 확인
  */
-@Order(value = 20)
+@Order(30)
 @Component
 class AlreadyExistsStudentPolicy(
     private val studentRepository: StudentRepository,

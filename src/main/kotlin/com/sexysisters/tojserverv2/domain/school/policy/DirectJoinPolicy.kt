@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 /*
     참가 중인 학생이 5명 이하면 바로 참가
 */
-@Order(30)
+@Order(40)
 @Component
 class DirectJoinPolicy : SchoolPolicy {
 
