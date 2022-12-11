@@ -4,4 +4,5 @@ import com.sexysisters.tojserverv2.domain.approve.ApproveCommand
 
 interface ApproveService {
     fun approve(command: ApproveCommand.Approve)
+    fun cancel(command: ApproveCommand.Cancel)
 }
