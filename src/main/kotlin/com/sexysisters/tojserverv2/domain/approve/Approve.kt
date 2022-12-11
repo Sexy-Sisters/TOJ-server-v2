@@ -16,11 +16,11 @@ import javax.persistence.Table
 @Table(name = "tbl_approve")
 class Approve(
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "applicant_id")
     val applicant: Student,
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "acceptor_id")
     val acceptor: Student,
 ) : BaseTimeEntity() {

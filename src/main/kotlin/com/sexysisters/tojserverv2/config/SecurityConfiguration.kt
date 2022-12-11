@@ -50,6 +50,9 @@ class SecurityConfiguration(
 
             // school
             .antMatchers(HttpMethod.GET, "/api/v2/school").permitAll()
+
+            // swagger
+            .antMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
             .anyRequest().authenticated()
 
         http

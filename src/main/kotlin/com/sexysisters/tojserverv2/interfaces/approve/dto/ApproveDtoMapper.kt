@@ -14,5 +14,6 @@ interface ApproveDtoMapper {
     // request
     fun of(request: ApproveRequest.Approve): ApproveCommand.Approve
 
+    fun of(request: ApproveRequest.Cancel): ApproveCommand.Cancel
     // response
 }

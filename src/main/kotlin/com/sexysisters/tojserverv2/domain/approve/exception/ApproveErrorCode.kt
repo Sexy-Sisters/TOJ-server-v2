@@ -7,4 +7,5 @@ enum class ApproveErrorCode(
 ) : ErrorProperty {
     DIFFERENT_SCHOOL("Your school and the applicant's school are different"),
     ALREADY_COMPLETED("The applicant is already joined"),
+    APPROVE_NOT_FOUND("You've never approve it"),
 }
