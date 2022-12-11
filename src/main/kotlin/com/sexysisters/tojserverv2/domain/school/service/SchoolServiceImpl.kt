@@ -22,10 +22,9 @@ class SchoolServiceImpl(
 ) : SchoolService {
 
     @Transactional(readOnly = true)
-    override fun searchSchool(name: String, belong: String): List<SchoolInfo.Search> {
+    override fun searchSchool(name: String): List<SchoolInfo.Search> {
         val searchResults = neisSchoolReader.search(
             schoolName = name,
-            schoolBelong = belong,
         )
         return searchResults.map { schoolMapper.of(it) }
     }

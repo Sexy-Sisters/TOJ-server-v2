@@ -18,13 +18,12 @@ class NeisSchoolReaderImpl(
     private val neisSchoolMapper: NeisSchoolMapper,
 ) : NeisSchoolReader {
 
-    override fun search(schoolName: String, schoolBelong: String): List<NeisSchoolResponse> {
-        val neisSchoolInfoHtml = neisSchoolInfoClient.schoolInfo(
+    override fun search(schoolName: String): List<NeisSchoolResponse> {
+        val neisSchoolInfoHtml = neisSchoolInfoClient.schoolInfoByName(
             type = NeisRequestProperty.TYPE,
             pageIndex = NeisRequestProperty.PAGE_INDEX,
             pageSize = NeisRequestProperty.PAGE_SIZE,
             schoolName = schoolName,
-            schoolBelong = schoolBelong,
         )
         val neisSchoolInfoResponse = Gson().fromJson(
             neisSchoolInfoHtml,
@@ -39,7 +38,7 @@ class NeisSchoolReaderImpl(
     }
 
     override fun searchByCode(code: String): NeisSchoolResponse {
-        val neisSchoolInfoHtml = neisSchoolInfoClient.schoolInfo(
+        val neisSchoolInfoHtml = neisSchoolInfoClient.schoolInfoByCode(
             type = NeisRequestProperty.TYPE,
             pageIndex = NeisRequestProperty.PAGE_INDEX,
             pageSize = NeisRequestProperty.PAGE_SIZE,
