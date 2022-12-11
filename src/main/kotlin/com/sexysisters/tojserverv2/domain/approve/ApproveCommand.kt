@@ -5,7 +5,7 @@ class ApproveCommand {
         val applicantId: Long,
     )
 
-    class Cancel (
+    class Cancel(
         val applicantId: Long,
     )
 }
