@@ -6,5 +6,6 @@ class SchoolResponse {
         val code: String,
         val name: String,
         val address: String,
+        val division: String,
     )
 }

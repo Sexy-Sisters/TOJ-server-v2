@@ -26,9 +26,8 @@ class SchoolApiController(
     @GetMapping
     fun searchSchool(
         @RequestParam(name = "name") name: String,
-        @RequestParam(name = "belong") belong: String,
     ): CommonResponse<List<SchoolResponse.Search>> {
-        val schoolInfo = schoolService.searchSchool(name, belong)
+        val schoolInfo = schoolService.searchSchool(name)
         val response = schoolInfo.map { schoolDtoMapper.of(it) }
         return CommonResponse.success(response)
     }
