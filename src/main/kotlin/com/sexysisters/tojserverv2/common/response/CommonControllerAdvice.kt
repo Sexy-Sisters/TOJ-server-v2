@@ -17,24 +17,21 @@ class CommonControllerAdvice {
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception::class)
-    fun onException(e: Exception): CommonResponse<Unit> {
-        // return CommonResponse.fail(ErrorCode.COMMON_SYSTEM_ERROR)
-        return CommonResponse.fail(e.message!!, e.message!!)
-    }
+    fun onException(e: Exception) =
+        CommonResponse.fail(e.message!!, e.message!!)
+    // CommonResponse.fail(ErrorCode.COMMON_SYSTEM_ERROR)
 
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(BaseException::class)
-    fun onBaseException(e: BaseException): CommonResponse<Unit> {
-        return CommonResponse.fail(e.message!!, e.errorCode.errorMsg)
-    }
+    fun onBaseException(e: BaseException) =
+        CommonResponse.fail(e.message!!, e.errorCode.errorMsg)
 
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ClientAbortException::class)
-    fun skipException(e: Exception): CommonResponse<Unit> {
-        return CommonResponse.fail(ErrorCode.COMMON_SYSTEM_ERROR)
-    }
+    fun skipException(e: Exception) =
+        CommonResponse.fail(ErrorCode.COMMON_SYSTEM_ERROR)
 
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -44,7 +41,7 @@ class CommonControllerAdvice {
         val fe: FieldError? = bindingResult.fieldError
 
         if (fe != null) {
-            val message: String = "Request Error ${fe.field} = ${fe.rejectedValue} + (${fe.defaultMessage})"
+            val message = "Request Error ${fe.field} = ${fe.rejectedValue} + (${fe.defaultMessage})"
             return CommonResponse.fail(message, ErrorCode.COMMON_INVALID_PARAMETER.name)
         } else {
             return CommonResponse.fail(
