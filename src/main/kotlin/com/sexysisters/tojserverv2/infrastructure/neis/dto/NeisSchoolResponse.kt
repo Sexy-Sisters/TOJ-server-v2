@@ -13,8 +13,8 @@ data class NeisSchoolResponse constructor(
     val division: String,
     val kind: String?,
 ) {
-    fun toEntity(): School {
-        return School(
+    fun toEntity() =
+        School(
             code = this.code,
             belong = this.belong,
             name = this.name,
@@ -23,5 +23,4 @@ data class NeisSchoolResponse constructor(
             homePageAddress = this.homePageAddress,
             phone = this.phone,
         )
-    }
 }

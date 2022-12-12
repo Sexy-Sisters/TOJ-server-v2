@@ -73,10 +73,11 @@ class JwtTokenProvider(
         return null
     }
 
-    fun getExpiredTime(token: String): Date = Jwts.parserBuilder()
-        .setSigningKey(getSigningKey(jwtProperties.secret))
-        .build()
-        .parseClaimsJws(token)
-        .body
-        .expiration
+    fun getExpiredTime(token: String): Date =
+        Jwts.parserBuilder()
+            .setSigningKey(getSigningKey(jwtProperties.secret))
+            .build()
+            .parseClaimsJws(token)
+            .body
+            .expiration
 }

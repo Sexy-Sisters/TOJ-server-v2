@@ -26,28 +26,23 @@ class GoogleAuthExecutor(
             "&response_type=code" +
             "&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
 
-    fun getLink(): String {
-        return oAuthProperties.googleBaseUrl() +
+    fun getLink() =
+        oAuthProperties.googleBaseUrl() +
             String.format(
                 QUERY_STRING,
                 oAuthProperties.googleClientId(),
                 oAuthProperties.googleRedirectUrl()
             )
-    }
 
     fun execute(code: String): GoogleInfoResponse {
-
         val codeRequest = GoogleCodeRequest(
             code = URLDecoder.decode(code, StandardCharsets.UTF_8),
             clientId = oAuthProperties.googleClientId(),
             clientSecret = oAuthProperties.googleClientSecret(),
             redirectUri = oAuthProperties.googleRedirectUrl(),
         )
-
         val accessToken = googleAuthClient.googleAuth(codeRequest).accessToken
 
-        val response = googleInfoClient.googleInfo(accessToken)
-
-        return response
+        return googleInfoClient.googleInfo(accessToken)
     }
 }

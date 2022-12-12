@@ -6,9 +6,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata
 import com.amazonaws.services.s3.model.PutObjectRequest
 import com.sexysisters.tojserverv2.config.properties.S3Properties
 import com.sexysisters.tojserverv2.infrastructure.image.ImageUtil
-import com.sexysisters.tojserverv2.infrastructure.image.s3.exception.EmptyFileException
-import com.sexysisters.tojserverv2.infrastructure.image.s3.exception.SaveFailedException
-import com.sexysisters.tojserverv2.infrastructure.image.s3.exception.TooLongTitleException
+import com.sexysisters.tojserverv2.infrastructure.image.s3.exception.FileException
 import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 import java.util.UUID
@@ -31,26 +29,25 @@ class S3Executor(
             )
             amazonS3Client.putObject(putObjectRequest.withCannedAcl(CannedAccessControlList.PublicRead))
         } catch (e: Exception) {
-            throw SaveFailedException()
+            throw FileException.SaveFailed()
         }
 
         return amazonS3Client.getUrl(s3Properties.bucket, fileName).toString()
     }
 
-    private fun getObjectMetadata(image: MultipartFile): ObjectMetadata {
-        val objectMetadata = ObjectMetadata()
-        objectMetadata.contentType = image.contentType
-        objectMetadata.contentLength = image.size
-        return objectMetadata
-    }
+    private fun getObjectMetadata(image: MultipartFile) =
+        ObjectMetadata().apply {
+            contentType = image.contentType
+            contentLength = image.size
+        }
 
     private fun validateFile(file: MultipartFile) {
         val isTooLong = file.originalFilename!!.length > 20
         if (file.isEmpty) {
-            throw EmptyFileException()
+            throw FileException.EmptyFile()
         }
         if (isTooLong) {
-            throw TooLongTitleException()
+            throw FileException.TooLongTitle()
         }
     }
 }

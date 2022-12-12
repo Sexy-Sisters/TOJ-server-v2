@@ -8,8 +8,5 @@ import org.springframework.stereotype.Component
 class SchoolStoreImpl(
     private val schoolRepository: SchoolRepository,
 ) : SchoolStore {
-
-    override fun store(school: School): School {
-        return schoolRepository.save(school)
-    }
+    override fun store(school: School) = schoolRepository.save(school)
 }

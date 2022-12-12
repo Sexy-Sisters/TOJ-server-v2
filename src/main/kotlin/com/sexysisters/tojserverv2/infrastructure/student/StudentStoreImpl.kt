@@ -8,8 +8,5 @@ import org.springframework.stereotype.Component
 class StudentStoreImpl(
     private val studentRepository: StudentRepository,
 ) : StudentStore {
-
-    override fun store(student: Student): Long {
-        return studentRepository.save(student).id
-    }
+    override fun store(student: Student) = studentRepository.save(student).id
 }

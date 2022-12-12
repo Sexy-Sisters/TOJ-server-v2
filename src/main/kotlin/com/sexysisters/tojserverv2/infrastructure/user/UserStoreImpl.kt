@@ -26,7 +26,5 @@ class UserStoreImpl(
         }
     }
 
-    private fun isAlreadyExists(user: User): Boolean {
-        return userRepository.existsByEmail(user.email)
-    }
+    private fun isAlreadyExists(user: User) = userRepository.existsByEmail(user.email)
 }
