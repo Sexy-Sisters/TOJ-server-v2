@@ -27,8 +27,10 @@ class MailSenderConfiguration(
     }
 
     private fun configureJavaMailProperties(properties: Properties) {
-        properties["mail.transport.protocol"] = mailSenderProperties.protocol
-        properties["mail.smtp.auth"] = mailSenderProperties.auth
-        properties["mail.smtp.starttls.enable"] = mailSenderProperties.starttlsEnable
+        properties.also {
+            it["mail.transport.protocol"] = mailSenderProperties.protocol
+            it["mail.smtp.auth"] = mailSenderProperties.auth
+            it["mail.smtp.starttls.enable"] = mailSenderProperties.starttlsEnable
+        }
     }
 }
