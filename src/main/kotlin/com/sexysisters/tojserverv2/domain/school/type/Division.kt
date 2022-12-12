@@ -8,11 +8,9 @@ enum class Division(
     HIGH("고등학교"),
 }
 
-fun getDivision(description: String): Division? {
-    return when (description) {
-        Division.ELEMENTARY.description -> Division.ELEMENTARY
-        Division.MIDDLE.description -> Division.MIDDLE
-        Division.HIGH.description -> Division.HIGH
-        else -> null
-    }
+fun getDivision(description: String) = when (description) {
+    Division.ELEMENTARY.description -> Division.ELEMENTARY
+    Division.MIDDLE.description -> Division.MIDDLE
+    Division.HIGH.description -> Division.HIGH
+    else -> null
 }
