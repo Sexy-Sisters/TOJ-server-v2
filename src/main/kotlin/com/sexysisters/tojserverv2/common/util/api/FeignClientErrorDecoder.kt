@@ -1,9 +1,6 @@
 package com.sexysisters.tojserverv2.common.util.api
 
-import com.sexysisters.tojserverv2.common.util.api.oauth.exception.OtherServerBadRequestException
-import com.sexysisters.tojserverv2.common.util.api.oauth.exception.OtherServerExpiredTokenException
-import com.sexysisters.tojserverv2.common.util.api.oauth.exception.OtherServerForbiddenException
-import com.sexysisters.tojserverv2.common.util.api.oauth.exception.OtherServerUnauthorizedException
+import com.sexysisters.tojserverv2.common.util.api.oauth.exception.OtherServerException
 import feign.FeignException
 import feign.Response
 import feign.codec.ErrorDecoder
@@ -14,10 +11,10 @@ class FeignClientErrorDecoder : ErrorDecoder {
 
         if (response.status() >= 400) {
             when (response.status()) {
-                401 -> throw OtherServerUnauthorizedException()
-                403 -> throw OtherServerForbiddenException()
-                419 -> throw OtherServerExpiredTokenException()
-                else -> throw OtherServerBadRequestException()
+                401 -> throw OtherServerException.Unauthorized()
+                403 -> throw OtherServerException.Forbidden()
+                419 -> throw OtherServerException.ExpiredToken()
+                else -> throw OtherServerException.BadRequest()
             }
         }
 
