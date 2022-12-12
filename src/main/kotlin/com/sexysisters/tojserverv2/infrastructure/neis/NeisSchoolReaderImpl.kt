@@ -29,7 +29,6 @@ class NeisSchoolReaderImpl(
             neisSchoolInfoHtml,
             NeisSchoolInfoResponse::class.java
         )
-
         val schoolInfo = neisSchoolInfoResponse.schoolInfo
             ?: throw SchoolException.SchoolNotFound()
         val row = schoolInfo[1].row

@@ -13,15 +13,13 @@ class UserReaderImpl(
     private val userRepository: UserRepository,
 ) : UserReader {
 
-    override fun getUser(email: String): User {
-        return userRepository.findByEmail(email)
+    override fun getUser(email: String) =
+        userRepository.findByEmail(email)
             ?: throw UserException.UserNotFound()
-    }
 
-    override fun getUser(id: Long): User {
-        return userRepository.findByIdOrNull(id)
+    override fun getUser(id: Long) =
+        userRepository.findByIdOrNull(id)
             ?: throw UserException.UserNotFound()
-    }
 
     override fun getCurrentUser(): User {
         val auth = SecurityContextHolder.getContext().authentication.principal as AuthDetails

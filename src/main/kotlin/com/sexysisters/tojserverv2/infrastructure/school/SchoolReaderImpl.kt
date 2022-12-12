@@ -1,6 +1,5 @@
 package com.sexysisters.tojserverv2.infrastructure.school
 
-import com.sexysisters.tojserverv2.domain.school.School
 import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import org.springframework.stereotype.Component
@@ -12,8 +11,7 @@ class SchoolReaderImpl(
 ) : SchoolReader {
 
     @Transactional
-    override fun getSchool(code: String): School {
-        return schoolRepository.findByCode(code)
+    override fun getSchool(code: String) =
+        schoolRepository.findByCode(code)
             ?: throw SchoolException.SchoolNotFound()
-    }
 }

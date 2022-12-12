@@ -4,9 +4,10 @@ enum class Dir {
     USER, TEACHER, AD,
 }
 
-fun Dir.getDirName() = when {
-    this.name.equals(Dir.USER) -> "user-profile/"
-    this.name.equals(Dir.TEACHER) -> "teacher-profile/"
-    this.name.equals(Dir.AD) -> "ad-img/"
-    else -> ""
-}
+fun Dir.getDirName() =
+    when (name) {
+        Dir.USER.name -> "user-profile/"
+        Dir.TEACHER.name -> "teacher-profile/"
+        Dir.AD.name -> "ad-img/"
+        else -> ""
+    }

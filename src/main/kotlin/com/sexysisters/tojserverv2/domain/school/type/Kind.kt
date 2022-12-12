@@ -8,11 +8,9 @@ enum class Kind(
     ORDINARY("일반고"),
 }
 
-fun getKind(description: String): Kind? {
-    return when (description) {
-        Kind.SPECIAL_PURPOSE.description -> Kind.SPECIAL_PURPOSE
-        Kind.VOCATIONAL.description -> Kind.VOCATIONAL
-        Kind.ORDINARY.description -> Kind.ORDINARY
-        else -> null
-    }
+fun getKind(description: String) = when (description) {
+    Kind.SPECIAL_PURPOSE.description -> Kind.SPECIAL_PURPOSE
+    Kind.VOCATIONAL.description -> Kind.VOCATIONAL
+    Kind.ORDINARY.description -> Kind.ORDINARY
+    else -> null
 }

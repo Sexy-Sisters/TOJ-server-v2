@@ -16,18 +16,21 @@ class MailSenderConfiguration(
 
     @Bean
     fun javaMailSender(): JavaMailSender {
-        val mailSender = JavaMailSenderImpl()
-        mailSender.host = mailSenderProperties.host
-        mailSender.port = mailSenderProperties.port
-        mailSender.username = mailSenderProperties.username
-        mailSender.password = mailSenderProperties.password
+        val mailSender = JavaMailSenderImpl().apply {
+            host = mailSenderProperties.host
+            port = mailSenderProperties.port
+            username = mailSenderProperties.username
+            password = mailSenderProperties.password
+        }
         configureJavaMailProperties(mailSender.javaMailProperties)
         return mailSender
     }
 
     private fun configureJavaMailProperties(properties: Properties) {
-        properties["mail.transport.protocol"] = mailSenderProperties.protocol
-        properties["mail.smtp.auth"] = mailSenderProperties.auth
-        properties["mail.smtp.starttls.enable"] = mailSenderProperties.starttlsEnable
+        properties.also {
+            it["mail.transport.protocol"] = mailSenderProperties.protocol
+            it["mail.smtp.auth"] = mailSenderProperties.auth
+            it["mail.smtp.starttls.enable"] = mailSenderProperties.starttlsEnable
+        }
     }
 }

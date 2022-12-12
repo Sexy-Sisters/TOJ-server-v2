@@ -24,9 +24,7 @@ class JwtExceptionFilter : OncePerRequestFilter() {
     private fun setErrorResponse(response: HttpServletResponse, e: BaseException) {
         response.status = HttpStatus.UNAUTHORIZED.value()
         response.contentType = "application/json; charset=UTF-8"
-
         val commonResponse = CommonResponse.fail(e.errorCode)
-
         response.writer.write(commonResponse.convertToJson())
     }
 }
