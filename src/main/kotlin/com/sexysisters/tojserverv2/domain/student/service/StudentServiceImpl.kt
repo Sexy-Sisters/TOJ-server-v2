@@ -38,20 +38,10 @@ class StudentServiceImpl(
     }
 
     @Transactional(readOnly = true)
-    override fun getWaitingList(): List<StudentInfo.Main> {
+    override fun getStudentList(status: Status): List<StudentInfo.Main> {
         val student = studentReader.getCurrentStudent()
         student.school ?: throw StudentException.NotBelong()
-        return student.school!!.studentList
-            .filter { it.status == Status.WAITING }
-            .map { studentMapper.of(it) }
-    }
-
-    @Transactional(readOnly = true)
-    override fun getStudentList(): List<StudentInfo.Main> {
-        val student = studentReader.getCurrentStudent()
-        student.school ?: throw StudentException.NotBelong()
-        return student.school!!.studentList
-            .filter { it.status == Status.ENGAGED }
+        return studentReader.getStudentList(student.school!!, status)
             .map { studentMapper.of(it) }
     }
 }

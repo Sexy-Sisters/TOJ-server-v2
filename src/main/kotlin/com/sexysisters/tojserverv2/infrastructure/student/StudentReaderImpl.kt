@@ -1,6 +1,7 @@
 package com.sexysisters.tojserverv2.infrastructure.student
 
 import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.student.Status
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.user.design.UserReader
@@ -28,4 +29,6 @@ class StudentReaderImpl(
         classroom = classroom,
         number = number,
     )
+
+    override fun getStudentList(school: School, status: Status) = studentRepository.findAllBySchoolAndStatus(school, status)
 }

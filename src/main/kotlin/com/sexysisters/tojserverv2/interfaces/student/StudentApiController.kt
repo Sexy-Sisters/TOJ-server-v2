@@ -1,6 +1,7 @@
 package com.sexysisters.tojserverv2.interfaces.student
 
 import com.sexysisters.tojserverv2.common.response.CommonResponse
+import com.sexysisters.tojserverv2.domain.student.Status
 import com.sexysisters.tojserverv2.domain.student.service.StudentService
 import com.sexysisters.tojserverv2.interfaces.student.dto.StudentDtoMapper
 import com.sexysisters.tojserverv2.interfaces.student.dto.StudentRequest
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
@@ -30,19 +32,11 @@ class StudentApiController(
         return CommonResponse.success(studentId)
     }
 
-    @ApiOperation(value = "가입 신청자 리스트 조회")
-    @GetMapping("/waiting-list")
-    fun getWaitingList(): CommonResponse<List<StudentResponse.Main>> {
-        val studentInfo = studentService.getWaitingList()
+    @ApiOperation(value = "학생 리스트 조회")
+    @GetMapping
+    fun getWaitingList(@RequestParam("status") status: Status): CommonResponse<List<StudentResponse.Main>> {
+        val studentInfo = studentService.getStudentList(status)
         val response = studentInfo.map { studentDtoMapper.of(it) }
-        return CommonResponse.success(response)
-    }
-
-    @ApiOperation(value = "소속된 학생 리스트 조회")
-    @GetMapping("/student-list")
-    fun getStudentList(): CommonResponse<List<StudentResponse.Main>> {
-        val schoolInfo = studentService.getStudentList()
-        val response = schoolInfo.map { studentDtoMapper.of(it) }
         return CommonResponse.success(response)
     }
 }
