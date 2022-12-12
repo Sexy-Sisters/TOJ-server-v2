@@ -1,9 +1,7 @@
 package com.sexysisters.tojserverv2.infrastructure.jwt
 
 import com.sexysisters.tojserverv2.config.properties.JwtProperties
-import com.sexysisters.tojserverv2.infrastructure.jwt.exception.AlreadyLogoutException
-import com.sexysisters.tojserverv2.infrastructure.jwt.exception.ExpiredTokenException
-import com.sexysisters.tojserverv2.infrastructure.jwt.exception.InvalidTokenException
+import com.sexysisters.tojserverv2.infrastructure.jwt.exception.TokenException
 import com.sexysisters.tojserverv2.infrastructure.redis.RedisRepository
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.ExpiredJwtException
@@ -46,7 +44,7 @@ class JwtTokenProvider(
 
     fun extractAllClaims(token: String): Claims {
         if (redisRepository.hasBlackList(token)) {
-            throw AlreadyLogoutException()
+            throw TokenException.AlreadyLogout()
         }
         try {
             return Jwts.parserBuilder()
@@ -55,9 +53,9 @@ class JwtTokenProvider(
                 .parseClaimsJws(token)
                 .body
         } catch (e: ExpiredJwtException) {
-            throw ExpiredTokenException()
+            throw TokenException.Expired()
         } catch (e: Exception) {
-            throw InvalidTokenException()
+            throw TokenException.Invalid()
         }
     }
 
