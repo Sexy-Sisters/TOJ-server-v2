@@ -24,18 +24,10 @@ data class OAuthProperties(
     )
 }
 
-fun OAuthProperties.googleBaseUrl(): String {
-    return google.baseUrl
-}
+fun OAuthProperties.googleBaseUrl() = google.baseUrl
 
-fun OAuthProperties.googleClientId(): String {
-    return google.clientId
-}
+fun OAuthProperties.googleClientId() = google.clientId
 
-fun OAuthProperties.googleClientSecret(): String {
-    return google.clientSecret
-}
+fun OAuthProperties.googleClientSecret() = google.clientSecret
 
-fun OAuthProperties.googleRedirectUrl(): String {
-    return google.redirectUrl
-}
+fun OAuthProperties.googleRedirectUrl() = google.redirectUrl
