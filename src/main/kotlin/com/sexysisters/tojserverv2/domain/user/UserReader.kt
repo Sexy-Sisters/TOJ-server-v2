@@ -1,6 +1,4 @@
-package com.sexysisters.tojserverv2.domain.user.design
-
-import com.sexysisters.tojserverv2.domain.user.User
+package com.sexysisters.tojserverv2.domain.user
 
 interface UserReader {
     fun getUser(email: String): User

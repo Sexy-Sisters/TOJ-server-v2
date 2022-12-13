@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.common.security.auth
 
-import com.sexysisters.tojserverv2.domain.user.design.UserReader
+import com.sexysisters.tojserverv2.domain.user.UserReader
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
 

@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.infrastructure.user
 
 import com.sexysisters.tojserverv2.domain.user.User
-import com.sexysisters.tojserverv2.domain.user.design.UserStore
+import com.sexysisters.tojserverv2.domain.user.UserStore
 import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import org.springframework.stereotype.Component
 

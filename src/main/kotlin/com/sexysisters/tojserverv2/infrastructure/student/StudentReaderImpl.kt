@@ -4,7 +4,7 @@ import com.sexysisters.tojserverv2.domain.school.School
 import com.sexysisters.tojserverv2.domain.student.Status
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.student.exception.StudentException
-import com.sexysisters.tojserverv2.domain.user.design.UserReader
+import com.sexysisters.tojserverv2.domain.user.UserReader
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 

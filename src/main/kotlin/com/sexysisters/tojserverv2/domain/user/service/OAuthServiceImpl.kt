@@ -2,7 +2,7 @@ package com.sexysisters.tojserverv2.domain.user.service
 
 import com.sexysisters.tojserverv2.domain.auth.AuthInfo
 import com.sexysisters.tojserverv2.domain.user.User
-import com.sexysisters.tojserverv2.domain.user.design.UserStore
+import com.sexysisters.tojserverv2.domain.user.UserStore
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.oauth.GoogleAuthExecutor
 import org.springframework.stereotype.Service
