@@ -3,6 +3,8 @@ package com.sexysisters.tojserverv2.interfaces.image
 import com.sexysisters.tojserverv2.infrastructure.image.s3.Dir
 import com.sexysisters.tojserverv2.infrastructure.image.s3.S3Executor
 import com.sexysisters.tojserverv2.infrastructure.image.s3.getDirName
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -12,12 +14,14 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 
+@Api(tags = ["Image Upload 관련 API"])
 @RestController
 @RequestMapping("/api/v2/image")
 class ImageApiController(
     private val s3Executor: S3Executor,
 ) {
 
+    @ApiOperation("Image Upload")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun saveImage(
@@ -25,8 +29,7 @@ class ImageApiController(
         @RequestParam(name = "dir")dir: Dir,
     ): ImageUrlResponse {
         val dirName = dir.getDirName()
-        val imgUrlList = images
-            .map { s3Executor.uploadImage(it, dirName) }
+        val imgUrlList = images.map { s3Executor.uploadImage(it, dirName) }
         return ImageUrlResponse(imgUrlList)
     }
 }

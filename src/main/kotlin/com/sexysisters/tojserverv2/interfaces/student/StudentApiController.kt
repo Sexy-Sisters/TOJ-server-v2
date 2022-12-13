@@ -6,6 +6,7 @@ import com.sexysisters.tojserverv2.domain.student.service.StudentService
 import com.sexysisters.tojserverv2.interfaces.student.dto.StudentDtoMapper
 import com.sexysisters.tojserverv2.interfaces.student.dto.StudentRequest
 import com.sexysisters.tojserverv2.interfaces.student.dto.StudentResponse
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
+@Api(tags = ["Student 관련 API"])
 @RestController
 @RequestMapping("/api/v2/student")
 class StudentApiController(
