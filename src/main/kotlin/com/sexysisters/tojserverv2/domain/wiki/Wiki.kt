@@ -15,7 +15,7 @@ import javax.persistence.Table
 @Table(name = "tbl_wiki")
 class Wiki(
     val name: String,
-    val content: String = "🌕🌖🌗🌘🌑🌒🌓🌔🌕\n 자유롭게 입력해주세요!",
+    var content: String = "🌕🌖🌗🌘🌑🌒🌓🌔🌕\n 자유롭게 입력해주세요!",
 ) {
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -33,4 +33,8 @@ class Wiki(
 fun Wiki.makeRelation(school: School) {
     this.school = school
     school.wiki = this
+}
+
+fun Wiki.update(content: String) {
+    this.content = content
 }
