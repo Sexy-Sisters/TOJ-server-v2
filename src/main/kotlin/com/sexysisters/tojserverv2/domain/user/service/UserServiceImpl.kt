@@ -3,8 +3,8 @@ package com.sexysisters.tojserverv2.domain.user.service
 import com.sexysisters.tojserverv2.domain.user.UserCommand
 import com.sexysisters.tojserverv2.domain.user.UserInfo
 import com.sexysisters.tojserverv2.domain.user.UserMapper
-import com.sexysisters.tojserverv2.domain.user.design.UserReader
-import com.sexysisters.tojserverv2.domain.user.design.UserStore
+import com.sexysisters.tojserverv2.domain.user.UserReader
+import com.sexysisters.tojserverv2.domain.user.UserStore
 import com.sexysisters.tojserverv2.domain.user.setEncodedPassword
 import com.sexysisters.tojserverv2.domain.user.toEntity
 import com.sexysisters.tojserverv2.domain.user.updateInfo

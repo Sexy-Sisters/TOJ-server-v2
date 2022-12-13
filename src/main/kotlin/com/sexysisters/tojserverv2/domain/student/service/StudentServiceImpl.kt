@@ -10,7 +10,7 @@ import com.sexysisters.tojserverv2.domain.student.StudentStore
 import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.student.makeRelation
 import com.sexysisters.tojserverv2.domain.student.policy.StudentPolicy
-import com.sexysisters.tojserverv2.domain.user.design.UserReader
+import com.sexysisters.tojserverv2.domain.user.UserReader
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

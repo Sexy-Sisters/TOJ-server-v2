@@ -5,7 +5,7 @@ import com.sexysisters.tojserverv2.domain.auth.AuthCommand
 import com.sexysisters.tojserverv2.domain.auth.exception.AuthErrorCode
 import com.sexysisters.tojserverv2.domain.auth.exception.AuthException
 import com.sexysisters.tojserverv2.domain.user.User
-import com.sexysisters.tojserverv2.domain.user.design.UserReader
+import com.sexysisters.tojserverv2.domain.user.UserReader
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
 import com.sexysisters.tojserverv2.infrastructure.mail.MailSenderImpl
