@@ -30,9 +30,9 @@ class SchoolServiceImpl(
     }
 
     @Transactional
-    override fun createSchool(code: String) {
+    override fun createSchool(code: String): String {
         val initSchool = neisSchoolReader.getSchoolByCode(code)
-        schoolStore.store(initSchool)
+        return schoolStore.store(initSchool).code
     }
 
     @Transactional
