@@ -47,7 +47,7 @@ class SecurityConfiguration(
                 "/configuration/ui",
                 "/configuration/security",
                 "/swagger-ui.html",
-                "/webjars/**",  /* swagger v3 */
+                "/webjars/**",
                 "/v3/api-docs/**",
                 "/swagger-ui/**"
             ).permitAll()
