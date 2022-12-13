@@ -1,4 +1,4 @@
-package com.sexysisters.tojserverv2.interfaces.wiki
+package com.sexysisters.tojserverv2.infrastructure.wiki
 
 import com.sexysisters.tojserverv2.domain.wiki.Wiki
 import org.springframework.data.jpa.repository.JpaRepository
