@@ -11,4 +11,5 @@ interface StudentReader {
         classroom: Int,
         number: Int
     ): Boolean
+    fun getStudentList(school: School, status: Status): List<Student>
 }
