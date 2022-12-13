@@ -1,10 +1,10 @@
 package com.sexysisters.tojserverv2.config
 
+import com.sexysisters.tojserverv2.common.filter.JwtAuthenticationFilter
+import com.sexysisters.tojserverv2.common.filter.JwtExceptionFilter
 import com.sexysisters.tojserverv2.common.security.auth.AuthDetailsService
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
-import com.sexysisters.tojserverv2.common.filter.JwtAuthenticationFilter
-import com.sexysisters.tojserverv2.common.filter.JwtExceptionFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -30,30 +30,41 @@ class SecurityConfiguration(
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain? {
         http
-            .httpBasic().disable()
-            .formLogin().disable()
             .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .formLogin().disable()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and().cors()
 
-            .and()
+        http
             .authorizeRequests()
 
+            // swagger
+            .antMatchers(
+                "/v2/api-docs",
+                "/swagger-resources",
+                "/swagger-resources/**",
+                "/configuration/ui",
+                "/configuration/security",
+                "/swagger-ui.html",
+                "/webjars/**",  /* swagger v3 */
+                "/v3/api-docs/**",
+                "/swagger-ui/**"
+            ).permitAll()
+
             // auth
-            .antMatchers(HttpMethod.POST, "/api/v2/auth").anonymous()
-            .antMatchers("/api/v2/auth/code").anonymous()
+            .antMatchers(HttpMethod.POST, "/api/v2/auth").permitAll()
+            .antMatchers("/api/v2/auth/code").permitAll()
 
             // oauth
-            .antMatchers("/api/v2/oauth/**").anonymous()
+            .antMatchers("/api/v2/oauth/**").permitAll()
 
             // user
-            .antMatchers(HttpMethod.POST, "/api/v2/user").anonymous()
+            .antMatchers(HttpMethod.POST, "/api/v2/user").permitAll()
 
             // school
             .antMatchers(HttpMethod.GET, "/api/v2/school").permitAll()
 
-            // swagger
-            .antMatchers("/v3/api-docs/**").permitAll()
-            .antMatchers("/swagger-ui/**").permitAll()
             .anyRequest().authenticated()
 
         http
