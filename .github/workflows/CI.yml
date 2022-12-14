@@ -13,6 +13,26 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      MYSQL_HOST: ${{secret.MYSQL_HOST}}
+      MYSQL_DB: ${{secret.MYSQL_DB}}
+      MYSQL_USER: ${{secret.MYSQL_USER}}
+      MYSQL_PASSWORD: ${{secret.MYSQL_PASSWORD}}
+      REDIS_HOST: ${{secret.REDIS_HOST}}
+      REDIS_PORT: ${{secret.REDIS_PORT}}
+      ACCESS_TOKEN_VALID_TIME: ${{secret.ACCESS_TOKEN_VALID_TIME}}
+      REFRESH_TOKEN_VALID_TIME: ${{secret.REFRESH_TOKEN_VALID_TIME}}
+      JWT_SECRET: ${{secret.JWT_SECRET}}
+      MAIL_USERNAME: ${{secret.MAIL_USERNAME}}
+      MAIL_PASSWORD: ${{secret.MAIL_PASSWORD}}
+      BUCKET_NAME: ${{secret.BUCKET_NAME}}
+      AWS_REGION: ${{secret.AWS_REGION}}
+      AWS_ACCESS_KEY: ${{secret.AWS_ACCESS_KEY}}
+      AWS_SECRET_KEY: ${{secret.AWS_SECRET_KEY}}
+      GOOGLE_BASE_URL: ${{secret.GOOGLE_BASE_URL}}
+      GOOGLE_CLIENT_ID: ${{secret.GOOGLE_CLIENT_ID}}
+      GOOGLE_CLIENT_SCERET: ${{secret.GOOGLE_CLIENT_SCERET}}
+      GOOGLE_REDIRECT_URL: ${{secret.GOOGLE_REDIRECT_URL}}
 
     steps:
     - uses: actions/checkout@v3
