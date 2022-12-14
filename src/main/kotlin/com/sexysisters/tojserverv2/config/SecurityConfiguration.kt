@@ -66,6 +66,9 @@ class SecurityConfiguration(
             // school
             .antMatchers(HttpMethod.GET, "/api/v2/school").permitAll()
 
+            // IMG
+            .antMatchers(HttpMethod.POST, "/api/v2/image").permitAll()
+
             .anyRequest().authenticated()
 
         http

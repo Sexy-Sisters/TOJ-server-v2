@@ -17,33 +17,33 @@ import io.mockk.every
 import io.mockk.mockk
 import org.springframework.security.crypto.password.PasswordEncoder
 
+val userReader: UserReader = mockk()
+val encoder: PasswordEncoder = mockk()
+val jwtTokenProvider: JwtTokenProvider = mockk()
+val jwtProperties: JwtProperties = mockk(relaxed = true)
+val jwtValidator: JwtValidator = mockk()
+val redisRepository: RedisRepository = mockk(relaxed = true)
+val mailSenderImpl: MailSenderImpl = mockk()
+
+val target = AuthServiceImpl(
+    userReader = userReader,
+    passwordEncoder = encoder,
+    jwtTokenProvider = jwtTokenProvider,
+    jwtValidator = jwtValidator,
+    jwtProperties = jwtProperties,
+    redisRepository = redisRepository,
+    mailSender = mailSenderImpl,
+)
+
+val user = User(
+    name = "이규진",
+    nickname = "청출어람",
+    email = "email",
+    password = "password",
+    profileImg = "추후 수정",
+)
+
 class AuthServiceTest : BehaviorSpec({
-
-    val userReader: UserReader = mockk()
-    val encoder: PasswordEncoder = mockk()
-    val jwtTokenProvider: JwtTokenProvider = mockk()
-    val jwtProperties: JwtProperties = mockk(relaxed = true)
-    val jwtValidator: JwtValidator = mockk()
-    val redisRepository: RedisRepository = mockk(relaxed = true)
-    val mailSenderImpl: MailSenderImpl = mockk()
-
-    val target = AuthServiceImpl(
-        userReader = userReader,
-        passwordEncoder = encoder,
-        jwtTokenProvider = jwtTokenProvider,
-        jwtValidator = jwtValidator,
-        jwtProperties = jwtProperties,
-        redisRepository = redisRepository,
-        mailSender = mailSenderImpl,
-    )
-
-    val user = User(
-        name = "이규진",
-        nickname = "청출어람",
-        email = "email",
-        password = "password",
-        profileImg = "추후 수정",
-    )
 
     Given("로그인 성공 answer 정의") {
 

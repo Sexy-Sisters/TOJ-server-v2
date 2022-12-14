@@ -1,11 +1,7 @@
 package com.sexysisters.tojserverv2.domain.user.service
 
 import com.sexysisters.tojserverv2.config.properties.S3Properties
-import com.sexysisters.tojserverv2.domain.user.User
-import com.sexysisters.tojserverv2.domain.user.UserCommand
-import com.sexysisters.tojserverv2.domain.user.UserMapper
-import com.sexysisters.tojserverv2.domain.user.UserReader
-import com.sexysisters.tojserverv2.domain.user.UserStore
+import com.sexysisters.tojserverv2.domain.user.*
 import com.sexysisters.tojserverv2.domain.user.type.Authority
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
@@ -16,27 +12,27 @@ import io.mockk.verify
 import org.mapstruct.factory.Mappers
 import org.springframework.security.crypto.password.PasswordEncoder
 
+val encoder: PasswordEncoder = mockk()
+val userStore: UserStore = mockk()
+val userReader: UserReader = mockk()
+val userMapper = Mappers.getMapper(UserMapper::class.java)
+
+val target = UserServiceImpl(
+    userStore = userStore,
+    userReader = userReader,
+    passwordEncoder = encoder,
+    userMapper = userMapper,
+)
+
+val user = User(
+    name = "이규진",
+    nickname = "청출어람",
+    email = "leekujin14@gmail.com",
+    password = "enCodedPassword",
+    profileImg = S3Properties.defaultProfileImg,
+)
+
 class UserServiceTest : BehaviorSpec({
-
-    val encoder: PasswordEncoder = mockk()
-    val userStore: UserStore = mockk()
-    val userReader: UserReader = mockk()
-    val userMapper = Mappers.getMapper(UserMapper::class.java)
-
-    val target = UserServiceImpl(
-        userStore = userStore,
-        userReader = userReader,
-        passwordEncoder = encoder,
-        userMapper = userMapper,
-    )
-
-    val user = User(
-        name = "이규진",
-        nickname = "청출어람",
-        email = "leekujin14@gmail.com",
-        password = "enCodedPassword",
-        profileImg = S3Properties.defaultProfileImg,
-    )
 
     Given("회원가입") {
         val userCapture = slot<User>()
