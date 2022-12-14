@@ -51,7 +51,7 @@ class UserServiceTest : BehaviorSpec({
                 password = "password",
             )
 
-            val userId = target.createUser(createRequest)
+            target.createUser(createRequest)
 
             Then("Command가 정상적으로 Entity로 변환되어야 한다.") {
                 val userEntity = userCapture.captured
