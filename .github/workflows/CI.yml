@@ -1,49 +1,62 @@
 name: Java CI with Gradle
 
 on:
-  push:
-    branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
+    push:
+        branches: [ "develop" ]
+    pull_request:
+        branches: [ "develop" ]
 
 permissions:
-  contents: read
+    contents: read
 
 jobs:
-  build:
+    build:
 
-    runs-on: ubuntu-latest
-    env:
-      MYSQL_HOST: ${{secrets.MYSQL_HOST}}
-      MYSQL_DB: ${{secrets.MYSQL_DB}}
-      MYSQL_USER: ${{secrets.MYSQL_USER}}
-      MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
-      REDIS_HOST: ${{secrets.REDIS_HOST}}
-      REDIS_PORT: ${{secrets.REDIS_PORT}}
-      ACCESS_TOKEN_VALID_TIME: ${{secrets.ACCESS_TOKEN_VALID_TIME}}
-      REFRESH_TOKEN_VALID_TIME: ${{secrets.REFRESH_TOKEN_VALID_TIME}}
-      JWT_SECRET: ${{secrets.JWT_SECRET}}
-      MAIL_USERNAME: ${{secrets.MAIL_USERNAME}}
-      MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
-      BUCKET_NAME: ${{secrets.BUCKET_NAME}}
-      AWS_REGION: ${{secrets.AWS_REGION}}
-      AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY}}
-      AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
-      GOOGLE_BASE_URL: ${{secrets.GOOGLE_BASE_URL}}
-      GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
-      GOOGLE_CLIENT_SCERET: ${{secrets.GOOGLE_CLIENT_SCERET}}
-      GOOGLE_REDIRECT_URL: ${{secrets.GOOGLE_REDIRECT_URL}}
+        runs-on: ubuntu-latest
+        env:
+            MYSQL_HOST: ${{secrets.MYSQL_HOST}}
+            MYSQL_DB: ${{secrets.MYSQL_DB}}
+            MYSQL_USER: ${{secrets.MYSQL_USER}}
+            MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
+            REDIS_HOST: ${{secrets.REDIS_HOST}}
+            REDIS_PORT: ${{secrets.REDIS_PORT}}
+            ACCESS_TOKEN_VALID_TIME: ${{secrets.ACCESS_TOKEN_VALID_TIME}}
+            REFRESH_TOKEN_VALID_TIME: ${{secrets.REFRESH_TOKEN_VALID_TIME}}
+            JWT_SECRET: ${{secrets.JWT_SECRET}}
+            MAIL_USERNAME: ${{secrets.MAIL_USERNAME}}
+            MAIL_PASSWORD: ${{secrets.MAIL_PASSWORD}}
+            BUCKET_NAME: ${{secrets.BUCKET_NAME}}
+            AWS_REGION: ${{secrets.AWS_REGION}}
+            AWS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY}}
+            AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
+            GOOGLE_BASE_URL: ${{secrets.GOOGLE_BASE_URL}}
+            GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
+            GOOGLE_CLIENT_SCERET: ${{secrets.GOOGLE_CLIENT_SCERET}}
+            GOOGLE_REDIRECT_URL: ${{secrets.GOOGLE_REDIRECT_URL}}
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    
-    - name: Build with Gradle
-      run: ./gradlew clean build
+        steps:
+            -   uses: actions/checkout@v3
+            -   name: Setup MySQL
+                    uses: samin/mysql-action@v1
+                    with:
+                        character set server: 'utf8'
+                        mysql database: ${{secrets.MYSQL_DB}}
+                        mysql user: ${{secrets.MYSQL_USER}}
+                        mysql password: ${{ secrets.MYSQL_PASSWORD }}
+
+            -   name: Start Redis
+                    uses: supercharge/redis-github-action@1.1.0
+                    with:
+                        redis-version: 6
+
+            -   name: Set up JDK 11
+                uses: actions/setup-java@v3
+                with:
+                    java-version: '11'
+                    distribution: 'temurin'
+
+            -   name: Grant execute permission for gradlew
+                run: chmod +x gradlew
+
+            -   name: Build with Gradle
+                run: ./gradlew clean build
