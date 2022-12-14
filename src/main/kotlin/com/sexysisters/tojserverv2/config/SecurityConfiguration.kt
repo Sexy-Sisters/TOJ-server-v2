@@ -54,6 +54,7 @@ class SecurityConfiguration(
 
             // auth
             .antMatchers(HttpMethod.POST, "/api/v2/auth").permitAll()
+            .antMatchers(HttpMethod.PUT, "/api/v2/auth").permitAll()
             .antMatchers("/api/v2/auth/code").permitAll()
 
             // oauth

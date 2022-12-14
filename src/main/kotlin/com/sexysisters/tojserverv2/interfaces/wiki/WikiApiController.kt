@@ -1,9 +1,6 @@
 package com.sexysisters.tojserverv2.interfaces.wiki
 
 import com.sexysisters.tojserverv2.common.response.CommonResponse
-import com.sexysisters.tojserverv2.domain.student.StudentReader
-import com.sexysisters.tojserverv2.domain.wiki.WikiCommand
-import com.sexysisters.tojserverv2.domain.wiki.policy.WikiPolicy
 import com.sexysisters.tojserverv2.domain.wiki.service.WikiService
 import com.sexysisters.tojserverv2.interfaces.wiki.dto.WikiDtoMapper
 import com.sexysisters.tojserverv2.interfaces.wiki.dto.WikiRequest
