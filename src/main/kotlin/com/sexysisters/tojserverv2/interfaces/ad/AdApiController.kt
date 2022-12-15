@@ -16,8 +16,13 @@ class AdApiController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun createAd(@RequestBody @Valid request: AdRequest.Create) {
+    fun openAd(@RequestBody @Valid request: AdRequest.Create) {
         val adCommand = adDtoMapper.of(request)
-        adService.createAd(adCommand)
+        adService.openAd(adCommand)
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteAd(@PathVariable id: Long) {
+        adService.deleteAd(id)
     }
 }
