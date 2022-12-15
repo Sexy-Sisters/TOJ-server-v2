@@ -14,10 +14,10 @@ class Teacher (
     val bio: String,
 ) : BaseTimeEntity() {
     init {
-        if(image.isEmpty()) throw TeacherException.TeacherNotValid()
-        if(name.isEmpty()) throw TeacherException.TeacherNotValid()
-        if(nickname.isEmpty()) throw TeacherException.TeacherNotValid()
-        if(bio.isEmpty()) throw TeacherException.TeacherNotValid()
+        if(image.isBlank()) throw TeacherException.TeacherNotValid()
+        if(name.isBlank()) throw TeacherException.TeacherNotValid()
+        if(nickname.isBlank()) throw TeacherException.TeacherNotValid()
+        if(bio.isBlank()) throw TeacherException.TeacherNotValid()
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
