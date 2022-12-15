@@ -45,7 +45,7 @@ class Student(
     @OneToMany(mappedBy = "acceptor", cascade = arrayOf(CascadeType.ALL))
     val acceptorList = mutableListOf<Approve>()
 
-    @OneToMany(mappedBy = "student", cascade = arrayOf(CascadeType.ALL))
+    @OneToMany(mappedBy = "student", cascade = [CascadeType.ALL])
     val teachers = mutableListOf<Teacher>()
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

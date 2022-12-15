@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.domain.teacher
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.school.School
 import javax.persistence.*
 
 @Entity
@@ -11,12 +11,11 @@ class Teacher (
     val name: String,
     val nickname: String,
     val bio: String,
-
 ) : BaseTimeEntity() {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tbl_student_id")
-    val student: Student? = null
+    @JoinColumn(name = "tbl_school_id")
+    val school: School? = null
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
