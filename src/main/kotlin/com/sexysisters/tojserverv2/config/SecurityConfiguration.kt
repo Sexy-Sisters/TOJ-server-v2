@@ -69,6 +69,9 @@ class SecurityConfiguration(
             // IMG
             .antMatchers(HttpMethod.POST, "/api/v2/image").permitAll()
 
+            // TODO:: for test / change range of authority
+            .antMatchers("/api/v2/ad").permitAll()
+
             .anyRequest().authenticated()
 
         http

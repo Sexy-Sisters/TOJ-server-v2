@@ -1,21 +1,32 @@
-package com.sexysisters.tojserverv2.domain.ad
+package com.sexysisters.tojserverv2.domain.ad.domain
 
 import com.sexysisters.tojserverv2.domain.ad.exception.AdException
+import javax.persistence.Column
 import javax.persistence.Embeddable
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
 
 @Embeddable
-class CostInfo(
+data class CostInfo(
     @Enumerated(value = EnumType.STRING)
-    val costType: CostType,
+    @Column(nullable = false)
+    val type: Type,
+
+    @Column(nullable = false)
     val cost: Int,
-    val views: Int = 0,
+
+    @Column(nullable = false)
+    var views: Int = 0,
+
+    @Column(nullable = false)
+    var clicks: Int = 0,
 ) {
     init {
         if (cost < 0) throw AdException.AdNotValid()
     }
 }
+
+fun CostInfo.view() { views++ }
 
 enum class AdKind(
     val description: String,
@@ -24,7 +35,7 @@ enum class AdKind(
     BANNER("배너(띠) 광고"),
 }
 
-enum class CostType(
+enum class Type(
     val description: String,
 ) {
     IMP("노출당 비용"),
