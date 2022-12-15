@@ -9,7 +9,9 @@ class AdStoreImpl(
     private val adRepository: AdRepository,
 ) : AdStore {
 
-    override fun store(ad: Ad): Ad {
-        return adRepository.save(ad)
+    override fun store(ad: Ad) = adRepository.save(ad)
+
+    override fun delete(ad: Ad) {
+        adRepository.delete(ad)
     }
 }
