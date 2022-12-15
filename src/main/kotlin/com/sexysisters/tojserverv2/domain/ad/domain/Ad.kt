@@ -1,9 +1,8 @@
-package com.sexysisters.tojserverv2.domain.ad
+package com.sexysisters.tojserverv2.domain.ad.domain
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.ad.exception.AdException
-import org.apache.commons.lang3.StringUtils
-import java.time.LocalDateTime
+import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
@@ -13,7 +12,7 @@ class Ad(
     val adKind: AdKind,
     val image: String,
     val link: String,
-    val experationDate: LocalDateTime,
+    val expirationDate: LocalDate,
 
     @Embedded
     val costInfo: CostInfo,
@@ -25,12 +24,13 @@ class Ad(
     @Enumerated(value = EnumType.STRING)
     var status: Status = Status.OPEN
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
 
     init {
-        if (StringUtils.isEmpty(image)) throw AdException.AdNotValid()
-        if (StringUtils.isEmpty(link)) throw AdException.AdNotValid()
+        if (image.isBlank()) throw AdException.AdNotValid()
+        if (link.isBlank()) throw AdException.AdNotValid()
     }
 }
 
