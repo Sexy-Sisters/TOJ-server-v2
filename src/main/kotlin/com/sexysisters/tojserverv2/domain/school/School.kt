@@ -5,6 +5,7 @@ import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.school.type.Division
 import com.sexysisters.tojserverv2.domain.school.type.Kind
+import com.sexysisters.tojserverv2.domain.teacher.Teacher
 import com.sexysisters.tojserverv2.domain.wiki.Wiki
 import org.apache.commons.lang3.StringUtils
 import javax.persistence.CascadeType
@@ -43,6 +44,9 @@ class School(
 
     @OneToOne(mappedBy = "school", fetch = FetchType.LAZY)
     var wiki: Wiki? = null
+
+    @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
+    val teachers = mutableListOf<Teacher>()
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
