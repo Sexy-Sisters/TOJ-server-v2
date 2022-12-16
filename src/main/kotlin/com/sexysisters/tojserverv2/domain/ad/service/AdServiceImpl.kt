@@ -1,11 +1,8 @@
 package com.sexysisters.tojserverv2.domain.ad.service
 
-import com.sexysisters.tojserverv2.domain.ad.AdCommand
-import com.sexysisters.tojserverv2.domain.ad.AdReader
-import com.sexysisters.tojserverv2.domain.ad.AdStore
-import com.sexysisters.tojserverv2.domain.ad.domain.Ad
-import com.sexysisters.tojserverv2.domain.ad.domain.Company
-import com.sexysisters.tojserverv2.domain.ad.domain.CostInfo
+import com.sexysisters.tojserverv2.domain.ad.*
+import com.sexysisters.tojserverv2.domain.ad.domain.*
+import com.sexysisters.tojserverv2.infrastructure.ad.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -13,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional
 class AdServiceImpl(
     private val adStore: AdStore,
     private val adReader: AdReader,
+    private val adMapper: AdMapper,
 ) : AdService {
 
     @Transactional
@@ -40,5 +38,18 @@ class AdServiceImpl(
     override fun deleteAd(id: Long) {
         val ad = adReader.getAd(id)
         adStore.delete(ad)
+    }
+
+    @Transactional(readOnly = true)
+    override fun getAdList(
+        status: Status?,
+        adKind: AdKind?,
+        sort: Sort?,
+    ): List<AdInfo.Main> {
+        return adReader.getAdList(
+            status,
+            adKind,
+            sort,
+        ).map { adMapper.of(it) }
     }
 }
