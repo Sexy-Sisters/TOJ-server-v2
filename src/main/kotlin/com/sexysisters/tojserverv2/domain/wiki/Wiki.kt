@@ -11,10 +11,10 @@ class Wiki(
     val name: String,
     var html: String = WikiProperties.EMPTY,
     var markdown: String = WikiProperties.EMPTY,
-    var views: Int = 0
 ) {
+    var views: Int = 0
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "wiki", fetch = FetchType.LAZY)
     var school: School? = null
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +36,8 @@ fun Wiki.makeRelation(school: School) {
 fun Wiki.update(html: String, markdown: String) {
     this.html = html
     this.markdown = markdown
+}
+
+fun Wiki.countViews() {
+    this.views++
 }

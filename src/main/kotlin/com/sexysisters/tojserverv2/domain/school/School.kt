@@ -2,23 +2,13 @@ package com.sexysisters.tojserverv2.domain.school
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
-import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.school.type.Division
 import com.sexysisters.tojserverv2.domain.school.type.Kind
+import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.teacher.Teacher
 import com.sexysisters.tojserverv2.domain.wiki.Wiki
 import org.apache.commons.lang3.StringUtils
-import javax.persistence.CascadeType
-import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
-import javax.persistence.FetchType
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.OneToMany
-import javax.persistence.OneToOne
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "tbl_school")
@@ -42,7 +32,8 @@ class School(
     @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
     val studentList = mutableListOf<Student>()
 
-    @OneToOne(mappedBy = "school", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="wiki_id")
     var wiki: Wiki? = null
 
     @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])

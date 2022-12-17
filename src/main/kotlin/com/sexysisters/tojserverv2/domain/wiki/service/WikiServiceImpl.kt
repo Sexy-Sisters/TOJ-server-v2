@@ -2,15 +2,8 @@ package com.sexysisters.tojserverv2.domain.wiki.service
 
 import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.student.StudentReader
-import com.sexysisters.tojserverv2.domain.wiki.Wiki
-import com.sexysisters.tojserverv2.domain.wiki.WikiCommand
-import com.sexysisters.tojserverv2.domain.wiki.WikiInfo
-import com.sexysisters.tojserverv2.domain.wiki.WikiMapper
-import com.sexysisters.tojserverv2.domain.wiki.WikiReader
-import com.sexysisters.tojserverv2.domain.wiki.WikiStore
-import com.sexysisters.tojserverv2.domain.wiki.makeRelation
+import com.sexysisters.tojserverv2.domain.wiki.*
 import com.sexysisters.tojserverv2.domain.wiki.policy.WikiPolicy
-import com.sexysisters.tojserverv2.domain.wiki.update
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -32,10 +25,12 @@ class WikiServiceImpl(
         wikiStore.store(initWiki)
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     override fun getSchoolWiki(schoolCode: String): WikiInfo.Main {
         val school = schoolReader.getSchool(schoolCode)
-        return wikiMapper.of(school.wiki!!)
+        val wiki = wikiReader.getWiki(school.wiki!!.id)
+        wiki.countViews()
+        return wikiMapper.of(wiki)
     }
 
     @Transactional

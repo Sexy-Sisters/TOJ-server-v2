@@ -7,5 +7,6 @@ class WikiInfo {
         val name: String,
         val html: String,
         val markdown: String,
+        val views: Int,
     )
 }
