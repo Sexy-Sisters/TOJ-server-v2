@@ -36,10 +36,10 @@ class Student(
     val id: Long = 0L
 
     init {
-        if(grade !in 1..6) throw StudentException.StudentNotValid()
-        if(classroom !in 1..20) throw StudentException.StudentNotValid()
-        if(number !in 1..100) throw StudentException.StudentNotValid()
-        if(age !in 1..40) throw StudentException.StudentNotValid()
+        if (grade !in 1..6) throw StudentException.StudentNotValid()
+        if (classroom !in 1..20) throw StudentException.StudentNotValid()
+        if (number !in 1..100) throw StudentException.StudentNotValid()
+        if (age !in 1..40) throw StudentException.StudentNotValid()
     }
 }
 
