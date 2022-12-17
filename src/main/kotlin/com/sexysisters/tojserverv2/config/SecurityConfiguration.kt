@@ -55,6 +55,8 @@ class SecurityConfiguration(
             // auth
             .antMatchers(HttpMethod.POST, "/api/v2/auth").permitAll()
             .antMatchers(HttpMethod.PUT, "/api/v2/auth").permitAll()
+
+            // TODO :: 인증 코드 발급 인증 안하고 허용하기 (계속 토큰 만료 에러뜸)
             .antMatchers("/api/v2/auth/code").permitAll()
 
             // oauth
