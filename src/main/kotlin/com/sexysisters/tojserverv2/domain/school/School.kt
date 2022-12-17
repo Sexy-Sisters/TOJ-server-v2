@@ -7,7 +7,6 @@ import com.sexysisters.tojserverv2.domain.school.type.Kind
 import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.teacher.Teacher
 import com.sexysisters.tojserverv2.domain.wiki.Wiki
-import org.apache.commons.lang3.StringUtils
 import javax.persistence.*
 
 @Entity
@@ -43,13 +42,13 @@ class School(
     val id: Long = 0L
 
     init {
-        if (StringUtils.isEmpty(code)) throw SchoolException.SchoolNotValid()
-        if (StringUtils.isEmpty(belong)) throw SchoolException.SchoolNotValid()
-        if (StringUtils.isEmpty(name)) throw SchoolException.SchoolNotValid()
-        if (StringUtils.isEmpty(address)) throw SchoolException.SchoolNotValid()
-        if (StringUtils.isEmpty(birthDay)) throw SchoolException.SchoolNotValid()
-        if (StringUtils.isEmpty(homePageAddress)) throw SchoolException.SchoolNotValid()
-        if (StringUtils.isEmpty(phone)) throw SchoolException.SchoolNotValid()
+        if (code.isBlank()) throw SchoolException.SchoolNotValid()
+        if (belong.isBlank()) throw SchoolException.SchoolNotValid()
+        if (name.isBlank()) throw SchoolException.SchoolNotValid()
+        if (address.isBlank()) throw SchoolException.SchoolNotValid()
+        if (birthDay.isBlank()) throw SchoolException.SchoolNotValid()
+        if (homePageAddress.isBlank()) throw SchoolException.SchoolNotValid()
+        if (phone.isBlank()) throw SchoolException.SchoolNotValid()
     }
 }
 
