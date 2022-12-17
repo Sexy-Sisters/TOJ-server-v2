@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
-@Api(tags = ["Student 관련 API"])
+@Api(tags = ["학생 관련 API"])
 @RestController
 @RequestMapping("/api/v2/student")
 class StudentApiController(

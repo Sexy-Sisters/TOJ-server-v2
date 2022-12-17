@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 
-@Api(tags = ["Image Upload 관련 API"])
+@Api(tags = ["이미지 업로드 관련 API"])
 @RestController
 @RequestMapping("/api/v2/image")
 class ImageApiController(
     private val s3Executor: S3Executor,
 ) {
 
-    @ApiOperation("Image Upload")
+    @ApiOperation("이미지 업로드")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun saveImage(

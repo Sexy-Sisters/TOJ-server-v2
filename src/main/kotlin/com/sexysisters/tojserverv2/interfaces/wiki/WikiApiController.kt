@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
-@Api(tags = ["School Wiki 관련 API"])
+@Api(tags = ["스쿨 위키 관련 API"])
 @RestController
 @RequestMapping("/api/v2/wiki")
 class WikiApiController(
