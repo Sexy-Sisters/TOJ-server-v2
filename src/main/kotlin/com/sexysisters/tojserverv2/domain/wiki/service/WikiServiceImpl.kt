@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional
 class WikiServiceImpl(
     private val wikiStore: WikiStore,
     private val wikiReader: WikiReader,
@@ -17,7 +18,6 @@ class WikiServiceImpl(
     private val schoolReader: SchoolReader,
 ) : WikiService {
 
-    @Transactional
     override fun createWiki(schoolCode: String) {
         val school = schoolReader.getSchool(schoolCode)
         val initWiki = Wiki(name = school.name)
@@ -25,7 +25,6 @@ class WikiServiceImpl(
         wikiStore.store(initWiki)
     }
 
-    @Transactional
     override fun getSchoolWiki(schoolCode: String): WikiInfo.Main {
         val school = schoolReader.getSchool(schoolCode)
         val wiki = wikiReader.getWiki(school.wiki!!.id)
@@ -33,7 +32,6 @@ class WikiServiceImpl(
         return wikiMapper.of(wiki)
     }
 
-    @Transactional
     override fun updateWiki(command: WikiCommand.Update) {
         val wiki = wikiReader.getWiki(command.id)
         val student = studentReader.getCurrentStudent()

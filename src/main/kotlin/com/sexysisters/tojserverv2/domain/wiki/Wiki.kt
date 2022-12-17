@@ -9,9 +9,9 @@ import javax.persistence.*
 @Table(name = "tbl_wiki")
 class Wiki(
     val name: String,
-    var html: String = WikiProperties.EMPTY,
-    var markdown: String = WikiProperties.EMPTY,
 ) {
+    var html: String = WikiProperties.EMPTY
+    var markdown: String = WikiProperties.EMPTY
     var views: Int = 0
 
     @OneToOne(mappedBy = "wiki", fetch = FetchType.LAZY)
