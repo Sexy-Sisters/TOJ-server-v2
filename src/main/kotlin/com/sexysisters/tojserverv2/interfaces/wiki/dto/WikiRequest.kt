@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.interfaces.wiki.dto
 
-import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
 class WikiRequest {
@@ -8,7 +8,9 @@ class WikiRequest {
     class Update(
         @field: NotNull
         val id: Long,
-        @field: NotEmpty
-        val content: String,
+        @field: NotBlank
+        val html: String,
+        @field: NotBlank
+        val markdown: String,
     )
 }

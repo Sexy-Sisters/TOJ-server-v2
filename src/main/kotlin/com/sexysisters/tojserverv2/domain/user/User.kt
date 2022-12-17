@@ -4,15 +4,7 @@ import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.student.Student
 import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import com.sexysisters.tojserverv2.domain.user.type.Authority
-import org.apache.commons.lang3.StringUtils
-import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.OneToOne
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "tbl_user")
@@ -34,11 +26,11 @@ class User(
     val id: Long = 0L
 
     init {
-        if (StringUtils.isEmpty(email)) throw UserException.UserNotValid()
-        if (StringUtils.isEmpty(password)) throw UserException.UserNotValid()
-        if (StringUtils.isEmpty(nickname)) throw UserException.UserNotValid()
-        if (StringUtils.isEmpty(profileImg)) throw UserException.UserNotValid()
-        if (StringUtils.isEmpty(name)) throw UserException.UserNotValid()
+        if (email.isBlank()) throw UserException.UserNotValid()
+        if (password.isBlank()) throw UserException.UserNotValid()
+        if (nickname.isBlank()) throw UserException.UserNotValid()
+        if (profileImg.isBlank()) throw UserException.UserNotValid()
+        if (name.isBlank()) throw UserException.UserNotValid()
     }
 }
 

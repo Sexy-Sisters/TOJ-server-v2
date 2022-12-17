@@ -5,6 +5,8 @@ class WikiResponse {
     data class Main(
         val id: Long,
         val name: String,
-        val content: String,
+        val html: String,
+        val markdown: String,
+        val views: Int,
     )
 }

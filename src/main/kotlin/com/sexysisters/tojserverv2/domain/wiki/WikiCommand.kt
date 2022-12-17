@@ -4,6 +4,7 @@ class WikiCommand {
 
     class Update(
         val id: Long,
-        val content: String,
+        val html: String,
+        val markdown: String,
     )
 }

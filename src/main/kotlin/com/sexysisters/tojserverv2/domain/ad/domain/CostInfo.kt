@@ -14,13 +14,13 @@ data class CostInfo(
 
     @Column(nullable = false)
     val cost: Int,
-
-    @Column(nullable = false)
-    var views: Int = 0,
-
-    @Column(nullable = false)
-    var clicks: Int = 0,
 ) {
+    @Column(nullable = false)
+    var views: Int = 0
+
+    @Column(nullable = false)
+    var clicks: Int = 0
+
     init {
         if (cost < 0) throw AdException.AdNotValid()
     }
