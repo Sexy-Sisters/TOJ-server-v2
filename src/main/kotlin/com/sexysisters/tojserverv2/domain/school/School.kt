@@ -46,7 +46,7 @@ class School(
     var wiki: Wiki? = null
 
     @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
-    val teachers = mutableListOf<Teacher>()
+    val teacherEntities = mutableListOf<Teacher>()
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L

@@ -8,17 +8,15 @@ import javax.persistence.*
 @Entity
 @Table(name = "tbl_teacher")
 class Teacher(
-    val image: String,
-    val name: String,
-    val nickname: String,
-    val bio: String,
+    @Embedded
+    val image: Image,
+    @Embedded
+    val name: Name,
+    @Embedded
+    val nickname: Nickname,
+    @Embedded
+    val bio: Bio,
 ) : BaseTimeEntity() {
-    init {
-        if (image.isBlank()) throw TeacherException.TeacherNotValid()
-        if (name.isBlank()) throw TeacherException.TeacherNotValid()
-        if (nickname.isBlank()) throw TeacherException.TeacherNotValid()
-        if (bio.isBlank()) throw TeacherException.TeacherNotValid()
-    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tbl_school_id")
