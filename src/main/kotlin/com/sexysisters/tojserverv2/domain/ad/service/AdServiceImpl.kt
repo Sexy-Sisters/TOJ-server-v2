@@ -42,9 +42,9 @@ class AdServiceImpl(
 
     @Transactional(readOnly = true)
     override fun getAdList(
-        status: Status?,
+        status: Status,
         adKind: AdKind?,
-        sort: Sort?,
+        sort: Sort,
     ): List<AdInfo.Main> {
         return adReader.getAdList(
             status,

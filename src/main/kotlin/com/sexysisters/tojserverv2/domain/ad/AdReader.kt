@@ -8,8 +8,8 @@ import com.sexysisters.tojserverv2.infrastructure.ad.Sort
 interface AdReader {
     fun getAd(id: Long): Ad
     fun getAdList(
-        status: Status?,
+        status: Status,
         adKind: AdKind?,
-        sort: Sort?,
+        sort: Sort,
     ): List<Ad>
 }

@@ -18,9 +18,9 @@ class AdReaderImpl(
             ?: throw AdException.AdNotFound()
 
     override fun getAdList(
-        status: Status?,
+        status: Status,
         adKind: AdKind?,
-        sort: Sort?,
+        sort: Sort,
     ): List<Ad> {
         return adRepository.getAdList(
             status,

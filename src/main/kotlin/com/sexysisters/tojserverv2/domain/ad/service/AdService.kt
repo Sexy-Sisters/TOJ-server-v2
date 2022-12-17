@@ -10,8 +10,8 @@ interface AdService {
     fun openAd(command: AdCommand.Create)
     fun deleteAd(id: Long)
     fun getAdList(
-        status: Status?,
+        status: Status,
         adKind: AdKind?,
-        sort: Sort?,
+        sort: Sort,
     ): List<AdInfo.Main>
 }

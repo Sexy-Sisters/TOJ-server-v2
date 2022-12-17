@@ -6,9 +6,9 @@ import com.sexysisters.tojserverv2.domain.ad.domain.Status
 
 interface AdCustomRepository {
     fun getAdList(
-        status: Status?,
+        status: Status,
         adKind: AdKind?,
-        sort: Sort?,
+        sort: Sort,
     ): List<Ad>
 }
 

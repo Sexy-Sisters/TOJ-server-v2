@@ -33,9 +33,9 @@ class AdApiController(
 
     @GetMapping
     fun getAdList(
-        @RequestParam(name = "status", required = false) status: Status?,
-        @RequestParam(name = "adKind", required = false) adKind: AdKind?,
-        @RequestParam(name = "sort", required = false) sort: Sort?,
+        @RequestParam(defaultValue = "OPEN") status: Status,
+        @RequestParam adKind: AdKind?,
+        @RequestParam(defaultValue = "VIEWS") sort: Sort,
     ): CommonResponse<List<AdResponse.Main>> {
         val adInfo = adService.getAdList(status, adKind, sort)
         val response = adInfo.map { adDtoMapper.of(it) }

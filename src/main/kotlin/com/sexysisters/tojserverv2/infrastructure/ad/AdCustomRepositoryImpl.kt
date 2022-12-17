@@ -14,9 +14,9 @@ class AdCustomRepositoryImpl(
 ) : AdCustomRepository {
 
     override fun getAdList(
-        status: Status?,
+        status: Status,
         adKind: AdKind?,
-        sort: Sort?,
+        sort: Sort,
     ): List<Ad> {
         return query.selectFrom(ad)
             .where(
@@ -29,12 +29,7 @@ class AdCustomRepositoryImpl(
             .fetch()
     }
 
-    private fun statusEq(status: Status?): BooleanExpression? {
-        if (status != null) {
-            return ad.status.eq(status)
-        }
-        return null
-    }
+    private fun statusEq(status: Status) = ad.status.eq(status)
 
     private fun adKindEq(adKind: AdKind?): BooleanExpression? {
         if (adKind != null) {
@@ -43,7 +38,7 @@ class AdCustomRepositoryImpl(
         return null
     }
 
-    private fun selectStandard(sort: Sort?) = when (sort) {
+    private fun selectStandard(sort: Sort) = when (sort) {
         Sort.VIEWS -> ad.costInfo.views.desc()
         else -> null
     }
