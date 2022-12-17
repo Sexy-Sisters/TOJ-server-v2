@@ -3,7 +3,6 @@ package com.sexysisters.tojserverv2.domain.student
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.approve.Approve
 import com.sexysisters.tojserverv2.domain.school.School
-import com.sexysisters.tojserverv2.domain.teacher.Teacher
 import com.sexysisters.tojserverv2.domain.user.User
 import javax.persistence.*
 
@@ -32,9 +31,6 @@ class Student(
 
     @OneToMany(mappedBy = "acceptor", cascade = arrayOf(CascadeType.ALL))
     val acceptorList = mutableListOf<Approve>()
-
-    @OneToMany(mappedBy = "student", cascade = [CascadeType.ALL])
-    val teachers = mutableListOf<Teacher>()
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
