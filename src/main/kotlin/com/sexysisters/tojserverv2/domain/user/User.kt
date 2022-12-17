@@ -46,3 +46,5 @@ fun User.updateInfo(
 fun User.updateProfileImg(profileImg: String) {
     this.profileImg = profileImg
 }
+
+fun User.hasStudent() = student != null
