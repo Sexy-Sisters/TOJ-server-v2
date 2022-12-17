@@ -10,7 +10,7 @@ class Name private constructor (
     val value: String
 ) {
     companion object {
-        private val REGEX = Regex("^[가-힣]{1,4}$")
+        private val REGEX = Regex("^{1,100}$")
 
         fun of(value: String): Name {
             validate(value)

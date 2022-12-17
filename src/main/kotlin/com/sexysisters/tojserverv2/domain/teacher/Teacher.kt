@@ -2,7 +2,6 @@ package com.sexysisters.tojserverv2.domain.teacher
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.school.School
-import com.sexysisters.tojserverv2.domain.teacher.exception.TeacherException
 import javax.persistence.*
 
 @Entity

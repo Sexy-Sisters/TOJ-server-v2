@@ -10,7 +10,7 @@ class Nickname private constructor(
     val value: String
 ) {
     companion object {
-        private val REGEX = Regex("^{1,50}$")
+        private val REGEX = Regex("^{1,100}$")
 
         fun of(value: String): Nickname {
             validate(value)
