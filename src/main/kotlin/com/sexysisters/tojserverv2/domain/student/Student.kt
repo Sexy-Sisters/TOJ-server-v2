@@ -3,6 +3,7 @@ package com.sexysisters.tojserverv2.domain.student
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.approve.Approve
 import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.user.User
 import javax.persistence.*
 
@@ -13,10 +14,9 @@ class Student(
     val classroom: Int,
     val number: Int,
     val age: Int,
-
-    @Enumerated(EnumType.STRING)
-    var status: Status = Status.INDEPENDENT,
 ) : BaseTimeEntity() {
+    @Enumerated(EnumType.STRING)
+    var status: Status = Status.INDEPENDENT
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")
@@ -34,6 +34,13 @@ class Student(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+
+    init {
+        if(grade in 1..6) throw StudentException.StudentNotValid()
+        if(classroom in 1..20) throw StudentException.StudentNotValid()
+        if(number in 1..100) throw StudentException.StudentNotValid()
+        if(age in 1..40) throw StudentException.StudentNotValid()
+    }
 }
 
 enum class Status(
