@@ -17,7 +17,7 @@ class TeacherServiceImpl(
     @Transactional
     override fun createTeacher(command: TeacherCommand.Create) {
         val user = userReader.getCurrentUser()
-        if(!user.hasStudent()) throw StudentException.StudentNotFound()
+        if (!user.hasStudent()) throw StudentException.StudentNotFound()
         val teacher = teacherEntityMapper.of(command)
         teacherStore.store(teacher)
     }

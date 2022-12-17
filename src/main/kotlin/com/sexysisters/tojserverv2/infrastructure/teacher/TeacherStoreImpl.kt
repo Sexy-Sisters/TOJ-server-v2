@@ -21,11 +21,11 @@ class TeacherStoreImpl(
 
     private fun checkDuplicateName(teacher: Teacher) {
         val isDuplicate = teacherRepository.existsByNameValue(teacher.name.value)
-        if(isDuplicate) throw TeacherException.DuplicateTeacherName()
+        if (isDuplicate) throw TeacherException.DuplicateTeacherName()
     }
 
     private fun checkDuplicateNickname(teacher: Teacher) {
         val isDuplicate = teacherRepository.existsByNicknameValue(teacher.nickname.value)
-        if(isDuplicate) throw TeacherException.DuplicateTeacherNickname()
+        if (isDuplicate) throw TeacherException.DuplicateTeacherNickname()
     }
 }

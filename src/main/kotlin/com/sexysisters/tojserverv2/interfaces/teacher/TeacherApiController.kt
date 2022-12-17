@@ -1,6 +1,5 @@
 package com.sexysisters.tojserverv2.interfaces.teacher
 
-import com.sexysisters.tojserverv2.common.response.CommonResponse
 import com.sexysisters.tojserverv2.domain.teacher.service.TeacherService
 import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherDtoMapper
 import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherRequest
