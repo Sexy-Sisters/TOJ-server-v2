@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
-@Api(tags = ["School 관련 API"])
+@Api(tags = ["학교 관련 API"])
 @RestController
 @RequestMapping("/api/v2/school")
 class SchoolApiController(
