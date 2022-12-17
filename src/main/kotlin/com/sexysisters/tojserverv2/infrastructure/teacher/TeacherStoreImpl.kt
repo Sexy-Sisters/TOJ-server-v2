@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component
 class TeacherStoreImpl(
     private val teacherRepository: TeacherRepository,
 ) : TeacherStore {
-    override fun store(teacher: Teacher): Long {
+    override fun store(teacher: Teacher): Teacher {
         validate(teacher)
-        return teacherRepository.save(teacher).id
+        return teacherRepository.save(teacher)
     }
 
     private fun validate(teacher: Teacher) {

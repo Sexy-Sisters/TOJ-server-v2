@@ -27,9 +27,8 @@ class TeacherApiController(
     @PostMapping
     fun createTeacher(
         @RequestBody @Valid request: TeacherRequest.Create
-    ): CommonResponse<Long> {
+    ) {
         val teacherCommand = teacherDtoMapper.of(request)
-        val teacherId = teacherService.createTeacher(teacherCommand)
-        return CommonResponse.success(teacherId)
+        teacherService.createTeacher(teacherCommand)
     }
 }
