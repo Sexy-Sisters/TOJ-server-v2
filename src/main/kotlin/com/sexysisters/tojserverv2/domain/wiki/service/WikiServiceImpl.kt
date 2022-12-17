@@ -43,6 +43,9 @@ class WikiServiceImpl(
         val wiki = wikiReader.getWiki(command.id)
         val student = studentReader.getCurrentStudent()
         wikiPolicy.forEach { it.check(student, wiki.school!!) }
-        wiki.update(command.content)
+        wiki.update(
+            html = command.html,
+            markdown = command.markdown
+        )
     }
 }

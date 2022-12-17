@@ -14,7 +14,7 @@ spring:
         generate-ddl: true
         show-sql: true
         hibernate:
-            ddl-auto: update
+            ddl-auto: 'create-drop'
 
     datasource:
         url: jdbc:mysql://${MYSQL_HOST}:3306/${MYSQL_DB}?serverTimezone=UTC&characterEncoding=UTF-8
