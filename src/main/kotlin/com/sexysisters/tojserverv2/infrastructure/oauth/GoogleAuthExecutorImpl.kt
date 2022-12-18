@@ -3,7 +3,7 @@ package com.sexysisters.tojserverv2.infrastructure.oauth
 import com.sexysisters.tojserverv2.common.util.api.oauth.client.GoogleAuthClient
 import com.sexysisters.tojserverv2.common.util.api.oauth.client.GoogleInfoClient
 import com.sexysisters.tojserverv2.common.util.api.oauth.dto.GoogleCodeRequest
-import com.sexysisters.tojserverv2.common.util.api.oauth.dto.GoogleInfoResponse
+import com.sexysisters.tojserverv2.common.util.api.oauth.dto.OAuthInfoResponse
 import com.sexysisters.tojserverv2.config.properties.OAuthProperties
 import com.sexysisters.tojserverv2.config.properties.googleBaseUrl
 import com.sexysisters.tojserverv2.config.properties.googleClientId
@@ -14,11 +14,11 @@ import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 
 @Service
-class GoogleAuthExecutor(
+class GoogleAuthExecutorImpl(
     private val oAuthProperties: OAuthProperties,
     private val googleAuthClient: GoogleAuthClient,
     private val googleInfoClient: GoogleInfoClient,
-) {
+) : OAuthExecutor {
 
     private val QUERY_STRING =
         "?client_id=%s" +
@@ -26,7 +26,9 @@ class GoogleAuthExecutor(
             "&response_type=code" +
             "&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
 
-    fun getLink() =
+    override fun support(oAUthMethod: OAuthMethod) = oAUthMethod == OAuthMethod.GOOGLE
+
+    override fun getLink() =
         oAuthProperties.googleBaseUrl() +
             String.format(
                 QUERY_STRING,
@@ -34,7 +36,7 @@ class GoogleAuthExecutor(
                 oAuthProperties.googleRedirectUrl()
             )
 
-    fun execute(code: String): GoogleInfoResponse {
+    override fun execute(code: String): OAuthInfoResponse {
         val codeRequest = GoogleCodeRequest(
             code = URLDecoder.decode(code, StandardCharsets.UTF_8),
             clientId = oAuthProperties.googleClientId(),
@@ -42,7 +44,6 @@ class GoogleAuthExecutor(
             redirectUri = oAuthProperties.googleRedirectUrl(),
         )
         val accessToken = googleAuthClient.googleAuth(codeRequest).accessToken
-
         return googleInfoClient.googleInfo(accessToken)
     }
 }
