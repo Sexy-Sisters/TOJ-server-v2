@@ -1,5 +1,6 @@
 package com.sexysisters.tojserverv2.interfaces.image
 
+import com.sexysisters.tojserverv2.common.response.CommonResponse
 import com.sexysisters.tojserverv2.infrastructure.image.s3.Dir
 import com.sexysisters.tojserverv2.infrastructure.image.s3.S3Executor
 import com.sexysisters.tojserverv2.infrastructure.image.s3.getDirName
@@ -27,9 +28,9 @@ class ImageApiController(
     fun saveImage(
         @RequestPart images: List<MultipartFile>,
         @RequestParam(name = "dir")dir: Dir,
-    ): ImageUrlResponse {
+    ): CommonResponse<ImageUrlResponse> {
         val dirName = dir.getDirName()
         val imgUrlList = images.map { s3Executor.uploadImage(it, dirName) }
-        return ImageUrlResponse(imgUrlList)
+        return CommonResponse.success(ImageUrlResponse(imgUrlList))
     }
 }
