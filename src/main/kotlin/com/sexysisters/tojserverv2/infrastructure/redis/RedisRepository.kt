@@ -3,7 +3,7 @@ package com.sexysisters.tojserverv2.infrastructure.redis
 import java.time.Duration
 
 interface RedisRepository {
-    fun getData(key: String): Any?
+    fun getData(key: String): String?
     fun setData(
         key: String,
         value: String
