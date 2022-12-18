@@ -22,6 +22,7 @@ class SecurityConfiguration(
     private val jwtTokenProvider: JwtTokenProvider,
     private val jwtValidator: JwtValidator,
 ) {
+    private val VERSION = "/api/v2"
 
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
@@ -53,23 +54,23 @@ class SecurityConfiguration(
             ).permitAll()
 
             // auth
-            .antMatchers(HttpMethod.POST, "/api/v2/auth").permitAll()
-            .antMatchers(HttpMethod.PUT, "/api/v2/auth").permitAll()
+            .antMatchers(HttpMethod.POST, "$VERSION/auth").permitAll()
+            .antMatchers(HttpMethod.PUT, "$VERSION/auth").permitAll()
 
             // TODO :: 인증 코드 발급 인증 안하고 허용하기 (계속 토큰 만료 에러뜸)
-            .antMatchers("/api/v2/auth/code").permitAll()
+            .antMatchers("$VERSION/uth/code").permitAll()
 
             // oauth
-            .antMatchers("/api/v2/oauth/**").permitAll()
+            .antMatchers("$VERSION/oauth/**").permitAll()
 
             // user
-            .antMatchers(HttpMethod.POST, "/api/v2/user").permitAll()
+            .antMatchers(HttpMethod.POST, "$VERSION/user").permitAll()
 
             // school
-            .antMatchers(HttpMethod.GET, "/api/v2/school").permitAll()
+            .antMatchers(HttpMethod.GET, "$VERSION/school").permitAll()
 
             // IMG
-            .antMatchers(HttpMethod.POST, "/api/v2/image").permitAll()
+            .antMatchers(HttpMethod.POST, "$VERSION/image").permitAll()
 
             // TODO:: for test / change range of authority
             .antMatchers("/api/v2/ad").permitAll()
