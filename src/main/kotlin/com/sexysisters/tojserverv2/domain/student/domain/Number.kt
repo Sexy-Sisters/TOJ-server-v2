@@ -12,6 +12,6 @@ class Number(
     val value: Int,
 ) {
     init {
-        if (value !in 1..6) throw StudentException.StudentNotValid()
+        if (value !in 1..100) throw StudentException.StudentNotValid()
     }
 }
