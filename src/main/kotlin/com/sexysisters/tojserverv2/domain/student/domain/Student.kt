@@ -44,6 +44,11 @@ fun Student.makeRelation(user: User) {
     user.student = this
 }
 
+fun Student.makeRelation(school: School) {
+    this.school = school
+    school.students.add(this)
+}
+
 fun Student.independent() {
     status = Status.INDEPENDENT
 }

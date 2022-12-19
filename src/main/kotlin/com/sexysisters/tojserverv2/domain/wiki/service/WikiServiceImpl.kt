@@ -22,7 +22,7 @@ class WikiServiceImpl(
 
     override fun createWiki(schoolCode: String) {
         val school = schoolReader.getSchool(schoolCode)
-        val initWiki = createWikiEntity(school.name)
+        val initWiki = createWikiEntity(school.name.value)
         initWiki.makeRelation(school)
         wikiStore.store(initWiki)
     }
