@@ -1,24 +1,22 @@
-package com.sexysisters.tojserverv2.domain.teacher
+package com.sexysisters.tojserverv2.domain.teacher.domain
 
 import com.sexysisters.tojserverv2.domain.teacher.exception.TeacherException
 import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
-class Bio private constructor(
-    @Column(name = "bio")
+class Image private constructor (
+    @Column(name = "image")
     val value: String
 ) {
     companion object {
-        private val REGEX = Regex("^{1,500}$")
-
-        fun of(value: String): Bio {
+        fun of(value: String): Image {
             validate(value)
-            return Bio(value)
+            return Image(value)
         }
 
         private fun validate(value: String) {
-            if (REGEX.matches(value)) throw TeacherException.TeacherNotValid()
+            if (value.isBlank()) throw TeacherException.TeacherNotValid()
         }
     }
 }

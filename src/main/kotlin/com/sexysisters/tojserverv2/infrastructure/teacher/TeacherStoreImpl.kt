@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.infrastructure.teacher
 
-import com.sexysisters.tojserverv2.domain.teacher.Teacher
+import com.sexysisters.tojserverv2.domain.teacher.domain.Teacher
 import com.sexysisters.tojserverv2.domain.teacher.TeacherStore
 import com.sexysisters.tojserverv2.domain.teacher.exception.TeacherException
 import org.springframework.stereotype.Component

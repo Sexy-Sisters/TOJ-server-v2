@@ -1,4 +1,4 @@
-package com.sexysisters.tojserverv2.domain.teacher
+package com.sexysisters.tojserverv2.domain.teacher.domain
 
 import com.sexysisters.tojserverv2.domain.teacher.exception.TeacherException
 import javax.persistence.Column
