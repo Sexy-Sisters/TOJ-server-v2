@@ -33,7 +33,7 @@ class School(
     var kind: Kind? = null
 
     @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
-    val studentList = mutableListOf<Student>()
+    val students = mutableListOf<Student>()
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wiki_id")

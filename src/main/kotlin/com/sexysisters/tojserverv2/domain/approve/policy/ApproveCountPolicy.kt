@@ -15,7 +15,7 @@ class ApproveCountPolicy : ApprovePolicy {
 
     override fun check(applicant: Student, acceptor: Student) {
         val school = acceptor.school!!
-        val studentCapacity = school.studentList.size
+        val studentCapacity = school.students.size
         val neededCount = studentCapacity / 5
         val approveCount = applicant.approves.size
         val isOver = approveCount >= neededCount

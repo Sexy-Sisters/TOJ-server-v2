@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component
 class DirectJoinPolicy : SchoolPolicy {
 
     override fun check(student: Student, school: School) {
-        val studentCount = school.studentList.size
+        val studentCount = school.students.size
         if (studentCount <= 5) {
             student.engaged()
         } else {
