@@ -4,10 +4,10 @@ import com.google.gson.Gson
 import com.sexysisters.tojserverv2.common.util.api.neis.client.NeisSchoolInfoClient
 import com.sexysisters.tojserverv2.common.util.api.neis.dto.NeisSchoolInfoResponse
 import com.sexysisters.tojserverv2.common.util.api.neis.properties.NeisRequestProperty
-import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.school.domain.School
+import com.sexysisters.tojserverv2.domain.school.domain.getDivision
+import com.sexysisters.tojserverv2.domain.school.domain.getKind
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
-import com.sexysisters.tojserverv2.domain.school.type.getDivision
-import com.sexysisters.tojserverv2.domain.school.type.getKind
 import com.sexysisters.tojserverv2.infrastructure.neis.dto.NeisSchoolMapper
 import com.sexysisters.tojserverv2.infrastructure.neis.dto.NeisSchoolResponse
 import org.springframework.stereotype.Component

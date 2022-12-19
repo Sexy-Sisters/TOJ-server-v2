@@ -3,7 +3,7 @@ package com.sexysisters.tojserverv2.domain.school.domain
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.student.domain.Student
 import com.sexysisters.tojserverv2.domain.teacher.domain.Teacher
-import com.sexysisters.tojserverv2.domain.wiki.Wiki
+import com.sexysisters.tojserverv2.domain.wiki.domain.Wiki
 import javax.persistence.*
 
 @Entity

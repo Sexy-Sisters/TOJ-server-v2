@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.domain.school.policy
 
-import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import com.sexysisters.tojserverv2.domain.student.domain.Student
 import com.sexysisters.tojserverv2.infrastructure.student.StudentRepository

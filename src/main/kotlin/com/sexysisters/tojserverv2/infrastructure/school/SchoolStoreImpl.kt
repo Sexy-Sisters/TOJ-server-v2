@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.infrastructure.school
 
-import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.school.SchoolStore
 import org.springframework.stereotype.Component
 
