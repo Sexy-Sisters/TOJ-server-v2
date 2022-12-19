@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.interfaces.student
 
 import com.sexysisters.tojserverv2.common.response.CommonResponse
-import com.sexysisters.tojserverv2.domain.student.Status
+import com.sexysisters.tojserverv2.domain.student.domain.Status
 import com.sexysisters.tojserverv2.domain.student.service.StudentService
 import com.sexysisters.tojserverv2.interfaces.student.dto.StudentDtoMapper
 import com.sexysisters.tojserverv2.interfaces.student.dto.StudentRequest

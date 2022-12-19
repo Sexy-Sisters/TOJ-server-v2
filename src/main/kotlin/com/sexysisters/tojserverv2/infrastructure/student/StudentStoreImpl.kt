@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.infrastructure.student
 
 import com.sexysisters.tojserverv2.domain.student.StudentStore
-import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.domain.Student
 import org.springframework.stereotype.Component
 
 @Component

@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.domain.approve
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.domain.Student
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.FetchType
