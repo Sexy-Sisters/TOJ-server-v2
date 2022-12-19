@@ -2,7 +2,7 @@ package com.sexysisters.tojserverv2.infrastructure.student
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.sexysisters.tojserverv2.domain.school.School
-import com.sexysisters.tojserverv2.domain.student.QStudent.student
+import com.sexysisters.tojserverv2.domain.student.domain.QStudent.student
 import org.springframework.stereotype.Component
 
 @Component
@@ -20,9 +20,9 @@ class StudentCustomRepositoryImpl(
             .selectFrom(student)
             .where(
                 student.school.eq(school),
-                student.grade.eq(grade),
-                student.classroom.eq(classroom),
-                student.number.eq(number),
+                student.grade.value.eq(grade),
+                student.classroom.value.eq(classroom),
+                student.number.value.eq(number),
             )
             .fetchFirst()
         return student != null
