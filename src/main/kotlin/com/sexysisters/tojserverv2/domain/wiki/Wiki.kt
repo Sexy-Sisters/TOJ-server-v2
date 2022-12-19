@@ -1,7 +1,8 @@
 package com.sexysisters.tojserverv2.domain.wiki
 
 import com.sexysisters.tojserverv2.config.properties.WikiProperties
-import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.wiki.exception.WikiException
 import javax.persistence.*
 
@@ -9,7 +10,7 @@ import javax.persistence.*
 @Table(name = "tbl_wiki")
 class Wiki(
     val name: String,
-) {
+) : BaseTimeEntity() {
     var html: String = WikiProperties.EMPTY
     var markdown: String = WikiProperties.EMPTY
     var views: Int = 0

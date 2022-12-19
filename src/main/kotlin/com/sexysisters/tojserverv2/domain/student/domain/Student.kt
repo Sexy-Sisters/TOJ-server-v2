@@ -2,7 +2,7 @@ package com.sexysisters.tojserverv2.domain.student.domain
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.approve.Approve
-import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.user.User
 import javax.persistence.*
 
