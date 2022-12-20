@@ -19,7 +19,7 @@ data class NeisSchoolResponse constructor(
             belong = Belong(this.belong),
             name = Name(this.name),
             address = Address(this.address),
-            birthDay = Birthday(this.birthday),
+            birthday = Birthday(this.birthday),
             homePageAddress = HomePageAddress(this.homePageAddress),
             phone = Phone(this.phone),
         )

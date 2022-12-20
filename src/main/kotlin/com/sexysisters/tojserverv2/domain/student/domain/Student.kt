@@ -9,15 +9,12 @@ import javax.persistence.*
 @Entity
 @Table(name = "tbl_student")
 class Student(
-    @Embedded
-    val grade: Grade,
-    @Embedded
-    val classroom: Classroom,
-    @Embedded
-    val number: Number,
-    @Embedded
-    val age: Age,
+    @Embedded val grade: Grade,
+    @Embedded val classroom: Classroom,
+    @Embedded val number: Number,
+    @Embedded val age: Age,
 ) : BaseTimeEntity() {
+
     @Enumerated(EnumType.STRING)
     var status: Status = Status.INDEPENDENT
 
@@ -35,8 +32,14 @@ class Student(
     @OneToMany(mappedBy = "acceptor", cascade = [CascadeType.ALL])
     val acceptors = mutableSetOf<Approve>()
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+
+    fun getGradeValue() = grade.value
+    fun getClassroomValue() = classroom.value
+    fun getNumberValue() = number.value
+    fun getAgeValue() = age.value
 }
 
 fun Student.makeRelation(user: User) {

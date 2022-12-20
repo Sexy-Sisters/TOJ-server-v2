@@ -22,26 +22,16 @@ class StudentServiceImpl(
     override fun createStudent(command: StudentCommand.Create): Long {
         val user = userReader.getCurrentUser()
         studentPolicy.forEach { it.check(user) }
-        val initStudent = createStudent(
-            grade = command.grade,
-            classroom = command.classroom,
-            number = command.number,
-            age = command.age,
-        )
+        val initStudent = createStudentEntity(command)
         initStudent.makeRelation(user)
         return studentStore.store(initStudent)
     }
 
-    private fun createStudent(
-        grade: Int,
-        classroom: Int,
-        number: Int,
-        age: Int,
-    ) = Student(
-        grade = Grade(grade),
-        classroom = Classroom(classroom),
-        number = Number(number),
-        age = Age(age)
+    private fun createStudentEntity(command: StudentCommand.Create) = Student(
+        grade = Grade(command.grade),
+        classroom = Classroom(command.classroom),
+        number = Number(command.number),
+        age = Age(command.age),
     )
 
     @Transactional(readOnly = true)

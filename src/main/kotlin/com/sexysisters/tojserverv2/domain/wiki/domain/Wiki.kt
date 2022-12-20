@@ -7,21 +7,24 @@ import javax.persistence.*
 @Entity
 @Table(name = "tbl_wiki")
 class Wiki(
-    @Embedded
-    val name: Name,
-    @Embedded
-    var html: HTML,
-    @Embedded
-    var markdown: Markdown,
-    @Embedded
-    var views: Views,
+    @Embedded val name: Name
 ) : BaseTimeEntity() {
+
+    @Embedded var html: HTML = HTML()
+    @Embedded var markdown: Markdown = Markdown()
+    @Embedded var views: Views = Views()
 
     @OneToOne(mappedBy = "wiki", fetch = FetchType.LAZY)
     var school: School? = null
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+
+    fun getNameValue() = name.value
+    fun getHTMLValue() = html.value
+    fun getMarkdownValue() = markdown.value
+    fun getViewsValue() = views.value
 }
 
 fun Wiki.makeRelation(school: School) {

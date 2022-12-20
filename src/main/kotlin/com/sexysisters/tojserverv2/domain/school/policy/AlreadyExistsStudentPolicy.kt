@@ -19,9 +19,9 @@ class AlreadyExistsStudentPolicy(
     override fun check(student: Student, school: School) {
         val hasStudent = studentRepository.checkAlreadyExists(
             school = school,
-            grade = student.grade.value,
-            classroom = student.classroom.value,
-            number = student.number.value,
+            grade = student.getGradeValue(),
+            classroom = student.getClassroomValue(),
+            number = student.getNumberValue(),
         )
         if (hasStudent) {
             throw SchoolException.StudentAlreadyExists()

@@ -9,20 +9,13 @@ import javax.persistence.*
 @Entity
 @Table(name = "tbl_school")
 class School(
-    @Embedded
-    val code: Code,
-    @Embedded
-    val belong: Belong,
-    @Embedded
-    val name: Name,
-    @Embedded
-    val address: Address,
-    @Embedded
-    val birthDay: Birthday,
-    @Embedded
-    val homePageAddress: HomePageAddress,
-    @Embedded
-    val phone: Phone,
+    @Embedded val code: Code,
+    @Embedded val belong: Belong,
+    @Embedded val name: Name,
+    @Embedded val address: Address,
+    @Embedded val birthday: Birthday,
+    @Embedded val homePageAddress: HomePageAddress,
+    @Embedded val phone: Phone,
     // TODO :: 평점
 ) : BaseTimeEntity() {
 
@@ -42,6 +35,15 @@ class School(
     @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
     val teachers = mutableSetOf<Teacher>()
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+
+    fun getCodeValue() = code.value
+    fun getBelongValue() = belong.value
+    fun getNameValue() = name.value
+    fun getAddressValue() = address.value
+    fun getBirthdayValue() = birthday.value
+    fun getHomePageAddressValue() = homePageAddress.value
+    fun getPhoneValue() = phone.value
 }
