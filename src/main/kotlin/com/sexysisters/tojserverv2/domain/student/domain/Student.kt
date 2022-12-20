@@ -63,3 +63,5 @@ fun Student.waiting() {
 fun Student.engaged() {
     status = Status.ENGAGED
 }
+
+fun Student.hasSchool() = school != null

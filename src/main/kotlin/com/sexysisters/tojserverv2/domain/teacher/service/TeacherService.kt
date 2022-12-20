@@ -6,4 +6,5 @@ import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherResponse
 interface TeacherService {
     fun createTeacher(command: TeacherCommand.Create)
     fun getTeachers(schoolCode: String): List<TeacherResponse.Search>
+    fun getTeacher(id: Long): TeacherResponse.Get
 }

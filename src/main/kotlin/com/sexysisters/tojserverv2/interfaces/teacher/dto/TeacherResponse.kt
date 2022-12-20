@@ -7,4 +7,12 @@ class TeacherResponse {
         val nickname: String,
         val bio: String,
     )
+
+    data class Get(
+        val image: String,
+        val name: String,
+        val nickname: String,
+        val bio: String,
+        //TODO : add comments
+    )
 }
