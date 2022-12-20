@@ -12,7 +12,8 @@ class Code(
     val value: String
 ) {
     init {
+        val CODE_LENGTH = 7
         if (value.isBlank()) throw SchoolException.SchoolNotValid()
-        if (value.length != 7) throw SchoolException.SchoolNotValid()
+        if (value.length != CODE_LENGTH) throw SchoolException.SchoolNotValid()
     }
 }

@@ -12,6 +12,8 @@ class Age(
     val value: Int,
 ) {
     init {
-        if (value !in 1..40) throw StudentException.StudentNotValid()
+        val MIN = 8
+        val MAX = 40
+        if (value !in MIN..MAX) throw StudentException.StudentNotValid()
     }
 }

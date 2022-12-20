@@ -12,6 +12,8 @@ class Classroom(
     val value: Int,
 ) {
     init {
-        if (value !in 1..20) throw StudentException.StudentNotValid()
+        val MIN = 1
+        val MAX = 20
+        if (value !in MIN..MAX) throw StudentException.StudentNotValid()
     }
 }

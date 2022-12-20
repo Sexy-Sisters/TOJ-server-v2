@@ -10,6 +10,6 @@ class Views(
     var value: Int
 ) {
     init {
-        if (value < 0) throw WikiException.WikiNotValid()
+        if (value != 0) throw WikiException.WikiNotValid()
     }
 }

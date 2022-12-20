@@ -12,6 +12,8 @@ class Grade(
     val value: Int,
 ) {
     init {
-        if (value !in 1..6) throw StudentException.StudentNotValid()
+        val MIN = 1
+        val MAX = 6
+        if (value !in MIN..MAX) throw StudentException.StudentNotValid()
     }
 }

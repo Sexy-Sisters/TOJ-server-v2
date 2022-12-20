@@ -12,8 +12,9 @@ class Name(
     val value: String
 ) {
     init {
+        val MAX_LENGTH = 21
         if (value.isBlank()) throw SchoolException.SchoolNotValid()
         if (value.endsWith("학교")) throw SchoolException.SchoolNotValid()
-        if (value.length > 21) throw SchoolException.SchoolNotValid()
+        if (value.length > MAX_LENGTH) throw SchoolException.SchoolNotValid()
     }
 }

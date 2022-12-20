@@ -16,6 +16,6 @@ class Markdown(
     var value: String
 ) {
     init {
-        if (value.isEmpty()) throw WikiException.WikiNotValid()
+        if (value.isBlank()) throw WikiException.WikiNotValid()
     }
 }
