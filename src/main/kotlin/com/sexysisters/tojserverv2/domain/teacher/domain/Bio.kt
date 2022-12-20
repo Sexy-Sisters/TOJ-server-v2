@@ -3,9 +3,11 @@ package com.sexysisters.tojserverv2.domain.teacher.domain
 import com.sexysisters.tojserverv2.domain.teacher.exception.TeacherException
 import javax.persistence.Column
 import javax.persistence.Embeddable
+import javax.validation.constraints.NotNull
 
 @Embeddable
 class Bio private constructor(
+    @field:NotNull
     @Column(name = "bio")
     val value: String
 ) {

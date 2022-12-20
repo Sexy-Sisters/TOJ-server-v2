@@ -8,11 +8,7 @@ import javax.validation.constraints.NotNull
 @Embeddable
 class Markdown(
     @field:NotNull
-    @Column(
-        name = "markdown",
-        nullable = false,
-        length = 100000
-    )
+    @Column(name = "markdown", length = 100000)
     var value: String
 ) {
     init {

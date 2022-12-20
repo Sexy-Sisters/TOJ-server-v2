@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull
 
 class Name(
     @field:NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     val value: String
 ) {
     init {

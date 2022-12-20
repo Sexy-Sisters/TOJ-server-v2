@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull
 @Embeddable
 class Name(
     @field:NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     val value: String
 ) {
     init {

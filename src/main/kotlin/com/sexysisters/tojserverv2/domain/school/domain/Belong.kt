@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull
 @Embeddable
 class Belong(
     @field:NotNull
-    @Column(name = "belong", nullable = false)
+    @Column(name = "belong")
     val value: String
 ) {
     init {

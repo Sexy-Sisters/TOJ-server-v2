@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull
 
 class Views(
     @field:NotNull
-    @Column(name = "views", nullable = false)
+    @Column(name = "views")
     var value: Int
 ) {
     init {

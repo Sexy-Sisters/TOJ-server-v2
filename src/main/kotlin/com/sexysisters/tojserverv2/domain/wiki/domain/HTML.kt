@@ -6,11 +6,7 @@ import javax.validation.constraints.NotNull
 
 class HTML(
     @field:NotNull
-    @Column(
-        name = "html",
-        nullable = false,
-        length = 100000
-    )
+    @Column(name = "html", length = 100000)
     var value: String
 ) {
     init {
