@@ -64,4 +64,4 @@ fun Student.engaged() {
     status = Status.ENGAGED
 }
 
-fun Student.hasSchool() = school != null
+fun Student.isAttendSchool() = school != null

@@ -7,4 +7,5 @@ interface TeacherService {
     fun createTeacher(command: TeacherCommand.Create)
     fun getTeachers(schoolCode: String): List<TeacherResponse.Search>
     fun getTeacher(id: Long): TeacherResponse.Get
+    fun update(id: Long, request: TeacherCommand.Update)
 }

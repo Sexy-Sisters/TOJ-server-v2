@@ -17,4 +17,14 @@ class TeacherCustomRepositoryImpl(
             )
             .fetch()
     }
+
+    override fun get(id: Long, schoolCode: String): Teacher? {
+        return query
+            .selectFrom(teacher)
+            .where(
+                teacher.id.eq(id),
+                teacher.school.code.value.eq(schoolCode)
+            )
+            .fetchOne()
+    }
 }

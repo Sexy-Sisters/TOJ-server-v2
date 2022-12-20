@@ -1,10 +1,13 @@
 package com.sexysisters.tojserverv2.domain.teacher.service
 
+import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
 import com.sexysisters.tojserverv2.domain.student.domain.Student
+import com.sexysisters.tojserverv2.domain.student.domain.isAttendSchool
 import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.teacher.*
 import com.sexysisters.tojserverv2.domain.user.UserReader
 import com.sexysisters.tojserverv2.domain.user.hasStudent
+import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherRequest
 import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -32,9 +35,16 @@ class TeacherServiceImpl(
     }
 
     override fun getTeacher(id: Long): TeacherResponse.Get {
-        checkStudentIdentity()
         val teacher = teacherReader.getTeacher(id)
         return teacherResponseMapper.ofDetail(teacher)
+    }
+
+    @Transactional
+    override fun update(id: Long, request: TeacherCommand.Update) {
+        val student = checkStudentIdentity()
+        if(!student.isAttendSchool()) throw SchoolException.SchoolNotFound()
+        val teacher = teacherReader.getTeacher(id, student.school!!)
+        teacher.update(request.image, request.name, request.nickname, request.bio)
     }
 
     private fun checkStudentIdentity(): Student {

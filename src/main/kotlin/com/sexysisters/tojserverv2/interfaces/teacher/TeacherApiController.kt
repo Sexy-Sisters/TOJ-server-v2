@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -36,21 +37,31 @@ class TeacherApiController(
         teacherService.createTeacher(teacherCommand)
     }
 
-    @ApiOperation(value = "학교 코드로 선생님들 조회")
+    @ApiOperation(value = "학교 코드로 선생님 목록 조회")
     @GetMapping
-    fun getTeachers(
+    fun getAll(
         @RequestParam("code") schoolCode: String
     ): CommonResponse<List<TeacherResponse.Search>> {
         val response = teacherService.getTeachers(schoolCode)
         return CommonResponse.success(response)
     }
 
-    @ApiOperation(value = "특정 학교에 속한 학생만 그 학교의 선생님들 조회")
+    @ApiOperation(value = "선생님 단건 조회")
     @GetMapping("/{id}")
-    fun getTeacher(
+    fun getDetail(
         @PathVariable("id") id: Long,
     ): CommonResponse<TeacherResponse.Get> {
         val response = teacherService.getTeacher(id)
         return CommonResponse.success(response)
+    }
+
+    @ApiOperation(value = "학교의 학생만 학교의 선생님 수정")
+    @PutMapping("/{id}")
+    fun update(
+        @PathVariable("id") id: Long,
+        @RequestBody request: TeacherRequest.Update
+    ) {
+        val teacherCommand = teacherDtoMapper.of(request)
+        teacherService.update(id, teacherCommand)
     }
 }

@@ -8,13 +8,13 @@ import javax.persistence.*
 @Table(name = "tbl_teacher")
 class Teacher(
     @Embedded
-    val image: Image,
+    var image: Image,
     @Embedded
-    val name: Name,
+    var name: Name,
     @Embedded
-    val nickname: Nickname,
+    var nickname: Nickname,
     @Embedded
-    val bio: Bio,
+    var bio: Bio,
 ) : BaseTimeEntity() {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,8 +24,10 @@ class Teacher(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
 
-    fun getTeacherImageUrl() = image.value
-    fun getTeacherName() = image.value
-    fun getTeacherNickname() = nickname.value
-    fun getTeacherBioValue() = bio.value
+    fun update(image: String, name: String, nickname: String, bio: String) {
+        this.image = Image(image)
+        this.name = Name(name)
+        this.nickname = Nickname(nickname)
+        this.bio = Bio(bio)
+    }
 }

@@ -13,4 +13,5 @@ import org.mapstruct.ReportingPolicy
 interface TeacherDtoMapper {
 
     fun of(request: TeacherRequest.Create): TeacherCommand.Create
+    fun of(request: TeacherRequest.Update): TeacherCommand.Update
 }
