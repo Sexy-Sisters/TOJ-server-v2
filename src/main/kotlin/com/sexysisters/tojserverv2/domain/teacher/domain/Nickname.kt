@@ -6,21 +6,14 @@ import javax.persistence.Embeddable
 import javax.validation.constraints.NotNull
 
 @Embeddable
-class Nickname private constructor(
+class Nickname(
     @field:NotNull
     @Column(name = "nickname")
     val value: String
 ) {
-    companion object {
-        private val REGEX = Regex("^{1,100}$")
-
-        fun of(value: String): Nickname {
-            validate(value)
-            return Nickname(value)
-        }
-
-        private fun validate(value: String) {
-            if (REGEX.matches(value)) throw TeacherException.TeacherNotValid()
-        }
+    init {
+        val MIN_LENGTH = 1
+        val MAX_LENGTH = 100
+        if (value.length !in MIN_LENGTH..MAX_LENGTH) throw TeacherException.TeacherNotValid()
     }
 }

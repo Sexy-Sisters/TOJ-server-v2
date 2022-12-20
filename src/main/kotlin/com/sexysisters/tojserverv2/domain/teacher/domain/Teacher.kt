@@ -23,4 +23,9 @@ class Teacher(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+
+    fun getTeacherImageUrl() = image.value
+    fun getTeacherName() = image.value
+    fun getTeacherNickname() = nickname.value
+    fun getTeacherBioValue() = bio.value
 }

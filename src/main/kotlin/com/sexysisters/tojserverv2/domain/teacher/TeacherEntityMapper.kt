@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component
 @Component
 class TeacherEntityMapper {
     fun of(command: TeacherCommand.Create) = Teacher(
-        Image.of(command.image),
-        Name.of(command.name),
-        Nickname.of(command.nickname),
-        Bio.of(command.bio),
+        Image(command.image),
+        Name(command.name),
+        Nickname(command.nickname),
+        Bio(command.bio),
     )
 }
