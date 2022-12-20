@@ -22,7 +22,18 @@ class SecurityConfiguration(
     private val jwtTokenProvider: JwtTokenProvider,
     private val jwtValidator: JwtValidator,
 ) {
-    private val VERSION = "/api/v2"
+
+    private val VERSION = "api/v2"
+    private val AUTH = "auth"
+    private val CODE = "code"
+    private val OAUTH = "oauth"
+    private val USER = "user"
+    private val STUDENT = "student"
+    private val TEACHER = "teacher"
+    private val SCHOOL = "school"
+    private val AD = "ad"
+    private val WIKI = "wiki"
+    private val IMAGE = "image"
 
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
@@ -54,26 +65,26 @@ class SecurityConfiguration(
             ).permitAll()
 
             // auth
-            .antMatchers(HttpMethod.POST, "$VERSION/auth").permitAll()
-            .antMatchers(HttpMethod.PUT, "$VERSION/auth").permitAll()
+            .antMatchers(HttpMethod.POST, "/$VERSION/$AUTH").permitAll()
+            .antMatchers(HttpMethod.PUT, "/$VERSION/$AUTH").permitAll()
 
             // TODO :: 인증 코드 발급 인증 안하고 허용하기 (계속 토큰 만료 에러뜸)
-            .antMatchers("$VERSION/uth/code").permitAll()
+            .antMatchers("/$VERSION/$AUTH/$CODE").permitAll()
 
             // oauth
-            .antMatchers("$VERSION/oauth/**").permitAll()
+            .antMatchers("/$VERSION/$OAUTH/**").permitAll()
 
             // user
-            .antMatchers(HttpMethod.POST, "$VERSION/user").permitAll()
+            .antMatchers(HttpMethod.POST, "/$VERSION/$USER").permitAll()
 
             // school
-            .antMatchers(HttpMethod.GET, "$VERSION/school").permitAll()
+            .antMatchers(HttpMethod.GET, "/$VERSION/$SCHOOL").permitAll()
 
             // IMG
-            .antMatchers(HttpMethod.POST, "$VERSION/image").permitAll()
+            .antMatchers(HttpMethod.POST, "/$VERSION/$IMAGE").permitAll()
 
             // TODO:: for test / change range of authority
-            .antMatchers("/api/v2/ad").permitAll()
+            .antMatchers("/$VERSION/$AD").permitAll()
 
             .anyRequest().authenticated()
 
