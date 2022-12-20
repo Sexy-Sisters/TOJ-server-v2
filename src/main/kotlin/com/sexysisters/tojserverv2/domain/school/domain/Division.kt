@@ -1,4 +1,4 @@
-package com.sexysisters.tojserverv2.domain.school.type
+package com.sexysisters.tojserverv2.domain.school.domain
 
 enum class Division(
     val description: String,

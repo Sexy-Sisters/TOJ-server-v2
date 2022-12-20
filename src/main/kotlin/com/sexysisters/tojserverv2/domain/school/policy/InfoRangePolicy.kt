@@ -1,9 +1,9 @@
 package com.sexysisters.tojserverv2.domain.school.policy
 
-import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.school.domain.Division
+import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
-import com.sexysisters.tojserverv2.domain.school.type.Division
-import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.domain.Student
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
@@ -19,9 +19,9 @@ class InfoRangePolicy : SchoolPolicy {
 
     override fun check(student: Student, school: School) {
         val schoolDivision = school.division
-        val grade = student.grade
-        val classroom = student.classroom
-        val number = student.number
+        val grade = student.getGradeValue()
+        val classroom = student.getClassroomValue()
+        val number = student.getNumberValue()
 
         val isValidGrade = when (schoolDivision) {
             Division.ELEMENTARY -> grade in 1..6

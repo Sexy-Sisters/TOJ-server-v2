@@ -1,5 +1,6 @@
 package com.sexysisters.tojserverv2.domain.student
 
+import com.sexysisters.tojserverv2.domain.student.domain.Student
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
@@ -17,6 +18,9 @@ interface StudentMapper {
         value = [
             Mapping(source = "user.profileImg", target = "profileImg"),
             Mapping(source = "user.nickname", target = "nickname"),
+            Mapping(source = "grade.value", target = "grade"),
+            Mapping(source = "classroom.value", target = "classroom"),
+            Mapping(source = "number.value", target = "number"),
         ]
     )
     fun of(student: Student): StudentInfo.Main

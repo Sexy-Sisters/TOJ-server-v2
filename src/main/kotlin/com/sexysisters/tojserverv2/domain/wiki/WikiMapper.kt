@@ -1,8 +1,7 @@
 package com.sexysisters.tojserverv2.domain.wiki
 
-import org.mapstruct.InjectionStrategy
-import org.mapstruct.Mapper
-import org.mapstruct.ReportingPolicy
+import com.sexysisters.tojserverv2.domain.wiki.domain.Wiki
+import org.mapstruct.*
 
 @Mapper(
     componentModel = "spring",
@@ -10,5 +9,14 @@ import org.mapstruct.ReportingPolicy
     unmappedTargetPolicy = ReportingPolicy.ERROR,
 )
 interface WikiMapper {
+
+    @Mappings(
+        value = [
+            Mapping(source = "name.value", target = "name"),
+            Mapping(source = "html.value", target = "html"),
+            Mapping(source = "markdown.value", target = "markdown"),
+            Mapping(source = "views.value", target = "views"),
+        ]
+    )
     fun of(wiki: Wiki): WikiInfo.Main
 }

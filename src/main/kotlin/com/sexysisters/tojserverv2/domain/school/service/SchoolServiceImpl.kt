@@ -4,9 +4,9 @@ import com.sexysisters.tojserverv2.domain.school.SchoolInfo
 import com.sexysisters.tojserverv2.domain.school.SchoolMapper
 import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.school.SchoolStore
-import com.sexysisters.tojserverv2.domain.school.makeRelation
 import com.sexysisters.tojserverv2.domain.school.policy.SchoolPolicy
 import com.sexysisters.tojserverv2.domain.student.StudentReader
+import com.sexysisters.tojserverv2.domain.student.domain.makeRelation
 import com.sexysisters.tojserverv2.infrastructure.neis.NeisSchoolReader
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -23,16 +23,14 @@ class SchoolServiceImpl(
 
     @Transactional(readOnly = true)
     override fun searchSchool(name: String): List<SchoolInfo.Search> {
-        val searchResults = neisSchoolReader.search(
-            schoolName = name,
-        )
+        val searchResults = neisSchoolReader.search(name)
         return searchResults.map { schoolMapper.of(it) }
     }
 
     @Transactional
     override fun createSchool(code: String): String {
         val initSchool = neisSchoolReader.getSchoolByCode(code)
-        return schoolStore.store(initSchool).code
+        return schoolStore.store(initSchool).code.value
     }
 
     @Transactional
@@ -40,7 +38,7 @@ class SchoolServiceImpl(
         val student = studentReader.getCurrentStudent()
         val school = schoolReader.getSchool(code)
         schoolPolicy.forEach { it.check(student, school) }
-        school.makeRelation(student)
+        student.makeRelation(school)
         return student.status.description
     }
 }

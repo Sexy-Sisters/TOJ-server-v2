@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.infrastructure.student
 
-import com.sexysisters.tojserverv2.domain.school.School
-import com.sexysisters.tojserverv2.domain.student.Status
+import com.sexysisters.tojserverv2.domain.school.domain.School
+import com.sexysisters.tojserverv2.domain.student.domain.Status
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.user.UserReader

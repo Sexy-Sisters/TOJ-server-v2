@@ -3,6 +3,7 @@ package com.sexysisters.tojserverv2.domain.wiki.service
 import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.wiki.*
+import com.sexysisters.tojserverv2.domain.wiki.domain.*
 import com.sexysisters.tojserverv2.domain.wiki.policy.WikiPolicy
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -20,7 +21,7 @@ class WikiServiceImpl(
 
     override fun createWiki(schoolCode: String) {
         val school = schoolReader.getSchool(schoolCode)
-        val initWiki = Wiki(name = school.name)
+        val initWiki = Wiki(Name(school.getNameValue()))
         initWiki.makeRelation(school)
         wikiStore.store(initWiki)
     }

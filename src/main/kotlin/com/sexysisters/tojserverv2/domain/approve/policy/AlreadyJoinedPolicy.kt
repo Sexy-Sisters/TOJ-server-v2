@@ -1,8 +1,8 @@
 package com.sexysisters.tojserverv2.domain.approve.policy
 
 import com.sexysisters.tojserverv2.domain.approve.exception.ApproveException
-import com.sexysisters.tojserverv2.domain.student.Status
-import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.domain.Status
+import com.sexysisters.tojserverv2.domain.student.domain.Student
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 

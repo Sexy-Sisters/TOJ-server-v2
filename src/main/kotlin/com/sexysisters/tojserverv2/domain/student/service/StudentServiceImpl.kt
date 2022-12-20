@@ -1,14 +1,9 @@
 package com.sexysisters.tojserverv2.domain.student.service
 
-import com.sexysisters.tojserverv2.domain.student.Status
-import com.sexysisters.tojserverv2.domain.student.Student
-import com.sexysisters.tojserverv2.domain.student.StudentCommand
-import com.sexysisters.tojserverv2.domain.student.StudentInfo
-import com.sexysisters.tojserverv2.domain.student.StudentMapper
-import com.sexysisters.tojserverv2.domain.student.StudentReader
-import com.sexysisters.tojserverv2.domain.student.StudentStore
+import com.sexysisters.tojserverv2.domain.student.*
+import com.sexysisters.tojserverv2.domain.student.domain.*
+import com.sexysisters.tojserverv2.domain.student.domain.Number
 import com.sexysisters.tojserverv2.domain.student.exception.StudentException
-import com.sexysisters.tojserverv2.domain.student.makeRelation
 import com.sexysisters.tojserverv2.domain.student.policy.StudentPolicy
 import com.sexysisters.tojserverv2.domain.user.UserReader
 import org.springframework.stereotype.Service
@@ -27,15 +22,17 @@ class StudentServiceImpl(
     override fun createStudent(command: StudentCommand.Create): Long {
         val user = userReader.getCurrentUser()
         studentPolicy.forEach { it.check(user) }
-        val initStudent = Student(
-            grade = command.grade,
-            classroom = command.classroom,
-            number = command.number,
-            age = command.age,
-        )
+        val initStudent = createStudentEntity(command)
         initStudent.makeRelation(user)
         return studentStore.store(initStudent)
     }
+
+    private fun createStudentEntity(command: StudentCommand.Create) = Student(
+        grade = Grade(command.grade),
+        classroom = Classroom(command.classroom),
+        number = Number(command.number),
+        age = Age(command.age),
+    )
 
     @Transactional(readOnly = true)
     override fun getStudentList(status: Status): List<StudentInfo.Main> {

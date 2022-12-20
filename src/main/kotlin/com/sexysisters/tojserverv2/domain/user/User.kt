@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.domain.user
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.domain.Student
 import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import com.sexysisters.tojserverv2.domain.user.type.Authority
 import javax.persistence.*

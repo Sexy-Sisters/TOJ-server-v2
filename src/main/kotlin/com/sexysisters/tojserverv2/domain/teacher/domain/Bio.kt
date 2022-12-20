@@ -1,20 +1,22 @@
-package com.sexysisters.tojserverv2.domain.teacher
+package com.sexysisters.tojserverv2.domain.teacher.domain
 
 import com.sexysisters.tojserverv2.domain.teacher.exception.TeacherException
 import javax.persistence.Column
 import javax.persistence.Embeddable
+import javax.validation.constraints.NotNull
 
 @Embeddable
-class Nickname private constructor(
-    @Column(name = "nickname")
+class Bio private constructor(
+    @field:NotNull
+    @Column(name = "bio")
     val value: String
 ) {
     companion object {
-        private val REGEX = Regex("^{1,100}$")
+        private val REGEX = Regex("^{1,500}$")
 
-        fun of(value: String): Nickname {
+        fun of(value: String): Bio {
             validate(value)
-            return Nickname(value)
+            return Bio(value)
         }
 
         private fun validate(value: String) {

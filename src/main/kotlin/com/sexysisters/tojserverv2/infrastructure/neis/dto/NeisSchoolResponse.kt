@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.infrastructure.neis.dto
 
-import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.school.domain.*
 
 data class NeisSchoolResponse constructor(
     val code: String,
@@ -15,12 +15,12 @@ data class NeisSchoolResponse constructor(
 ) {
     fun toEntity() =
         School(
-            code = this.code,
-            belong = this.belong,
-            name = this.name,
-            address = this.address,
-            birthDay = this.birthday,
-            homePageAddress = this.homePageAddress,
-            phone = this.phone,
+            code = Code(this.code),
+            belong = Belong(this.belong),
+            name = Name(this.name),
+            address = Address(this.address),
+            birthday = Birthday(this.birthday),
+            homePageAddress = HomePageAddress(this.homePageAddress),
+            phone = Phone(this.phone),
         )
 }

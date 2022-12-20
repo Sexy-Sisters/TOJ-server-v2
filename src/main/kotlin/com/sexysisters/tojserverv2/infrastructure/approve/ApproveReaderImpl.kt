@@ -2,7 +2,7 @@ package com.sexysisters.tojserverv2.infrastructure.approve
 
 import com.sexysisters.tojserverv2.domain.approve.ApproveReader
 import com.sexysisters.tojserverv2.domain.approve.exception.ApproveException
-import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.domain.Student
 import org.springframework.stereotype.Component
 
 @Component

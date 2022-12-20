@@ -1,8 +1,8 @@
 package com.sexysisters.tojserverv2.domain.school.policy
 
-import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.school.exception.SchoolException
-import com.sexysisters.tojserverv2.domain.student.Student
+import com.sexysisters.tojserverv2.domain.student.domain.Student
 import com.sexysisters.tojserverv2.infrastructure.student.StudentRepository
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
@@ -19,9 +19,9 @@ class AlreadyExistsStudentPolicy(
     override fun check(student: Student, school: School) {
         val hasStudent = studentRepository.checkAlreadyExists(
             school = school,
-            grade = student.grade,
-            classroom = student.classroom,
-            number = student.number,
+            grade = student.getGradeValue(),
+            classroom = student.getClassroomValue(),
+            number = student.getNumberValue(),
         )
         if (hasStudent) {
             throw SchoolException.StudentAlreadyExists()

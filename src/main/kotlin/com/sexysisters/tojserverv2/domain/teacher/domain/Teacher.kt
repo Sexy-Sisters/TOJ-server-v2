@@ -1,7 +1,7 @@
-package com.sexysisters.tojserverv2.domain.teacher
+package com.sexysisters.tojserverv2.domain.teacher.domain
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import com.sexysisters.tojserverv2.domain.school.School
+import com.sexysisters.tojserverv2.domain.school.domain.School
 import javax.persistence.*
 
 @Entity

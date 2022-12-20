@@ -13,7 +13,8 @@ import org.springframework.stereotype.Component
 class AlreadyCreatedPolicy : StudentPolicy {
 
     override fun check(user: User) {
-        if (user.student != null) {
+        val hasStudent = user.student != null
+        if (hasStudent) {
             throw StudentException.AlreadyCreated()
         }
     }
