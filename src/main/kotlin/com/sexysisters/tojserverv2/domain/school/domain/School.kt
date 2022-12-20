@@ -37,6 +37,7 @@ class School(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "school_id")
     val id: Long = 0L
 
     fun getCodeValue() = code.value
