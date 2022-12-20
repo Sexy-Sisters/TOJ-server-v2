@@ -33,14 +33,14 @@ class School(
     var kind: Kind? = null
 
     @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
-    val students = mutableListOf<Student>()
+    val students = mutableSetOf<Student>()
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wiki_id")
     var wiki: Wiki? = null
 
     @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
-    val teachers = mutableListOf<Teacher>()
+    val teachers = mutableSetOf<Teacher>()
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L

@@ -30,10 +30,10 @@ class Student(
     var user: User? = null
 
     @OneToMany(mappedBy = "applicant", cascade = [CascadeType.ALL])
-    val approves = mutableListOf<Approve>()
+    val approves = mutableSetOf<Approve>()
 
     @OneToMany(mappedBy = "acceptor", cascade = [CascadeType.ALL])
-    val acceptorList = mutableListOf<Approve>()
+    val acceptors = mutableSetOf<Approve>()
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L

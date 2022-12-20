@@ -38,7 +38,7 @@ class Approve(
                 acceptor = acceptor,
             )
             applicant.approves.add(initApprove)
-            acceptor.acceptorList.add(initApprove)
+            acceptor.acceptors.add(initApprove)
             return initApprove
         }
     }
