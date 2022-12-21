@@ -32,17 +32,6 @@ class NeisSchoolReaderImpl(
         val schoolInfo = neisSchoolInfoResponse.schoolInfo
             ?: throw SchoolException.SchoolNotFound()
         val row = schoolInfo[1].row
-
-        println(row[1].ATPT_OFCDC_SC_NM)
-        println(row[1].FOAS_MEMRD)
-        println(row[1].HMPG_ADRES)
-        println(row[1].HS_SC_NM)
-        println(row[1].SCHUL_NM)
-        println(row[1].ORG_TELNO)
-        println(row[1].ORG_RDNMA)
-        println(row[1].SCHUL_KND_SC_NM)
-        println(row[1].SD_SCHUL_CODE)
-
         return row.map { neisSchoolMapper.of(it) }
     }
 
