@@ -10,24 +10,4 @@ import org.mapstruct.*
     unmappedTargetPolicy = ReportingPolicy.ERROR,
 )
 interface TeacherResponseMapper {
-
-    @Mappings(
-        value = [
-            Mapping(source = "teacher.image.value", target = "image"),
-            Mapping(source = "teacher.name.value", target = "name"),
-            Mapping(source = "teacher.nickname.value", target = "nickname"),
-            Mapping(source = "teacher.bio.value", target = "bio"),
-        ]
-    )
-    fun of(teacher: Teacher): TeacherResponse.Search
-
-    @Mappings(
-        value = [
-            Mapping(source = "teacher.image.value", target = "image"),
-            Mapping(source = "teacher.name.value", target = "name"),
-            Mapping(source = "teacher.nickname.value", target = "nickname"),
-            Mapping(source = "teacher.bio.value", target = "bio"),
-        ]
-    )
-    fun ofDetail(teacher: Teacher): TeacherResponse.Get
 }

@@ -2,49 +2,42 @@ package com.sexysisters.tojserverv2.domain.user
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.student.domain.Student
-import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import com.sexysisters.tojserverv2.domain.user.type.Authority
+import com.sexysisters.tojserverv2.domain.user.type.Nickname
 import javax.persistence.*
 
 @Entity
 @Table(name = "tbl_user")
 class User(
-    val email: String,
-    var password: String,
-    var nickname: String,
-    var profileImg: String,
-    var name: String,
+    @Embedded val email: Email,
+    @Embedded var password: Password,
+    @Embedded var nickname: Nickname,
+    @Embedded var image: Image,
+    @Embedded var name: Name,
 ) : BaseTimeEntity() {
 
     @Enumerated(EnumType.STRING)
     var authority: Authority = Authority.USER
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     var student: Student? = null
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
-
-    init {
-        if (email.isBlank()) throw UserException.UserNotValid()
-        if (password.isBlank()) throw UserException.UserNotValid()
-        if (nickname.isBlank()) throw UserException.UserNotValid()
-        if (profileImg.isBlank()) throw UserException.UserNotValid()
-        if (name.isBlank()) throw UserException.UserNotValid()
-    }
 }
 
 fun User.updateInfo(
     nickname: String,
     name: String,
 ): User {
-    this.nickname = nickname
-    this.name = name
+    this.nickname = Nickname(nickname)
+    this.name = Name(name)
     return this
 }
 
-fun User.updateProfileImg(profileImg: String) {
-    this.profileImg = profileImg
+fun User.updateProfileImg(image: String) {
+    this.image = Image(image)
 }
 
 fun User.hasStudent() = student != null

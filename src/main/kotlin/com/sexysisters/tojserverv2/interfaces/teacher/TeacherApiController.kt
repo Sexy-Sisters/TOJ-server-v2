@@ -31,27 +31,21 @@ class TeacherApiController(
     @ApiOperation(value = "선생님 생성")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    fun create(
-        @RequestBody @Valid request: TeacherRequest.Create
-    ) {
+    fun create(@RequestBody @Valid request: TeacherRequest.Create) {
         val teacherCommand = teacherDtoMapper.of(request)
         teacherService.create(teacherCommand)
     }
 
     @ApiOperation(value = "학교 코드로 선생님 목록 조회")
     @GetMapping
-    fun getAll(
-        @RequestParam("code") schoolCode: String
-    ): CommonResponse<List<TeacherResponse.Search>> {
+    fun getAll(@RequestParam("code") schoolCode: String): CommonResponse<List<TeacherResponse.Main>> {
         val response = teacherService.getTeachers(schoolCode)
         return CommonResponse.success(response)
     }
 
     @ApiOperation(value = "선생님 단건 조회")
     @GetMapping("/{id}")
-    fun getDetail(
-        @PathVariable("id") id: Long,
-    ): CommonResponse<TeacherResponse.Get> {
+    fun getDetail(@PathVariable("id") id: Long): CommonResponse<TeacherResponse.Main> {
         val response = teacherService.getTeacher(id)
         return CommonResponse.success(response)
     }
@@ -68,9 +62,7 @@ class TeacherApiController(
 
     @ApiOperation(value = "학교의 학생만 학교의 선생님 삭제")
     @DeleteMapping("/{id}")
-    fun delete(
-        @PathVariable("id") id: Long,
-    ) {
+    fun delete(@PathVariable("id") id: Long) {
         teacherService.delete(id)
     }
 }

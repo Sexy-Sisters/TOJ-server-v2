@@ -7,7 +7,7 @@ import javax.persistence.Embeddable
 import javax.validation.constraints.NotNull
 
 @Embeddable
-class Image (
+class Image(
     @URL
     @field:NotNull
     @Column(name = "image")

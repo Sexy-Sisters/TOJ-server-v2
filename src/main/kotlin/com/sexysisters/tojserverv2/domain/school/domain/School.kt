@@ -39,7 +39,7 @@ class School(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
 
-    fun getCodeValue() = code.value
+    fun codeValue() = code.value
     fun getBelongValue() = belong.value
     fun getNameValue() = name.value
     fun getAddressValue() = address.value

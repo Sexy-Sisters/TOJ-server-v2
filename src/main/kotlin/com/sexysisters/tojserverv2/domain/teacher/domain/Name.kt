@@ -12,8 +12,8 @@ class Name(
     val value: String
 ) {
     init {
-        val MIN_LENGHT = 1
-        val MAX_LENGHT = 100
-        if (value.length !in MIN_LENGHT..MAX_LENGHT) throw TeacherException.TeacherNotValid()
+        val MIN_LENGTH = 1
+        val MAX_LENGTH = 50
+        if (value.length !in MIN_LENGTH..MAX_LENGTH) throw TeacherException.TeacherNotValid()
     }
 }

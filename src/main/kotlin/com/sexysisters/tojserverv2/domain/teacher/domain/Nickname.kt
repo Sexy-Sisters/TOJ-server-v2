@@ -13,7 +13,7 @@ class Nickname(
 ) {
     init {
         val MIN_LENGTH = 1
-        val MAX_LENGTH = 100
+        val MAX_LENGTH = 50
         if (value.length !in MIN_LENGTH..MAX_LENGTH) throw TeacherException.TeacherNotValid()
     }
 }

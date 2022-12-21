@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 class TeacherCustomRepositoryImpl(
     private val query: JPAQueryFactory
 ) : TeacherCustomRepository {
-    override fun search(schoolCode: String): List<Teacher> {
+    override fun getTeachersBySchoolCode(schoolCode: String): List<Teacher> {
         return query
             .selectFrom(teacher)
             .where(
@@ -18,7 +18,7 @@ class TeacherCustomRepositoryImpl(
             .fetch()
     }
 
-    override fun get(id: Long, schoolCode: String): Teacher? {
+    override fun findByIdAndSchoolCode(id: Long, schoolCode: String): Teacher? {
         return query
             .selectFrom(teacher)
             .where(
