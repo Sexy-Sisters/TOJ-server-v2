@@ -3,6 +3,7 @@ package com.sexysisters.tojserverv2.config
 import com.sexysisters.tojserverv2.common.filter.JwtAuthenticationFilter
 import com.sexysisters.tojserverv2.common.filter.JwtExceptionFilter
 import com.sexysisters.tojserverv2.common.security.auth.AuthDetailsService
+import com.sexysisters.tojserverv2.config.SecurityConfiguration.AccessUrl.*
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
 import org.springframework.context.annotation.Bean
@@ -22,7 +23,21 @@ class SecurityConfiguration(
     private val jwtTokenProvider: JwtTokenProvider,
     private val jwtValidator: JwtValidator,
 ) {
-    private val VERSION = "/api/v2"
+
+    enum class AccessUrl(
+        val url: String,
+    ) {
+        AUTH("/api/v2/auth"),
+        CODE("/api/v2/auth/code"),
+        OAUTH("/api/v2/oauth"),
+        USER("/api/v2/user"),
+        STUDENT("/api/v2/student"),
+        TEACHER("/api/v2/teacher"),
+        SCHOOL("/api/v2/school"),
+        AD("/api/v2/ad"),
+        WIKI("/api/v2/wiki"),
+        IMAGE("/api/v2/image"),
+    }
 
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
@@ -54,26 +69,26 @@ class SecurityConfiguration(
             ).permitAll()
 
             // auth
-            .antMatchers(HttpMethod.POST, "$VERSION/auth").permitAll()
-            .antMatchers(HttpMethod.PUT, "$VERSION/auth").permitAll()
+            .antMatchers(HttpMethod.POST, AUTH.url).permitAll()
+            .antMatchers(HttpMethod.PUT, AUTH.url).permitAll()
 
             // TODO :: 인증 코드 발급 인증 안하고 허용하기 (계속 토큰 만료 에러뜸)
-            .antMatchers("$VERSION/uth/code").permitAll()
+            .antMatchers(CODE.url).permitAll()
 
             // oauth
-            .antMatchers("$VERSION/oauth/**").permitAll()
+            .antMatchers(OAUTH.url).permitAll()
 
             // user
-            .antMatchers(HttpMethod.POST, "$VERSION/user").permitAll()
+            .antMatchers(HttpMethod.POST, USER.url).permitAll()
 
             // school
-            .antMatchers(HttpMethod.GET, "$VERSION/school").permitAll()
+            .antMatchers(HttpMethod.GET, SCHOOL.url).permitAll()
 
             // IMG
-            .antMatchers(HttpMethod.POST, "$VERSION/image").permitAll()
+            .antMatchers(HttpMethod.POST, IMAGE.url).permitAll()
 
-            // TODO:: for test / change range of authority
-            .antMatchers("/api/v2/ad").permitAll()
+            // TODO:: To test / It need to be changed range of authority
+            .antMatchers(AD.url).permitAll()
 
             .anyRequest().authenticated()
 
