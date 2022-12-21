@@ -21,10 +21,10 @@ class Wiki(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
 
-    fun getNameValue() = name.value
-    fun getHTMLValue() = html.value
-    fun getMarkdownValue() = markdown.value
-    fun getViewsValue() = views.value
+    fun nameValue() = name.value
+    fun htmlValue() = html.value
+    fun markdownValue() = markdown.value
+    fun viewsValue() = views.value
 }
 
 fun Wiki.makeRelation(school: School) {

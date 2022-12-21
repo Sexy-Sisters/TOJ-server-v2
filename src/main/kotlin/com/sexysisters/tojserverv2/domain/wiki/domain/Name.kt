@@ -2,8 +2,10 @@ package com.sexysisters.tojserverv2.domain.wiki.domain
 
 import com.sexysisters.tojserverv2.domain.wiki.exception.WikiException
 import javax.persistence.Column
+import javax.persistence.Embeddable
 import javax.validation.constraints.NotNull
 
+@Embeddable
 class Name(
     @field:NotNull
     @Column(name = "name")
