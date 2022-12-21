@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.infrastructure.user
 
-import com.sexysisters.tojserverv2.domain.user.User
+import com.sexysisters.tojserverv2.domain.user.domain.User
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository : JpaRepository<User, Long> {

@@ -1,7 +1,8 @@
 package com.sexysisters.tojserverv2.domain.user
 
 import com.sexysisters.tojserverv2.config.properties.S3Properties
-import com.sexysisters.tojserverv2.domain.user.type.Nickname
+import com.sexysisters.tojserverv2.domain.user.domain.*
+import com.sexysisters.tojserverv2.domain.user.domain.Nickname
 import org.springframework.security.crypto.password.PasswordEncoder
 
 class UserCommand {

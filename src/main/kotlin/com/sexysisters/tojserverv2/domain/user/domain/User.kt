@@ -1,9 +1,7 @@
-package com.sexysisters.tojserverv2.domain.user
+package com.sexysisters.tojserverv2.domain.user.domain
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.student.domain.Student
-import com.sexysisters.tojserverv2.domain.user.type.Authority
-import com.sexysisters.tojserverv2.domain.user.type.Nickname
 import javax.persistence.*
 
 @Entity
@@ -25,6 +23,12 @@ class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+
+    fun emailValue() = email.value
+    fun passwordValue() = password.value
+    fun nicknameValue() = nickname.value
+    fun imageValue() = image.value
+    fun nameValue() = name.value
 }
 
 fun User.updateInfo(

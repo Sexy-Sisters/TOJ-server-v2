@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.common.security.auth
 
-import com.sexysisters.tojserverv2.domain.user.User
+import com.sexysisters.tojserverv2.domain.user.domain.User
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
@@ -10,9 +10,9 @@ class AuthDetails(
 
     override fun getAuthorities() = mutableListOf(SimpleGrantedAuthority(user.authority.name))
 
-    override fun getPassword() = this.user.password
+    override fun getPassword() = this.user.passwordValue()
 
-    override fun getUsername() = this.user.email
+    override fun getUsername() = this.user.emailValue()
 
     override fun isAccountNonExpired() = true
 

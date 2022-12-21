@@ -2,7 +2,7 @@ package com.sexysisters.tojserverv2.domain.user.service
 
 import com.sexysisters.tojserverv2.config.properties.S3Properties
 import com.sexysisters.tojserverv2.domain.user.*
-import com.sexysisters.tojserverv2.domain.user.type.Authority
+import com.sexysisters.tojserverv2.domain.user.domain.*
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -25,11 +25,11 @@ val target = UserServiceImpl(
 )
 
 val user = User(
-    name = "이규진",
-    nickname = "청출어람",
-    email = "leekujin14@gmail.com",
-    password = "enCodedPassword",
-    profileImg = S3Properties.defaultProfileImg,
+    name = Name("이규진"),
+    nickname = Nickname("청출어람"),
+    email = Email("leekujin14@gmail.com"),
+    password = Password("enCodedPassword"),
+    image = Image(S3Properties.defaultProfileImg)
 )
 
 class UserServiceTest : BehaviorSpec({
@@ -52,11 +52,11 @@ class UserServiceTest : BehaviorSpec({
             Then("Command가 정상적으로 Entity로 변환되어야 한다.") {
                 val userEntity = userCapture.captured
 
-                userEntity.email shouldBe createRequest.email
-                userEntity.nickname shouldBe createRequest.nickname
-                userEntity.password shouldBe "encodedPassword"
+                userEntity.emailValue() shouldBe createRequest.email
+                userEntity.nicknameValue() shouldBe createRequest.nickname
+                userEntity.passwordValue() shouldBe "encodedPassword"
                 userEntity.authority shouldBe Authority.USER
-                userEntity.profileImg shouldBe S3Properties.defaultProfileImg
+                userEntity.imageValue() shouldBe S3Properties.defaultProfileImg
             }
 
             Then("PasswordEncoder와 UserStore 로직이 동작해야 한다.") {
@@ -78,10 +78,10 @@ class UserServiceTest : BehaviorSpec({
             Then("정확한 유저 프로필이 조회되어야 한다.") {
 
                 userIdCapture.captured shouldBe userId
-                userInfo.email shouldBe user.email
-                userInfo.nickname shouldBe user.nickname
-                userInfo.profileImg shouldBe user.profileImg
-                userInfo.name shouldBe user.name
+                userInfo.email shouldBe user.emailValue()
+                userInfo.nickname shouldBe user.nicknameValue()
+                userInfo.profileImg shouldBe user.imageValue()
+                userInfo.name shouldBe user.nameValue()
                 // TODO :: add properties -> description, age, school, ...
             }
 
@@ -98,10 +98,10 @@ class UserServiceTest : BehaviorSpec({
             val userInfo = target.findCurrentUserProfile()
 
             Then("정확한 값이 반환되어야 한다.") {
-                userInfo.email shouldBe user.email
-                userInfo.nickname shouldBe user.nickname
-                userInfo.profileImg shouldBe user.profileImg
-                userInfo.name shouldBe user.name
+                userInfo.email shouldBe user.emailValue()
+                userInfo.nickname shouldBe user.nicknameValue()
+                userInfo.profileImg shouldBe user.imageValue()
+                userInfo.name shouldBe user.nameValue()
             }
         }
     }

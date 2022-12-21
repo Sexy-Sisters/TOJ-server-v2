@@ -7,8 +7,8 @@ import com.sexysisters.tojserverv2.domain.user.UserReader
 import com.sexysisters.tojserverv2.domain.user.UserStore
 import com.sexysisters.tojserverv2.domain.user.setEncodedPassword
 import com.sexysisters.tojserverv2.domain.user.toEntity
-import com.sexysisters.tojserverv2.domain.user.updateInfo
-import com.sexysisters.tojserverv2.domain.user.updateProfileImg
+import com.sexysisters.tojserverv2.domain.user.domain.updateInfo
+import com.sexysisters.tojserverv2.domain.user.domain.updateProfileImg
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

@@ -3,16 +3,16 @@ package com.sexysisters.tojserverv2.domain.student.domain
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.approve.Approve
 import com.sexysisters.tojserverv2.domain.school.domain.School
-import com.sexysisters.tojserverv2.domain.user.User
+import com.sexysisters.tojserverv2.domain.user.domain.User
 import javax.persistence.*
 
 @Entity
 @Table(name = "tbl_student")
 class Student(
-    @Embedded private val grade: Grade,
-    @Embedded private val classroom: Classroom,
-    @Embedded private val number: Number,
-    @Embedded private val age: Age,
+    @Embedded val grade: Grade,
+    @Embedded val classroom: Classroom,
+    @Embedded val number: Number,
+    @Embedded val age: Age,
 ) : BaseTimeEntity() {
 
     @Enumerated(EnumType.STRING)
@@ -36,10 +36,10 @@ class Student(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
 
-    fun getGradeValue() = grade.value
-    fun getClassroomValue() = classroom.value
-    fun getNumberValue() = number.value
-    fun getAgeValue() = age.value
+    fun gradeValue() = grade.value
+    fun classroomValue() = classroom.value
+    fun numberValue() = number.value
+    fun ageValue() = age.value
 }
 
 fun Student.makeRelation(user: User) {

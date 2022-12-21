@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.Duration
-import java.util.Date
+import java.util.*
 
 @Service
 class AuthServiceImpl(
@@ -33,7 +33,7 @@ class AuthServiceImpl(
     override fun login(command: AuthCommand.LoginRequest): AuthInfo.Token {
         val email = command.email
         val user = userReader.getUser(email)
-        checkPassword(command.password, user.password)
+        checkPassword(command.password, user.passwordValue())
 
         val accessToken = jwtTokenProvider.createAccessToken(email)
         val refreshToken = jwtTokenProvider.createRefreshToken(email)
@@ -63,7 +63,7 @@ class AuthServiceImpl(
         val parsedAccessToken = jwtTokenProvider.parseToken(accessToken)!!
         val remainTime = jwtTokenProvider.getExpiredTime(parsedAccessToken).time - Date().time
         redisRepository.setBlackList(parsedAccessToken, Duration.ofMillis(remainTime))
-        redisRepository.deleteData(user.email)
+        redisRepository.deleteData(user.emailValue())
     }
 
     @Transactional(readOnly = true)

@@ -4,8 +4,8 @@ import com.sexysisters.tojserverv2.config.properties.JwtProperties
 import com.sexysisters.tojserverv2.domain.auth.AuthCommand
 import com.sexysisters.tojserverv2.domain.auth.exception.AuthErrorCode
 import com.sexysisters.tojserverv2.domain.auth.exception.AuthException
-import com.sexysisters.tojserverv2.domain.user.User
 import com.sexysisters.tojserverv2.domain.user.UserReader
+import com.sexysisters.tojserverv2.domain.user.domain.*
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
 import com.sexysisters.tojserverv2.infrastructure.mail.MailSenderImpl
@@ -36,18 +36,18 @@ val target = AuthServiceImpl(
 )
 
 val user = User(
-    name = "이규진",
-    nickname = "청출어람",
-    email = "email",
-    password = "password",
-    profileImg = "추후 수정",
+    name = Name("이규진"),
+    nickname = Nickname("청출어람"),
+    email = Email("email@email.com"),
+    password = Password("password"),
+    image = Image("추후 수정)")
 )
 
 class AuthServiceTest : BehaviorSpec({
 
     Given("로그인 성공 answer 정의") {
 
-        val email = "email"
+        val email = "email@email.com"
         val accessToken = "accessToken"
         val refreshToken = "refreshToken"
 
