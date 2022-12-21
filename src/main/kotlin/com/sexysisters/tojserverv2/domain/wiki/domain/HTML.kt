@@ -6,12 +6,7 @@ import javax.persistence.Column
 import javax.validation.constraints.NotNull
 
 class HTML {
-
     @field:NotNull
     @Column(name = "html", length = 100000)
     var value: String = WikiProperties.EMPTY
-
-    init {
-        if (value.isBlank()) throw WikiException.WikiNotValid()
-    }
 }

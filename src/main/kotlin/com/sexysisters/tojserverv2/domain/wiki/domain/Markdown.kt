@@ -8,12 +8,7 @@ import javax.validation.constraints.NotNull
 
 @Embeddable
 class Markdown {
-
     @field:NotNull
     @Column(name = "markdown", length = 100000)
     var value: String = WikiProperties.EMPTY
-
-    init {
-        if (value.isBlank()) throw WikiException.WikiNotValid()
-    }
 }

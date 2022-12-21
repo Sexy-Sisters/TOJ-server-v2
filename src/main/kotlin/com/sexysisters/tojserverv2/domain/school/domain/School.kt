@@ -40,11 +40,11 @@ class School(
     @Column(name = "school_id")
     val id: Long = 0L
 
-    fun getCodeValue() = code.value
-    fun getBelongValue() = belong.value
-    fun getNameValue() = name.value
-    fun getAddressValue() = address.value
-    fun getBirthdayValue() = birthday.value
-    fun getHomePageAddressValue() = homePageAddress.value
-    fun getPhoneValue() = phone.value
+    fun codeValue() = code.value
+    fun belongValue() = belong.value
+    fun nameValue() = name.value
+    fun addressValue() = address.value
+    fun birthdayValue() = birthday.value
+    fun homePageAddressValue() = homePageAddress.value
+    fun phoneValue() = phone.value
 }

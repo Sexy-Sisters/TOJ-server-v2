@@ -8,8 +8,4 @@ class Views {
     @field:NotNull
     @Column(name = "views")
     var value: Int = 0
-
-    init {
-        if (value != 0) throw WikiException.WikiNotValid()
-    }
 }

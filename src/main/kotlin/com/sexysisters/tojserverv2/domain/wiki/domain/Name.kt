@@ -10,7 +10,10 @@ class Name(
     val value: String
 ) {
     init {
+        val MIN_LENGTH = 4
+        val MAX_LENGTH = 21
+
         if (value.isBlank()) throw WikiException.WikiNotValid()
-        if (value.length !in 2..5) throw WikiException.WikiNotValid()
+        if (value.length !in MIN_LENGTH..MAX_LENGTH) throw WikiException.WikiNotValid()
     }
 }

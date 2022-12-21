@@ -13,7 +13,7 @@ class SchoolFacade(
 ) {
 
     fun applySchool(code: String): String {
-        val isExists = schoolRepository.existsByCode(code)
+        val isExists = schoolRepository.existsByCodeValue(code)
         if (!isExists) {
             val schoolCode = schoolService.createSchool(code)
             wikiService.createWiki(schoolCode)
