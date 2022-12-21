@@ -12,6 +12,6 @@ class SchoolReaderImpl(
 
     @Transactional
     override fun getSchool(code: String) =
-        schoolRepository.findByCode(code)
+        schoolRepository.findByCodeValue(code)
             ?: throw SchoolException.SchoolNotFound()
 }
