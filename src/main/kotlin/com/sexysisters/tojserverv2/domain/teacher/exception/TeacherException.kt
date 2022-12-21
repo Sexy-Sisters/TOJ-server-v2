@@ -6,4 +6,5 @@ class TeacherException {
     class TeacherNotValid : BaseException(TeacherErrorCode.TEACHER_NOT_VALID)
     class DuplicateTeacherName : BaseException(TeacherErrorCode.DUPLICATE_NAME)
     class DuplicateTeacherNickname : BaseException(TeacherErrorCode.DUPLICATE_NICKNAME)
+    class TeacherNotFound : BaseException(TeacherErrorCode.TEACHER_NOT_FOUND)
 }

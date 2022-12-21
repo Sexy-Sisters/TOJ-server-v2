@@ -9,10 +9,10 @@ import javax.persistence.*
 @Entity
 @Table(name = "tbl_student")
 class Student(
-    @Embedded val grade: Grade,
-    @Embedded val classroom: Classroom,
-    @Embedded val number: Number,
-    @Embedded val age: Age,
+    @Embedded private val grade: Grade,
+    @Embedded private val classroom: Classroom,
+    @Embedded private val number: Number,
+    @Embedded private val age: Age,
 ) : BaseTimeEntity() {
 
     @Enumerated(EnumType.STRING)
@@ -63,3 +63,5 @@ fun Student.waiting() {
 fun Student.engaged() {
     status = Status.ENGAGED
 }
+
+fun Student.isAttendSchool() = school != null

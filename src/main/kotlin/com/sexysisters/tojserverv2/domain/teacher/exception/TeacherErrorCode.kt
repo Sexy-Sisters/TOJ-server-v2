@@ -8,4 +8,5 @@ enum class TeacherErrorCode(
     TEACHER_NOT_VALID("Teacher domain is not valid"),
     DUPLICATE_NAME("Teacher name is duplicate"),
     DUPLICATE_NICKNAME("Teacher nickname is duplicate"),
+    TEACHER_NOT_FOUND("Teacher not found"),
 }

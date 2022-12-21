@@ -6,21 +6,14 @@ import javax.persistence.Embeddable
 import javax.validation.constraints.NotNull
 
 @Embeddable
-class Bio private constructor(
+class Bio(
     @field:NotNull
     @Column(name = "bio")
     val value: String
 ) {
-    companion object {
-        private val REGEX = Regex("^{1,500}$")
-
-        fun of(value: String): Bio {
-            validate(value)
-            return Bio(value)
-        }
-
-        private fun validate(value: String) {
-            if (REGEX.matches(value)) throw TeacherException.TeacherNotValid()
-        }
+    init {
+        val MIN_LENGTH = 1
+        val MAX_LENGTH = 500
+        if (value.length !in MIN_LENGTH..MAX_LENGTH) throw TeacherException.TeacherNotValid()
     }
 }

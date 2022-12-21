@@ -16,8 +16,8 @@ interface StudentMapper {
 
     @Mappings(
         value = [
-            Mapping(source = "user.profileImg", target = "profileImg"),
-            Mapping(source = "user.nickname", target = "nickname"),
+            Mapping(source = "user.image.value", target = "profileImg"),
+            Mapping(source = "user.nickname.value", target = "nickname"),
             Mapping(source = "grade.value", target = "grade"),
             Mapping(source = "classroom.value", target = "classroom"),
             Mapping(source = "number.value", target = "number"),
