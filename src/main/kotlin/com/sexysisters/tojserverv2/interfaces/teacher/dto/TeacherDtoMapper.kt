@@ -16,10 +16,10 @@ interface TeacherDtoMapper {
 
     @Mappings(
         value = [
-            Mapping(source = "teacher.image.value", target = "image"),
-            Mapping(source = "teacher.name.value", target = "name"),
-            Mapping(source = "teacher.nickname.value", target = "nickname"),
-            Mapping(source = "teacher.bio.value", target = "bio"),
+            Mapping(source = "image.value", target = "image"),
+            Mapping(source = "name.value", target = "name"),
+            Mapping(source = "nickname.value", target = "nickname"),
+            Mapping(source = "bio.value", target = "bio"),
         ]
     )
     fun of(teacher: Teacher): TeacherResponse.Main
