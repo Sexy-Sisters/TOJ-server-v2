@@ -14,6 +14,7 @@ class Phone(
     init {
         val MIN_LENGTH = 11
         val MAX_LENTH = 12
+
         if (value.isBlank()) throw SchoolException.SchoolNotValid()
         if (value.length !in MIN_LENGTH..MAX_LENTH) throw SchoolException.SchoolNotValid()
     }

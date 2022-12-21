@@ -13,6 +13,7 @@ class Address(
 ) {
     init {
         val MAX_LENGTH = 34
+
         if (value.isBlank()) throw SchoolException.SchoolNotValid()
         if (value.length > MAX_LENGTH) throw SchoolException.SchoolNotValid()
     }

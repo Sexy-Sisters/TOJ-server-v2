@@ -13,6 +13,7 @@ class Belong(
 ) {
     init {
         val BELONG_FORMAT = "교육청"
+
         if (value.isBlank()) throw SchoolException.SchoolNotValid()
         if (!value.endsWith(BELONG_FORMAT)) throw SchoolException.SchoolNotValid()
     }
