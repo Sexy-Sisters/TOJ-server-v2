@@ -14,6 +14,11 @@ class TeacherStoreImpl(
         return teacherRepository.save(teacher)
     }
 
+    override fun delete(teacher: Teacher): Teacher {
+        teacherRepository.delete(teacher)
+        return teacher;
+    }
+
     private fun validate(teacher: Teacher) {
         checkDuplicateName(teacher)
         checkDuplicateNickname(teacher)

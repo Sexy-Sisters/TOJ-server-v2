@@ -8,6 +8,7 @@ import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherResponse
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -63,5 +64,13 @@ class TeacherApiController(
     ) {
         val teacherCommand = teacherDtoMapper.of(request)
         teacherService.update(id, teacherCommand)
+    }
+
+    @ApiOperation(value = "학교의 학생만 학교의 선생님 삭제")
+    @DeleteMapping("/{id}")
+    fun delete(
+        @PathVariable("id") id: Long,
+    ) {
+        teacherService.delete(id)
     }
 }
