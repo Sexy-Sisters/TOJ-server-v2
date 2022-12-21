@@ -4,7 +4,7 @@ import com.sexysisters.tojserverv2.domain.teacher.TeacherCommand
 import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherResponse
 
 interface TeacherService {
-    fun createTeacher(command: TeacherCommand.Create)
+    fun create(command: TeacherCommand.Create)
     fun getTeachers(schoolCode: String): List<TeacherResponse.Search>
     fun getTeacher(id: Long): TeacherResponse.Get
     fun update(id: Long, request: TeacherCommand.Update)

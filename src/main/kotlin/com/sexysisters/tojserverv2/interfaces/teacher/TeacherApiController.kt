@@ -31,11 +31,11 @@ class TeacherApiController(
     @ApiOperation(value = "선생님 생성")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    fun createTeacher(
+    fun create(
         @RequestBody @Valid request: TeacherRequest.Create
     ) {
         val teacherCommand = teacherDtoMapper.of(request)
-        teacherService.createTeacher(teacherCommand)
+        teacherService.create(teacherCommand)
     }
 
     @ApiOperation(value = "학교 코드로 선생님 목록 조회")

@@ -22,7 +22,7 @@ class TeacherServiceImpl(
     private val teacherResponseMapper: TeacherResponseMapper,
 ) : TeacherService {
 
-    override fun createTeacher(command: TeacherCommand.Create) {
+    override fun create(command: TeacherCommand.Create) {
         checkStudentIdentity()
         val teacher = teacherEntityMapper.of(command)
         teacherStore.store(teacher)
