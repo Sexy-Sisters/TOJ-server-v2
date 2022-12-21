@@ -3,6 +3,7 @@ package com.sexysisters.tojserverv2.config
 import com.sexysisters.tojserverv2.common.filter.JwtAuthenticationFilter
 import com.sexysisters.tojserverv2.common.filter.JwtExceptionFilter
 import com.sexysisters.tojserverv2.common.security.auth.AuthDetailsService
+import com.sexysisters.tojserverv2.config.SecurityConfiguration.AccessUrl.*
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtTokenProvider
 import com.sexysisters.tojserverv2.infrastructure.jwt.JwtValidator
 import org.springframework.context.annotation.Bean
@@ -23,17 +24,20 @@ class SecurityConfiguration(
     private val jwtValidator: JwtValidator,
 ) {
 
-    private val VERSION = "api/v2"
-    private val AUTH = "auth"
-    private val CODE = "code"
-    private val OAUTH = "oauth"
-    private val USER = "user"
-    private val STUDENT = "student"
-    private val TEACHER = "teacher"
-    private val SCHOOL = "school"
-    private val AD = "ad"
-    private val WIKI = "wiki"
-    private val IMAGE = "image"
+    enum class AccessUrl(
+        val url: String,
+    ) {
+        AUTH("/api/v2/auth"),
+        CODE("/api/v2/auth/code"),
+        OAUTH("/api/v2/oauth"),
+        USER("/api/v2/user"),
+        STUDENT("/api/v2/student"),
+        TEACHER("/api/v2/teacher"),
+        SCHOOL("/api/v2/school"),
+        AD("/api/v2/ad"),
+        WIKI("/api/v2/wiki"),
+        IMAGE("/api/v2/image"),
+    }
 
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
@@ -65,26 +69,26 @@ class SecurityConfiguration(
             ).permitAll()
 
             // auth
-            .antMatchers(HttpMethod.POST, "/$VERSION/$AUTH").permitAll()
-            .antMatchers(HttpMethod.PUT, "/$VERSION/$AUTH").permitAll()
+            .antMatchers(HttpMethod.POST, AUTH.url).permitAll()
+            .antMatchers(HttpMethod.PUT, AUTH.url).permitAll()
 
             // TODO :: 인증 코드 발급 인증 안하고 허용하기 (계속 토큰 만료 에러뜸)
-            .antMatchers("/$VERSION/$AUTH/$CODE").permitAll()
+            .antMatchers(CODE.url).permitAll()
 
             // oauth
-            .antMatchers("/$VERSION/$OAUTH/**").permitAll()
+            .antMatchers(OAUTH.url).permitAll()
 
             // user
-            .antMatchers(HttpMethod.POST, "/$VERSION/$USER").permitAll()
+            .antMatchers(HttpMethod.POST, USER.url).permitAll()
 
             // school
-            .antMatchers(HttpMethod.GET, "/$VERSION/$SCHOOL").permitAll()
+            .antMatchers(HttpMethod.GET, SCHOOL.url).permitAll()
 
             // IMG
-            .antMatchers(HttpMethod.POST, "/$VERSION/$IMAGE").permitAll()
+            .antMatchers(HttpMethod.POST, IMAGE.url).permitAll()
 
-            // TODO:: for test / change range of authority
-            .antMatchers("/$VERSION/$AD").permitAll()
+            // TODO:: To test / It need to be changed range of authority
+            .antMatchers(AD.url).permitAll()
 
             .anyRequest().authenticated()
 
