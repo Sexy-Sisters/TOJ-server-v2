@@ -1,4 +1,4 @@
-package com.sexysisters.tojserverv2.domain.user
+package com.sexysisters.tojserverv2.domain.user.domain
 
 import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import javax.persistence.Column
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull
 class Name(
     @field:NotNull
     @Column(name = "name")
-    private val value: String,
+    val value: String,
 ) {
     init {
         val MAX_LENGTH = 20

@@ -7,7 +7,7 @@ import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.teacher.*
 import com.sexysisters.tojserverv2.domain.teacher.domain.*
 import com.sexysisters.tojserverv2.domain.user.UserReader
-import com.sexysisters.tojserverv2.domain.user.hasStudent
+import com.sexysisters.tojserverv2.domain.user.domain.hasStudent
 import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherDtoMapper
 import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherResponse
 import org.springframework.stereotype.Service

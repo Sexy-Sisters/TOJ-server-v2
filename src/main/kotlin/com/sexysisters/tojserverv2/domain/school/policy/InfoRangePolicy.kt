@@ -19,9 +19,9 @@ class InfoRangePolicy : SchoolPolicy {
 
     override fun check(student: Student, school: School) {
         val schoolDivision = school.division
-        val grade = student.getGradeValue()
-        val classroom = student.getClassroomValue()
-        val number = student.getNumberValue()
+        val grade = student.gradeValue()
+        val classroom = student.classroomValue()
+        val number = student.numberValue()
 
         val isValidGrade = when (schoolDivision) {
             Division.ELEMENTARY -> grade in 1..6

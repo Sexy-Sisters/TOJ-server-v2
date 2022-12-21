@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.infrastructure.user
 
-import com.sexysisters.tojserverv2.domain.user.User
+import com.sexysisters.tojserverv2.domain.user.domain.User
 import com.sexysisters.tojserverv2.domain.user.UserStore
 import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import org.springframework.stereotype.Component
@@ -11,7 +11,7 @@ class UserStoreImpl(
 ) : UserStore {
 
     override fun store(user: User): User {
-        validation(user.email, user.nickname)
+        validation(user.emailValue(), user.nicknameValue())
         return userRepository.save(user)
     }
 
@@ -26,5 +26,5 @@ class UserStoreImpl(
         }
     }
 
-    private fun isAlreadyExists(user: User) = userRepository.existsByEmail(user.email)
+    private fun isAlreadyExists(user: User) = userRepository.existsByEmail(user.emailValue())
 }
