@@ -7,4 +7,5 @@ import com.sexysisters.tojserverv2.domain.student.StudentInfo
 interface StudentService {
     fun createStudent(command: StudentCommand.Create): Long
     fun getStudentList(status: Status): List<StudentInfo.Main>
+    fun getCurrentStudent(): StudentInfo.Main
 }

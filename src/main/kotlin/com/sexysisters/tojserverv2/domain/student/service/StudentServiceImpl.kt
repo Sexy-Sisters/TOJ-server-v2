@@ -41,4 +41,10 @@ class StudentServiceImpl(
         return studentReader.getStudentList(student.school!!, status)
             .map { studentMapper.of(it) }
     }
+
+    @Transactional(readOnly = true)
+    override fun getCurrentStudent(): StudentInfo.Main {
+        val student = studentReader.getCurrentStudent()
+        return studentMapper.of(student)
+    }
 }

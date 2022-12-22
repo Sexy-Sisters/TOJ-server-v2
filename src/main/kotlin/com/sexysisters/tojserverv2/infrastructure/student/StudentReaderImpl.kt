@@ -14,9 +14,13 @@ class StudentReaderImpl(
     private val userReader: UserReader,
 ) : StudentReader {
 
-    override fun getStudent(id: Long) = studentRepository.findByIdOrNull(id) ?: throw StudentException.StudentNotFound()
+    override fun getStudent(id: Long) =
+        studentRepository.findByIdOrNull(id)
+            ?: throw StudentException.StudentNotFound()
 
-    override fun getCurrentStudent() = userReader.getCurrentUser().student ?: throw StudentException.StudentNotFound()
+    override fun getCurrentStudent() =
+        userReader.getCurrentUser().student
+            ?: throw StudentException.StudentNotFound()
 
     override fun checkAlreadyExists(
         school: School,

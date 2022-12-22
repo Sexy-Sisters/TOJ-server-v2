@@ -29,20 +29,25 @@ class StudentApiController(
     @ApiOperation(value = "학교에 가입할 학생 생성")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    fun createStudent(
-        @RequestBody @Valid request: StudentRequest.Create
-    ): CommonResponse<Long> {
+    fun createStudent(@RequestBody @Valid request: StudentRequest.Create): CommonResponse<Long> {
         val studentCommand = studentDtoMapper.of(request)
         val studentId = studentService.createStudent(studentCommand)
         return CommonResponse.success(studentId)
     }
 
     @ApiOperation(value = "학생 리스트 조회")
-    @ResponseStatus(HttpStatus.CREATED)
     @GetMapping
     fun getWaitingList(@RequestParam("status") status: Status): CommonResponse<List<StudentResponse.Main>> {
         val studentInfo = studentService.getStudentList(status)
         val response = studentInfo.map { studentDtoMapper.of(it) }
+        return CommonResponse.success(response)
+    }
+
+    @ApiOperation(value = "현재 로그인한 학생(증) 조회")
+    @GetMapping("/current")
+    fun getCurrentStudent(): CommonResponse<StudentResponse.Main> {
+        val studentInfo = studentService.getCurrentStudent()
+        val response = studentDtoMapper.of(studentInfo)
         return CommonResponse.success(response)
     }
 }
