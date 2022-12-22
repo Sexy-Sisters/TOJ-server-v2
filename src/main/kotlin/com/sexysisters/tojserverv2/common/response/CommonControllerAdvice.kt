@@ -39,14 +39,13 @@ class CommonControllerAdvice {
     fun methodArgumentNotValidException(e: MethodArgumentNotValidException): CommonResponse<Unit> {
         val bindingResult: BindingResult = e.bindingResult
         val fe: FieldError? = bindingResult.fieldError
-
         if (fe != null) {
             val message = "Request Error ${fe.field} = ${fe.rejectedValue} + (${fe.defaultMessage})"
             return CommonResponse.fail(message, ErrorCode.COMMON_INVALID_PARAMETER.name)
-        } else {
-            return CommonResponse.fail(
-                ErrorCode.COMMON_INVALID_PARAMETER.errorMsg, ErrorCode.COMMON_INVALID_PARAMETER.name
-            )
         }
+        return CommonResponse.fail(
+            ErrorCode.COMMON_INVALID_PARAMETER.errorMsg,
+            ErrorCode.COMMON_INVALID_PARAMETER.name
+        )
     }
 }
