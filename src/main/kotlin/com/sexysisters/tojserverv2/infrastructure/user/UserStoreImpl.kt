@@ -16,8 +16,8 @@ class UserStoreImpl(
     }
 
     private fun validation(email: String, nickname: String) {
-        if (userRepository.existsByEmail(email)) throw UserException.EmailAlreadyExists()
-        if (userRepository.existsByNickname(nickname)) throw UserException.NicknameAlreadyExists()
+        if (userRepository.existsByEmailValue(email)) throw UserException.EmailAlreadyExists()
+        if (userRepository.existsByNicknameValue(nickname)) throw UserException.NicknameAlreadyExists()
     }
 
     override fun storeOAuthUser(user: User) {
@@ -26,5 +26,5 @@ class UserStoreImpl(
         }
     }
 
-    private fun isAlreadyExists(user: User) = userRepository.existsByEmail(user.emailValue())
+    private fun isAlreadyExists(user: User) = userRepository.existsByEmailValue(user.emailValue())
 }

@@ -33,9 +33,7 @@ class UserApiController(
     @ApiOperation(value = "회원가입")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    fun signUpUser(
-        @RequestBody @Valid request: UserRequest.SignUp
-    ): CommonResponse<UserResponse.SignUp> {
+    fun signUpUser(@RequestBody @Valid request: UserRequest.SignUp): CommonResponse<UserResponse.SignUp> {
         val userCommand = userDtoMapper.of(request)
         val userId = userFacade.createUser(userCommand)
         val response = userDtoMapper.of(userId)
@@ -44,9 +42,7 @@ class UserApiController(
 
     @ApiOperation(value = "id로 프로필 정보 조회")
     @GetMapping("/{userId}")
-    fun findUserProfile(
-        @ApiParam(value = "유저 아이디") @PathVariable userId: Long
-    ): CommonResponse<UserResponse.Profile> {
+    fun findUserProfile(@ApiParam(value = "유저 아이디") @PathVariable userId: Long): CommonResponse<UserResponse.Profile> {
         val userInfo = userService.findUserProfile(userId)
         val response = userDtoMapper.of(userInfo)
         return CommonResponse.success(response)
@@ -62,9 +58,7 @@ class UserApiController(
 
     @ApiOperation(value = "현재 로그인한 유저 프로필 정보 수정")
     @PutMapping("/profile-info")
-    fun updateProfileInfo(
-        @RequestBody @Valid request: UserRequest.Update
-    ): CommonResponse<UserResponse.Profile> {
+    fun updateProfileInfo(@RequestBody @Valid request: UserRequest.Update): CommonResponse<UserResponse.Profile> {
         val userCommand = userDtoMapper.of(request)
         val userInfo = userService.updateUser(userCommand)
         val response = userDtoMapper.of(userInfo)

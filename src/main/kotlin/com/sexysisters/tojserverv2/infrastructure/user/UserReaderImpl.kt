@@ -14,7 +14,7 @@ class UserReaderImpl(
 ) : UserReader {
 
     override fun getUser(email: String) =
-        userRepository.findByEmail(email)
+        userRepository.findByEmailValue(email)
             ?: throw UserException.UserNotFound()
 
     override fun getUser(id: Long) =
@@ -26,5 +26,5 @@ class UserReaderImpl(
         return getUser(auth.username)
     }
 
-    override fun existsUserByEmail(email: String) = userRepository.existsByEmail(email)
+    override fun existsUserByEmail(email: String) = userRepository.existsByEmailValue(email)
 }

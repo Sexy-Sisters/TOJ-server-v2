@@ -4,7 +4,7 @@ import com.sexysisters.tojserverv2.domain.user.domain.User
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository : JpaRepository<User, Long> {
-    fun findByEmail(email: String): User?
-    fun existsByEmail(email: String): Boolean
-    fun existsByNickname(nickname: String): Boolean
+    fun findByEmailValue(email: String): User?
+    fun existsByEmailValue(email: String): Boolean
+    fun existsByNicknameValue(nickname: String): Boolean
 }
