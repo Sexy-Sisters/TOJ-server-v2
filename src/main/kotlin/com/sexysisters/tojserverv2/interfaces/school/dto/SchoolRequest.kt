@@ -11,4 +11,9 @@ class SchoolRequest {
         @field: NotBlank(message = "school belong is empty")
         val belong: String,
     )
+
+    data class UpdateWallpaper(
+        @field: NotBlank(message = "wallpaper is empty")
+        val wallpaper: String
+    )
 }

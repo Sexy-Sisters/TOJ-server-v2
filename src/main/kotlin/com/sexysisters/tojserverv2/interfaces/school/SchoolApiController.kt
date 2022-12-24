@@ -4,16 +4,20 @@ import com.sexysisters.tojserverv2.application.school.SchoolFacade
 import com.sexysisters.tojserverv2.common.response.CommonResponse
 import com.sexysisters.tojserverv2.domain.school.service.SchoolService
 import com.sexysisters.tojserverv2.interfaces.school.dto.SchoolDtoMapper
+import com.sexysisters.tojserverv2.interfaces.school.dto.SchoolRequest
 import com.sexysisters.tojserverv2.interfaces.school.dto.SchoolResponse
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import javax.validation.Valid
 
 @Api(tags = ["학교 관련 API"])
 @RestController
@@ -42,5 +46,15 @@ class SchoolApiController(
     ): CommonResponse<String> {
         val status = schoolFacade.applySchool(schoolCode)
         return CommonResponse.success(status)
+    }
+
+    @ApiOperation(value = "학교 배경화면 수정")
+    @PutMapping("/wallpaper")
+    fun applySchool(
+        @RequestBody @Valid request: SchoolRequest.UpdateWallpaper
+    ): CommonResponse<String> {
+        val schoolCommand = schoolDtoMapper.of(request)
+        val updatedWallpaper = schoolService.updateWallpaper(schoolCommand)
+        return CommonResponse.success(updatedWallpaper)
     }
 }

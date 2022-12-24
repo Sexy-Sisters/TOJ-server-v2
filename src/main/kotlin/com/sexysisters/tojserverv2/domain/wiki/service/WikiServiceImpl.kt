@@ -28,9 +28,9 @@ class WikiServiceImpl(
 
     override fun getSchoolWiki(schoolCode: String): WikiInfo.Main {
         val school = schoolReader.getSchool(schoolCode)
-        val wiki = wikiReader.getWiki(school.wiki!!.id)
+        val wiki = school.wiki!!
         wiki.countViews()
-        return wikiMapper.of(wiki)
+        return wikiMapper.of(wiki, school.wallpaper)
     }
 
     override fun updateWiki(command: WikiCommand.Update) {
