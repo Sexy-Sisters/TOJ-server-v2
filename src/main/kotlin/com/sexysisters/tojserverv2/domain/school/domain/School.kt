@@ -53,8 +53,8 @@ class School(
     fun phoneValue() = phone.value
     fun wallPaperValue() = wallpaper.value
 
-    fun updateWallpaper(wallpaper: String): String {
-        this.wallpaper = Wallpaper(wallpaper)
+    fun updateWallpaper(wallpaper: Wallpaper): String {
+        this.wallpaper = wallpaper
         return wallPaperValue()
     }
 }

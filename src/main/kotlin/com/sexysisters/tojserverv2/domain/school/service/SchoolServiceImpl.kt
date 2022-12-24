@@ -1,6 +1,7 @@
 package com.sexysisters.tojserverv2.domain.school.service
 
 import com.sexysisters.tojserverv2.domain.school.*
+import com.sexysisters.tojserverv2.domain.school.domain.Wallpaper
 import com.sexysisters.tojserverv2.domain.school.policy.SchoolPolicy
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.student.domain.makeRelation
@@ -41,6 +42,7 @@ class SchoolServiceImpl(
     override fun updateWallpaper(command: SchoolCommand.UpdateWallpaper): String {
         val student = studentReader.getCurrentStudent()
         val school = student.school!!
-        return school.updateWallpaper(command.wallpaper)
+        val wallpaper = Wallpaper(command.wallpaper)
+        return school.updateWallpaper(wallpaper)
     }
 }
