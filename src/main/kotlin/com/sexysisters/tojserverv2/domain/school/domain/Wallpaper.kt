@@ -8,7 +8,7 @@ import javax.persistence.Embeddable
 import javax.validation.constraints.NotNull
 
 @Embeddable
-class Wallpaper (
+class Wallpaper(
     @URL
     @NotNull
     @Column(name = "wallpaper")
