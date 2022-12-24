@@ -19,6 +19,10 @@ class School(
     // TODO :: 평점
 ) : BaseTimeEntity() {
 
+    @Embedded
+    var wallpaper: Wallpaper = Wallpaper()
+        private set
+
     @Enumerated(EnumType.STRING)
     var division: Division? = null
 
@@ -47,4 +51,10 @@ class School(
     fun birthdayValue() = birthday.value
     fun homePageAddressValue() = homePageAddress.value
     fun phoneValue() = phone.value
+    fun wallPaperValue() = wallpaper.value
+
+    fun updateWallpaper(wallpaper: String): String {
+        this.wallpaper = Wallpaper(wallpaper)
+        return wallPaperValue()
+    }
 }
