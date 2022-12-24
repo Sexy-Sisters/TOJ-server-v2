@@ -13,14 +13,13 @@ data class NeisSchoolResponse constructor(
     val division: String,
     val kind: String?,
 ) {
-    fun toEntity() =
-        School(
-            code = Code(this.code),
-            belong = Belong(this.belong),
-            name = Name(this.name),
-            address = Address(this.address),
-            birthday = Birthday(this.birthday),
-            homePageAddress = HomePageAddress(this.homePageAddress),
-            phone = Phone(this.phone),
-        )
+    fun toEntity() = School(
+        code = Code(code),
+        belong = Belong(belong),
+        name = Name(name),
+        address = Address(address),
+        birthday = Birthday(birthday),
+        homePageAddress = HomePageAddress(homePageAddress),
+        phone = Phone(phone),
+    )
 }
