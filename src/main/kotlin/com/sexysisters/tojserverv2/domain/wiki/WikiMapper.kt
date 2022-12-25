@@ -17,8 +17,9 @@ interface WikiMapper {
             Mapping(source = "wiki.html.value", target = "html"),
             Mapping(source = "wiki.markdown.value", target = "markdown"),
             Mapping(source = "wiki.views.value", target = "views"),
-            Mapping(source = "wallpaper.value", target = "wallpaper")
+            Mapping(source = "updatedAt", target = "updatedAt"),
+            Mapping(source = "wallpaper.value", target = "wallpaper"),
         ]
     )
-    fun of(wiki: Wiki, wallpaper: Wallpaper): WikiInfo.Main
+    fun of(wiki: Wiki, updatedAt: String, wallpaper: Wallpaper): WikiInfo.Main
 }

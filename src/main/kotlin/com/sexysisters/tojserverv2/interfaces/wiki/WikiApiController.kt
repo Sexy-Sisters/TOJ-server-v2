@@ -35,7 +35,9 @@ class WikiApiController(
 
     @ApiOperation("스쿨 위키 수정")
     @PutMapping
-    fun updateSchoolWiki(@RequestBody @Valid request: WikiRequest.Update) {
+    fun updateSchoolWiki(
+        @RequestBody @Valid request: WikiRequest.Update
+    ) {
         val wikiCommand = wikiDtoMapper.of(request)
         wikiService.updateWiki(wikiCommand)
     }

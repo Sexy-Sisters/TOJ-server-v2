@@ -1,5 +1,6 @@
 package com.sexysisters.tojserverv2.domain.wiki.service
 
+import com.sexysisters.tojserverv2.common.util.date.FormatUtil
 import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.wiki.*
@@ -30,7 +31,8 @@ class WikiServiceImpl(
         val school = schoolReader.getSchool(schoolCode)
         val wiki = school.wiki!!
         wiki.countViews()
-        return wikiMapper.of(wiki, school.wallpaper)
+        val updatedAt = FormatUtil.format(wiki.updatedAt!!)
+        return wikiMapper.of(wiki, updatedAt, school.wallpaper)
     }
 
     override fun updateWiki(command: WikiCommand.Update) {
