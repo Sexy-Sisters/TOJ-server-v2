@@ -1,9 +1,7 @@
 package com.sexysisters.tojserverv2.domain.school.service
 
-import com.sexysisters.tojserverv2.domain.school.SchoolInfo
-import com.sexysisters.tojserverv2.domain.school.SchoolMapper
-import com.sexysisters.tojserverv2.domain.school.SchoolReader
-import com.sexysisters.tojserverv2.domain.school.SchoolStore
+import com.sexysisters.tojserverv2.domain.school.*
+import com.sexysisters.tojserverv2.domain.school.domain.Wallpaper
 import com.sexysisters.tojserverv2.domain.school.policy.SchoolPolicy
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.student.domain.makeRelation
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional
 class SchoolServiceImpl(
     private val neisSchoolReader: NeisSchoolReader,
     private val schoolMapper: SchoolMapper,
@@ -27,18 +26,23 @@ class SchoolServiceImpl(
         return searchResults.map { schoolMapper.of(it) }
     }
 
-    @Transactional
     override fun createSchool(code: String): String {
         val initSchool = neisSchoolReader.getSchoolByCode(code)
-        return schoolStore.store(initSchool).code.value
+        return schoolStore.store(initSchool).codeValue()
     }
 
-    @Transactional
     override fun applySchool(code: String): String {
         val student = studentReader.getCurrentStudent()
         val school = schoolReader.getSchool(code)
         schoolPolicy.forEach { it.check(student, school) }
         student.makeRelation(school)
         return student.status.description
+    }
+
+    override fun updateWallpaper(command: SchoolCommand.UpdateWallpaper): String {
+        val student = studentReader.getCurrentStudent()
+        val school = student.school!!
+        val wallpaper = Wallpaper(command.wallpaper)
+        return school.updateWallpaper(wallpaper)
     }
 }

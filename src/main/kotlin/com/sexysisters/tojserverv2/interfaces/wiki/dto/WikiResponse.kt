@@ -9,5 +9,6 @@ class WikiResponse {
         val markdown: String,
         val views: Int,
         val updatedAt: String
+        val wallpaper: String,
     )
 }
