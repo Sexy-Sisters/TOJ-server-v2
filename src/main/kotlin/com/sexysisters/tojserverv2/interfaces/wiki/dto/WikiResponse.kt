@@ -8,5 +8,6 @@ class WikiResponse {
         val html: String,
         val markdown: String,
         val views: Int,
+        val updatedAt: String
     )
 }

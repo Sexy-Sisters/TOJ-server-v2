@@ -25,15 +25,19 @@ class WikiApiController(
 
     @ApiOperation("학교 조회 화면에 등잘할 스쿨위키 단건 조회")
     @GetMapping
-    fun getSchoolWiki(@RequestParam("schoolCode") schoolCode: String): CommonResponse<WikiResponse.Main> {
+    fun getSchoolWiki(
+        @RequestParam("schoolCode") schoolCode: String
+    ): CommonResponse<WikiResponse.Main> {
         val wikiInfo = wikiService.getSchoolWiki(schoolCode)
-        val response: WikiResponse.Main = wikiDtoMapper.of(wikiInfo)
+        val response = wikiDtoMapper.of(wikiInfo)
         return CommonResponse.success(response)
     }
 
     @ApiOperation("스쿨 위키 수정")
     @PutMapping
-    fun updateSchoolWiki(@RequestBody @Valid request: WikiRequest.Update) {
+    fun updateSchoolWiki(
+        @RequestBody @Valid request: WikiRequest.Update
+    ) {
         val wikiCommand = wikiDtoMapper.of(request)
         wikiService.updateWiki(wikiCommand)
     }
