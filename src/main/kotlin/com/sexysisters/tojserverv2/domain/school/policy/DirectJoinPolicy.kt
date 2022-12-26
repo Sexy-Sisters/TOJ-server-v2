@@ -2,8 +2,6 @@ package com.sexysisters.tojserverv2.domain.school.policy
 
 import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.student.domain.Student
-import com.sexysisters.tojserverv2.domain.student.domain.engaged
-import com.sexysisters.tojserverv2.domain.student.domain.waiting
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 

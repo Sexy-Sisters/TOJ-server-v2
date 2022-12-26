@@ -2,7 +2,6 @@ package com.sexysisters.tojserverv2.domain.student.policy
 
 import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.user.domain.User
-import com.sexysisters.tojserverv2.domain.user.domain.hasStudent
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
