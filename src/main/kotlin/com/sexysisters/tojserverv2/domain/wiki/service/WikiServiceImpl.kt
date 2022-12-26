@@ -8,6 +8,7 @@ import com.sexysisters.tojserverv2.domain.wiki.domain.*
 import com.sexysisters.tojserverv2.domain.wiki.policy.WikiPolicy
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.yaml.snakeyaml.error.Mark
 
 @Service
 @Transactional
@@ -40,8 +41,8 @@ class WikiServiceImpl(
         val student = studentReader.getCurrentStudent()
         wikiPolicy.forEach { it.check(student, wiki.school!!) }
         wiki.update(
-            html = command.html,
-            markdown = command.markdown
+            html = HTML(command.html),
+            markdown = Markdown(command.markdown)
         )
     }
 }
