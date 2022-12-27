@@ -6,11 +6,15 @@ import javax.persistence.Embeddable
 import javax.validation.constraints.NotNull
 
 @Embeddable
-class Views(
+class Views {
+
     @field:NotNull
     @Column(name = "views")
-    val value: Int = 0
-) {
+    var value: Int = 0
+        private set
+
+    fun countViews() = value++
+
     init {
         if (value < 0) throw WikiException.WikiNotValid()
     }

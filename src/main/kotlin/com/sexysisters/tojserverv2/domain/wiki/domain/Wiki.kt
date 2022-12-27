@@ -41,10 +41,7 @@ class Wiki(
         this.markdown = markdown
     }
 
-    fun countViews() {
-        val calculatedValue = viewsValue() + 1
-        this.views = Views(calculatedValue)
-    }
+    fun countViews() = views.countViews()
 
     fun nameValue() = name.value
     fun htmlValue() = html.value
