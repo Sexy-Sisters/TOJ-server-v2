@@ -4,7 +4,10 @@ import com.sexysisters.tojserverv2.common.util.date.FormatUtil
 import com.sexysisters.tojserverv2.domain.school.SchoolReader
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import com.sexysisters.tojserverv2.domain.wiki.*
-import com.sexysisters.tojserverv2.domain.wiki.domain.*
+import com.sexysisters.tojserverv2.domain.wiki.domain.HTML
+import com.sexysisters.tojserverv2.domain.wiki.domain.Markdown
+import com.sexysisters.tojserverv2.domain.wiki.domain.Name
+import com.sexysisters.tojserverv2.domain.wiki.domain.Wiki
 import com.sexysisters.tojserverv2.domain.wiki.policy.WikiPolicy
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -40,8 +43,8 @@ class WikiServiceImpl(
         val student = studentReader.getCurrentStudent()
         wikiPolicy.forEach { it.check(student, wiki.school!!) }
         wiki.update(
-            html = command.html,
-            markdown = command.markdown
+            html = HTML(command.html),
+            markdown = Markdown(command.markdown)
         )
     }
 }

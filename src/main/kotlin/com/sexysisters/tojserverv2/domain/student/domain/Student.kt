@@ -17,14 +17,17 @@ class Student(
 
     @Enumerated(EnumType.STRING)
     var status: Status = Status.INDEPENDENT
+        private set
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")
     var school: School? = null
+        private set
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     var user: User? = null
+        private set
 
     @OneToMany(mappedBy = "applicant", cascade = [CascadeType.ALL])
     val approves = mutableSetOf<Approve>()
@@ -36,32 +39,32 @@ class Student(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
 
+    fun makeRelation(user: User) {
+        this.user = user
+        user.student = this
+    }
+
+    fun makeRelation(school: School) {
+        this.school = school
+        school.students.add(this)
+    }
+
+    fun independent() {
+        status = Status.INDEPENDENT
+    }
+
+    fun waiting() {
+        status = Status.WAITING
+    }
+
+    fun engaged() {
+        status = Status.ENGAGED
+    }
+
+    fun isAttendSchool() = school != null
+
     fun gradeValue() = grade.value
     fun classroomValue() = classroom.value
     fun numberValue() = number.value
     fun ageValue() = age.value
 }
-
-fun Student.makeRelation(user: User) {
-    this.user = user
-    user.student = this
-}
-
-fun Student.makeRelation(school: School) {
-    this.school = school
-    school.students.add(this)
-}
-
-fun Student.independent() {
-    status = Status.INDEPENDENT
-}
-
-fun Student.waiting() {
-    status = Status.WAITING
-}
-
-fun Student.engaged() {
-    status = Status.ENGAGED
-}
-
-fun Student.isAttendSchool() = school != null

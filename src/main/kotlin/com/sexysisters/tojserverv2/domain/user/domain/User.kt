@@ -8,11 +8,27 @@ import javax.persistence.*
 @Table(name = "tbl_user")
 class User(
     @Embedded val email: Email,
-    @Embedded var password: Password,
-    @Embedded var nickname: Nickname,
-    @Embedded var image: Image,
-    @Embedded var name: Name,
+    password: Password,
+    nickname: Nickname,
+    image: Image,
+    name: Name,
 ) : BaseTimeEntity() {
+
+    @Embedded
+    var password: Password = password
+        private set
+
+    @Embedded
+    var nickname: Nickname = nickname
+        private set
+
+    @Embedded
+    var image: Image = image
+        private set
+
+    @Embedded
+    var name: Name = name
+        private set
 
     @Enumerated(EnumType.STRING)
     var authority: Authority = Authority.USER
@@ -24,24 +40,24 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
 
+    fun updateInfo(
+        nickname: Nickname,
+        name: Name,
+    ): User {
+        this.nickname = nickname
+        this.name = name
+        return this
+    }
+
+    fun updateProfileImg(image: Image) {
+        this.image = image
+    }
+
+    fun hasStudent() = student != null
+
     fun emailValue() = email.value
     fun passwordValue() = password.value
     fun nicknameValue() = nickname.value
     fun imageValue() = image.value
     fun nameValue() = name.value
 }
-
-fun User.updateInfo(
-    nickname: String,
-    name: String,
-): User {
-    this.nickname = Nickname(nickname)
-    this.name = Name(name)
-    return this
-}
-
-fun User.updateProfileImg(image: String) {
-    this.image = Image(image)
-}
-
-fun User.hasStudent() = student != null

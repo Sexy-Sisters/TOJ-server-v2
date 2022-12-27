@@ -4,7 +4,6 @@ import com.sexysisters.tojserverv2.domain.school.*
 import com.sexysisters.tojserverv2.domain.school.domain.Wallpaper
 import com.sexysisters.tojserverv2.domain.school.policy.SchoolPolicy
 import com.sexysisters.tojserverv2.domain.student.StudentReader
-import com.sexysisters.tojserverv2.domain.student.domain.makeRelation
 import com.sexysisters.tojserverv2.infrastructure.neis.NeisSchoolReader
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

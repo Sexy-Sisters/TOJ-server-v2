@@ -5,10 +5,9 @@ import com.sexysisters.tojserverv2.domain.user.UserInfo
 import com.sexysisters.tojserverv2.domain.user.UserMapper
 import com.sexysisters.tojserverv2.domain.user.UserReader
 import com.sexysisters.tojserverv2.domain.user.UserStore
+import com.sexysisters.tojserverv2.domain.user.domain.*
 import com.sexysisters.tojserverv2.domain.user.setEncodedPassword
 import com.sexysisters.tojserverv2.domain.user.toEntity
-import com.sexysisters.tojserverv2.domain.user.domain.updateInfo
-import com.sexysisters.tojserverv2.domain.user.domain.updateProfileImg
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -44,14 +43,16 @@ class UserServiceImpl(
     @Transactional
     override fun updateUser(command: UserCommand.UpdateRequest): UserInfo.Profile {
         val user = userReader.getCurrentUser()
-        val updatedUser = user.updateInfo(command.nickname, command.name)
+        val updatedUser = user.updateInfo(
+            nickname = Nickname(command.nickname),
+            name = Name(command.name)
+        )
         return userMapper.of(updatedUser)
     }
 
     @Transactional
     override fun updateProfileImg(command: UserCommand.UpdateProfileImgRequest) {
         val user = userReader.getCurrentUser()
-        val profileImg = command.profileImg
-        user.updateProfileImg(profileImg)
+        user.updateProfileImg(Image(command.profileImg))
     }
 }
