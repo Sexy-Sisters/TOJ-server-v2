@@ -8,4 +8,12 @@ class FeedRequest {
         val content: String,
         val images: List<String>,
     )
+
+    data class Update(
+        @field:NotNull
+        val id: Long,
+
+        @field:NotNull
+        val content: String,
+    )
 }

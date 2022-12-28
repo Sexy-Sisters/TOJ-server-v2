@@ -7,13 +7,25 @@ import javax.persistence.*
 @Entity
 @Table(name = "tbl_feed")
 class Feed(
+    content: Content,
+
     @ManyToOne
     val writer: Student,
-    val content: Content,
+
     @ElementCollection
     val images: List<Image>
 ) : BaseTimeEntity() {
 
+    var content: Content = content
+        private set
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+
+    fun update(content: Content) {
+        this.content = content
+    }
+
+    fun contentValue() = content.value
+    fun imageValues() = images.map { it.value }
 }

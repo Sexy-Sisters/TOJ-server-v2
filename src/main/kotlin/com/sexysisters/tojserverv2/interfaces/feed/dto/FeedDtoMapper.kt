@@ -14,4 +14,5 @@ interface FeedDtoMapper {
 
     // request
     fun of(request: FeedRequest.Create): FeedCommand.Create
+    fun of(request: FeedRequest.Update): FeedCommand.Update
 }

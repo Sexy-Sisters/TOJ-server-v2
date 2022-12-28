@@ -5,4 +5,9 @@ class FeedCommand {
         val content: String,
         val images: List<String>,
     )
+
+    class Update(
+        val id: Long,
+        val content: String,
+    )
 }
