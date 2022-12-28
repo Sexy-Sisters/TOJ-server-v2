@@ -7,6 +7,6 @@ class WikiProperties {
                 "src=${"https://assets.pinterest.com/ext/embed.html?id=704743041686828494"} " +
                 "height=${"445"} width=${"345"} " +
                 "frameborder=${"0"} scrolling=${"no"} >" +
-            "</iframe>"
+                "</iframe>"
     }
 }
