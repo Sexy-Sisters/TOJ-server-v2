@@ -9,7 +9,8 @@ import javax.persistence.*
 class Feed(
     content: Content,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "writer_id")
     val writer: Student,
 
     @ElementCollection
