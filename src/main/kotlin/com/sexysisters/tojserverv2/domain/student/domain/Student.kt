@@ -2,6 +2,7 @@ package com.sexysisters.tojserverv2.domain.student.domain
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.approve.Approve
+import com.sexysisters.tojserverv2.domain.feed.domain.Feed
 import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.user.domain.User
 import javax.persistence.*
@@ -29,11 +30,26 @@ class Student(
     var user: User? = null
         private set
 
-    @OneToMany(mappedBy = "applicant", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "applicant",
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.ALL]
+    )
     val approves = mutableSetOf<Approve>()
 
-    @OneToMany(mappedBy = "acceptor", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "acceptor",
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.ALL]
+    )
     val acceptors = mutableSetOf<Approve>()
+
+    @OneToMany(
+        mappedBy = "writer",
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.ALL]
+    )
+    val feeds = mutableSetOf<Feed>()
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

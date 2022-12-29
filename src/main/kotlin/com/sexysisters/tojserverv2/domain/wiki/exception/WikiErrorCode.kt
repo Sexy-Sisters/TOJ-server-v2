@@ -6,5 +6,5 @@ enum class WikiErrorCode(
     override val errorMsg: String,
 ) : ErrorProperty {
     WIKI_NOT_VALID("Wiki domain is not valid"),
-    WIKI_NOT_FOUND("Wiki does not exist"),
+    WIKI_NOT_FOUND("The wiki does not exist"),
 }
