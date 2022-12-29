@@ -6,6 +6,7 @@ import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherCommentDtoMappe
 import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherCommentRequest
 import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherCommentResponse
 import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -23,6 +24,7 @@ class TeacherCommentApiController(
     private val teacherCommentDtoMapper: TeacherCommentDtoMapper,
 ) {
 
+    @ApiOperation(value = "선생님 정보에 댓글 생성")
     @PostMapping("/{teacherId}")
     fun create(
         @PathVariable("teacherId") teacherId: Long,
@@ -32,6 +34,7 @@ class TeacherCommentApiController(
         teacherCommentService.create(teacherId, commentCommand)
     }
 
+    @ApiOperation(value = "선생님 정보에 대댓글 생성")
     @PostMapping("/{teacherId}/{commentId}")
     fun create(
         @PathVariable("teacherId") teacherId: Long,
@@ -42,12 +45,14 @@ class TeacherCommentApiController(
         teacherCommentService.create(teacherId, commendId, commentCommand)
     }
 
+    @ApiOperation(value = "선생님 정보에 댓글 전체 조회")
     @GetMapping
     fun getComments(): CommonResponse<List<TeacherCommentResponse.Main>> {
         val response = teacherCommentService.getComments()
         return CommonResponse.success(response)
     }
 
+    @ApiOperation(value = "선생님 정보에 댓글 수정")
     @PutMapping("/{commentId}")
     fun update(
         @PathVariable("commentId") commentId: Long,
@@ -57,6 +62,7 @@ class TeacherCommentApiController(
         teacherCommentService.update(commentId, commentCommand)
     }
 
+    @ApiOperation(value = "선생님 정보에 댓글 삭제")
     @DeleteMapping("/{commentId}")
     fun delete(@PathVariable("commentId") commentId: Long) {
         teacherCommentService.delete(commentId)
