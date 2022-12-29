@@ -6,5 +6,5 @@ enum class AdErrorCode(
     override val errorMsg: String,
 ) : ErrorProperty {
     AD_NOT_VALID("Ad domain is not valid"),
-    AD_NOT_FOUND("Ad does not exists"),
+    AD_NOT_FOUND("The ad does not exist"),
 }
