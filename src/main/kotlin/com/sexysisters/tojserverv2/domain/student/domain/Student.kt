@@ -30,13 +30,24 @@ class Student(
     var user: User? = null
         private set
 
-    @OneToMany(mappedBy = "applicant", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "applicant",
+        cascade = [CascadeType.ALL]
+    )
     val approves = mutableSetOf<Approve>()
 
-    @OneToMany(mappedBy = "acceptor", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "acceptor",
+        cascade = [CascadeType.ALL]
+    )
     val acceptors = mutableSetOf<Approve>()
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE], orphanRemoval = true, mappedBy = "student")
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        mappedBy = "student",
+        cascade = [CascadeType.REMOVE],
+        orphanRemoval = true
+    )
     protected val mutableComments: MutableList<Comment> = mutableListOf()
     val comments: List<Comment> get() = mutableComments.toList()
 

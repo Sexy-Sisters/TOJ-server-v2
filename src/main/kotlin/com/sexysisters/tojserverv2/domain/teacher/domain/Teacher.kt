@@ -33,7 +33,12 @@ class Teacher(
     @JoinColumn(name = "tbl_school_id")
     val school: School? = null
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher", cascade = [CascadeType.REMOVE], orphanRemoval = true)
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        mappedBy = "teacher",
+        cascade = [CascadeType.REMOVE],
+        orphanRemoval = true
+    )
     protected val mutableComments: MutableList<Comment> = mutableListOf()
     val comments: List<Comment> get() = mutableComments.toList()
 
