@@ -9,11 +9,5 @@ import org.mapstruct.*
     unmappedTargetPolicy = ReportingPolicy.ERROR,
 )
 interface TeacherCommentDtoMapper {
-    @Mappings(
-        value = [
-            Mapping(source = "content", target = "content"),
-            Mapping(source = "anonymous", target = "anonymous")
-        ]
-    )
     fun of(request: TeacherCommentRequest.Main): TeacherCommentCommand.Main
 }
