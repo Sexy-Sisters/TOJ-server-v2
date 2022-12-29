@@ -15,6 +15,6 @@ class Content(
         val MIN_LENGTH = 1
         val MAX_LENGTH = 1000
         if (value.isBlank()) throw TeacherCommentException.TeacherCommentNotValid()
-        if (value.length !in MIN_LENGTH .. MAX_LENGTH) throw TeacherCommentException.TeacherCommentNotValid()
+        if (value.length !in MIN_LENGTH..MAX_LENGTH) throw TeacherCommentException.TeacherCommentNotValid()
     }
 }

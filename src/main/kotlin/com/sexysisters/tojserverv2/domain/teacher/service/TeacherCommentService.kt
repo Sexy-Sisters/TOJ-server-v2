@@ -8,5 +8,5 @@ interface TeacherCommentService {
     fun create(teacherId: Long, commentId: Long, command: TeacherCommentCommand.Main)
     fun update(commentId: Long, command: TeacherCommentCommand.Main)
     fun delete(commentId: Long)
-    fun getComments() : List<TeacherCommentResponse.Main>
+    fun getComments(): List<TeacherCommentResponse.Main>
 }
