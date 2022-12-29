@@ -29,14 +29,20 @@ class School(
     @Enumerated(EnumType.STRING)
     var kind: Kind? = null
 
-    @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "school",
+        cascade = [CascadeType.ALL]
+    )
     val students = mutableSetOf<Student>()
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wiki_id")
     var wiki: Wiki? = null
 
-    @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "school",
+        cascade = [CascadeType.ALL]
+    )
     val teachers = mutableSetOf<Teacher>()
 
     @Id

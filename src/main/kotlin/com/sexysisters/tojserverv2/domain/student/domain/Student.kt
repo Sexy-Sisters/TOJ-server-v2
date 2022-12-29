@@ -2,6 +2,7 @@ package com.sexysisters.tojserverv2.domain.student.domain
 
 import com.sexysisters.tojserverv2.domain.BaseTimeEntity
 import com.sexysisters.tojserverv2.domain.approve.Approve
+import com.sexysisters.tojserverv2.domain.teacher.domain.Comment
 import com.sexysisters.tojserverv2.domain.feed.domain.Feed
 import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.user.domain.User
@@ -31,19 +32,27 @@ class Student(
         private set
 
     @OneToMany(
-        mappedBy = "applicant",
         fetch = FetchType.LAZY,
+        mappedBy = "applicant",
         cascade = [CascadeType.ALL]
     )
     val approves = mutableSetOf<Approve>()
 
     @OneToMany(
-        mappedBy = "acceptor",
         fetch = FetchType.LAZY,
+        mappedBy = "acceptor",
         cascade = [CascadeType.ALL]
     )
     val acceptors = mutableSetOf<Approve>()
 
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        mappedBy = "student",
+        cascade = [CascadeType.REMOVE],
+        orphanRemoval = true
+    )
+    protected val mutableComments: MutableList<Comment> = mutableListOf()
+    val comments: List<Comment> get() = mutableComments.toList()
     @OneToMany(
         mappedBy = "writer",
         fetch = FetchType.LAZY,
@@ -83,4 +92,12 @@ class Student(
     fun classroomValue() = classroom.value
     fun numberValue() = number.value
     fun ageValue() = age.value
+
+    fun writeComment(comment: Comment) {
+        mutableComments.add(comment)
+    }
+
+    fun isSame(writer: Student): Boolean {
+        return this.id == writer.id
+    }
 }
