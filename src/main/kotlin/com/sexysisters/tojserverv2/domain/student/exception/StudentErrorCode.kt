@@ -9,4 +9,5 @@ enum class StudentErrorCode(
     STUDENT_NOT_FOUND("Student does not exist"),
     ALREADY_CREATED("You've already completed the student information form"),
     STUDENT_NOT_VALID("Student domain is not valid"),
+    DIFFERENT_STUDENT("You are not the same identity")
 }

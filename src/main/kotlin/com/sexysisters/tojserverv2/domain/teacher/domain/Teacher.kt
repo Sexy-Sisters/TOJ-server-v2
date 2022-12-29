@@ -33,9 +33,17 @@ class Teacher(
     @JoinColumn(name = "tbl_school_id")
     val school: School? = null
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher", cascade = [CascadeType.REMOVE], orphanRemoval = true)
+    protected val mutableComments: MutableList<Comment> = mutableListOf()
+    val comments: List<Comment> get() = mutableComments.toList()
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
+
+    fun registeredComment(comment: Comment) {
+        mutableComments.add(comment)
+    }
 
     fun update(image: Image, name: Name, nickname: Nickname, bio: Bio) {
         this.image = image
