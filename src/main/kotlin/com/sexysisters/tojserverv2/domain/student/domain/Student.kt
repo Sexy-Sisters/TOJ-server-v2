@@ -33,22 +33,22 @@ class Student(
         private set
 
     @OneToMany(
-        mappedBy = "applicant",
         fetch = FetchType.LAZY,
+        mappedBy = "applicant",
         cascade = [CascadeType.ALL]
     )
     val approves = mutableSetOf<Approve>()
 
     @OneToMany(
-        mappedBy = "acceptor",
         fetch = FetchType.LAZY,
+        mappedBy = "acceptor",
         cascade = [CascadeType.ALL]
     )
     val acceptors = mutableSetOf<Approve>()
 
     @OneToMany(
-        mappedBy = "writer",
         fetch = FetchType.LAZY,
+        mappedBy = "writer",
         cascade = [CascadeType.ALL]
     )
     val feeds = mutableSetOf<Feed>()
@@ -56,16 +56,6 @@ class Student(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
-
-    fun makeRelation(user: User) {
-        this.user = user
-        user.student = this
-    }
-
-    fun makeRelation(school: School) {
-        this.school = school
-        school.students.add(this)
-    }
 
     fun independent() {
         status = Status.INDEPENDENT
