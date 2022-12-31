@@ -5,6 +5,7 @@ import com.sexysisters.tojserverv2.domain.approve.Approve
 import com.sexysisters.tojserverv2.domain.teacher.domain.Comment
 import com.sexysisters.tojserverv2.domain.feed.domain.Feed
 import com.sexysisters.tojserverv2.domain.school.domain.School
+import com.sexysisters.tojserverv2.domain.teacherLike.domain.TeacherLike
 import com.sexysisters.tojserverv2.domain.user.domain.User
 import javax.persistence.*
 
@@ -48,17 +49,25 @@ class Student(
     @OneToMany(
         fetch = FetchType.LAZY,
         mappedBy = "student",
-        cascade = [CascadeType.REMOVE],
-        orphanRemoval = true
     )
-    protected val mutableComments: MutableList<Comment> = mutableListOf()
+    private val mutableComments: MutableList<Comment> = mutableListOf()
     val comments: List<Comment> get() = mutableComments.toList()
+
     @OneToMany(
         mappedBy = "writer",
         fetch = FetchType.LAZY,
         cascade = [CascadeType.ALL]
     )
     val feeds = mutableSetOf<Feed>()
+
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        mappedBy = "student",
+        cascade = [CascadeType.REMOVE],
+        orphanRemoval = true
+    )
+    private val mutableTeacherLikes: MutableList<TeacherLike> = mutableListOf()
+    val teacherLikes get(): List<TeacherLike> = mutableTeacherLikes.toList()
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -95,6 +104,10 @@ class Student(
 
     fun writeComment(comment: Comment) {
         mutableComments.add(comment)
+    }
+
+    fun likeTeacher(teacherLike: TeacherLike) {
+        mutableTeacherLikes.add(teacherLike)
     }
 
     fun isSame(writer: Student): Boolean {

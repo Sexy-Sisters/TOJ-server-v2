@@ -40,8 +40,6 @@ class Comment(
     @OneToMany(
         fetch = FetchType.LAZY,
         mappedBy = "parent",
-        cascade = [CascadeType.REMOVE],
-        orphanRemoval = true,
     )
     protected val mutableChildComments: MutableList<Comment> = mutableListOf()
     val childComments: List<Comment> get() = mutableChildComments.toList()

@@ -24,17 +24,17 @@ class TeacherCommentServiceImpl(
     override fun create(teacherId: Long, command: TeacherCommentCommand.Main) {
         val student: Student = studentReader.getCurrentStudent()
         val teacher: Teacher = teacherReader.getTeacher(teacherId)
-        val comment: Comment = toEntity(command, student, teacher)
-        teacherCommentStore.store(comment)
+        val initComment: Comment = toEntity(command, student, teacher)
+        teacherCommentStore.store(initComment)
     }
 
     override fun create(teacherId: Long, commentId: Long, command: TeacherCommentCommand.Main) {
         val student: Student = studentReader.getCurrentStudent()
         val teacher: Teacher = teacherReader.getTeacher(teacherId)
         val parent: Comment = teacherCommentReader.getComment(commentId)
-        val comment: Comment = toEntity(command, student, teacher)
-        comment.writeChildComment(parent)
-        teacherCommentStore.store(comment)
+        val initComment: Comment = toEntity(command, student, teacher)
+        initComment.writeChildComment(parent)
+        teacherCommentStore.store(initComment)
     }
 
     private fun toEntity(
