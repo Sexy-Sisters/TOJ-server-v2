@@ -55,9 +55,8 @@ class Student(
     )
     protected val mutableComments: MutableList<Comment> = mutableListOf()
     val comments: List<Comment> get() = mutableComments.toList()
-    
+
     @OneToMany(
-        mappedBy = "writer",
         fetch = FetchType.LAZY,
         mappedBy = "writer",
         cascade = [CascadeType.ALL]
