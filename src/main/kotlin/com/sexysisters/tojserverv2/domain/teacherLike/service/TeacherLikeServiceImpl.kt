@@ -15,7 +15,7 @@ class TeacherLikeServiceImpl(
     private val studentReader: StudentReader,
     private val teacherLikeReader: TeacherLikeReader,
     private val teacherLikeStore: TeacherLikeStore
-    ): TeacherLikeService {
+) : TeacherLikeService {
 
     override fun like(teacherId: Long): Boolean {
         val teacher = teacherReader.getTeacher(teacherId)
@@ -25,11 +25,11 @@ class TeacherLikeServiceImpl(
             teacherLikeStore.delete(teacher, student)
             return true
         }
-        val teacherLike = TeacherLike(
+        val initTeacherLike = TeacherLike(
             teacher,
             student
         )
-        teacherLikeStore.store(teacherLike)
+        teacherLikeStore.store(initTeacherLike)
         return true
     }
 }

@@ -37,10 +37,8 @@ class Teacher(
     @OneToMany(
         fetch = FetchType.LAZY,
         mappedBy = "teacher",
-        cascade = [CascadeType.REMOVE],
-        orphanRemoval = true
     )
-    protected val mutableComments: MutableList<Comment> = mutableListOf()
+    private val mutableComments: MutableList<Comment> = mutableListOf()
     val comments get(): List<Comment> = mutableComments.toList()
 
     @OneToMany(

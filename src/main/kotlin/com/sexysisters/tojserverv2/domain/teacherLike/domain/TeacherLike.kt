@@ -26,6 +26,6 @@ class TeacherLike(
 
     init {
         teacher.addTeacherLike(this)
-        student.pressTeacherLike(this)
+        student.likeTeacher(this)
     }
 }

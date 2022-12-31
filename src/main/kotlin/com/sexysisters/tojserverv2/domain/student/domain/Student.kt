@@ -49,8 +49,6 @@ class Student(
     @OneToMany(
         fetch = FetchType.LAZY,
         mappedBy = "student",
-        cascade = [CascadeType.REMOVE],
-        orphanRemoval = true
     )
     private val mutableComments: MutableList<Comment> = mutableListOf()
     val comments: List<Comment> get() = mutableComments.toList()
@@ -108,7 +106,7 @@ class Student(
         mutableComments.add(comment)
     }
 
-    fun pressTeacherLike(teacherLike: TeacherLike) {
+    fun likeTeacher(teacherLike: TeacherLike) {
         mutableTeacherLikes.add(teacherLike)
     }
 

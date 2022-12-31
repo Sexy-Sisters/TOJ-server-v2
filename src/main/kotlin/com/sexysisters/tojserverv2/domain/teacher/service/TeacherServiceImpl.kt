@@ -22,8 +22,8 @@ class TeacherServiceImpl(
 
     override fun create(command: TeacherCommand.Create) {
         checkStudentIdentity()
-        val teacher = createTeacherEntity(command)
-        teacherStore.store(teacher)
+        val initTeacher = createTeacherEntity(command)
+        teacherStore.store(initTeacher)
     }
 
     @Transactional(readOnly = true)
