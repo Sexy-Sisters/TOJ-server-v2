@@ -41,7 +41,7 @@ class TeacherServiceImpl(
     override fun update(id: Long, command: TeacherCommand.Update) {
         val student = checkStudentIdentity()
         if (!student.isAttendSchool()) throw SchoolException.SchoolNotFound()
-        val teacher = teacherReader.getTeacher(id, student.school!!)
+        val teacher = teacherReader.getTeacher(id, student.school)
         teacher.update(
             image = Image(command.image),
             name = Name(command.name),
@@ -53,7 +53,7 @@ class TeacherServiceImpl(
     override fun delete(id: Long) {
         val student = checkStudentIdentity()
         if (!student.isAttendSchool()) throw SchoolException.SchoolNotFound()
-        val teacher = teacherReader.getTeacher(id, student.school!!)
+        val teacher = teacherReader.getTeacher(id, student.school)
         teacherStore.delete(teacher)
     }
 

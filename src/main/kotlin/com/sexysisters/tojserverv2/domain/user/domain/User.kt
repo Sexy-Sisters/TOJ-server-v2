@@ -31,9 +31,13 @@ class User(
         private set
 
     @Enumerated(EnumType.STRING)
-    var authority: Authority = Authority.USER
+    var authority = Authority.USER
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToOne(
+        fetch = FetchType.LAZY,
+        mappedBy = "user",
+        cascade = [CascadeType.ALL],
+    )
     var student: Student? = null
 
     @Id

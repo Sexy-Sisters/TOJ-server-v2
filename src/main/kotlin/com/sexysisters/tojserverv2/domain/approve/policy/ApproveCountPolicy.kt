@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 class ApproveCountPolicy : ApprovePolicy {
 
     override fun check(applicant: Student, acceptor: Student) {
-        val school = acceptor.school!!
+        val school = acceptor.school
         val studentCapacity = school.students.size
         val neededCount = studentCapacity / 5
         val approveCount = applicant.approves.size

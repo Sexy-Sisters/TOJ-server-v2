@@ -30,6 +30,7 @@ class School(
     var kind: Kind? = null
 
     @OneToMany(
+        fetch = FetchType.LAZY,
         mappedBy = "school",
         cascade = [CascadeType.ALL]
     )

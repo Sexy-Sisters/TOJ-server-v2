@@ -12,6 +12,8 @@ import javax.persistence.*
 @Entity
 @Table(name = "tbl_student")
 class Student(
+    user: User,
+    school: School,
     @Embedded val grade: Grade,
     @Embedded val classroom: Classroom,
     @Embedded val number: Number,
@@ -22,14 +24,14 @@ class Student(
     var status: Status = Status.INDEPENDENT
         private set
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "school_id")
-    var school: School? = null
-        private set
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    var user: User? = null
+    var user: User = user
+        private set
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "school_id")
+    var school: School = school
         private set
 
     @OneToMany(
@@ -54,8 +56,8 @@ class Student(
     val comments: List<Comment> get() = mutableComments.toList()
 
     @OneToMany(
-        mappedBy = "writer",
         fetch = FetchType.LAZY,
+        mappedBy = "writer",
         cascade = [CascadeType.ALL]
     )
     val feeds = mutableSetOf<Feed>()
@@ -73,16 +75,6 @@ class Student(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L
 
-    fun makeRelation(user: User) {
-        this.user = user
-        user.student = this
-    }
-
-    fun makeRelation(school: School) {
-        this.school = school
-        school.students.add(this)
-    }
-
     fun independent() {
         status = Status.INDEPENDENT
     }
@@ -95,7 +87,7 @@ class Student(
         status = Status.ENGAGED
     }
 
-    fun isAttendSchool() = school != null
+    fun isAttendSchool() = status != Status.INDEPENDENT
 
     fun gradeValue() = grade.value
     fun classroomValue() = classroom.value

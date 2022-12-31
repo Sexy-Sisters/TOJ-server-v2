@@ -15,7 +15,6 @@ class SchoolServiceImpl(
     private val schoolMapper: SchoolMapper,
     private val schoolStore: SchoolStore,
     private val studentReader: StudentReader,
-    private val schoolReader: SchoolReader,
     private val schoolPolicy: List<SchoolPolicy>,
 ) : SchoolService {
 
@@ -30,17 +29,15 @@ class SchoolServiceImpl(
         return schoolStore.store(initSchool).codeValue()
     }
 
-    override fun applySchool(code: String): String {
+    override fun applySchool(): String {
         val student = studentReader.getCurrentStudent()
-        val school = schoolReader.getSchool(code)
-        schoolPolicy.forEach { it.check(student, school) }
-        student.makeRelation(school)
+        schoolPolicy.forEach { it.check(student) }
         return student.status.description
     }
 
     override fun updateWallpaper(command: SchoolCommand.UpdateWallpaper): String {
         val student = studentReader.getCurrentStudent()
-        val school = student.school!!
+        val school = student.school
         val wallpaper = Wallpaper(command.wallpaper)
         return school.updateWallpaper(wallpaper)
     }
