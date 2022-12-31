@@ -10,6 +10,8 @@ import javax.persistence.*
 @Entity
 @Table(name = "tbl_student")
 class Student(
+    user: User,
+    school: School,
     @Embedded val grade: Grade,
     @Embedded val classroom: Classroom,
     @Embedded val number: Number,
@@ -20,14 +22,14 @@ class Student(
     var status: Status = Status.INDEPENDENT
         private set
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "school_id")
-    var school: School? = null
-        private set
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    var user: User? = null
+    var user: User = user
+        private set
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "school_id")
+    var school: School = school
         private set
 
     @OneToMany(
@@ -77,7 +79,7 @@ class Student(
         status = Status.ENGAGED
     }
 
-    fun isAttendSchool() = school != null
+    fun isAttendSchool() = status != Status.INDEPENDENT
 
     fun gradeValue() = grade.value
     fun classroomValue() = classroom.value

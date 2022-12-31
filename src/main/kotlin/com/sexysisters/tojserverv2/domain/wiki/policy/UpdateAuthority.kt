@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 @Component
 class UpdateAuthority : WikiPolicy {
     override fun check(student: Student, school: School) {
-        if (student.school!!.code != school.code) {
+        if (student.school.code != school.code) {
             throw StudentException.NotBelong()
         }
     }

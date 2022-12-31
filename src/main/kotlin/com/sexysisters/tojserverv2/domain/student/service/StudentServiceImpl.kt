@@ -23,22 +23,21 @@ class StudentServiceImpl(
         val user = userReader.getCurrentUser()
         studentPolicy.forEach { it.check(user) }
         val initStudent = createStudentEntity(command)
-        initStudent.makeRelation(user)
-        return studentStore.store(initStudent)
-    }
+        val initStudent = Student(
+            user = user,
+            school = school,
 
     private fun createStudentEntity(command: StudentCommand.Create) = Student(
-        grade = Grade(command.grade),
-        classroom = Classroom(command.classroom),
-        number = Number(command.number),
+            grade = Grade(command.grade),
+            classroom = Classroom(command.classroom),
+            number = Number(command.number),
         age = Age(command.age),
     )
 
     @Transactional(readOnly = true)
     override fun getStudentList(status: Status): List<StudentInfo.Main> {
         val student = studentReader.getCurrentStudent()
-        student.school ?: throw StudentException.NotBelong()
-        return studentReader.getStudentList(student.school!!, status)
+        return studentReader.getStudentList(student.school, status)
             .map { studentMapper.of(it) }
     }
 

@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component
 class SameSchoolPolicy : ApprovePolicy {
 
     override fun check(applicant: Student, acceptor: Student) {
-        val applicantSchool = applicant.school!!
-        val acceptorSchool = acceptor.school!!
+        val applicantSchool = applicant.school
+        val acceptorSchool = acceptor.school
         val isSame = acceptorSchool.code == applicantSchool.code
         if (!isSame) {
             throw ApproveException.DifferentSchool()
