@@ -40,7 +40,10 @@ class School(
     @JoinColumn(name = "wiki_id")
     var wiki: Wiki? = null
 
-    @OneToMany(mappedBy = "school", cascade = [CascadeType.ALL])
+    @OneToMany(
+        mappedBy = "school",
+        cascade = [CascadeType.ALL]
+    )
     val teachers = mutableSetOf<Teacher>()
 
     @Id
