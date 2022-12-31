@@ -7,4 +7,5 @@ class StudentException {
     class NotBelong : BaseException(StudentErrorCode.NOT_BELONG)
     class AlreadyCreated : BaseException(StudentErrorCode.ALREADY_CREATED)
     class StudentNotValid : BaseException(StudentErrorCode.STUDENT_NOT_VALID)
+    class DuplicatedStudent : BaseException(StudentErrorCode.DUPLICATED_STUDENT)
 }

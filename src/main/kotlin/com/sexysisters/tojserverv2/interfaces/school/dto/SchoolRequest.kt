@@ -4,6 +4,14 @@ import javax.validation.constraints.NotBlank
 
 class SchoolRequest {
 
+    data class Apply(
+        val schoolCode: String,
+        val age: Int,
+        val grade: Int,
+        val classroom: Int,
+        val number: Int,
+    )
+
     data class Search(
         @field: NotBlank(message = "school name is empty")
         val name: String,
