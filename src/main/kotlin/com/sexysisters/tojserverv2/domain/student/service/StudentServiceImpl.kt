@@ -19,7 +19,7 @@ class StudentServiceImpl(
 ) : StudentService {
 
     @Transactional
-    override fun createStudent(command: StudentCommand.Create): Long {
+    override fun createStudent(command: StudentCommand.Create) {
         val user = userReader.getCurrentUser()
         if (user.hasStudent()) throw StudentException.AlreadyCreated()
         val school = schoolReader.getSchool(command.schoolCode)
@@ -31,10 +31,19 @@ class StudentServiceImpl(
             number = Number(command.number),
             age = Age(command.age)
         )
-        val student = studentStore.store(initStudent)
-        user.student = student
-        school.students.add(student)
-        return student.id
+        validateStudent(initStudent)
+    }
+
+    private fun validateStudent(student: Student) {
+        val hasStudent = studentReader.checkAlreadyExists(
+            school = student.school,
+            grade = student.gradeValue(),
+            classroom = student.classroomValue(),
+            number = student.numberValue(),
+        )
+        if (hasStudent) {
+            throw StudentException.DuplicatedStudent()
+        }
     }
 
     @Transactional(readOnly = true)

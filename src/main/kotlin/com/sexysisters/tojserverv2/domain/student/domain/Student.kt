@@ -20,12 +20,19 @@ class Student(
     @Embedded val age: Age,
 ) : BaseTimeEntity() {
 
+    init {
+        school.students.add(this)
+        user.student = this
+    }
+
     @Enumerated(EnumType.STRING)
     var status: Status = Status.INDEPENDENT
         private set
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToOne(
+        fetch = FetchType.LAZY,
+        mappedBy = "student",
+    )
     var user: User = user
         private set
 
