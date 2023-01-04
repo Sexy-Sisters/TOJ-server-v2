@@ -75,6 +75,9 @@ dependencies {
 
     implementation("com.google.code.gson:gson")
 
+    // ULID Generater
+    implementation("com.github.f4b6a3:ulid-creator:5.1.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 }
