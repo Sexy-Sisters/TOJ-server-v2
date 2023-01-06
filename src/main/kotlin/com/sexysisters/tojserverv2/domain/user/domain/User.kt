@@ -35,9 +35,9 @@ class User(
 
     @OneToOne(
         fetch = FetchType.LAZY,
-        mappedBy = "user",
-        cascade = [CascadeType.ALL],
+        cascade = [CascadeType.ALL]
     )
+    @JoinColumn(name = "student_id")
     var student: Student? = null
 
     @Id

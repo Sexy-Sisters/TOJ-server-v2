@@ -32,7 +32,7 @@ class School(
     @OneToMany(
         fetch = FetchType.LAZY,
         mappedBy = "school",
-        cascade = [CascadeType.ALL]
+        cascade = [CascadeType.REMOVE]
     )
     val students = mutableSetOf<Student>()
 

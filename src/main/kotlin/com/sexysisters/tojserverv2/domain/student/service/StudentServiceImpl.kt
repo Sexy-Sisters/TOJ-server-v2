@@ -1,6 +1,7 @@
 package com.sexysisters.tojserverv2.domain.student.service
 
 import com.sexysisters.tojserverv2.domain.school.SchoolReader
+import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.student.*
 import com.sexysisters.tojserverv2.domain.student.domain.*
 import com.sexysisters.tojserverv2.domain.student.domain.Number
@@ -13,17 +14,17 @@ import org.springframework.transaction.annotation.Transactional
 class StudentServiceImpl(
     private val schoolReader: SchoolReader,
     private val userReader: UserReader,
-    private val studentStore: StudentStore,
     private val studentReader: StudentReader,
     private val studentMapper: StudentMapper,
 ) : StudentService {
 
     @Transactional
-    override fun createStudent(command: StudentCommand.Create): Long {
+    override fun createStudent(command: StudentCommand.Create) {
         val user = userReader.getCurrentUser()
         if (user.hasStudent()) throw StudentException.AlreadyCreated()
         val school = schoolReader.getSchool(command.schoolCode)
-        val initStudent = Student(
+        validateStudent(school, command)
+        Student(
             user = user,
             school = school,
             grade = Grade(command.grade),
@@ -31,10 +32,18 @@ class StudentServiceImpl(
             number = Number(command.number),
             age = Age(command.age)
         )
-        val student = studentStore.store(initStudent)
-        user.student = student
-        school.students.add(student)
-        return student.id
+    }
+
+    private fun validateStudent(school: School, command: StudentCommand.Create) {
+        val hasStudent = studentReader.checkAlreadyExists(
+            school = school,
+            grade = command.grade,
+            classroom = command.classroom,
+            number = command.number,
+        )
+        if (hasStudent) {
+            throw StudentException.DuplicatedStudent()
+        }
     }
 
     @Transactional(readOnly = true)
