@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 @Component
 class TeacherLikeStoreImpl(
     private val teacherLikeRepository: TeacherLikeRepository
-): TeacherLikeStore {
+) : TeacherLikeStore {
 
     override fun store(teacherLike: TeacherLike) =
         teacherLikeRepository.save(teacherLike)

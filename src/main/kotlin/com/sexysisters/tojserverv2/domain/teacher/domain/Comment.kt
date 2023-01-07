@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.domain.teacher.domain
 
 import com.sexysisters.tojserverv2.config.properties.S3Properties
-import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.BaseEntity
 import com.sexysisters.tojserverv2.domain.student.domain.Student
 import javax.persistence.*
 
@@ -12,7 +12,7 @@ class Comment(
     teacher: Teacher,
     student: Student,
     isAnonymous: Boolean
-) : BaseTimeEntity() {
+) : BaseEntity() {
     private val ANONYMOUS_NAME: String = "익명"
 
     @Embedded

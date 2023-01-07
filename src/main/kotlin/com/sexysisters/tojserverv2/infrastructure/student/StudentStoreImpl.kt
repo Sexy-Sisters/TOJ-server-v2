@@ -2,7 +2,6 @@ package com.sexysisters.tojserverv2.infrastructure.student
 
 import com.sexysisters.tojserverv2.domain.student.StudentStore
 import com.sexysisters.tojserverv2.domain.student.domain.Student
-import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import org.springframework.stereotype.Component
 
 @Component

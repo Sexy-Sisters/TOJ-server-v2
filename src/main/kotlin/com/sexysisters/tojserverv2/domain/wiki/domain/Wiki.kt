@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.domain.wiki.domain
 
-import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.BaseEntity
 import com.sexysisters.tojserverv2.domain.school.domain.School
 import javax.persistence.*
 
@@ -9,7 +9,7 @@ import javax.persistence.*
 class Wiki(
     @Embedded
     val name: Name
-) : BaseTimeEntity() {
+) : BaseEntity() {
 
     @Embedded
     var html: HTML = HTML()
@@ -26,10 +26,6 @@ class Wiki(
     @OneToOne(mappedBy = "wiki", fetch = FetchType.LAZY)
     var school: School? = null
         private set
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
 
     fun makeRelation(school: School) {
         this.school = school

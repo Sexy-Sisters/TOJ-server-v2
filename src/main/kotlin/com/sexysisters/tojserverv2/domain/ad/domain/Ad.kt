@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.domain.ad.domain
 
-import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.BaseEntity
 import com.sexysisters.tojserverv2.domain.ad.exception.AdException
 import java.time.LocalDate
 import javax.persistence.*
@@ -19,19 +19,15 @@ class Ad(
 
     @Embedded
     val company: Company,
-) : BaseTimeEntity() {
-
-    @Enumerated(value = EnumType.STRING)
-    var status: Status = Status.OPEN
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
+) : BaseEntity() {
 
     init {
         if (image.isBlank()) throw AdException.AdNotValid()
         if (link.isBlank()) throw AdException.AdNotValid()
     }
+
+    @Enumerated(value = EnumType.STRING)
+    var status: Status = Status.OPEN
 }
 
 fun Ad.close() { this.status = Status.CLOSE }
