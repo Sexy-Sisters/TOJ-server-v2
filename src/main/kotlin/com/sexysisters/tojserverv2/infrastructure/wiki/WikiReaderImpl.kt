@@ -11,7 +11,7 @@ class WikiReaderImpl(
     private val wikiRepository: WikiRepository,
 ) : WikiReader {
 
-    override fun getWiki(id: Long): Wiki {
+    override fun getWiki(id: String): Wiki {
         return wikiRepository.findByIdOrNull(id)
             ?: throw WikiException.WikiNotFound()
     }

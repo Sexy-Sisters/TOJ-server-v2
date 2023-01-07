@@ -8,7 +8,7 @@ import com.sexysisters.tojserverv2.infrastructure.ad.Sort
 
 interface AdService {
     fun openAd(command: AdCommand.Create)
-    fun deleteAd(id: Long)
+    fun deleteAd(id: String)
     fun getAdList(
         status: Status,
         adKind: AdKind?,

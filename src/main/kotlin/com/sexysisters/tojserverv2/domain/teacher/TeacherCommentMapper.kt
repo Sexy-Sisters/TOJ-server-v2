@@ -10,6 +10,6 @@ class TeacherCommentMapper {
         profileImg = comment.getProfileImage(),
         nickname = comment.getNickname(),
         content = comment.getContent(),
-        createdDate = comment.createdAt!!
+        createdDate = comment.createdAt
     )
 }

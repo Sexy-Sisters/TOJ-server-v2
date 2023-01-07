@@ -4,6 +4,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory
 import com.sexysisters.tojserverv2.domain.teacher.domain.Teacher
 import com.sexysisters.tojserverv2.domain.teacher.domain.QTeacher.teacher
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class TeacherCustomRepositoryImpl(
@@ -18,7 +19,7 @@ class TeacherCustomRepositoryImpl(
             .fetch()
     }
 
-    override fun findByIdAndSchoolCode(id: Long, schoolCode: String): Teacher? {
+    override fun findByIdAndSchoolCode(id: UUID, schoolCode: String): Teacher? {
         return query
             .selectFrom(teacher)
             .where(

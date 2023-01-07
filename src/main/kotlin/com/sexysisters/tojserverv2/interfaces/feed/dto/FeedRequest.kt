@@ -11,7 +11,7 @@ class FeedRequest {
 
     data class Update(
         @field:NotNull
-        val id: Long,
+        val id: String,
 
         @field:NotNull
         val content: String,

@@ -6,7 +6,7 @@ import java.time.LocalDate
 class AdResponse {
 
     class Main(
-        val id: Long,
+        val id: String,
         val companyName: String,
         val views: Int,
         val image: String,

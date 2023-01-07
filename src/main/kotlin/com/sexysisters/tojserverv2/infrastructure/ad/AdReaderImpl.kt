@@ -13,7 +13,7 @@ class AdReaderImpl(
     private val adRepository: AdRepository,
 ) : AdReader {
 
-    override fun getAd(id: Long) =
+    override fun getAd(id: String) =
         adRepository.findByIdOrNull(id)
             ?: throw AdException.AdNotFound()
 

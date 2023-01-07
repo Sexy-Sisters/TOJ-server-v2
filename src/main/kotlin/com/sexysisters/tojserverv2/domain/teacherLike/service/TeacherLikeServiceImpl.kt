@@ -7,6 +7,7 @@ import com.sexysisters.tojserverv2.domain.teacherLike.TeacherLikeStore
 import com.sexysisters.tojserverv2.domain.teacherLike.domain.TeacherLike
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ class TeacherLikeServiceImpl(
     private val teacherLikeStore: TeacherLikeStore
 ) : TeacherLikeService {
 
-    override fun like(teacherId: Long): Boolean {
+    override fun like(teacherId: UUID): Boolean {
         val teacher = teacherReader.getTeacher(teacherId)
         val student = studentReader.getCurrentStudent()
 

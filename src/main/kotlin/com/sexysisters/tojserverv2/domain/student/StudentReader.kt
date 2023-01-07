@@ -5,7 +5,7 @@ import com.sexysisters.tojserverv2.domain.student.domain.Status
 import com.sexysisters.tojserverv2.domain.student.domain.Student
 
 interface StudentReader {
-    fun getStudent(id: Long): Student
+    fun getStudent(id: String): Student
     fun getCurrentStudent(): Student
     fun checkAlreadyExists(
         school: School,

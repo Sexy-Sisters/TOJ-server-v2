@@ -7,7 +7,7 @@ class WikiRequest {
 
     class Update(
         @field: NotNull
-        val id: Long,
+        val id: String,
         @field: NotBlank
         val html: String,
         @field: NotBlank

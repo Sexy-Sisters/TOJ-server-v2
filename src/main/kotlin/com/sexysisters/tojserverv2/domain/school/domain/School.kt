@@ -47,7 +47,7 @@ class School(
     val teachers = mutableSetOf<Teacher>()
 
     fun codeValue() = code.value
-    fun belongValue() = belong.value
+    fun beStringValue() = belong.value
     fun nameValue() = name.value
     fun addressValue() = address.value
     fun birthdayValue() = birthday.value

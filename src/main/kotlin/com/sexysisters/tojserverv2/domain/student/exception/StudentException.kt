@@ -4,7 +4,7 @@ import com.sexysisters.tojserverv2.common.exception.BaseException
 
 class StudentException {
     class StudentNotFound : BaseException(StudentErrorCode.STUDENT_NOT_FOUND)
-    class NotBelong : BaseException(StudentErrorCode.NOT_BELONG)
+    class NotBeString : BaseException(StudentErrorCode.NOT_BEString)
     class AlreadyCreated : BaseException(StudentErrorCode.ALREADY_CREATED)
     class StudentNotValid : BaseException(StudentErrorCode.STUDENT_NOT_VALID)
     class DuplicatedStudent : BaseException(StudentErrorCode.DUPLICATED_STUDENT)

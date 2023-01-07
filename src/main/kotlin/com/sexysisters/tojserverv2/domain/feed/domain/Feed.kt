@@ -20,9 +20,6 @@ class Feed(
     var content: Content = content
         private set
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
-
     fun update(content: Content) {
         this.content = content
     }

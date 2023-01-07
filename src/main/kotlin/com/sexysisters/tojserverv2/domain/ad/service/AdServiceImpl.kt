@@ -35,7 +35,7 @@ class AdServiceImpl(
     }
 
     @Transactional
-    override fun deleteAd(id: Long) {
+    override fun deleteAd(id: String) {
         val ad = adReader.getAd(id)
         adStore.delete(ad)
     }

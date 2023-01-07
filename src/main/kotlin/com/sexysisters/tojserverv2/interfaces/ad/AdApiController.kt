@@ -32,7 +32,7 @@ class AdApiController(
 
     @ApiOperation("실수로 잘못 생성한 광고 삭제")
     @DeleteMapping("/{id}")
-    fun deleteAd(@PathVariable id: Long) {
+    fun deleteAd(@PathVariable id: String) {
         adService.deleteAd(id)
     }
 

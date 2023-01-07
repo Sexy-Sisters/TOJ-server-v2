@@ -10,6 +10,7 @@ import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherDtoMapper
 import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 @Transactional
@@ -33,12 +34,12 @@ class TeacherServiceImpl(
     }
 
     @Transactional(readOnly = true)
-    override fun getTeacher(id: Long): TeacherResponse.Main {
+    override fun getTeacher(id: UUID): TeacherResponse.Main {
         val teacher = teacherReader.getTeacher(id)
         return teacherDtoMapper.of(teacher)
     }
 
-    override fun update(id: Long, command: TeacherCommand.Update) {
+    override fun update(id: UUID, command: TeacherCommand.Update) {
         val student = checkStudentIdentity()
         if (!student.isAttendSchool()) throw SchoolException.SchoolNotFound()
         val teacher = teacherReader.getTeacher(id, student.school)
@@ -50,7 +51,7 @@ class TeacherServiceImpl(
         )
     }
 
-    override fun delete(id: Long) {
+    override fun delete(id: UUID) {
         val student = checkStudentIdentity()
         if (!student.isAttendSchool()) throw SchoolException.SchoolNotFound()
         val teacher = teacherReader.getTeacher(id, student.school)

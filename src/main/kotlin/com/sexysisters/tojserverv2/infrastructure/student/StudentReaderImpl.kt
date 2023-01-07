@@ -14,7 +14,7 @@ class StudentReaderImpl(
     private val userReader: UserReader,
 ) : StudentReader {
 
-    override fun getStudent(id: Long) =
+    override fun getStudent(id: String) =
         studentRepository.findByIdOrNull(id)
             ?: throw StudentException.StudentNotFound()
 

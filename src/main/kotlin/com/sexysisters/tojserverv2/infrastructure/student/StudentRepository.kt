@@ -5,6 +5,6 @@ import com.sexysisters.tojserverv2.domain.student.domain.Status
 import com.sexysisters.tojserverv2.domain.student.domain.Student
 import org.springframework.data.jpa.repository.JpaRepository
 
-interface StudentRepository : JpaRepository<Student, Long>, StudentCustomRepository {
+interface StudentRepository : JpaRepository<Student, String>, StudentCustomRepository {
     fun findAllBySchoolAndStatus(school: School, status: Status): List<Student>
 }

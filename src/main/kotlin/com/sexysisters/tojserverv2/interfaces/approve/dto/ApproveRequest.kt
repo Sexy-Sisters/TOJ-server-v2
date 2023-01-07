@@ -6,11 +6,11 @@ class ApproveRequest {
 
     data class Approve(
         @field: NotNull
-        val applicantId: Long,
+        val applicantId: String,
     )
 
     data class Cancel(
         @field: NotNull
-        val applicantId: Long,
+        val applicantId: String,
     )
 }

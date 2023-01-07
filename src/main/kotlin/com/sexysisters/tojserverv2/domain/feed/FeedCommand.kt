@@ -7,7 +7,7 @@ class FeedCommand {
     )
 
     class Update(
-        val id: Long,
+        val id: String,
         val content: String,
     )
 }

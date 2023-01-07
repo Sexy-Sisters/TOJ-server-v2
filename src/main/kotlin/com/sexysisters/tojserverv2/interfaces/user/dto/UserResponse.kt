@@ -3,7 +3,7 @@ package com.sexysisters.tojserverv2.interfaces.user.dto
 class UserResponse {
 
     class SignUp(
-        val userId: Long,
+        val userId: String,
     )
 
     class Profile(
