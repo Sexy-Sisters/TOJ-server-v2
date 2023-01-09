@@ -5,6 +5,7 @@ import com.sexysisters.tojserverv2.domain.ad.domain.*
 import com.sexysisters.tojserverv2.infrastructure.ad.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 class AdServiceImpl(
@@ -35,7 +36,7 @@ class AdServiceImpl(
     }
 
     @Transactional
-    override fun deleteAd(id: String) {
+    override fun deleteAd(id: UUID) {
         val ad = adReader.getAd(id)
         adStore.delete(ad)
     }

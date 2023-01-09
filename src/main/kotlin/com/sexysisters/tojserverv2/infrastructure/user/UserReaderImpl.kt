@@ -4,6 +4,7 @@ import com.sexysisters.tojserverv2.common.security.auth.AuthDetails
 import com.sexysisters.tojserverv2.domain.user.UserReader
 import com.sexysisters.tojserverv2.domain.user.domain.User
 import com.sexysisters.tojserverv2.domain.user.exception.UserException
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import java.util.*
@@ -18,7 +19,7 @@ class UserReaderImpl(
             ?: throw UserException.UserNotFound()
 
     override fun getUser(id: UUID) =
-        userRepository.findById(id)
+        userRepository.findByIdOrNull(id)
             ?: throw UserException.UserNotFound()
 
     override fun getCurrentUser(): User {

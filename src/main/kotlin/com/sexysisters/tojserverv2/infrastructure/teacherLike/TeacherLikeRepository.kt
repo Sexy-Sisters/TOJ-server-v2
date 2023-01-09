@@ -4,8 +4,9 @@ import com.sexysisters.tojserverv2.domain.student.domain.Student
 import com.sexysisters.tojserverv2.domain.teacher.domain.Teacher
 import com.sexysisters.tojserverv2.domain.teacherLike.domain.TeacherLike
 import org.springframework.data.jpa.repository.JpaRepository
+import java.util.*
 
-interface TeacherLikeRepository : JpaRepository<TeacherLike, String> {
+interface TeacherLikeRepository : JpaRepository<TeacherLike, UUID> {
     fun existsByTeacherAndStudent(teacher: Teacher, student: Student): Boolean
     fun deleteByTeacherAndStudent(teacher: Teacher, student: Student)
 }

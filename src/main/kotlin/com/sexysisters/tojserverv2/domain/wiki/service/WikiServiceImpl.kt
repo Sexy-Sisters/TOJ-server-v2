@@ -34,7 +34,7 @@ class WikiServiceImpl(
         val school = schoolReader.getSchool(schoolCode)
         val wiki = school.wiki!!
         wiki.countViews()
-        val updatedAt = FormatUtil.format(wiki.updatedAt!!)
+        val updatedAt = FormatUtil.format(wiki.updatedAt)
         return wikiMapper.of(wiki, updatedAt, school.wallpaper)
     }
 
