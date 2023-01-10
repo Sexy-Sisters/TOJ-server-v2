@@ -21,9 +21,11 @@ abstract class BaseEntity : Persistable<UUID> {
     private val id: UUID = UlidCreator.getMonotonicUlid().toUuid()
 
     @CreatedDate
+    @Column(name = "created_at")
     val createdAt: LocalDateTime = LocalDateTime.MIN
 
     @LastModifiedDate
+    @Column(name = "updated_at")
     var updatedAt: LocalDateTime = LocalDateTime.MIN
         protected set
 
