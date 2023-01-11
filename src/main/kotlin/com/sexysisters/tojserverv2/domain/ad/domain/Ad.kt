@@ -1,8 +1,6 @@
 package com.sexysisters.tojserverv2.domain.ad.domain
 
 import com.sexysisters.tojserverv2.domain.BaseEntity
-import com.sexysisters.tojserverv2.domain.ad.exception.AdException
-import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
@@ -10,21 +8,26 @@ import javax.persistence.*
 class Ad(
     @Enumerated(value = EnumType.STRING)
     val adKind: AdKind,
-    val image: String,
-    val link: String,
-    val expirationDate: LocalDate,
 
+    @Embedded
+    val image: Image,
+
+    @Embedded
+    val link: Link,
+
+    @Embedded
+    val expirationDate: ExpirationDate,
+
+    // TODO ::
+    // @author: Lee Kyu-jin
+    // @to: Nam Se-won
+    //  These normal embedded type columns should be changed to wrapper type using embedded type
     @Embedded
     val costInfo: CostInfo,
 
     @Embedded
     val company: Company,
 ) : BaseEntity() {
-
-    init {
-        if (image.isBlank()) throw AdException.AdNotValid()
-        if (link.isBlank()) throw AdException.AdNotValid()
-    }
 
     @Enumerated(value = EnumType.STRING)
     var status: Status = Status.OPEN
