@@ -26,9 +26,9 @@ class AdServiceImpl(
         )
         val initAd = Ad(
             adKind = command.adKind,
-            image = command.image,
-            link = command.link,
-            expirationDate = command.expirationDate,
+            image = Image(command.image),
+            link = Link(command.link),
+            expirationDate = ExpirationDate(command.expirationDate),
             costInfo = initCostInfo,
             company = initCompany,
         )

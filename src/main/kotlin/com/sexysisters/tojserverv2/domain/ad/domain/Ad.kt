@@ -19,8 +19,8 @@ class Ad(
     val expirationDate: ExpirationDate,
 
     /*
-    @author: Lee Kyu-jin
-    @to: Nam Se-won
+    @author Lee Kyu-jin
+    @to Nam Se-won
     TODO :: These normal embedded type columns should be changed to wrapper type using embedded type
     */
     @Embedded
