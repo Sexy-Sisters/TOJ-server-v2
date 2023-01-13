@@ -3,7 +3,7 @@ package com.sexysisters.tojserverv2.infrastructure.ad
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.sexysisters.tojserverv2.domain.ad.domain.Ad
-import com.sexysisters.tojserverv2.domain.ad.domain.AdKind
+import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.AdKind
 import com.sexysisters.tojserverv2.domain.ad.domain.QAd.ad
 import com.sexysisters.tojserverv2.domain.ad.domain.Status
 import org.springframework.stereotype.Component
