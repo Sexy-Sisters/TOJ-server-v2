@@ -2,7 +2,7 @@ package com.sexysisters.tojserverv2.domain.ad.service
 
 import com.sexysisters.tojserverv2.domain.ad.*
 import com.sexysisters.tojserverv2.domain.ad.domain.*
-import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.AdKind
+import com.sexysisters.tojserverv2.domain.ad.domain.company.Company
 import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.CostInfo
 import com.sexysisters.tojserverv2.infrastructure.ad.Sort
 import org.springframework.stereotype.Service

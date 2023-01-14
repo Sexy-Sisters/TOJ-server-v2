@@ -1,4 +1,4 @@
-package com.sexysisters.tojserverv2.domain.ad.domain.custinfo
+package com.sexysisters.tojserverv2.domain.ad.domain.company
 
 import com.sexysisters.tojserverv2.domain.ad.exception.AdException
 import org.jetbrains.annotations.NotNull
@@ -6,12 +6,12 @@ import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
-class Cost(
+class Advertiser(
     @NotNull
-    @Column(name = "cost")
-    val value: Int
+    @Column(name = "advertiser")
+    val value: String,
 ) {
     init {
-        if (value < 0) AdException.AdNotValid()
+        if (value.isBlank()) AdException.AdNotValid()
     }
 }

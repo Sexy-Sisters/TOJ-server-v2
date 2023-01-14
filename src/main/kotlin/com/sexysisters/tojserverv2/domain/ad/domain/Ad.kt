@@ -1,6 +1,7 @@
 package com.sexysisters.tojserverv2.domain.ad.domain
 
 import com.sexysisters.tojserverv2.domain.BaseEntity
+import com.sexysisters.tojserverv2.domain.ad.domain.company.Company
 import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.CostInfo
 import javax.persistence.*
 
