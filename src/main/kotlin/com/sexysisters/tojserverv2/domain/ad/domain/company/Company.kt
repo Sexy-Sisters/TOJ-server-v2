@@ -6,7 +6,7 @@ import javax.persistence.Embedded
 @Embeddable
 data class Company(
     @Embedded
-    val name: Name,
+    val companyName: CompanyName,
 
     @Embedded
     val advertiser: Advertiser,

@@ -17,7 +17,7 @@ interface AdMapper {
     @Mappings(
         value = [
             Mapping(source = "costInfo.views", target = "views"),
-            Mapping(source = "company.name", target = "companyName"),
+            Mapping(source = "company.companyName", target = "companyName"),
             Mapping(source = "link.value", target = "link"),
             Mapping(source = "image.value", target = "image"),
             Mapping(source = "expirationDate.value", target = "expirationDate"),

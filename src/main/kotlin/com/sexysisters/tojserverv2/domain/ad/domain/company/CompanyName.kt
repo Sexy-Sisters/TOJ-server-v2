@@ -6,7 +6,7 @@ import javax.persistence.Column
 import javax.persistence.Embeddable
 
 @Embeddable
-class Name(
+class CompanyName(
     @NotNull
     @Column(name = "name")
     val value: String,

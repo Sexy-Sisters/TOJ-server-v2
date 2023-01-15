@@ -2,7 +2,10 @@ package com.sexysisters.tojserverv2.domain.ad.service
 
 import com.sexysisters.tojserverv2.domain.ad.*
 import com.sexysisters.tojserverv2.domain.ad.domain.*
+import com.sexysisters.tojserverv2.domain.ad.domain.company.Advertiser
 import com.sexysisters.tojserverv2.domain.ad.domain.company.Company
+import com.sexysisters.tojserverv2.domain.ad.domain.company.CompanyName
+import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.Cost
 import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.CostInfo
 import com.sexysisters.tojserverv2.infrastructure.ad.Sort
 import org.springframework.stereotype.Service
@@ -20,11 +23,11 @@ class AdServiceImpl(
     override fun openAd(command: AdCommand.Create) {
         val initCostInfo = CostInfo(
             type = command.costType,
-            cost = command.cost,
+            cost = Cost(command.cost),
         )
         val initCompany = Company(
-            name = command.companyName,
-            advertiser = command.advertiser,
+            companyName = CompanyName(command.companyName),
+            advertiser = Advertiser(command.advertiser),
         )
         val initAd = Ad(
             adKind = command.adKind,

@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.domain.ad
 
-import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.AdKind
+import com.sexysisters.tojserverv2.domain.ad.domain.AdKind
 import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.Type
 import java.time.LocalDate
 
