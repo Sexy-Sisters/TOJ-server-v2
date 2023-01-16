@@ -9,6 +9,7 @@ class AdInfo {
         val id: String,
         val companyName: String,
         val views: Int,
+        val clicks: Int,
         val image: String,
         val link: String,
         val expirationDate: LocalDate,

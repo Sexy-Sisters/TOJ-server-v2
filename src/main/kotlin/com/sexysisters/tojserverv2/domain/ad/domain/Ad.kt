@@ -17,8 +17,10 @@ class Ad(
     @Embedded
     val link: Link,
 
-    // @author Lee Kyu-jin
-    // TODO :: 래핑 타입과 일반 임베디드 타입의 차이를 두기 위해서 래핑 타입을 위한 어노테이션을 만들 필요가 있어 보임
+    /*
+    @author Lee Kyu-jin
+    TODO :: 래핑 타입과 일반 임베디드 타입의 차이를 두기 위해서 래핑 타입을 위한 어노테이션을 만들 필요가 있어 보임
+     */
     @Embedded
     val expirationDate: ExpirationDate,
 
