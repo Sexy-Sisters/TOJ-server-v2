@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.interfaces.ad
 
 import com.sexysisters.tojserverv2.common.response.CommonResponse
-import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.AdKind
+import com.sexysisters.tojserverv2.domain.ad.domain.AdKind
 import com.sexysisters.tojserverv2.domain.ad.domain.Status
 import com.sexysisters.tojserverv2.domain.ad.service.AdService
 import com.sexysisters.tojserverv2.infrastructure.ad.Sort
