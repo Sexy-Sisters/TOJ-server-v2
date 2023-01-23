@@ -39,7 +39,7 @@ class AdCustomRepositoryImpl(
     }
 
     private fun selectStandard(sort: Sort) = when (sort) {
-        Sort.VIEWS -> ad.costInfo.views.desc()
+        Sort.VIEWS -> ad.costInfo.views.value.desc()
         else -> null
     }
 }

@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.domain.teacher.domain
 
-import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.BaseEntity
 import com.sexysisters.tojserverv2.domain.school.domain.School
 import com.sexysisters.tojserverv2.domain.teacherLike.domain.TeacherLike
 import javax.persistence.*
@@ -12,7 +12,7 @@ class Teacher(
     name: Name,
     nickname: Nickname,
     bio: Bio,
-) : BaseTimeEntity() {
+) : BaseEntity() {
 
     @Embedded
     var image: Image = image
@@ -49,11 +49,6 @@ class Teacher(
     )
     private val mutableTeacherLikes: MutableList<TeacherLike> = mutableListOf()
     val teacherLikes get(): List<TeacherLike> = mutableTeacherLikes.toList()
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tbl_teacher_id")
-    val id: Long = 0L
 
     fun registeredComment(comment: Comment) {
         mutableComments.add(comment)

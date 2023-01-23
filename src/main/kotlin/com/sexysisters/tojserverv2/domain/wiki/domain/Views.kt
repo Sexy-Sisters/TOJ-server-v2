@@ -18,4 +18,6 @@ class Views {
     init {
         if (value < 0) throw WikiException.WikiNotValid()
     }
+
+    fun view() { value++ }
 }

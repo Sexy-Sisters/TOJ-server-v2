@@ -3,7 +3,7 @@ package com.sexysisters.tojserverv2.domain.wiki
 class WikiInfo {
 
     class Main(
-        val id: Long,
+        val id: String,
         val name: String,
         val html: String,
         val markdown: String,

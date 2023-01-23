@@ -7,13 +7,14 @@ import com.sexysisters.tojserverv2.domain.ad.domain.Status
 import com.sexysisters.tojserverv2.domain.ad.exception.AdException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class AdReaderImpl(
     private val adRepository: AdRepository,
 ) : AdReader {
 
-    override fun getAd(id: Long) =
+    override fun getAd(id: UUID) =
         adRepository.findByIdOrNull(id)
             ?: throw AdException.AdNotFound()
 

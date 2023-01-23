@@ -1,5 +1,7 @@
 package com.sexysisters.tojserverv2.domain.feed
 
+import java.util.*
+
 class FeedCommand {
     class Create(
         val content: String,
@@ -7,7 +9,7 @@ class FeedCommand {
     )
 
     class Update(
-        val id: Long,
+        val id: UUID,
         val content: String,
     )
 }

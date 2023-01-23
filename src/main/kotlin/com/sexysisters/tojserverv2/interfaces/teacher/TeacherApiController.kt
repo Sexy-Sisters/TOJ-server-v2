@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 import javax.validation.Valid
 
 @Api(tags = ["선생님 관련 API"])
@@ -45,7 +46,7 @@ class TeacherApiController(
 
     @ApiOperation(value = "선생님 단건 조회")
     @GetMapping("/{id}")
-    fun getDetail(@PathVariable("id") id: Long): CommonResponse<TeacherResponse.Main> {
+    fun getDetail(@PathVariable("id") id: UUID): CommonResponse<TeacherResponse.Main> {
         val response = teacherService.getTeacher(id)
         return CommonResponse.success(response)
     }
@@ -53,7 +54,7 @@ class TeacherApiController(
     @ApiOperation(value = "학교의 학생만 학교의 선생님 수정")
     @PutMapping("/{id}")
     fun update(
-        @PathVariable("id") id: Long,
+        @PathVariable("id") id: UUID,
         @RequestBody request: TeacherRequest.Update
     ) {
         val teacherCommand = teacherDtoMapper.of(request)
@@ -62,7 +63,7 @@ class TeacherApiController(
 
     @ApiOperation(value = "학교의 학생만 학교의 선생님 삭제")
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable("id") id: Long) {
+    fun delete(@PathVariable("id") id: UUID) {
         teacherService.delete(id)
     }
 }

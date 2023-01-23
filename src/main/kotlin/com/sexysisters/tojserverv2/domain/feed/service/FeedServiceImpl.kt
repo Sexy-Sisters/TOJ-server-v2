@@ -10,6 +10,7 @@ import com.sexysisters.tojserverv2.domain.feed.exception.FeedException
 import com.sexysisters.tojserverv2.domain.student.StudentReader
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 @Transactional
@@ -19,7 +20,7 @@ class FeedServiceImpl(
     private val studentReader: StudentReader,
 ) : FeedService {
 
-    override fun createFeed(command: FeedCommand.Create): Long {
+    override fun createFeed(command: FeedCommand.Create): UUID {
         val student = studentReader.getCurrentStudent()
         val feed = Feed(
             writer = student,

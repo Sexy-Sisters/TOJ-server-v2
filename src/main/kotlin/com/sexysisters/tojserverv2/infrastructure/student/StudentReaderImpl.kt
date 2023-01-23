@@ -7,6 +7,7 @@ import com.sexysisters.tojserverv2.domain.student.exception.StudentException
 import com.sexysisters.tojserverv2.domain.user.UserReader
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class StudentReaderImpl(
@@ -14,7 +15,7 @@ class StudentReaderImpl(
     private val userReader: UserReader,
 ) : StudentReader {
 
-    override fun getStudent(id: Long) =
+    override fun getStudent(id: UUID) =
         studentRepository.findByIdOrNull(id)
             ?: throw StudentException.StudentNotFound()
 

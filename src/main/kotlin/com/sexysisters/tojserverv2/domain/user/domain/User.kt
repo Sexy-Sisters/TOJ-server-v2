@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.domain.user.domain
 
-import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.BaseEntity
 import com.sexysisters.tojserverv2.domain.student.domain.Student
 import javax.persistence.*
 
@@ -12,7 +12,7 @@ class User(
     nickname: Nickname,
     image: Image,
     name: Name,
-) : BaseTimeEntity() {
+) : BaseEntity() {
 
     @Embedded
     var password: Password = password
@@ -39,10 +39,6 @@ class User(
     )
     @JoinColumn(name = "student_id")
     var student: Student? = null
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
 
     fun updateInfo(
         nickname: Nickname,

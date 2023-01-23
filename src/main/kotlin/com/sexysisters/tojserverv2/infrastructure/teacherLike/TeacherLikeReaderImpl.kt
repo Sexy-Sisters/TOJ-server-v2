@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 @Component
 class TeacherLikeReaderImpl(
     private val teacherLikeRepository: TeacherLikeRepository
-): TeacherLikeReader {
+) : TeacherLikeReader {
 
     override fun hasTeacherLike(teacher: Teacher, student: Student) =
         teacherLikeRepository.existsByTeacherAndStudent(teacher, student)

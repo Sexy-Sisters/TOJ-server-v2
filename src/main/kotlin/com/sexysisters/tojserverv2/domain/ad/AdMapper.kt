@@ -16,8 +16,12 @@ interface AdMapper {
 
     @Mappings(
         value = [
-            Mapping(source = "costInfo.views", target = "views"),
-            Mapping(source = "company.name", target = "companyName")
+            Mapping(source = "link.value", target = "link"),
+            Mapping(source = "image.value", target = "image"),
+            Mapping(source = "expirationDate.value", target = "expirationDate"),
+            Mapping(source = "costInfo.views.value", target = "views"),
+            Mapping(source = "costInfo.clicks.value", target = "clicks"),
+            Mapping(source = "company.companyName.value", target = "companyName"),
         ]
     )
     fun of(ad: Ad): AdInfo.Main

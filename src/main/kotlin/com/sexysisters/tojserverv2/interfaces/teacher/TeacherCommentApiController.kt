@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 @Api(tags = ["선생님 댓글 관련 API"])
 @RestController
@@ -27,7 +28,7 @@ class TeacherCommentApiController(
     @ApiOperation(value = "선생님 정보에 댓글 생성")
     @PostMapping("/{teacherId}")
     fun create(
-        @PathVariable("teacherId") teacherId: Long,
+        @PathVariable("teacherId") teacherId: UUID,
         @RequestBody request: TeacherCommentRequest.Main
     ) {
         val commentCommand = teacherCommentDtoMapper.of(request)
@@ -37,8 +38,8 @@ class TeacherCommentApiController(
     @ApiOperation(value = "선생님 정보에 대댓글 생성")
     @PostMapping("/{teacherId}/{commentId}")
     fun create(
-        @PathVariable("teacherId") teacherId: Long,
-        @PathVariable("commentId") commendId: Long,
+        @PathVariable("teacherId") teacherId: UUID,
+        @PathVariable("commentId") commendId: UUID,
         @RequestBody request: TeacherCommentRequest.Main
     ) {
         val commentCommand = teacherCommentDtoMapper.of(request)
@@ -55,7 +56,7 @@ class TeacherCommentApiController(
     @ApiOperation(value = "선생님 정보에 댓글 수정")
     @PutMapping("/{commentId}")
     fun update(
-        @PathVariable("commentId") commentId: Long,
+        @PathVariable("commentId") commentId: UUID,
         @RequestBody request: TeacherCommentRequest.Main
     ) {
         val commentCommand = teacherCommentDtoMapper.of(request)
@@ -64,7 +65,7 @@ class TeacherCommentApiController(
 
     @ApiOperation(value = "선생님 정보에 댓글 삭제")
     @DeleteMapping("/{commentId}")
-    fun delete(@PathVariable("commentId") commentId: Long) {
+    fun delete(@PathVariable("commentId") commentId: UUID) {
         teacherCommentService.delete(commentId)
     }
 }

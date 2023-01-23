@@ -1,12 +1,13 @@
 package com.sexysisters.tojserverv2.infrastructure.user
 
 import com.sexysisters.tojserverv2.common.security.auth.AuthDetails
-import com.sexysisters.tojserverv2.domain.user.domain.User
 import com.sexysisters.tojserverv2.domain.user.UserReader
+import com.sexysisters.tojserverv2.domain.user.domain.User
 import com.sexysisters.tojserverv2.domain.user.exception.UserException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class UserReaderImpl(
@@ -17,7 +18,7 @@ class UserReaderImpl(
         userRepository.findByEmailValue(email)
             ?: throw UserException.UserNotFound()
 
-    override fun getUser(id: Long) =
+    override fun getUser(id: UUID) =
         userRepository.findByIdOrNull(id)
             ?: throw UserException.UserNotFound()
 

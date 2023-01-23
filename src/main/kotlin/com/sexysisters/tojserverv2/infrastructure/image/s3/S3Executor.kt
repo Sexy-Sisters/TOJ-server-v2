@@ -42,12 +42,12 @@ class S3Executor(
         }
 
     private fun validateFile(file: MultipartFile) {
-        val isTooLong = file.originalFilename!!.length > 20
+        val isTooString = file.originalFilename!!.length > 20
         if (file.isEmpty) {
             throw FileException.EmptyFile()
         }
-        if (isTooLong) {
-            throw FileException.TooLongTitle()
+        if (isTooString) {
+            throw FileException.TooStringTitle()
         }
     }
 }

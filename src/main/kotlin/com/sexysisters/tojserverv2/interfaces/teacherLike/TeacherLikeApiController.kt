@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 @Api(tags = ["선생님 좋아요 관련 API"])
 @RestController
@@ -17,7 +18,7 @@ class TeacherLikeApiController(
 
     @ApiOperation(value = "좋아요 또는 싫어요 적용")
     @PutMapping("/{teacherId}")
-    fun like(@PathVariable("teacherId") teacherId: Long) {
+    fun like(@PathVariable("teacherId") teacherId: UUID) {
         teacherLikeService.like(teacherId)
     }
 }

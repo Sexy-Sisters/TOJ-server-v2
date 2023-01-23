@@ -12,6 +12,7 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import java.util.*
 import javax.validation.Valid
 
 @Api(tags = ["광고 관련 API"])
@@ -32,7 +33,7 @@ class AdApiController(
 
     @ApiOperation("실수로 잘못 생성한 광고 삭제")
     @DeleteMapping("/{id}")
-    fun deleteAd(@PathVariable id: Long) {
+    fun deleteAd(@PathVariable id: UUID) {
         adService.deleteAd(id)
     }
 

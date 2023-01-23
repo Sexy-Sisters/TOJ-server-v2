@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 import javax.validation.Valid
 
 @Api(tags = ["피드 관련 API"])
@@ -24,7 +25,7 @@ class FeedApiController(
 
     @ApiOperation(value = "피드 게시")
     @PostMapping
-    fun postFeed(@RequestBody @Valid request: FeedRequest.Create): CommonResponse<Long> {
+    fun postFeed(@RequestBody @Valid request: FeedRequest.Create): CommonResponse<UUID> {
         val command = feedDtoMapper.of(request)
         val feedId = feedService.createFeed(command)
         return CommonResponse.success(feedId)

@@ -67,9 +67,9 @@ class UserServiceTest : BehaviorSpec({
     }
 
     Given("아이디로 프로필 조회") {
-        val userId = 1L
+        val userId = "12312"
 
-        val userIdCapture = slot<Long>()
+        val userIdCapture = slot<String>()
         every { userReader.getUser(capture(userIdCapture)) } returns user
 
         When("특정 유저 프로필 조회시") {

@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.domain.school.domain
 
-import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.BaseEntity
 import com.sexysisters.tojserverv2.domain.student.domain.Student
 import com.sexysisters.tojserverv2.domain.teacher.domain.Teacher
 import com.sexysisters.tojserverv2.domain.wiki.domain.Wiki
@@ -17,7 +17,7 @@ class School(
     @Embedded val homePageAddress: HomePageAddress,
     @Embedded val phone: Phone,
     // TODO :: 평점
-) : BaseTimeEntity() {
+) : BaseEntity() {
 
     @Embedded
     var wallpaper: Wallpaper = Wallpaper()
@@ -46,13 +46,8 @@ class School(
     )
     val teachers = mutableSetOf<Teacher>()
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "school_id")
-    val id: Long = 0L
-
     fun codeValue() = code.value
-    fun belongValue() = belong.value
+    fun beStringValue() = belong.value
     fun nameValue() = name.value
     fun addressValue() = address.value
     fun birthdayValue() = birthday.value

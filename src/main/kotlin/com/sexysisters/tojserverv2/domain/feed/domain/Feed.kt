@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.domain.feed.domain
 
-import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.BaseEntity
 import com.sexysisters.tojserverv2.domain.student.domain.Student
 import javax.persistence.*
 
@@ -15,13 +15,10 @@ class Feed(
 
     @ElementCollection
     val images: List<Image>
-) : BaseTimeEntity() {
+) : BaseEntity() {
 
     var content: Content = content
         private set
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
 
     fun update(content: Content) {
         this.content = content

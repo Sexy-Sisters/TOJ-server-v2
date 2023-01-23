@@ -2,9 +2,15 @@ package com.sexysisters.tojserverv2.domain.ad.service
 
 import com.sexysisters.tojserverv2.domain.ad.*
 import com.sexysisters.tojserverv2.domain.ad.domain.*
+import com.sexysisters.tojserverv2.domain.ad.domain.company.Advertiser
+import com.sexysisters.tojserverv2.domain.ad.domain.company.Company
+import com.sexysisters.tojserverv2.domain.ad.domain.company.CompanyName
+import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.Cost
+import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.CostInfo
 import com.sexysisters.tojserverv2.infrastructure.ad.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 class AdServiceImpl(
@@ -17,17 +23,17 @@ class AdServiceImpl(
     override fun openAd(command: AdCommand.Create) {
         val initCostInfo = CostInfo(
             type = command.costType,
-            cost = command.cost,
+            cost = Cost(command.cost),
         )
         val initCompany = Company(
-            name = command.companyName,
-            advertiser = command.advertiser,
+            companyName = CompanyName(command.companyName),
+            advertiser = Advertiser(command.advertiser),
         )
         val initAd = Ad(
             adKind = command.adKind,
-            image = command.image,
-            link = command.link,
-            expirationDate = command.expirationDate,
+            image = Image(command.image),
+            link = Link(command.link),
+            expirationDate = ExpirationDate(command.expirationDate),
             costInfo = initCostInfo,
             company = initCompany,
         )
@@ -35,7 +41,7 @@ class AdServiceImpl(
     }
 
     @Transactional
-    override fun deleteAd(id: Long) {
+    override fun deleteAd(id: UUID) {
         val ad = adReader.getAd(id)
         adStore.delete(ad)
     }

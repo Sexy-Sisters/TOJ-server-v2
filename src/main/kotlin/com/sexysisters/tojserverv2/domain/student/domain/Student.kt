@@ -1,6 +1,6 @@
 package com.sexysisters.tojserverv2.domain.student.domain
 
-import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.BaseEntity
 import com.sexysisters.tojserverv2.domain.approve.Approve
 import com.sexysisters.tojserverv2.domain.teacher.domain.Comment
 import com.sexysisters.tojserverv2.domain.feed.domain.Feed
@@ -18,7 +18,7 @@ class Student(
     @Embedded val classroom: Classroom,
     @Embedded val number: Number,
     @Embedded val age: Age,
-) : BaseTimeEntity() {
+) : BaseEntity() {
 
     init {
         school.students.add(this)
@@ -77,10 +77,6 @@ class Student(
     )
     private val mutableTeacherLikes: MutableList<TeacherLike> = mutableListOf()
     val teacherLikes get(): List<TeacherLike> = mutableTeacherLikes.toList()
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
 
     fun independent() {
         status = Status.INDEPENDENT

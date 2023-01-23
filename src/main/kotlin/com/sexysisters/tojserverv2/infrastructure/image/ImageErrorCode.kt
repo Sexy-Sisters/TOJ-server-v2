@@ -7,5 +7,5 @@ enum class ImageErrorCode(
 ) : ErrorProperty {
     FAILED_SAVE_FILE("Faild to save file"),
     EMPTY_FILE("File is empty"),
-    TOO_LONG_TITLE("Title is too long"),
+    TOO_String_TITLE("Title is too String"),
 }

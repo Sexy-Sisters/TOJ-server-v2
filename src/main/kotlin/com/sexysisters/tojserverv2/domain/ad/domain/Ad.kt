@@ -1,8 +1,8 @@
 package com.sexysisters.tojserverv2.domain.ad.domain
 
-import com.sexysisters.tojserverv2.domain.BaseTimeEntity
-import com.sexysisters.tojserverv2.domain.ad.exception.AdException
-import java.time.LocalDate
+import com.sexysisters.tojserverv2.domain.BaseEntity
+import com.sexysisters.tojserverv2.domain.ad.domain.company.Company
+import com.sexysisters.tojserverv2.domain.ad.domain.custinfo.CostInfo
 import javax.persistence.*
 
 @Entity
@@ -10,28 +10,31 @@ import javax.persistence.*
 class Ad(
     @Enumerated(value = EnumType.STRING)
     val adKind: AdKind,
-    val image: String,
-    val link: String,
-    val expirationDate: LocalDate,
 
+    @Embedded
+    val image: Image,
+
+    @Embedded
+    val link: Link,
+
+    /*
+    @author Lee Kyu-jin
+    TODO :: 래핑 타입과 일반 임베디드 타입의 차이를 두기 위해서 래핑 타입을 위한 어노테이션을 만들 필요가 있어 보임
+     */
+    @Embedded
+    val expirationDate: ExpirationDate,
+
+    // 일반 임베디드 타입
     @Embedded
     val costInfo: CostInfo,
 
+    // 일반 임베디드 타입
     @Embedded
     val company: Company,
-) : BaseTimeEntity() {
+) : BaseEntity() {
 
     @Enumerated(value = EnumType.STRING)
     var status: Status = Status.OPEN
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
-
-    init {
-        if (image.isBlank()) throw AdException.AdNotValid()
-        if (link.isBlank()) throw AdException.AdNotValid()
-    }
 }
 
 fun Ad.close() { this.status = Status.CLOSE }

@@ -4,7 +4,7 @@ import com.sexysisters.tojserverv2.domain.school.domain.*
 
 data class NeisSchoolResponse constructor(
     val code: String,
-    val belong: String,
+    val beString: String,
     val name: String,
     val address: String,
     val birthday: String,
@@ -15,7 +15,7 @@ data class NeisSchoolResponse constructor(
 ) {
     fun toEntity() = School(
         code = Code(code),
-        belong = Belong(belong),
+        belong = Belong(beString),
         name = Name(name),
         address = Address(address),
         birthday = Birthday(birthday),

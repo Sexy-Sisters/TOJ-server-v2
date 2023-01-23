@@ -5,6 +5,7 @@ import com.sexysisters.tojserverv2.domain.user.UserInfo
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.ReportingPolicy
+import java.util.*
 
 @Mapper(
     componentModel = "spring",
@@ -21,7 +22,7 @@ interface UserDtoMapper {
     fun of(request: UserRequest.UpdateProfileImg): UserCommand.UpdateProfileImgRequest
 
     // response
-    fun of(userId: Long?): UserResponse.SignUp
+    fun of(userId: UUID): UserResponse.SignUp
 
     fun of(userInfo: UserInfo.Profile): UserResponse.Profile
 }

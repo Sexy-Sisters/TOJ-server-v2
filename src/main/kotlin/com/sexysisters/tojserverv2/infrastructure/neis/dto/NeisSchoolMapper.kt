@@ -18,7 +18,7 @@ interface NeisSchoolMapper {
     @Mappings(
         value = [
             Mapping(source = "SD_SCHUL_CODE", target = "code"),
-            Mapping(source = "ATPT_OFCDC_SC_NM", target = "belong"),
+            Mapping(source = "ATPT_OFCDC_SC_NM", target = "beString"),
             Mapping(source = "SCHUL_NM", target = "name"),
             Mapping(source = "SCHUL_KND_SC_NM", target = "division"),
             Mapping(source = "ORG_RDNMA", target = "address"),

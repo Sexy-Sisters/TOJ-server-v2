@@ -11,6 +11,7 @@ import com.sexysisters.tojserverv2.domain.user.toEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 class UserServiceImpl(
@@ -21,7 +22,7 @@ class UserServiceImpl(
 ) : UserService {
 
     @Transactional
-    override fun createUser(command: UserCommand.CreateRequest): Long {
+    override fun createUser(command: UserCommand.CreateRequest): UUID {
         command.setEncodedPassword(passwordEncoder)
         val initUser = command.toEntity()
         val savedUser = userStore.store(initUser)
@@ -29,7 +30,7 @@ class UserServiceImpl(
     }
 
     @Transactional(readOnly = true)
-    override fun findUserProfile(userId: Long): UserInfo.Profile {
+    override fun findUserProfile(userId: String): UserInfo.Profile {
         val user = userReader.getUser(userId)
         return userMapper.of(user)
     }

@@ -1,7 +1,7 @@
 package com.sexysisters.tojserverv2.domain.teacher.domain
 
 import com.sexysisters.tojserverv2.config.properties.S3Properties
-import com.sexysisters.tojserverv2.domain.BaseTimeEntity
+import com.sexysisters.tojserverv2.domain.BaseEntity
 import com.sexysisters.tojserverv2.domain.student.domain.Student
 import javax.persistence.*
 
@@ -12,7 +12,7 @@ class Comment(
     teacher: Teacher,
     student: Student,
     isAnonymous: Boolean
-) : BaseTimeEntity() {
+) : BaseEntity() {
     private val ANONYMOUS_NAME: String = "익명"
 
     @Embedded
@@ -44,10 +44,6 @@ class Comment(
     protected val mutableChildComments: MutableList<Comment> = mutableListOf()
     val childComments: List<Comment> get() = mutableChildComments.toList()
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long = 0L
-
     init {
         teacher.registeredComment(this)
         student.writeComment(this)
@@ -68,11 +64,11 @@ class Comment(
     }
 
     fun getNickname() = if (isAnonymous) ANONYMOUS_NAME
-    else student.user!!.nicknameValue()
+    else student.user.nicknameValue()
 
     fun getProfileImage() =
         if (isAnonymous) S3Properties.defaultProfileImg
-        else student.user!!.imageValue()
+        else student.user.imageValue()
 
     fun getContent() = content.value
 }

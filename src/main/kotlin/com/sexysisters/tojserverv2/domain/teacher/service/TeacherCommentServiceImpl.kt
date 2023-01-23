@@ -10,6 +10,7 @@ import com.sexysisters.tojserverv2.domain.teacher.domain.Teacher
 import com.sexysisters.tojserverv2.interfaces.teacher.dto.TeacherCommentResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 @Transactional
@@ -21,14 +22,14 @@ class TeacherCommentServiceImpl(
     private val teacherCommentMapper: TeacherCommentMapper
 ) : TeacherCommentService {
 
-    override fun create(teacherId: Long, command: TeacherCommentCommand.Main) {
-        val student: Student = studentReader.getCurrentStudent()
-        val teacher: Teacher = teacherReader.getTeacher(teacherId)
+    override fun create(teacherId: UUID, command: TeacherCommentCommand.Main) {
+        val student = studentReader.getCurrentStudent()
+        val teacher = teacherReader.getTeacher(teacherId)
         val initComment: Comment = toEntity(command, student, teacher)
         teacherCommentStore.store(initComment)
     }
 
-    override fun create(teacherId: Long, commentId: Long, command: TeacherCommentCommand.Main) {
+    override fun create(teacherId: UUID, commentId: UUID, command: TeacherCommentCommand.Main) {
         val student: Student = studentReader.getCurrentStudent()
         val teacher: Teacher = teacherReader.getTeacher(teacherId)
         val parent: Comment = teacherCommentReader.getComment(commentId)
@@ -54,14 +55,14 @@ class TeacherCommentServiceImpl(
         return comments.map { teacherCommentMapper.of(it) }
     }
 
-    override fun update(commentId: Long, command: TeacherCommentCommand.Main) {
+    override fun update(commentId: UUID, command: TeacherCommentCommand.Main) {
         val student: Student = studentReader.getCurrentStudent()
         val comment: Comment = teacherCommentReader.getComment(commentId)
         checkIdentity(student, comment.student)
         comment.update(Content(command.content), command.anonymous)
     }
 
-    override fun delete(commentId: Long) {
+    override fun delete(commentId: UUID) {
         val student: Student = studentReader.getCurrentStudent()
         val comment: Comment = teacherCommentReader.getComment(commentId)
         checkIdentity(student, comment.student)

@@ -3,7 +3,7 @@ package com.sexysisters.tojserverv2.domain.school
 class SchoolInfo {
 
     data class Main(
-        val belong: String,
+        val beString: String,
         val name: String,
         val englishName: String,
         val division: String,
